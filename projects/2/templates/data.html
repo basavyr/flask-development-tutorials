@@ -8,11 +8,16 @@
 
 <body>
     <h1>Data</h1>
-    <ul>
+    <!-- <ul>
         <li>{{data}}</li>
         <li>l2</li>
         <li>l3</li>
-    </ul>
+    </ul> -->
+    <ul>
+    {% for data_elem in data %}
+    <li>{{ data_elem }} </li>
+    {% endfor %}
+</ul>
 </body>
 
 </html>
