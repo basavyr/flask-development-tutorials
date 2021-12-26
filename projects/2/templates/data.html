@@ -8,22 +8,13 @@
 
 <body>
     <h1>Data</h1>
-    <!-- <ul>
-        <li>{{data}}</li>
-        <li>l2</li>
-        <li>l3</li>
-    </ul> -->
-
-    <form action="/items" method="post">
-        <button type="submit" type="button">Refresh</button>
-    </form>
-    
 
     <ul>
-    {% for data_elem in data %}
-    <li>{{ data_elem }} </li>
-    {% endfor %}
+        {% for data_elem in data %}
+            <li>{{ data_elem }} </li>
+        {% endfor %}
     </ul>
+
 </body>
 
 </html>
