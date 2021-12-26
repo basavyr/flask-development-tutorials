@@ -45,4 +45,5 @@ def data_route():
 @app.route("/items", methods=['GET', 'POST'])
 def items():
     items = ['item1', 'item2', 'item3']
+    items2 = ['item1', 'item2', 'item3']
 
