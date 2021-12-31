@@ -42,8 +42,9 @@ def data_route():
     return render_template("data.html", data=Create_User_Data("data.txt"))
 
 
-# @app.route("/items", methods=['GET', 'POST'])
-# def items():
-#     items = ['item1', 'item2', 'item3']
-#     items2 = ['item1', 'item2', 'item3']
-#     # return items[0]
+@app.route("/items", methods=['GET', 'POST'])
+def items():
+    items = ['item1_1', 'item2_1', 'item3_1']
+    items2 = ['item1_2', 'item2_2', 'item3_2']
+    # return a simple string
+    return '<p> ITEMS </p>'
