@@ -47,4 +47,10 @@ def items():
     items = ['item1_1', 'item2_1', 'item3_1']
     items2 = ['item1_2', 'item2_2', 'item3_2']
     # return a simple string
-    return f'<p> {str(items)} </p>'
+    objify = lambda obj: f'<p> {str(obj)} </p>'
+    pars = [objify(x) for x in [items, items2]]
+    return
+
+
+if __name__ == "__main__":
+    items()
