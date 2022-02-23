@@ -6,8 +6,7 @@
 
 
 <h1>Service 3</h1>
-
-    </div>
+<div>
     <table class="table table-hover">
         <thead>
           <tr>
@@ -17,18 +16,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="table-info">
-            <th scope="row">Time1</th>
-            <td>{{time}}</td>
-            <td>Column content</td>
+          <tr class="table-light">
+            <th scope="row">T1</th>
+            <td>{{unparsed_time}}</td>
+            <td>{{parsed_time}}</td>
           </tr>
-          <tr class="table-info">
-            <th scope="row">Time2</th>
-            <td>Column content</td>
-            <td>Column content</td>
+          <tr class="table-dark">
+            <th scope="row">T2</th>
+            <td>{{unparsed_time}}</td>
+            <td>{{parsed_time}}</td>
           </tr>
         </tbody>
       </table>
+      <form action="/s3/" method="post">
+        <div><button type="submit" class="btn btn-info">Update stats</button></div>
+    </form>
+</div>
   
 
 {% endblock %}

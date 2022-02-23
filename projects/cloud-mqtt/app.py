@@ -31,10 +31,13 @@ def service_2(var=None):
     return render_template("service2.html", system_info=deliver_content(), system_info_parsed='⚙️', pressed_info=var)
 
 
-@app.route("/s3/")
+@app.route("/s3/",methods=['POST', 'GET'])
 def service_3():
-    current_time = tools.get_time()
-    return render_template("service3.html", time=current_time)
+    raw_time = tools.get_time()
+    parsed_time = f'{raw_time}'[11:19]
+    return render_template("service3.html",
+                           unparsed_time=raw_time,
+                           parsed_time=parsed_time)
 
 
 if __name__ == '__main__':
