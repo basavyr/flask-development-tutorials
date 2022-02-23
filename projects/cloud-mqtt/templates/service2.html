@@ -6,5 +6,21 @@
 
 <h1>Service-2</h1>
 
-<p>Hello! This is the second service.</p>
+<div class="card border-success mb-3" style="max-width: auto;">
+    <div class="card-header">Raw System Info</div>
+    <div class="card-body">
+      <h4 class="card-title">{{system_info}}</h4>
+      <div><button type="button" class="btn btn-success">Update</button></div>
+    </div>
+</div>
+
+<div class="card border-info mb-3" style="max-width: auto;">
+    <div class="card-header">Parsed System Info</div>
+    <div class="card-body">
+        <h4 class="card-title">{{system_info_parsed}}</h4>
+        <div><button type="button" class="btn btn-info">Update</button></div>
+    </div>
+  </div>
+
+
 {% endblock %}
