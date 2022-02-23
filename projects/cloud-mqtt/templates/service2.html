@@ -4,8 +4,7 @@
 
 {% block body %}
 
-
-<h1>Service-2</h1>
+<h1>System Stats</h1>
 
 <div class="card border-success mb-3" style="max-width: auto;">
     <div class="card-header">Raw System Info</div>
@@ -24,10 +23,13 @@
             <div><button type="submit" class="btn btn-info">Update stats</button></div>
         </form>
         {% if system_info_parsed %}
-        {% for key in system_info_parsed %}
-            <p>{{key}}: {{system_info_parsed[key]}}</p>
-        {% endfor %}
-        <p class="text-info">Data extracted at {{current_time}}</p>
+        <ul>
+
+            {% for key in system_info_parsed %}
+            <li><strong>{{key}}:</strong> {{system_info_parsed[key]}}</li>
+            {% endfor %}
+        </ul>
+            <p class="text-info">Data extracted at {{current_time}}</p>
         {% endif %}
     </div>
   </div>
