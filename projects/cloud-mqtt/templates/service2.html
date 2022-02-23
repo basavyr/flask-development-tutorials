@@ -11,7 +11,6 @@
     <div class="card-header">Raw System Info</div>
     <div class="card-body">
       <h4 class="card-title">{{system_info}}</h4>
-      <h4 class="card-title">{{system_info_parsed}}</h4>
         <form action="/s2/" method="post" >
             <div><button type="submit" class="btn btn-info">Update stats</button></div>
         </form>
@@ -21,15 +20,15 @@
 <div class="card border-info mb-3" style="max-width: auto;">
     <div class="card-header">Parsed System Info</div>
     <div class="card-body">
-        <h4 class="card-title">{{system_info_parsed}}</h4>
         <form action="/s2/" method="post" >
             <div><button type="submit" class="btn btn-info">Update stats</button></div>
-            {% if pressed_info %}
-                <div>
-                    <h4>{{pressed_info}}</h4>
-                </div>
-            {% endif %}
         </form>
+        {% if system_info_parsed %}
+        {% for key in system_info_parsed %}
+            <p>{{key}}: {{system_info_parsed[key]}}</p>
+        {% endfor %}
+        <p class="text-info">Data extracted at {{current_time}}</p>
+        {% endif %}
     </div>
   </div>
 

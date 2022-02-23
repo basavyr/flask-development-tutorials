@@ -25,13 +25,16 @@ def service_1(url_input=None):
 
 
 @app.route("/s2/", methods=['POST', 'GET'])
-@app.route("/s2/<var>", methods=['POST', 'GET'])
-def service_2(var=None):
+def service_2():
     """Shows information about the current system"""
-    return render_template("service2.html", system_info=deliver_content(), system_info_parsed='⚙️', pressed_info=var)
+    raw_info = deliver_content()
+    parsed_info = tools.detalied_info_stats()
+    return render_template("service2.html",
+                           system_info=raw_info, system_info_parsed=parsed_info,
+                           current_time=tools.get_time())
 
 
-@app.route("/s3/",methods=['POST', 'GET'])
+@app.route("/s3/", methods=['POST', 'GET'])
 def service_3():
     raw_time = tools.get_time()
     parsed_time = f'{raw_time}'[11:19]
