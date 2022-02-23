@@ -1,10 +1,15 @@
 {% extends "layout.html" %}
 
-{% block title %} Minimal Flask Table {% endblock %}
+{% block title %} Minimal {% endblock %}
 
 {% block body %}
 
 <h1>Welcome!</h1>
-
-<p>Hello! You've found the "minimal flask examples" website. Click on any of the links below to view the appropriate example.</p>
+Here are all the services implemented:
+<ul>
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+    <li><a href="{{ url_for('service_1') }}">Service 1</a></li>
+    <li><a href="{{ url_for('service_2') }}">Service 2</a></li>
+    <li><a href="{{ url_for('service_3') }}">Service 3</a></li>
+</ul>
 {% endblock %}
