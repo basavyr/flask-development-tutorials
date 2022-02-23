@@ -7,4 +7,13 @@
 <h1>Service-1</h1>
 
 <p>Hello! This is the first service.</p>
+
+{% if input_name %}
+  <p>Hello {{ input_name }}!</p>
+{% else %}
+  <p>There is no url input given.</p>
+{% endif %}
+
+<h1>{{delivered_content}}</h1>
+
 {% endblock %}
