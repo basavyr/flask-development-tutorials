@@ -23,7 +23,7 @@ def show_disk_info():
     disk_partitions = [p.device for p in psutil.disk_partitions()]
     disk_usage = psutil.disk_usage('/').percent
 
-    return disk_partitions, disk_usage
+    return [disk_partitions, disk_usage]
 
 
 def show_MEM_info():

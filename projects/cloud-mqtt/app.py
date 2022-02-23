@@ -31,7 +31,9 @@ def service_2():
     parsed_info = tools.detalied_info_stats()
     return render_template("service2.html",
                            system_info=raw_info, system_info_parsed=parsed_info,
-                           current_time=tools.get_time())
+                           current_time=tools.get_time(),
+                           disk_info=tools.show_disk_info()
+                           )
 
 
 @app.route("/s3/", methods=['POST', 'GET'])
