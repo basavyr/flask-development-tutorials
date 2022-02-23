@@ -4,7 +4,31 @@
 
 {% block body %}
 
-<h1>Service-3</h1>
 
-<p>Hello! This is the third service.</p>
+<h1>Service 3</h1>
+
+    </div>
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Raw time</th>
+            <th scope="col">Parsed time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-info">
+            <th scope="row">Time1</th>
+            <td>{{time}}</td>
+            <td>Column content</td>
+          </tr>
+          <tr class="table-info">
+            <th scope="row">Time2</th>
+            <td>Column content</td>
+            <td>Column content</td>
+          </tr>
+        </tbody>
+      </table>
+  
+
 {% endblock %}
