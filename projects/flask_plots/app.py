@@ -9,5 +9,20 @@ def indexhtml():
     return render_template('index.html', message='ok')
 
 
+@app.route("/1")
+def plot_example1():
+    return render_template('plot1.html')
+
+
+@app.route("/2")
+def plot_example2():
+    return render_template('plot2.html')
+
+
+@app.route("/3")
+def plot_example3():
+    return render_template('plot3.html')
+
+
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=False, port=5000)
