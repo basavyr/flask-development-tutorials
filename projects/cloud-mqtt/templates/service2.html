@@ -57,4 +57,42 @@
     </div>
   </div>
 
+  <div class="card border-info mb-3" style="max-width: auto;">
+    <div class="card-header">Header</div>
+    <div class="card-body">
+      <h4 class="card-title">CPU Info</h4>
+      <ul>
+      {% for info in cpu_info %}
+        <li>{{info}}: {{cpu_info[info]}}</li>
+        {% endfor %}
+    </ul>
+      <form action="/s2/" method="post" >
+        <div><button type="submit" class="btn btn-info">Update stats</button></div>
+    </form>
+    </div>
+  </div>
+
+  <div class="card border-info mb-3" style="max-width: auto;">
+    <div class="card-header">Memory</div>
+    <div class="card-body">
+      <h4 class="card-title">Virtual Memory</h4>
+      <p class="card-text">{{virtual_memory}}</p>
+      <form action="/s2/" method="post" >
+        <div><button type="submit" class="btn btn-info">Update stats</button></div>
+    </form>
+    </div>
+  </div>
+
+  <div class="card border-info mb-3" style="max-width: auto;">
+    <div class="card-header">Memory</div>
+    <div class="card-body">
+      <h4 class="card-title">Swap info</h4>
+      <p class="card-text">{{swap_memory}}</p>
+      <form action="/s2/" method="post" >
+        <div><button type="submit" class="btn btn-info">Update stats</button></div>
+    </form>
+    </div>
+  </div>
+
+
 {% endblock %}

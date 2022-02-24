@@ -57,6 +57,7 @@ def show_CPU_info():
         "cpu-count": cpu_count,
         "load-average": cpugetloadavg,
         "cpu-percent": psutil.cpu_percent(),
+        "cpu-freq": psutil.cpu_freq().current,
     }
 
     return cpu_times
@@ -68,7 +69,8 @@ def get_time():
 
 def main():
     cpu = show_CPU_info()
-    print(cpu)
+    for c in cpu:
+        print(c, cpu[c])
 
 
 if __name__ == '__main__':
