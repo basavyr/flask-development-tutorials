@@ -1,6 +1,13 @@
 from flask import Flask, render_template
 
 
+import base64
+from io import BytesIO
+from matplotlib.figure import Figure
+
+
+import plotter
+
 app = Flask(__name__)
 
 
@@ -11,7 +18,7 @@ def indexhtml():
 
 @app.route("/1")
 def plot_example1():
-    return render_template('plot1.html')
+    return render_template('plot1.html', data=plotter.make_plot())
 
 
 @app.route("/2")
