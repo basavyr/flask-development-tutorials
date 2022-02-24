@@ -5,6 +5,9 @@ import os
 import psutil
 
 
+Gbytes = pow(10, 9)
+
+
 def show_system_info():
     return os.uname()
 
@@ -30,8 +33,8 @@ def show_MEM_info():
     # MEM
     virtual_memory = psutil.virtual_memory()
     virt_memory = {
-        "total": virtual_memory.total,
-        "used": virtual_memory.used,
+        "total": float(virtual_memory.total / Gbytes),
+        "used": float(virtual_memory.used / Gbytes),
         "percentage": virtual_memory.percent,
     }
 
@@ -41,8 +44,8 @@ def show_MEM_info():
 def show_SWAP_info():
     swap_memory = psutil.swap_memory()
     swap_memory = {
-        "total": swap_memory.total,
-        "used": swap_memory.used,
+        "total": float(swap_memory.total / Gbytes),
+        "used": float(swap_memory.used / Gbytes),
         "percentage": swap_memory.percent,
     }
 
@@ -68,9 +71,8 @@ def get_time():
 
 
 def main():
-    cpu = show_CPU_info()
-    for c in cpu:
-        print(c, cpu[c])
+    cpu = show_MEM_info()
+    print(cpu)
 
 
 if __name__ == '__main__':
