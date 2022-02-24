@@ -63,7 +63,7 @@
       <h4 class="card-title">CPU Info</h4>
       <ul>
       {% for info in cpu_info %}
-        <li>{{info}}: {{cpu_info[info]}}</li>
+        <li><strong>{{info}}:</strong> {{cpu_info[info]}}</li>
         {% endfor %}
     </ul>
       <form action="/s2/" method="post" >
@@ -76,7 +76,11 @@
     <div class="card-header">Memory</div>
     <div class="card-body">
       <h4 class="card-title">Virtual Memory</h4>
-      <p class="card-text">{{virtual_memory}}</p>
+      <ul>
+        {% for info in memory_info %}
+            <li><strong>{{info}}:</strong> {{memory_info[info]}}</li>
+            {% endfor %}
+      </ul>
       <form action="/s2/" method="post" >
         <div><button type="submit" class="btn btn-info">Update stats</button></div>
     </form>
@@ -87,12 +91,17 @@
     <div class="card-header">Memory</div>
     <div class="card-body">
       <h4 class="card-title">Swap info</h4>
-      <p class="card-text">{{swap_memory}}</p>
+      <ul>
+        {% for info in swap_info %}
+            <li><strong>{{info}}:</strong> {{swap_info[info]}}</li>
+            {% endfor %}
+      </ul>
       <form action="/s2/" method="post" >
         <div><button type="submit" class="btn btn-info">Update stats</button></div>
     </form>
     </div>
   </div>
+
 
 
 {% endblock %}

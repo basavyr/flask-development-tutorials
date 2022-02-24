@@ -33,8 +33,8 @@ def service_2():
                            system_info=raw_info, system_info_parsed=parsed_info,
                            current_time=tools.get_time(),
                            disk_info=tools.show_disk_info(),
-                           virtual_memory=tools.show_MEM_info(),
-                           swap_memory=tools.show_SWAP_info(),
+                           memory_info=tools.show_MEM_info(),
+                           swap_info=tools.show_SWAP_info(),
                            cpu_info=tools.show_CPU_info(),
                            )
 
