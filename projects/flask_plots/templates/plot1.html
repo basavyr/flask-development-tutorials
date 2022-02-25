@@ -10,14 +10,14 @@
       <div class="card bg-light mb-3" style="max-width: 30rem">
         <div class="card-header">Plot with random data</div>
         <div class="card-text">
-          {% if data %}
+          {% if plot1 %}
           <p class="card-text">
             Generate a plot as a <code>.png</code> file and output it into the
             webpage.
           </p>
           <div class="card-body">
             <div class="plot_box">
-              <img src="data:image/png;base64,{{data}}" />
+              <img src="data:image/png;base64,{{plot1}}" />
             </div>
             {% endif %}
           </div>
@@ -27,14 +27,14 @@
     <div class="column-child">
       <div class="card bg-light mb-3" style="max-width: 30rem">
         <div class="card-header">Header</div>
-        {% if data %}
+        {% if plot2 %}
         <p class="card-text">
           Generate a plot as a <code>.png</code> file and output it into the
           webpage.
         </p>
         <div class="card-body">
           <div class="plot_box">
-            <img src="data:image/png;base64,{{data}}" />
+            <img src="data:image/png;base64,{{plot2}}" />
           </div>
           {% endif %}
         </div>
@@ -43,14 +43,14 @@
     <div class="column-child">
       <div class="card bg-light mb-3" style="max-width: 30rem">
         <div class="card-header">Header</div>
-        {% if data %}
+        {% if plot3 %}
         <p class="card-text">
           Generate a plot as a <code>.png</code> file and output it into the
           webpage.
         </p>
         <div class="card-body">
           <div class="plot_box">
-            <img src="data:image/png;base64,{{data}}" />
+            <img src="data:image/png;base64,{{plot3}}" />
           </div>
           {% endif %}
         </div>

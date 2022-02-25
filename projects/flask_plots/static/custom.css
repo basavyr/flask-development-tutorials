@@ -14,9 +14,8 @@ img {
 }
 
 .column-child {
-  /* display: flex; */
   width: 33%;
-  /* float: left; */
+  float: left;
   padding: 10px;
 }
 

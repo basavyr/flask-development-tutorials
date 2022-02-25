@@ -18,7 +18,10 @@ def indexhtml():
 
 @app.route('/1', methods=['POST', 'GET'])
 def plot_example1():
-    return render_template('plot1.html', plot_1=plotter.make_plot())
+    return render_template('plot1.html',
+                           plot1=plotter.make_plot(),
+                           plot2=plotter.make_plot(),
+                           plot3=plotter.make_plot())
 
 
 @app.route('/2')
