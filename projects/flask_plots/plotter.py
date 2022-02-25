@@ -17,21 +17,10 @@ def generate_data():
     return [x_data, y_data]
 
 
-def plot_data(data):
-    xdata, ydata = data
-
-    plt.plot(xdata, ydata, '-ob', label='data')
-    plt.legend(loc='best')
-    plt.xlabel('x')
-    plt.ylabel('rand')
-    plt.ylim(0, 15)
-    plt.show()
-
-
 def make_plot():
     xdata, ydata = generate_data()
 
-    # Generate the figure **without using pyplot**.
+    # generate the plot with the Figure command
     fig = Figure()
     ax = fig.subplots()
     ax.plot(xdata, ydata, '-ob', label='data')
@@ -40,18 +29,18 @@ def make_plot():
     ax.set_ylabel('rand')
     ax.set_ylim(0, 15)
 
-    # Save it to a temporary buffer.
-    buf = BytesIO()
-    fig.savefig(buf, format="png")
+    # Save it to a temporary buffer
+    buffer = BytesIO()
+    fig.savefig(buffer, format="png")
 
     # Embed the result in the html output.
-    data = base64.b64encode(buf.getbuffer()).decode("ascii")
+    data = base64.b64encode(buffer.getbuffer()).decode("ascii")
     return data
 
 
 def main():
     my_data = generate_data()
-    plot_data(my_data)
+    make_plot(my_data)
 
 
 if __name__ == '__main__':

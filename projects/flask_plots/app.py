@@ -16,17 +16,17 @@ def indexhtml():
     return render_template('index.html', message='ok')
 
 
-@app.route("/1")
+@app.route('/1', methods=['POST', 'GET'])
 def plot_example1():
-    return render_template('plot1.html', data=plotter.make_plot())
+    return render_template('plot1.html', plot_1=plotter.make_plot())
 
 
-@app.route("/2")
+@app.route('/2')
 def plot_example2():
     return render_template('plot2.html')
 
 
-@app.route("/3")
+@app.route('/3')
 def plot_example3():
     return render_template('plot3.html')
 
