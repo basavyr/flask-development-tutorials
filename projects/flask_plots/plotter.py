@@ -1,3 +1,4 @@
+from cProfile import label
 from tabnanny import check
 from threading import local
 
@@ -32,27 +33,28 @@ def plot_data():
     return data
 
 
-def pie_chart():
-    test_data = local_data.get_swap_info()
-    
-    del test_data['percent']
+def swap_pie_chart():
+    raw_dict_data = local_data.get_swap_info()
 
-    test_labels = [k for k in test_data]
+    del raw_dict_data['percent']
+
+    data = [int(raw_dict_data[key]) for key in raw_dict_data]
+    print(data)
+    _labels = [k for k in raw_dict_data]
 
     fig = Figure()
 
     ax = fig.subplots()
 
-    ax.pie([12, 3, 4], labels=test_labels)
+    ax.pie([0, 1, 2], labels=_labels)
+
     ax.legend()
     fig.tight_layout()
-    fig.savefig('pie-chart-data.pdf', dpi=300, bbox_inches='tight')
-
-    return test_data
+    fig.savefig('swap-data.pdf', dpi=300, bbox_inches='tight')
 
 
 def main():
-    pie_chart()
+    swap_pie_chart()
 
 
 if __name__ == '__main__':
