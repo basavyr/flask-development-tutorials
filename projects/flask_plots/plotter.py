@@ -46,12 +46,12 @@ def swap_pie_chart():
     ax = fig.subplots()
 
     try:
-        ax.pie(data, labels=_labels)
+        ax.pie([1,2,3], labels=_labels)
     except ValueError as err:
         print(f'oops -> {err}')
 
     fig.tight_layout()
-    ax.legend()
+    ax.legend(title='Swap usage')
     fig.savefig('swap-data.pdf', dpi=300, bbox_inches='tight')
 
 
@@ -73,7 +73,7 @@ def vmem_pie_char():
         print(f'oops -> {err}')
 
     fig.tight_layout()
-    ax.legend()
+    ax.legend(title='Virtual memory')
     fig.savefig('vmem-data.pdf', dpi=300, bbox_inches='tight')
 
 
@@ -95,12 +95,12 @@ def disk_pie_chart():
         print(f'oops -> {err}')
 
     fig.tight_layout()
-    ax.legend()
+    ax.legend(title='Disk usage')
     fig.savefig('disk-data.pdf', dpi=300, bbox_inches='tight')
 
 
 def main():
-    # swap_pie_chart()
+    swap_pie_chart()
     vmem_pie_char()
     disk_pie_chart()
 
