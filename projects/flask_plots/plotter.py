@@ -39,7 +39,6 @@ def swap_pie_chart():
     del raw_dict_data['percent']
 
     data = [int(raw_dict_data[key]) for key in raw_dict_data]
-    print(data)
     _labels = [k for k in raw_dict_data]
 
     fig = Figure()
@@ -56,8 +55,31 @@ def swap_pie_chart():
     fig.savefig('swap-data.pdf', dpi=300, bbox_inches='tight')
 
 
+def vmem_pie_char():
+    raw_dict_data = local_data.get_memory_info()
+
+    del raw_dict_data['percent']
+
+    data = [int(raw_dict_data[key]) for key in raw_dict_data]
+    _labels = [k for k in raw_dict_data]
+
+    fig = Figure()
+
+    ax = fig.subplots()
+
+    try:
+        ax.pie(data, labels=_labels)
+    except ValueError as err:
+        print(f'oops -> {err}')
+
+    fig.tight_layout()
+    ax.legend()
+    fig.savefig('vmem-data.pdf', dpi=300, bbox_inches='tight')
+
+
 def main():
-    swap_pie_chart()
+    # swap_pie_chart()
+    vmem_pie_char()
 
 
 if __name__ == '__main__':
