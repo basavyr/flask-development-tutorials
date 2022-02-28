@@ -30,8 +30,21 @@ def get_memory_info():
         "used": mem_info.used,
         "percent": mem_info.percent,
     }
-    
+
     return memory
+
+
+def get_disk_info():
+    disk_info = psutil.disk_usage('/')
+
+    disk = {
+        "total": disk_info.total,
+        "used": disk_info.used,
+        "free": disk_info.free,
+        "percent": disk_info.percent,
+    }
+
+    return disk
 
 
 def get_random_number():
@@ -82,7 +95,8 @@ def generate_data():
 
 
 def main():
-    get_memory_info()
+    # get_memory_info()
+    print(get_disk_info())
 
 
 if __name__ == '__main__':
