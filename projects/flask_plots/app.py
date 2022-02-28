@@ -26,7 +26,10 @@ def plot_example1():
 
 @app.route('/2')
 def plot_example2():
-    return render_template('plot2.html')
+    return render_template('plot2.html',
+                           pie_chart1=1,
+                           pie_chart2=1,
+                           pie_chart3=1)
 
 
 @app.route('/3')

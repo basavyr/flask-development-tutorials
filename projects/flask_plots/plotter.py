@@ -1,24 +1,18 @@
-from matplotlib import pyplot as plt
+from tabnanny import check
+from threading import local
 
 import base64
 from io import BytesIO
+
+from matplotlib import pyplot
 from matplotlib.figure import Figure
 
 
-import random as rd
+import data as local_data
 
 
-def generate_data():
-    rand_number = lambda: rd.randrange(1, 15)
-    data_size = 100
-    y_data = [rand_number() for _ in range(data_size)]
-    x_data = [idx + 1 for idx in range(data_size)]
-
-    return [x_data, y_data]
-
-
-def make_plot():
-    xdata, ydata = generate_data()
+def plot_data():
+    xdata, ydata = local_data.generate_data()
 
     # generate the plot with the Figure command
     fig = Figure()
@@ -38,9 +32,27 @@ def make_plot():
     return data
 
 
+def pie_chart():
+    test_data = local_data.get_swap_info()
+    
+    del test_data['percent']
+
+    test_labels = [k for k in test_data]
+
+    fig = Figure()
+
+    ax = fig.subplots()
+
+    ax.pie([12, 3, 4], labels=test_labels)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig('pie-chart-data.pdf', dpi=300, bbox_inches='tight')
+
+    return test_data
+
+
 def main():
-    my_data = generate_data()
-    make_plot(my_data)
+    pie_chart()
 
 
 if __name__ == '__main__':
