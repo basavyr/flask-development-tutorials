@@ -21,6 +21,19 @@ def get_swap_info():
     return memory
 
 
+def get_memory_info():
+    mem_info = psutil.virtual_memory()
+
+    memory = {
+        "total": mem_info.total,
+        "available": mem_info.available,
+        "used": mem_info.used,
+        "percent": mem_info.percent,
+    }
+    
+    return memory
+
+
 def get_random_number():
     """ Generates a random number between [5 and 35]"""
     rd_n = random.randrange(_MIN_NUMBER, _MAX_NUMBER)
@@ -66,3 +79,11 @@ def generate_data():
     x_data = [idx + 1 for idx in range(data_size)]
 
     return [x_data, y_data]
+
+
+def main():
+    get_memory_info()
+
+
+if __name__ == '__main__':
+    main()

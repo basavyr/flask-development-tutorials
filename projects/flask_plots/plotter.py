@@ -55,6 +55,7 @@ def swap_pie_chart():
     ax.legend()
     fig.savefig('swap-data.pdf', dpi=300, bbox_inches='tight')
 
+
 def main():
     swap_pie_chart()
 
