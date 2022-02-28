@@ -46,12 +46,14 @@ def swap_pie_chart():
 
     ax = fig.subplots()
 
-    ax.pie([0, 1, 2], labels=_labels)
+    try:
+        ax.pie(data, labels=_labels)
+    except ValueError as err:
+        print(f'oops -> {err}')
 
-    ax.legend()
     fig.tight_layout()
+    ax.legend()
     fig.savefig('swap-data.pdf', dpi=300, bbox_inches='tight')
-
 
 def main():
     swap_pie_chart()
