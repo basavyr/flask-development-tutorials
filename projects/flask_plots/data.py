@@ -16,8 +16,8 @@ def get_swap_info():
 
     memory = {
         "total": round(swap_info.total / GBYTES, 2),
+        "available": round(swap_info.free / GBYTES, 2),
         "used": round(swap_info.used / GBYTES, 2),
-        "free": round(swap_info.free / GBYTES, 2),
         "percent": swap_info.percent,
     }
 
@@ -42,8 +42,8 @@ def get_disk_info():
 
     disk = {
         "total": round(disk_info.total / GBYTES, 2),
+        "available": round(disk_info.free / GBYTES, 2),
         "used": round(disk_info.used / GBYTES, 2),
-        "free": round(disk_info.free / GBYTES, 2),
         "percent": disk_info.percent,
     }
 

@@ -15,7 +15,7 @@ import data as local_data
 
 def shower(pct, data):
     """show a proper point based on the percentage"""
-    absolute = int(round(pct / 100 * sum(data)))
+    absolute = round(pct / 100 * sum(data), 2)
     return f'{round(pct,2)} %\n{absolute} GB'
 
 
@@ -43,6 +43,8 @@ def plot_data():
 def swap_pie_chart():
     raw_dict_data = local_data.get_swap_info()
 
+    percent = raw_dict_data['percent']
+
     # delete the percent element from the array
     del raw_dict_data['percent']
     # delete the total amount from the array
@@ -53,18 +55,25 @@ def swap_pie_chart():
 
     fig = Figure()
     ax = fig.subplots()
-    try:
-        ax.pie(data)
-    except ValueError as err:
-        print(f'oops -> {err}')
-        ax.pie([idx + 1 for idx in range(len(data))], labels=data_labels)
 
-    ax.legend(title='Swap usage [GB]', loc='best', labels=data_labels)
+    try:
+        ax.pie(data,
+               autopct=lambda pct: shower(pct, data),
+               explode=(0.01, 0.01))
+    except ValueError as err:
+        print('Issue while creating the SWAP pie chart -> {err} ')
+        ax.pie([idx + 1 for idx in range(len(data))],
+               autopct=lambda pct: shower(pct, data),
+               explode=(0.01, 0.01))
+
+    ax.legend(title='Swap memory [GB]',
+              loc='best',
+              labels=data_labels)
     fig.tight_layout()
     fig.savefig('swap-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
 
-def vmem_pie_char():
+def virtual_memory_pie_char():
     raw_dict_data = local_data.get_virtual_memory_info()
 
     percent = raw_dict_data['percent']
@@ -79,16 +88,22 @@ def vmem_pie_char():
 
     fig = Figure()
     ax = fig.subplots()
+
     try:
         ax.pie(data,
-               autopct=lambda pct: shower(pct, data), explode=(0.01, 0.01))
+               autopct=lambda pct: shower(pct, data),
+               explode=(0.01, 0.01))
     except ValueError as err:
-        ax.pie([idx for idx in range(len(data))], labels=data_labels)
+        print('Issue while creating the VIRTUAL_MEMORY pie chart -> {err} ')
+        ax.pie([idx + 1 for idx in range(len(data))],
+               autopct=lambda pct: shower(pct, data),
+               explode=(0.01, 0.01))
 
     ax.legend(title='Virtual memory [GB]',
-              labels=data_labels, loc='best')
+              labels=data_labels,
+              loc='best')
     fig.tight_layout()
-    fig.savefig('vmem-pie-chart.pdf', dpi=300, bbox_inches='tight')
+    fig.savefig('virtual-memory-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
 
 def disk_pie_chart():
@@ -98,26 +113,34 @@ def disk_pie_chart():
 
     # remove the percentage from the array
     del raw_dict_data['percent']
+    # remove the total value from the array
+    del raw_dict_data['total']
 
-    data = [int(raw_dict_data[key]) for key in raw_dict_data]
+    data = [float(raw_dict_data[key]) for key in raw_dict_data]
     data_labels = [k for k in raw_dict_data]
 
     fig = Figure()
     ax = fig.subplots()
     try:
-        ax.pie(data, labels=data_labels)
+        ax.pie(data,
+               autopct=lambda pct: shower(pct, data),
+               explode=(0.01, 0.01))
     except ValueError as err:
-        ax.pie([idx for idx in range(len(data))], labels=data_labels)
+        ax.pie([idx + 1 for idx in range(len(data))],
+               autopct=lambda pct: shower(pct, data),
+               explode=(0.01, 0.01))
 
-    ax.legend(title='Disk usage [GB]')
+    ax.legend(title='Disk usage [GB]',
+              labels=data_labels,
+              loc='best')
     fig.tight_layout()
     fig.savefig('disk-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
 
 def main():
-    swap_pie_chart()
-    vmem_pie_char()
     disk_pie_chart()
+    swap_pie_chart()
+    virtual_memory_pie_char()
 
 
 if __name__ == '__main__':
