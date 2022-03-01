@@ -8,8 +8,15 @@ from io import BytesIO
 from matplotlib import pyplot
 from matplotlib.figure import Figure
 
+import numpy
 
 import data as local_data
+
+
+def shower(pct, data):
+    """show a proper point based on the percentage"""
+    absolute = int(round(pct / 100 * sum(data)))
+    return f'{round(pct,2)} %\n{absolute} GB'
 
 
 def plot_data():
@@ -64,18 +71,18 @@ def vmem_pie_char():
     # remove the total value from the data
     del raw_dict_data['total']
 
-    data = [int(raw_dict_data[key]) for key in raw_dict_data]
+    data = [float(raw_dict_data[key]) for key in raw_dict_data]
     data_labels = [k for k in raw_dict_data]
 
     fig = Figure()
     ax = fig.subplots()
     try:
         ax.pie(data,
-               autopct='%1.1f%%', explode=(0.05, 0.05))
+               autopct=lambda pct: shower(pct, data), explode=(0.01, 0.01))
     except ValueError as err:
         ax.pie([idx for idx in range(len(data))], labels=data_labels)
 
-    ax.legend(title='Virtual memory [GB]',labels=data_labels)
+    ax.legend(title='Virtual memory [GB]', labels=data_labels)
     fig.tight_layout()
     fig.savefig('vmem-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
