@@ -43,20 +43,23 @@ def plot_data():
 def swap_pie_chart():
     raw_dict_data = local_data.get_swap_info()
 
+    # delete the percent element from the array
     del raw_dict_data['percent']
+    # delete the total amount from the array
+    del raw_dict_data['total']
 
-    data = [int(raw_dict_data[key]) for key in raw_dict_data]
+    data = [float(raw_dict_data[key]) for key in raw_dict_data]
     data_labels = [k for k in raw_dict_data]
 
     fig = Figure()
     ax = fig.subplots()
     try:
-        ax.pie(data, labels=data_labels)
+        ax.pie(data)
     except ValueError as err:
         print(f'oops -> {err}')
         ax.pie([idx + 1 for idx in range(len(data))], labels=data_labels)
 
-    ax.legend(title='Swap usage [GB]')
+    ax.legend(title='Swap usage [GB]', loc='best', labels=data_labels)
     fig.tight_layout()
     fig.savefig('swap-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
@@ -82,7 +85,8 @@ def vmem_pie_char():
     except ValueError as err:
         ax.pie([idx for idx in range(len(data))], labels=data_labels)
 
-    ax.legend(title='Virtual memory [GB]', labels=data_labels)
+    ax.legend(title='Virtual memory [GB]',
+              labels=data_labels, loc='best')
     fig.tight_layout()
     fig.savefig('vmem-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
