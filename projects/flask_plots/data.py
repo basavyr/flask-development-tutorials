@@ -1,33 +1,36 @@
 
 import random
 
+import os
 import psutil
 
 _MIN_NUMBER = 5
 _MAX_NUMBER = 35
 _SUMM = 100
 
+GBYTES = 1000 * 1024 * 1024
+
 
 def get_swap_info():
     swap_info = psutil.swap_memory()
 
     memory = {
-        "total": swap_info.total,
-        "used": swap_info.used,
-        "free": swap_info.free,
+        "total": round(swap_info.total / GBYTES, 2),
+        "used": round(swap_info.used / GBYTES, 2),
+        "free": round(swap_info.free / GBYTES, 2),
         "percent": swap_info.percent,
     }
 
     return memory
 
 
-def get_memory_info():
+def get_virtual_memory_info():
     mem_info = psutil.virtual_memory()
 
     memory = {
-        "total": mem_info.total,
-        "available": mem_info.available,
-        "used": mem_info.used,
+        "total": round(mem_info.total / GBYTES, 2),
+        "available": round(mem_info.available / GBYTES, 2),
+        "used": round(mem_info.used / GBYTES, 2),
         "percent": mem_info.percent,
     }
 
@@ -38,51 +41,27 @@ def get_disk_info():
     disk_info = psutil.disk_usage('/')
 
     disk = {
-        "total": disk_info.total,
-        "used": disk_info.used,
-        "free": disk_info.free,
+        "total": round(disk_info.total / GBYTES, 2),
+        "used": round(disk_info.used / GBYTES, 2),
+        "free": round(disk_info.free / GBYTES, 2),
         "percent": disk_info.percent,
     }
 
     return disk
 
 
+def get_cpu_info():
+    n_cpus = psutil.cpu_count()
+    load_average = [round(load * 100 / n_cpus, 2)
+                    for load in psutil.getloadavg()]
+
+    return load_average, n_cpus
+
+
 def get_random_number():
-    """ Generates a random number between [5 and 35]"""
-    rd_n = random.randrange(_MIN_NUMBER, _MAX_NUMBER)
-    return rd_n
-
-
-def generate_array_fixed_number(total_size, total_sum):
-    checker = True
-
-    array = []
-
-    array_sum = 0
-
-    array_size = 0
-
-    while checker:
-        rng = get_random_number()
-        if(array_sum + rng <= total_sum):
-            array.append(rng)
-            arr_size = len(array)
-            array_sum = sum(array)
-
-            if(arr_size == total_size):
-                if(array_sum <= total_sum):
-                    array.pop()
-                    final_term = total_sum - sum(array)
-                    array.append(final_term)
-                    array_sum = sum(array)
-                checker = False
-        else:
-            safety_rng = total_sum - array_sum
-            array.append(safety_rng)
-            array_sum = sum(array)
-            checker = False
-
-    return array, array_sum
+    """ Generates a random number between [_MIN_NUMBER and _MAX_NUMBER]"""
+    rng = random.randrange(_MIN_NUMBER, _MAX_NUMBER)
+    return rng
 
 
 def generate_data():
@@ -95,8 +74,9 @@ def generate_data():
 
 
 def main():
-    # get_memory_info()
+    print(get_virtual_memory_info())
     print(get_disk_info())
+    print(get_cpu_info())
 
 
 if __name__ == '__main__':
