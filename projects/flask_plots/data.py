@@ -77,7 +77,7 @@ def main():
     print(f'SWAP: {get_swap_info()}')
     print(f'VMEM: {get_virtual_memory_info()}')
     print(f'DISK: {get_disk_info()}')
-    print(f'CPU: usage:{get_cpu_info()[0]} cpu_count:{get_cpu_info()[1]}')
+    print(f'CPU: usage:{get_cpu_info()[0]} cpu_count:{get_cpu_info()[1]} ')
 
 
 if __name__ == '__main__':

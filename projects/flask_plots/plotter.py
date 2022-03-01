@@ -61,6 +61,8 @@ def vmem_pie_char():
 
     # remove the percentage from the array
     del raw_dict_data['percent']
+    # remove the total value from the data
+    del raw_dict_data['total']
 
     data = [int(raw_dict_data[key]) for key in raw_dict_data]
     data_labels = [k for k in raw_dict_data]
@@ -68,11 +70,12 @@ def vmem_pie_char():
     fig = Figure()
     ax = fig.subplots()
     try:
-        ax.pie(data, labels=data_labels)
+        ax.pie(data,
+               autopct='%1.1f%%', explode=(0.05, 0.05))
     except ValueError as err:
         ax.pie([idx for idx in range(len(data))], labels=data_labels)
 
-    ax.legend(title='Virtual memory [GB]')
+    ax.legend(title='Virtual memory [GB]',labels=data_labels)
     fig.tight_layout()
     fig.savefig('vmem-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
