@@ -39,64 +39,65 @@ def swap_pie_chart():
     del raw_dict_data['percent']
 
     data = [int(raw_dict_data[key]) for key in raw_dict_data]
-    _labels = [k for k in raw_dict_data]
+    data_labels = [k for k in raw_dict_data]
 
     fig = Figure()
-
     ax = fig.subplots()
-
     try:
-        ax.pie([1,2,3], labels=_labels)
+        ax.pie(data, labels=data_labels)
     except ValueError as err:
         print(f'oops -> {err}')
+        ax.pie([idx + 1 for idx in range(len(data))], labels=data_labels)
 
+    ax.legend(title='Swap usage [GB]')
     fig.tight_layout()
-    ax.legend(title='Swap usage')
-    fig.savefig('swap-data.pdf', dpi=300, bbox_inches='tight')
+    fig.savefig('swap-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
 
 def vmem_pie_char():
-    raw_dict_data = local_data.get_memory_info()
+    raw_dict_data = local_data.get_virtual_memory_info()
 
+    percent = raw_dict_data['percent']
+
+    # remove the percentage from the array
     del raw_dict_data['percent']
 
     data = [int(raw_dict_data[key]) for key in raw_dict_data]
-    _labels = [k for k in raw_dict_data]
+    data_labels = [k for k in raw_dict_data]
 
     fig = Figure()
-
     ax = fig.subplots()
-
     try:
-        ax.pie(data, labels=_labels)
+        ax.pie(data, labels=data_labels)
     except ValueError as err:
-        print(f'oops -> {err}')
+        ax.pie([idx for idx in range(len(data))], labels=data_labels)
 
+    ax.legend(title='Virtual memory [GB]')
     fig.tight_layout()
-    ax.legend(title='Virtual memory')
-    fig.savefig('vmem-data.pdf', dpi=300, bbox_inches='tight')
+    fig.savefig('vmem-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
 
 def disk_pie_chart():
     raw_dict_data = local_data.get_disk_info()
 
+    percent = raw_dict_data['percent']
+
+    # remove the percentage from the array
     del raw_dict_data['percent']
 
     data = [int(raw_dict_data[key]) for key in raw_dict_data]
-    _labels = [k for k in raw_dict_data]
+    data_labels = [k for k in raw_dict_data]
 
     fig = Figure()
-
     ax = fig.subplots()
-
     try:
-        ax.pie(data, labels=_labels)
+        ax.pie(data, labels=data_labels)
     except ValueError as err:
-        print(f'oops -> {err}')
+        ax.pie([idx for idx in range(len(data))], labels=data_labels)
 
+    ax.legend(title='Disk usage [GB]')
     fig.tight_layout()
-    ax.legend(title='Disk usage')
-    fig.savefig('disk-data.pdf', dpi=300, bbox_inches='tight')
+    fig.savefig('disk-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
 
 def main():

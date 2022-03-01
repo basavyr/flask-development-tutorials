@@ -8,7 +8,7 @@ _MIN_NUMBER = 5
 _MAX_NUMBER = 35
 _SUMM = 100
 
-GBYTES = 1000 * 1024 * 1024
+GBYTES = 1024 * 1024 * 1024  # transform memory in gbytes
 
 
 def get_swap_info():
@@ -74,9 +74,10 @@ def generate_data():
 
 
 def main():
-    print(get_virtual_memory_info())
-    print(get_disk_info())
-    print(get_cpu_info())
+    print(f'SWAP: {get_swap_info()}')
+    print(f'VMEM: {get_virtual_memory_info()}')
+    print(f'DISK: {get_disk_info()}')
+    print(f'CPU: usage:{get_cpu_info()[0]} cpu_count:{get_cpu_info()[1]}')
 
 
 if __name__ == '__main__':
