@@ -89,8 +89,13 @@ def get_node_name():
 
 def get_sys_info():
     sys_info = platform.uname()
+    labels = [f'system', f'node', f'release',
+              f'version', f'machine', f'processor']
 
-    return sys_info
+    data_dict = {f'{labels[idx]}': sys_info[idx]
+                 for idx in range(len(sys_info))}
+
+    return data_dict
 
 
 def main():

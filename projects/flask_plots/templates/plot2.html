@@ -78,8 +78,9 @@ body%}
         <div class="card-header"><strong>System Information</strong></div>
         {% if sys_info %}
         <ul>
-            {% for info in sys_info %}
-            <li>{{info[:10]}}</li>
+            {% for key in sys_info %}
+            <li><strong>{{key}}:</strong> </li>
+            <p>{{sys_info[key]}}</p>
             {% endfor %}
         </ul>
           {% endif %}
