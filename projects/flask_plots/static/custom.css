@@ -50,19 +50,35 @@ img {
 
 .node-controller {
   /* align-self: flex-start; */
-  order: 0;
   /* flex-wrap: wrap; */
+  order: 0;
+}
+
+.node-controller:hover {
+  border: 2px solid lightslategray;
 }
 
 .node-agent {
   order: 1;
 }
 
+.node-agent:hover {
+  border: 2px solid lightslategray;
+}
+
 .node-compute {
   order: 2;
+}
+
+.node-compute:hover {
+  border: 2px solid lightslategray;
 }
 
 .node-ceph {
   /* align-self: flex-end; */
   order: 3;
+}
+
+.node-ceph:hover {
+  border: 2px solid lightslategray;
 }

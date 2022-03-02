@@ -15,7 +15,7 @@
         {% for idx in range(nodes | length) %}
         {% if nodes[idx][1]=='controller' %}
         <div class="node-controller">
-        <div class="card text-white bg-primary mb-3" style="max-width: 20rem">
+        <div class="card text-white bg-primary mb-3" >
         <div class="card-header">node: <strong>{{nodes[idx][0]}}</strong></div>
         <div class="card-body">
             <img src="static/node_img.png" width="64">
@@ -26,7 +26,7 @@
         </div>
         {% elif nodes[idx][1]=='compute' %}
         <div class="node-compute">
-            <div class="card text-white bg-success mb-3" style="max-width: 20rem">
+            <div class="card text-white bg-success mb-3" >
                 <div class="card-header">node: <strong>{{nodes[idx][0]}}</strong></div>
                 <div class="card-body">
                     <img src="static/node_img.png" width="64">
@@ -37,7 +37,7 @@
         </div>
         {% elif nodes[idx][1]=='ceph' %}
         <div class="node-ceph">
-            <div class="card text-white bg-warning mb-3" style="max-width: 20rem">
+            <div class="card text-white bg-warning mb-3" >
                 <div class="card-header">node: <strong>{{nodes[idx][0]}}</strong></div>
                 <div class="card-body">
                     <img src="static/node_img.png" width="64">
@@ -48,7 +48,7 @@
         </div>
         {% elif nodes[idx][1]=='agent' %}
         <div class="node-agent">
-        <div class="card text-white bg-info mb-3" style="max-width: 20rem">
+        <div class="card text-white bg-info mb-3" >
             <div class="card-header">node: <strong>{{nodes[idx][0]}}</strong></div>
             <div class="card-body">
             <img src="static/node_img.png" width="64">
