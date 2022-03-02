@@ -1,18 +1,10 @@
 {% extends "base.html" %} {% block title %} System Stats {% endblock %} {% block
 body%}
 
-<div id="flex-container">
-  <div id="column-main">
-    <div id="column-child">
-      <h1>System statistics</h1>
-    </div>
-    <div id="column-child">
-      <form action="/2" method="post">
-        <button type="submit" class="btn btn-info">Reload service</button>
-      </form>
-    </div>
-  </div>
-</div>
+<h1>System statistics</h1>
+<form action="/2" method="post">
+<button type="submit" class="btn btn-info">Reload service</button>
+</form>
 
 {% if node_name %}
 <h2><< node: <code>{{node_name}}</code> >></h2>
@@ -77,6 +69,19 @@ body%}
           <div class="plot_box">
             <img src="data:image/png;base64,{{cpu_chart}}" />
           </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="column-child">
+      <div class="card bg-light mb-3">
+        <div class="card-header"><strong>System Information</strong></div>
+        {% if sys_info %}
+        <ul>
+            {% for info in sys_info %}
+            <li>{{info[:10]}}</li>
+            {% endfor %}
+        </ul>
           {% endif %}
         </div>
       </div>

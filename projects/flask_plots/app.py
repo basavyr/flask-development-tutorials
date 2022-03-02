@@ -32,6 +32,7 @@ def plot_example2():
                            virtual_memory_pie_chart=plotter.virtual_memory_pie_char(),
                            cpu_chart=plotter.cpu_info_chart(),
                            node_name=plotter.local_data.get_node_name(),
+                           sys_info=plotter.local_data.get_sys_info(),
                            )
 
 

@@ -87,6 +87,12 @@ def get_node_name():
     return f'{node_name}'
 
 
+def get_sys_info():
+    sys_info = platform.uname()
+
+    return sys_info
+
+
 def main():
     print(f'SWAP: {get_swap_info()}')
     print(f'VMEM: {get_virtual_memory_info()}')
