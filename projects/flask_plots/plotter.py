@@ -82,10 +82,13 @@ def swap_pie_chart():
     for auto in autotexts:
         auto.set_color('white')
 
-    ax.legend(title='Swap memory [GB]',
+    patches[0].set_color('#ADD8E6')
+    patches[1].set_color('#C9A9A6')
+
+    ax.legend(title='Swap memory',
               labels=data_labels,
-              loc='center right',
-              bbox_to_anchor=(1.2, 1),
+              bbox_to_anchor=(0.35, 0.7),
+              loc='upper right',
               )
     fig.tight_layout()
 
@@ -135,10 +138,13 @@ def virtual_memory_pie_char():
     for auto in autotexts:
         auto.set_color('white')
 
-    ax.legend(title='Virtual memory [GB]',
+    patches[0].set_color('#40B5AD')
+    patches[1].set_color('#5D3FD3')
+
+    ax.legend(title='Virtual memory',
               labels=data_labels,
-              loc='best',
-              bbox_to_anchor=(0.8, 0.7),
+              loc='upper right',
+              bbox_to_anchor=(0.3, 0.7),
               )
     fig.tight_layout()
 
@@ -191,7 +197,7 @@ def disk_pie_chart():
     patches[1].set_color('#E1C16E')
 
     # set the legend
-    ax.legend(title='Disk usage [GB]',
+    ax.legend(title='Disk usage',
               labels=data_labels,
               loc='best',
               bbox_to_anchor=(0.8, 0.7),
@@ -240,9 +246,10 @@ def cpu_info_chart():
     ax.set_title('Average CPU usage')
     ax.set_ylabel('%')
     # ax.set_ylim([0, 100])
-    bar_plot[0].set_color('r')
-    # bar_plot[1].set_color('')
-    bar_plot[2].set_color('y')
+    bar_plot[0].set_color('#87CEEB')
+    bar_plot[1].set_color('#4682B4')
+    bar_plot[2].set_color('#9FE2BF')
+    bar_plot[2].set_color('#A52A2A')
 
     # Save it to a temporary buffer
     buffer = BytesIO()
