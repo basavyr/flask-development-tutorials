@@ -10,7 +10,7 @@ def get_current_time():
 
 def get_node_list():
     node_list = [
-        (f'node-{idx}', random.choice(['controller', 'compute', 'ceph'])) for idx in range(6)]
+        (f'node-{idx}', random.choice(['controller', 'compute', 'ceph', 'agent']), f'10.0.1.{idx}') for idx in range(25)]
 
     return node_list
 
@@ -18,13 +18,15 @@ def get_node_list():
 def get_node_types(node_list):
     node_type_list = []
     idx = 0
-    for node_name, node_type in node_list:
+    for node_name, node_type, node_ip_addr in node_list:
         if(node_type == 'controller'):
             node_type_list.append(f'ctrl-os-{idx}')
         elif node_type == 'compute':
             node_type_list.append(f'compute-os-{idx}')
         elif node_type == 'ceph':
             node_type_list.append(f'ceph-os-{idx}')
+        elif node_type == 'agent':
+            node_type_list.append(f'agent-os-{idx}')
         idx = idx + 1
 
     return node_type_list

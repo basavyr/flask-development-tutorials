@@ -10,39 +10,49 @@
     <div class="card-body">
       <p class="card-text">The entire computing structure available on the map <code>{{map_info[0]}}</code>.</p>
 
+        <div class="node-container">
         {% if nodes %} 
-        {% for node in nodes %}
-        {% if node[1]=='controller' %}
+        {% for idx in range(nodes | length) %}
+        {% if nodes[idx][1]=='controller' %}
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem">
-        <div class="card-header">node: <strong>{{node[0]}}</strong></div>
+        <div class="card-header">node: <strong>{{nodes[idx][0]}}</strong></div>
         <div class="card-body">
             <img src="static/node_img.png" width="64">
-            <h4 class="card-title">{{node[1]}}</h4>
-            <p class="card-text">Some node info...</p>
+            <h4 class="card-title">{{node_types[idx]}}</h4>
+            <p class="card-text">{{nodes[idx][2]}}</p>
         </div>
         </div>
-        {% elif node[1]=='compute' %}
+        {% elif nodes[idx][1]=='compute' %}
         <div class="card text-white bg-success mb-3" style="max-width: 20rem">
-            <div class="card-header">node: <strong>{{node[0]}}</strong></div>
+            <div class="card-header">node: <strong>{{nodes[idx][0]}}</strong></div>
             <div class="card-body">
             <img src="static/node_img.png" width="64">
-            <h4 class="card-title">{{node[1]}}</h4>
-            <p class="card-text">Some node info...</p>
+            <h4 class="card-title">{{node_types[idx]}}</h4>
+            <p class="card-text">{{nodes[idx][2]}}</p>
             </div>
         </div>
-        {% elif node[1]=='ceph' %}
+        {% elif nodes[idx][1]=='ceph' %}
         <div class="card text-white bg-warning mb-3" style="max-width: 20rem">
-            <div class="card-header">node: <strong>{{node[0]}}</strong></div>
+            <div class="card-header">node: <strong>{{nodes[idx][0]}}</strong></div>
             <div class="card-body">
             <img src="static/node_img.png" width="64">
-            <h4 class="card-title">{{node[1]}}</h4>
-            <p class="card-text">Some node info...</p>
+            <h4 class="card-title">{{node_types[idx]}}</h4>
+            <p class="card-text">{{nodes[idx][2]}}</p>
+            </div>
+        </div>
+        {% elif nodes[idx][1]=='agent' %}
+        <div class="card text-white bg-info mb-3" style="max-width: 20rem">
+            <div class="card-header">node: <strong>{{nodes[idx][0]}}</strong></div>
+            <div class="card-body">
+            <img src="static/node_img.png" width="64">
+            <h4 class="card-title">{{node_types[idx]}}</h4>
+            <p class="card-text">{{nodes[idx][2]}}</p>
             </div>
         </div>
         {% endif %}
         {% endfor %}
         {% endif %}
-        
+        </div>
         {% if time_stamp %}
         <p>Map generated at <strong><code>{{time_stamp}}</code></strong>.</p>
         {% endif %} 
