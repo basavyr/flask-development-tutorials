@@ -1,11 +1,17 @@
 {% extends "base.html" %} {% block title %} System Stats {% endblock %} {% block
 body%}
 
-<div id="custom-header">
-  <h1>System statistics</h1>
-  <form action="/2" method="post">
-    <button type="submit" class="btn btn-info">Reload service</button>
-  </form>
+<div id="flex-container">
+  <div id="column-main">
+    <div id="column-child">
+      <h1>System statistics</h1>
+    </div>
+    <div id="column-child">
+      <form action="/2" method="post">
+        <button type="submit" class="btn btn-info">Reload service</button>
+      </form>
+    </div>
+  </div>
 </div>
 
 {% if node_name %}

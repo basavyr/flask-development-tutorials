@@ -31,7 +31,7 @@ def plot_example2():
                            swap_pie_chart=plotter.swap_pie_chart(),
                            virtual_memory_pie_chart=plotter.virtual_memory_pie_char(),
                            cpu_chart=plotter.cpu_info_chart(),
-                           node_name='testNode-01',
+                           node_name=plotter.local_data.get_node_name(),
                            )
 
 

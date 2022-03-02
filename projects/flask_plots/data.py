@@ -76,9 +76,15 @@ def generate_data():
 
 def get_platform_arch():
     arch = platform.architecture()[0]
-    processor=platform.processor()
+    processor = platform.processor()
 
     return f'{processor}-{arch}'
+
+
+def get_node_name():
+    node_name = platform.node()
+
+    return f'{node_name}'
 
 
 def main():
