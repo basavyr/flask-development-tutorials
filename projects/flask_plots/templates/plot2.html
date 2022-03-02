@@ -22,6 +22,7 @@ body%}
           <div class="card-body">
             <div class="plot_box">
               <img src="data:image/png;base64,{{disk_pie_chart}}" />
+              <p>System stats generated at <code>{{time_stamp}}</code>.</p>
             </div>
             {% endif %}
           </div>
@@ -38,6 +39,7 @@ body%}
         <div class="card-body">
           <div class="plot_box">
             <img src="data:image/png;base64,{{swap_pie_chart}}" />
+            <p>System stats generated at <code>{{time_stamp}}</code>.</p>
           </div>
           {% endif %}
         </div>
@@ -53,6 +55,7 @@ body%}
         <div class="card-body">
           <div class="plot_box">
             <img src="data:image/png;base64,{{virtual_memory_pie_chart}}" />
+            <p>System stats generated at <code>{{time_stamp}}</code>.</p>
           </div>
           {% endif %}
         </div>
@@ -68,6 +71,7 @@ body%}
         <div class="card-body">
           <div class="plot_box">
             <img src="data:image/png;base64,{{cpu_chart}}" />
+            <p>System stats generated at <code>{{time_stamp}}</code>.</p>
           </div>
           {% endif %}
         </div>
@@ -83,6 +87,7 @@ body%}
             <p><code>{{sys_info[key]}}</code></p>
             {% endfor %}
         </ul>
+        <p>System stats generated at <code>{{time_stamp}}</code>.</p>
           {% endif %}
         </div>
       </div>

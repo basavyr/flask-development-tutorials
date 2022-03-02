@@ -34,6 +34,7 @@ def plot_example2():
                            cpu_chart=plotter.cpu_info_chart(),
                            node_name=plotter.local_data.get_node_name(),
                            sys_info=plotter.local_data.get_sys_info(),
+                           time_stamp=plotter.local_data.get_timestamp(),
                            )
 
 
