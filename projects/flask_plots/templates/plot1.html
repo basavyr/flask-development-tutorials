@@ -1,13 +1,16 @@
 {% extends "base.html" %} {% block title %} Index {% endblock %} {% block body%}
 
-<h1>Plot example 1</h1>
-<form action="/1" method="post">
-  <button type="submit" class="btn btn-danger">Reload service</button>
-</form>
+<div id="custom-header">
+  <h1>System statistics</h1>
+  <form action="/1" method="post">
+    <button type="submit" class="btn btn-info">Reload service</button>
+  </form>
+</div>
+
 <div class="flex-container">
   <div class="column-main">
     <div class="column-child">
-      <div class="card bg-light mb-3" style="max-width: 30rem">
+      <div class="card bg-light mb-3">
         <div class="card-header">Plot with random data</div>
         <div class="card-text">
           {% if plot1 %}
@@ -25,7 +28,7 @@
       </div>
     </div>
     <div class="column-child">
-      <div class="card bg-light mb-3" style="max-width: 30rem">
+      <div class="card bg-light mb-3">
         <div class="card-header">Header</div>
         {% if plot2 %}
         <p class="card-text">
@@ -41,7 +44,7 @@
       </div>
     </div>
     <div class="column-child">
-      <div class="card bg-light mb-3" style="max-width: 30rem">
+      <div class="card bg-light mb-3">
         <div class="card-header">Header</div>
         {% if plot3 %}
         <p class="card-text">

@@ -1,15 +1,21 @@
 {% extends "base.html" %} {% block title %} System Stats {% endblock %} {% block
 body%}
 
-<h1>System statistics</h1>
-<form action="/1" method="post">
-  <button type="submit" class="btn btn-danger">Reload service</button>
-</form>
+<div id="custom-header">
+  <h1>System statistics</h1>
+  <form action="/2" method="post">
+    <button type="submit" class="btn btn-info">Reload service</button>
+  </form>
+</div>
+
+{% if node_name %}
+<h2><< node: <code>{{node_name}}</code> >></h2>
+{% endif %}
 <div class="flex-container">
   <div class="column-main">
     <div class="column-child">
-      <div class="card bg-light mb-3" style="max-width: 30rem">
-        <div class="card-header">DISK</div>
+      <div class="card bg-light mb-3">
+        <div class="card-header"><strong>DISK</strong></div>
         <div class="card-text">
           {% if disk_pie_chart %}
           <p class="card-text">
@@ -25,8 +31,8 @@ body%}
       </div>
     </div>
     <div class="column-child">
-      <div class="card bg-light mb-3" style="max-width: 30rem">
-        <div class="card-header">SWAP</div>
+      <div class="card bg-light mb-3">
+        <div class="card-header"><strong>SWAP</strong></div>
         {% if swap_pie_chart %}
         <p class="card-text">
           The current <code>swap memory</code> stats of the system.
@@ -40,8 +46,8 @@ body%}
       </div>
     </div>
     <div class="column-child">
-      <div class="card bg-light mb-3" style="max-width: 30rem">
-        <div class="card-header">VRAM</div>
+      <div class="card bg-light mb-3">
+        <div class="card-header"><strong>VIRTUAL MEMORY</strong></div>
         {% if virtual_memory_pie_chart %}
         <p class="card-text">
           The current <code>virtual memory</code> stats of the system.
@@ -49,6 +55,21 @@ body%}
         <div class="card-body">
           <div class="plot_box">
             <img src="data:image/png;base64,{{virtual_memory_pie_chart}}" />
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="column-child">
+      <div class="card bg-light mb-3">
+        <div class="card-header"><strong>Processing Unit</strong></div>
+        {% if cpu_chart %}
+        <p class="card-text">
+          The average <code>CPU</code> load of the system.
+        </p>
+        <div class="card-body">
+          <div class="plot_box">
+            <img src="data:image/png;base64,{{cpu_chart}}" />
           </div>
           {% endif %}
         </div>

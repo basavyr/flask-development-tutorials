@@ -185,16 +185,22 @@ def cpu_info_chart():
                 ha='center', color='white', size=14, fontweight='bold')
         idx = idx + 1
 
-    fig.tight_layout()
+    # fig.tight_layout()
     ax.set_title('Average CPU usage')
     ax.set_ylabel('%')
     # ax.set_ylim([0, 100])
     bar_plot[0].set_color('r')
     # bar_plot[1].set_color('')
     bar_plot[2].set_color('y')
-    fig.savefig('cpu-chart.pdf', dpi=300, bbox_inches='tight')
 
-    # return cpu_usages
+    # Save it to a temporary buffer
+    buffer = BytesIO()
+    fig.savefig(buffer, format="png")
+    # fig.savefig('cpu-chart.pdf', dpi=300, bbox_inches='tight')
+
+    # Embed the result in the html output.
+    data = base64.b64encode(buffer.getbuffer()).decode("ascii")
+    return data
 
 
 def main():

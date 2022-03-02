@@ -19,9 +19,9 @@ def indexhtml():
 @app.route('/1', methods=['POST', 'GET'])
 def plot_example1():
     return render_template('plot1.html',
-                           plot1=plotter.make_plot(),
-                           plot2=plotter.make_plot(),
-                           plot3=plotter.make_plot())
+                           plot1=plotter.plot_data(),
+                           plot2=plotter.plot_data(),
+                           plot3=plotter.plot_data())
 
 
 @app.route('/2', methods=['POST', 'GET'])
@@ -29,7 +29,10 @@ def plot_example2():
     return render_template('plot2.html',
                            disk_pie_chart=plotter.disk_pie_chart(),
                            swap_pie_chart=plotter.swap_pie_chart(),
-                           virtual_memory_pie_chart=plotter.virtual_memory_pie_char())
+                           virtual_memory_pie_chart=plotter.virtual_memory_pie_char(),
+                           cpu_chart=plotter.cpu_info_chart(),
+                           node_name='testNode-01',
+                           )
 
 
 @app.route('/3')
