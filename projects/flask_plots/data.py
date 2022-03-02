@@ -3,6 +3,7 @@ import random
 
 import os
 import psutil
+import platform
 
 _MIN_NUMBER = 5
 _MAX_NUMBER = 35
@@ -73,11 +74,19 @@ def generate_data():
     return [x_data, y_data]
 
 
+def get_platform_arch():
+    arch = platform.architecture()[0]
+    processor=platform.processor()
+
+    return f'{processor}-{arch}'
+
+
 def main():
     print(f'SWAP: {get_swap_info()}')
     print(f'VMEM: {get_virtual_memory_info()}')
     print(f'DISK: {get_disk_info()}')
     print(f'CPU: usage:{get_cpu_info()[0]} cpu_count:{get_cpu_info()[1]} ')
+    print(f'ARCH: {get_platform_arch()}')
 
 
 if __name__ == '__main__':
