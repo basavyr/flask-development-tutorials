@@ -1,5 +1,22 @@
-{% extends "base.html" %} {% block title %} Index {% endblock %} {% block body%}
+{% extends "base.html" %} {% block title %} Map {% endblock %} {% block body%}
 
-<h1>Plot example 3</h1>
+<h1>Openstack Map</h1>
+<form action="/3" method="post">
+  <button type="submit" class="btn btn-success">Reload service</button>
+</form>
 
-{% endblock %}
+{% if time_stamp %}
+<p>Map generated at <strong><code>{{time_stamp}}</code></strong>.</p>
+{% endif %} 
+{% if nodes %} 
+{% for node in nodes %}
+<div class="card text-white bg-primary mb-3" style="max-width: 20rem">
+  <div class="card-header">{{node}}</div>
+  <div class="card-body">
+    <h4 class="card-title">Node info</h4>
+    <p class="card-text">Some node info...</p>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+ {% endblock %}

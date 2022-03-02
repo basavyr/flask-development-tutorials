@@ -5,8 +5,9 @@ import base64
 from io import BytesIO
 from matplotlib.figure import Figure
 
-
+import tools as local_tools
 import plotter
+import data as local_data
 
 app = Flask(__name__)
 
@@ -36,9 +37,13 @@ def plot_example2():
                            )
 
 
-@app.route('/3')
+@app.route('/3', methods=['POST', 'GET'])
 def plot_example3():
-    return render_template('plot3.html')
+    nodes = local_tools.get_node_list()
+    return render_template('plot3.html',
+                           time_stamp=local_tools.get_current_time(),
+                           nodes=nodes,
+                           )
 
 
 if __name__ == "__main__":
