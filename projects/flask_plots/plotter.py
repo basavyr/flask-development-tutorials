@@ -7,11 +7,14 @@ from io import BytesIO
 
 from matplotlib import pyplot
 from matplotlib.figure import Figure
-from matplotlib import rcParams
+import matplotlib
 
 import numpy
 
 import data as local_data
+
+
+matplotlib.rcParams['font.size'] = 15
 
 
 def shower(pct, data):
@@ -140,22 +143,35 @@ def disk_pie_chart():
     fig = Figure()
     ax = fig.subplots()
     try:
-        ax.pie(data,
-               autopct=lambda pct: shower(pct, data),
-               explode=(0.01, 0.01))
+        patches, texts, autotexts = ax.pie(data,
+                                           autopct=lambda pct: shower(
+                                               pct, data),
+                                           explode=(0.01, 0.01),
+                                           textprops={'fontsize': 17,
+                                                      'fontweight': 'bold',
+                                                      })
     except ValueError as err:
-        ax.pie([idx + 1 for idx in range(len(data))],
-               autopct=lambda pct: shower(pct, data),
-               explode=(0.01, 0.01))
+        patches, texts, autotexts = ax.pie([idx + 1 for idx in range(len(data))],
+                                           autopct=lambda pct: shower(
+                                               pct, data),
+                                           explode=(0.01, 0.01),
+                                           textprops={'fontsize': 17,
+                                                      'fontweight': 'bold',
+                                                      })
 
+    for auto in autotexts:
+        auto.set_color('white')
+
+    # set the legend
     ax.legend(title='Disk usage [GB]',
               labels=data_labels,
               loc='best')
+
     fig.tight_layout()
     # Save it to a temporary buffer
     buffer = BytesIO()
+    fig.savefig('disk-pie-chart.pdf', dpi=300, bbox_inches='tight')
     fig.savefig(buffer, format="png")
-    # fig.savefig('disk-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
     # Embed the result in the html output.
     data = base64.b64encode(buffer.getbuffer()).decode("ascii")
@@ -182,8 +198,12 @@ def cpu_info_chart():
         text_label = cpu_usages[idx]
         x_cord = bar.get_x() + bar.get_width() / 2
         y_cord = bar.get_y() + current_height
-        ax.text(x_cord, y_cord, text_label,
-                ha='center', color='white', size=14, fontweight='bold')
+        ax.text(x_cord, y_cord,
+                text_label,
+                ha='center',
+                color='white',
+                # size=14,
+                fontweight='bold',)
         idx = idx + 1
 
     # fig.tight_layout()
@@ -205,7 +225,7 @@ def cpu_info_chart():
 
 
 def main():
-    # disk_pie_chart()
+    disk_pie_chart()
     # swap_pie_chart()
     # virtual_memory_pie_char()
     cpu_info_chart()
