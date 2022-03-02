@@ -9,6 +9,13 @@ def get_current_time():
 
 
 def get_node_list():
+    """
+    create a test list with compute nodes that belong to the same openstack macp
+    the node list contains tuples with the following items:
+	- node-name
+	- node type
+	- node ip_address
+    """
     node_list = [
         (f'node-{idx}', random.choice(['controller', 'compute', 'ceph', 'agent']), f'10.0.1.{idx}') for idx in range(25)]
 
@@ -16,6 +23,12 @@ def get_node_list():
 
 
 def get_node_types(node_list):
+    """
+    - create a list of node types, based on the input node list
+    - each node type is created in respect to the type of node within the input node list
+    - the input node list contains elements, where each node item is represented by a tuple
+    - the tuple contains a field that will give the actual node type and will be used to generate the node type name 
+    """
     node_type_list = []
     idx = 0
     for node_name, node_type, node_ip_addr in node_list:
