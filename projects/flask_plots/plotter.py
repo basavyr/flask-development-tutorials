@@ -4,6 +4,7 @@ from threading import local
 
 import base64
 from io import BytesIO
+from unittest.mock import patch
 
 from matplotlib import pyplot
 from matplotlib.figure import Figure
@@ -185,6 +186,9 @@ def disk_pie_chart():
 
     for auto in autotexts:
         auto.set_color('white')
+
+    patches[0].set_color('#7393B3')
+    patches[1].set_color('#E1C16E')
 
     # set the legend
     ax.legend(title='Disk usage [GB]',
