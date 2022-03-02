@@ -70,7 +70,15 @@ def swap_pie_chart():
               loc='best',
               labels=data_labels)
     fig.tight_layout()
-    fig.savefig('swap-pie-chart.pdf', dpi=300, bbox_inches='tight')
+
+    # Save it to a temporary buffer
+    buffer = BytesIO()
+    fig.savefig(buffer, format="png")
+    # fig.savefig('swap-pie-chart.pdf', dpi=300, bbox_inches='tight')
+
+    # Embed the result in the html output.
+    data = base64.b64encode(buffer.getbuffer()).decode("ascii")
+    return data
 
 
 def virtual_memory_pie_char():
@@ -103,7 +111,15 @@ def virtual_memory_pie_char():
               labels=data_labels,
               loc='best')
     fig.tight_layout()
-    fig.savefig('virtual-memory-pie-chart.pdf', dpi=300, bbox_inches='tight')
+
+    # Save it to a temporary buffer
+    buffer = BytesIO()
+    fig.savefig(buffer, format="png")
+    # fig.savefig('virtual-memory-pie-chart.pdf', dpi=300, bbox_inches='tight')
+
+    # Embed the result in the html output.
+    data = base64.b64encode(buffer.getbuffer()).decode("ascii")
+    return data
 
 
 def disk_pie_chart():
@@ -134,7 +150,14 @@ def disk_pie_chart():
               labels=data_labels,
               loc='best')
     fig.tight_layout()
-    fig.savefig('disk-pie-chart.pdf', dpi=300, bbox_inches='tight')
+    # Save it to a temporary buffer
+    buffer = BytesIO()
+    fig.savefig(buffer, format="png")
+    # fig.savefig('disk-pie-chart.pdf', dpi=300, bbox_inches='tight')
+
+    # Embed the result in the html output.
+    data = base64.b64encode(buffer.getbuffer()).decode("ascii")
+    return data
 
 
 def main():

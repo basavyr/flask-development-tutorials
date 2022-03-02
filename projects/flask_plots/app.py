@@ -24,12 +24,12 @@ def plot_example1():
                            plot3=plotter.make_plot())
 
 
-@app.route('/2')
+@app.route('/2', methods=['POST', 'GET'])
 def plot_example2():
     return render_template('plot2.html',
-                           pie_chart1=1,
-                           pie_chart2=1,
-                           pie_chart3=1)
+                           disk_pie_chart=plotter.disk_pie_chart(),
+                           swap_pie_chart=plotter.swap_pie_chart(),
+                           virtual_memory_pie_chart=plotter.virtual_memory_pie_char())
 
 
 @app.route('/3')
@@ -38,4 +38,4 @@ def plot_example3():
 
 
 if __name__ == "__main__":
-    app.run(debug=False, port=5000)
+    app.run(debug=True, port=5000)
