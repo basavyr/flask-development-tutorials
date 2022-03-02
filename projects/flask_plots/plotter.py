@@ -7,6 +7,7 @@ from io import BytesIO
 
 from matplotlib import pyplot
 from matplotlib.figure import Figure
+from matplotlib import rcParams
 
 import numpy
 
@@ -169,15 +170,25 @@ def cpu_info_chart():
     ax = fig.subplots()
 
     try:
-        bar_plot=ax.bar(bar_labels, cpu_usages)
+        bar_plot = ax.bar(bar_labels, cpu_usages)
     except ValueError as err:
         print(f'Issue while creating the bar plot -> {err}')
-        bar_plot=ax.bar(bar_labels, [1, 1, 1])
+        bar_plot = ax.bar(bar_labels, [1, 1, 1])
+
+    idx = 0
+    for bar in bar_plot:
+        current_height = bar.get_height() / 2
+        text_label = cpu_usages[idx]
+        x_cord = bar.get_x() + bar.get_width() / 2
+        y_cord = bar.get_y() + current_height
+        ax.text(x_cord, y_cord, text_label,
+                ha='center', color='white', size=14, fontweight='bold')
+        idx = idx + 1
 
     fig.tight_layout()
     ax.set_title('Average CPU usage')
     ax.set_ylabel('%')
-    ax.set_ylim([0,100])
+    # ax.set_ylim([0, 100])
     bar_plot[0].set_color('r')
     # bar_plot[1].set_color('')
     bar_plot[2].set_color('y')
