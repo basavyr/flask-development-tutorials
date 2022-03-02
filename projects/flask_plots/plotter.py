@@ -31,6 +31,7 @@ def plot_data():
     ax.set_xlabel('x')
     ax.set_ylabel('rand')
     ax.set_ylim(0, 15)
+    fig.tight_layout()
 
     # Save it to a temporary buffer
     buffer = BytesIO()
@@ -195,8 +196,8 @@ def cpu_info_chart():
 
     # Save it to a temporary buffer
     buffer = BytesIO()
+    fig.savefig('cpu-chart.pdf', dpi=300, bbox_inches='tight')
     fig.savefig(buffer, format="png")
-    # fig.savefig('cpu-chart.pdf', dpi=300, bbox_inches='tight')
 
     # Embed the result in the html output.
     data = base64.b64encode(buffer.getbuffer()).decode("ascii")
