@@ -1,4 +1,5 @@
 from cProfile import label
+from re import L
 from tabnanny import check
 from threading import local
 
@@ -16,6 +17,7 @@ import data as local_data
 
 
 matplotlib.rcParams['font.size'] = 15
+# matplotlib.rcParams.update({'hatch.color': 'k'})
 
 
 def shower(pct, data):
@@ -228,32 +230,68 @@ def cpu_info_chart():
         print(f'Issue while creating the bar plot -> {err}')
         bar_plot = ax.bar(bar_labels, [1, 1, 1])
 
+    set_colors = True
+
+    if set_colors == True:
+        # set the color for LOW usage mode
+        if float(cpu_usages[0]) <= 50.0:
+            bar_plot[0].set_color('#87CEEB')
+
+        if float(cpu_usages[1]) <= 50.0:
+            bar_plot[1].set_color('#87CEEB')
+
+        if float(cpu_usages[2]) <= 50.0:
+            bar_plot[2].set_color('#87CEEB')
+
+        # set the color for MEDIUM usage mode
+        if float(cpu_usages[0]) > 50.0 and float(cpu_usages[0]) <= 75.0:
+            bar_plot[0].set_color('#4682B4')
+
+        if float(cpu_usages[1]) > 50.0 and float(cpu_usages[1]) <= 75.0:
+            bar_plot[1].set_color('#4682B4')
+
+        if float(cpu_usages[2]) > 50.0 and float(cpu_usages[2]) <= 75.0:
+            bar_plot[2].set_color('#4682B4')
+
+        # set the color for high-usage mode
+        if float(cpu_usages[0]) > 75.0:
+            bar_plot[0].set_color('#A52A2A')
+
+        # set the color for high-usage mode
+        if float(cpu_usages[1]) > 75.0:
+            bar_plot[1].set_color('#A52A2A')
+
+        # set the color for high-usage mode
+        if float(cpu_usages[2]) > 75.0:
+            bar_plot[2].set_color('#A52A2A')
+
+    hatches = ['\\', '.', '/']
+
     idx = 0
     for bar in bar_plot:
         current_height = bar.get_height() / 2
-        text_label = cpu_usages[idx]
+        text_label = f'{cpu_usages[idx]}'
         x_cord = bar.get_x() + bar.get_width() / 2
         y_cord = bar.get_y() + current_height
         ax.text(x_cord, y_cord,
                 text_label,
                 ha='center',
                 color='white',
-                # size=14,
+                size=25,
                 fontweight='bold',)
+        # bar.set(hatch=hatches[idx])
+        bar.set_hatch(hatches[idx])
+        bar.set_edgecolor('k')
         idx = idx + 1
 
     # fig.tight_layout()
     ax.set_title('Average CPU usage')
     ax.set_ylabel('%')
     # ax.set_ylim([0, 100])
-    bar_plot[0].set_color('#87CEEB')
-    bar_plot[1].set_color('#4682B4')
-    bar_plot[2].set_color('#9FE2BF')
-    bar_plot[2].set_color('#A52A2A')
 
     # Save it to a temporary buffer
     buffer = BytesIO()
-    # fig.savefig('cpu-chart.pdf', dpi=300, bbox_inches='tight')
+    fig.savefig('cpu-chart.pdf', dpi=300, bbox_inches='tight')
     fig.savefig(buffer, format="png")
 
     # Embed the result in the html output.
@@ -265,7 +303,7 @@ def main():
     disk_pie_chart()
     # swap_pie_chart()
     # virtual_memory_pie_char()
-    # cpu_info_chart()
+    cpu_info_chart()
 
 
 if __name__ == '__main__':
