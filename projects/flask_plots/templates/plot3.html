@@ -5,18 +5,48 @@
   <button type="submit" class="btn btn-success">Reload service</button>
 </form>
 
-{% if time_stamp %}
-<p>Map generated at <strong><code>{{time_stamp}}</code></strong>.</p>
-{% endif %} 
-{% if nodes %} 
-{% for node in nodes %}
-<div class="card text-white bg-primary mb-3" style="max-width: 20rem">
-  <div class="card-header">{{node}}</div>
-  <div class="card-body">
-    <h4 class="card-title">Node info</h4>
-    <p class="card-text">Some node info...</p>
+<div class="card bg-light mb-3" style="max-width: auto;">
+    <div class="card-header"><h4> <code>{{map_info[0]}}</code>@<code>{{map_info[1]}}</code> </h4></div>
+    <div class="card-body">
+      <p class="card-text">The entire computing structure available on the map <code>{{map_info[0]}}</code>.</p>
+
+        {% if nodes %} 
+        {% for node in nodes %}
+        {% if node[1]=='controller' %}
+        <div class="card text-white bg-primary mb-3" style="max-width: 20rem">
+        <div class="card-header">node: <strong>{{node[0]}}</strong></div>
+        <div class="card-body">
+            <img src="static/node_img.png" width="64">
+            <h4 class="card-title">{{node[1]}}</h4>
+            <p class="card-text">Some node info...</p>
+        </div>
+        </div>
+        {% elif node[1]=='compute' %}
+        <div class="card text-white bg-success mb-3" style="max-width: 20rem">
+            <div class="card-header">node: <strong>{{node[0]}}</strong></div>
+            <div class="card-body">
+            <img src="static/node_img.png" width="64">
+            <h4 class="card-title">{{node[1]}}</h4>
+            <p class="card-text">Some node info...</p>
+            </div>
+        </div>
+        {% elif node[1]=='ceph' %}
+        <div class="card text-white bg-warning mb-3" style="max-width: 20rem">
+            <div class="card-header">node: <strong>{{node[0]}}</strong></div>
+            <div class="card-body">
+            <img src="static/node_img.png" width="64">
+            <h4 class="card-title">{{node[1]}}</h4>
+            <p class="card-text">Some node info...</p>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        
+        {% if time_stamp %}
+        <p>Map generated at <strong><code>{{time_stamp}}</code></strong>.</p>
+        {% endif %} 
+
+    </div>
   </div>
-</div>
-{% endfor %}
-{% endif %}
  {% endblock %}

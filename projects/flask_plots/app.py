@@ -39,10 +39,14 @@ def plot_example2():
 
 @app.route('/3', methods=['POST', 'GET'])
 def plot_example3():
-    nodes = local_tools.get_node_list()
+    node_list = local_tools.get_node_list()
+    node_types = local_tools.get_node_types(node_list)
+
     return render_template('plot3.html',
                            time_stamp=local_tools.get_current_time(),
-                           nodes=nodes,
+                           map_info=local_tools.get_openstack_map(),
+                           nodes=node_list,
+                           node_types=node_types,
                            )
 
 
