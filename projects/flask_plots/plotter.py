@@ -280,6 +280,9 @@ def cpu_info_chart():
                 size=25,
                 fontweight='bold',)
         # bar.set(hatch=hatches[idx])
+        # sources for setting the bar hatches
+        # https://towardsdatascience.com/how-to-fill-plots-with-patterns-in-matplotlib-58ad41ea8cf8
+        # https://stackoverflow.com/questions/56674645/changing-hatch-color-in-matplotlib
         bar.set_hatch(hatches[idx])
         bar.set_edgecolor('k')
         idx = idx + 1
