@@ -160,10 +160,37 @@ def disk_pie_chart():
     return data
 
 
+def cpu_info_chart():
+    cpu_usages, cpu_count = local_data.get_cpu_info()
+
+    bar_labels = [f'last\n{idx} minute(s)' for idx in [1, 5, 15]]
+
+    fig = Figure()
+    ax = fig.subplots()
+
+    try:
+        bar_plot=ax.bar(bar_labels, cpu_usages)
+    except ValueError as err:
+        print(f'Issue while creating the bar plot -> {err}')
+        bar_plot=ax.bar(bar_labels, [1, 1, 1])
+
+    fig.tight_layout()
+    ax.set_title('Average CPU usage')
+    ax.set_ylabel('%')
+    ax.set_ylim([0,100])
+    bar_plot[0].set_color('r')
+    # bar_plot[1].set_color('')
+    bar_plot[2].set_color('y')
+    fig.savefig('cpu-chart.pdf', dpi=300, bbox_inches='tight')
+
+    # return cpu_usages
+
+
 def main():
-    disk_pie_chart()
-    swap_pie_chart()
-    virtual_memory_pie_char()
+    # disk_pie_chart()
+    # swap_pie_chart()
+    # virtual_memory_pie_char()
+    cpu_info_chart()
 
 
 if __name__ == '__main__':
