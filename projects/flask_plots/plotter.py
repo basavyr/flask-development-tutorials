@@ -62,24 +62,36 @@ def swap_pie_chart():
     ax = fig.subplots()
 
     try:
-        ax.pie(data,
-               autopct=lambda pct: shower(pct, data),
-               explode=(0.01, 0.01))
+        patches, texts, autotexts = ax.pie(data,
+                                           autopct=lambda pct: shower(
+                                               pct, data),
+                                           explode=(0.01, 0.01),
+                                           textprops={'fontsize': 17,
+                                                      'fontweight': 'bold',
+                                                      })
     except ValueError as err:
-        print('Issue while creating the SWAP pie chart -> {err} ')
-        ax.pie([idx + 1 for idx in range(len(data))],
-               autopct=lambda pct: shower(pct, data),
-               explode=(0.01, 0.01))
+        patches, texts, autotexts = ax.pie([idx + 1 for idx in range(len(data))],
+                                           autopct=lambda pct: shower(
+                                               pct, data),
+                                           explode=(0.01, 0.01),
+                                           textprops={'fontsize': 17,
+                                                      'fontweight': 'bold',
+                                                      })
+
+    for auto in autotexts:
+        auto.set_color('white')
 
     ax.legend(title='Swap memory [GB]',
-              loc='best',
-              labels=data_labels)
+              labels=data_labels,
+              loc='center right',
+              bbox_to_anchor=(1.2, 1),
+              )
     fig.tight_layout()
 
     # Save it to a temporary buffer
     buffer = BytesIO()
-    fig.savefig(buffer, format="png")
     # fig.savefig('swap-pie-chart.pdf', dpi=300, bbox_inches='tight')
+    fig.savefig(buffer, format="png")
 
     # Embed the result in the html output.
     data = base64.b64encode(buffer.getbuffer()).decode("ascii")
@@ -103,24 +115,36 @@ def virtual_memory_pie_char():
     ax = fig.subplots()
 
     try:
-        ax.pie(data,
-               autopct=lambda pct: shower(pct, data),
-               explode=(0.01, 0.01))
+        patches, texts, autotexts = ax.pie(data,
+                                           autopct=lambda pct: shower(
+                                               pct, data),
+                                           explode=(0.01, 0.01),
+                                           textprops={'fontsize': 17,
+                                                      'fontweight': 'bold',
+                                                      })
     except ValueError as err:
-        print('Issue while creating the VIRTUAL_MEMORY pie chart -> {err} ')
-        ax.pie([idx + 1 for idx in range(len(data))],
-               autopct=lambda pct: shower(pct, data),
-               explode=(0.01, 0.01))
+        patches, texts, autotexts = ax.pie([idx + 1 for idx in range(len(data))],
+                                           autopct=lambda pct: shower(
+                                               pct, data),
+                                           explode=(0.01, 0.01),
+                                           textprops={'fontsize': 17,
+                                                      'fontweight': 'bold',
+                                                      })
+
+    for auto in autotexts:
+        auto.set_color('white')
 
     ax.legend(title='Virtual memory [GB]',
               labels=data_labels,
-              loc='best')
+              loc='best',
+              bbox_to_anchor=(0.8, 0.7),
+              )
     fig.tight_layout()
 
     # Save it to a temporary buffer
     buffer = BytesIO()
-    fig.savefig(buffer, format="png")
     # fig.savefig('virtual-memory-pie-chart.pdf', dpi=300, bbox_inches='tight')
+    fig.savefig(buffer, format="png")
 
     # Embed the result in the html output.
     data = base64.b64encode(buffer.getbuffer()).decode("ascii")
@@ -165,7 +189,9 @@ def disk_pie_chart():
     # set the legend
     ax.legend(title='Disk usage [GB]',
               labels=data_labels,
-              loc='best')
+              loc='best',
+              bbox_to_anchor=(0.8, 0.7),
+              )
 
     fig.tight_layout()
     # Save it to a temporary buffer
@@ -216,7 +242,7 @@ def cpu_info_chart():
 
     # Save it to a temporary buffer
     buffer = BytesIO()
-    fig.savefig('cpu-chart.pdf', dpi=300, bbox_inches='tight')
+    # fig.savefig('cpu-chart.pdf', dpi=300, bbox_inches='tight')
     fig.savefig(buffer, format="png")
 
     # Embed the result in the html output.
@@ -228,7 +254,7 @@ def main():
     disk_pie_chart()
     # swap_pie_chart()
     # virtual_memory_pie_char()
-    cpu_info_chart()
+    # cpu_info_chart()
 
 
 if __name__ == '__main__':
