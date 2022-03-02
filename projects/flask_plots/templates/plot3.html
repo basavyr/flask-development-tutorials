@@ -14,6 +14,7 @@
         {% if nodes %} 
         {% for idx in range(nodes | length) %}
         {% if nodes[idx][1]=='controller' %}
+        <div class="node-controller">
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem">
         <div class="card-header">node: <strong>{{nodes[idx][0]}}</strong></div>
         <div class="card-body">
@@ -22,32 +23,39 @@
             <p class="card-text">{{nodes[idx][2]}}</p>
         </div>
         </div>
+        </div>
         {% elif nodes[idx][1]=='compute' %}
-        <div class="card text-white bg-success mb-3" style="max-width: 20rem">
-            <div class="card-header">node: <strong>{{nodes[idx][0]}}</strong></div>
-            <div class="card-body">
-            <img src="static/node_img.png" width="64">
-            <h4 class="card-title">{{node_types[idx]}}</h4>
-            <p class="card-text">{{nodes[idx][2]}}</p>
+        <div class="node-compute">
+            <div class="card text-white bg-success mb-3" style="max-width: 20rem">
+                <div class="card-header">node: <strong>{{nodes[idx][0]}}</strong></div>
+                <div class="card-body">
+                    <img src="static/node_img.png" width="64">
+                    <h4 class="card-title">{{node_types[idx]}}</h4>
+                    <p class="card-text">{{nodes[idx][2]}}</p>
+                </div>
             </div>
         </div>
         {% elif nodes[idx][1]=='ceph' %}
-        <div class="card text-white bg-warning mb-3" style="max-width: 20rem">
-            <div class="card-header">node: <strong>{{nodes[idx][0]}}</strong></div>
-            <div class="card-body">
-            <img src="static/node_img.png" width="64">
-            <h4 class="card-title">{{node_types[idx]}}</h4>
-            <p class="card-text">{{nodes[idx][2]}}</p>
+        <div class="node-ceph">
+            <div class="card text-white bg-warning mb-3" style="max-width: 20rem">
+                <div class="card-header">node: <strong>{{nodes[idx][0]}}</strong></div>
+                <div class="card-body">
+                    <img src="static/node_img.png" width="64">
+                    <h4 class="card-title">{{node_types[idx]}}</h4>
+                    <p class="card-text">{{nodes[idx][2]}}</p>
+                </div>
             </div>
         </div>
         {% elif nodes[idx][1]=='agent' %}
+        <div class="node-agent">
         <div class="card text-white bg-info mb-3" style="max-width: 20rem">
             <div class="card-header">node: <strong>{{nodes[idx][0]}}</strong></div>
             <div class="card-body">
             <img src="static/node_img.png" width="64">
             <h4 class="card-title">{{node_types[idx]}}</h4>
             <p class="card-text">{{nodes[idx][2]}}</p>
-            </div>
+        </div>
+        </div>
         </div>
         {% endif %}
         {% endfor %}

@@ -38,13 +38,31 @@ img {
 }
 
 .node-container {
-  /* gap: 10px; */
-  /* gap: 10px 20px; */
-  row-gap: 10px;
-  column-gap: 5px; 
   display: flex;
-  width: auto;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  row-gap: 10px;
+  column-gap: 10px;
+  /* justify-content: center;
   align-content: center;
+  width: auto; */
+}
+
+.node-controller {
+  /* align-self: flex-start; */
+  order: 0;
+  /* flex-wrap: wrap; */
+}
+
+.node-agent {
+  order: 1;
+}
+
+.node-compute {
+  order: 2;
+}
+
+.node-ceph {
+  /* align-self: flex-end; */
+  order: 3;
 }
