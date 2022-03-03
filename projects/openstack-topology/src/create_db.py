@@ -119,21 +119,27 @@ def db_init():
 
     connection = db_object[0]
     cursor = db_object[1]
-    with closing(connection) as db_conn:
+    with closing(connection):
         cursor.execute('''DROP TABLE IF EXISTS HOSTS''')
-        cursor.execute('''CREATE TABLE HOSTS (id_cloud integer primary_key
+        cursor.execute('''CREATE TABLE HOSTS (id_cloud integer primary_key,
                                               service text,
                                               host text,
                                               zone text,
                                               status text, 
                                               state text, 
                                               updated text)''')
+        cursor.close()
         connection.commit()
 
 
+def db_update(data):
+    for data_element in data:
+        pass
+
+
 def main():
-    for index in range(10):
-        print(generate_db_entry(index + 1))
+    openstack_data = [generate_db_entry(index) for index in range(100)]
+    db_init()
 
 
 if __name__ == '__main__':
