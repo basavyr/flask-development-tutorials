@@ -44,24 +44,24 @@ def generate_status():
     return rng_status
 
 
-# GENERATE HOSTS 1
-def generate_nipne_host(index):
-    return f'dual{index}-c.cloudifin.nipne.ro'
-
-
 # GENERATE HOSTS 2
 def generate_cloudifin_host(label):
     return f'dual-{label}.cloudifin'
 
 
-# GENERATE HOSTS 3
-def generate_bcsh_host(index):
-    return f'bchs{index}'
-
-
 # GENERATE HOSTS 4
 def generate_dual_host(label):
     return f'dual-{label}'
+
+
+# GENERATE HOSTS 1
+def generate_nipne_host(index):
+    return f'dual{index}-c.cloudifin.nipne.ro'
+
+
+# GENERATE HOSTS 3
+def generate_bcsh_host(index):
+    return f'bchs{index}'
 
 
 # GENERATE HOSTS 5
@@ -80,6 +80,17 @@ def db_connect(db_file):
         print('All good with the db stuff')
 
         return db_conn, db_cursor
+
+
+# host generation stage
+def generate_random_host(host_id):
+    if isinstance(host_id, str):
+        print('Will generate a host with <<label>>')
+        labeled_host = [generate_dual_host(host_id),
+                        generate_cloudifin_host(host_id)]
+        return random.choice(labeled_host)
+    elif isinstance(host_id, int):
+        print('Will generate a host with <<index>>')
 
 
 def generate_db_entry(index):
@@ -114,8 +125,10 @@ def db_init():
 
 
 def main():
-    for index in range(10):
-        print(generate_db_entry(index+1))
+    print(generate_random_host('a'))
+    print(generate_random_host(1))
+    # for index in range(10):
+    #     print(generate_db_entry(index + 1))
 
 
 if __name__ == '__main__':
