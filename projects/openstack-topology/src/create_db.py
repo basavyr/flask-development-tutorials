@@ -7,8 +7,8 @@ from datetime import datetime
 import random
 
 
-def get_timestamp():
-    return datetime.utcnow()
+def generate_update_timestamp():
+    return f'{datetime.utcnow()}'
 
 
 OPENSTACK_SERVICES = ['nova-scheduler',
@@ -82,6 +82,18 @@ def db_connect(db_file):
         return db_conn, db_cursor
 
 
+def generate_db_entry(index):
+    db_entry = [index,
+                generate_service(),
+                # GENERATE HOST,
+                generate_zone(),
+                generate_status(),
+                generate_state(),
+                generate_update_timestamp(),
+                ]
+    return db_entry
+
+
 def db_init():
     dbFile = 'openstack_topology.db'
 
@@ -102,7 +114,8 @@ def db_init():
 
 
 def main():
-    print(get_timestamp())
+    for index in range(10):
+        print(generate_db_entry(index+1))
 
 
 if __name__ == '__main__':
