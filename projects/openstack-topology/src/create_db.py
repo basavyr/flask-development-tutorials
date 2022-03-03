@@ -85,18 +85,25 @@ def db_connect(db_file):
 # host generation stage
 def generate_random_host(host_id):
     if isinstance(host_id, str):
-        print('Will generate a host with <<label>>')
+        # print('Will generate a host with <<label>>')
         labeled_host = [generate_dual_host(host_id),
                         generate_cloudifin_host(host_id)]
         return random.choice(labeled_host)
     elif isinstance(host_id, int):
-        print('Will generate a host with <<index>>')
+        # print('Will generate a host with <<index>>')
+        indexed_host = [generate_bcsh_host(host_id),
+                        generate_nipne_host(host_id),
+                        generate_controller_host(host_id)
+                        ]
+        return random.choice(indexed_host)
 
 
 def generate_db_entry(index):
+    host_id = ['a', 'c', 'd', 1, 2, 3, 4]
+
     db_entry = [index,
                 generate_service(),
-                # GENERATE HOST,
+                generate_random_host(random.choice(host_id)),
                 generate_zone(),
                 generate_status(),
                 generate_state(),
@@ -125,10 +132,8 @@ def db_init():
 
 
 def main():
-    print(generate_random_host('a'))
-    print(generate_random_host(1))
-    # for index in range(10):
-    #     print(generate_db_entry(index + 1))
+    for index in range(10):
+        print(generate_db_entry(index + 1))
 
 
 if __name__ == '__main__':
