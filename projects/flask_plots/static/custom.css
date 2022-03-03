@@ -43,15 +43,16 @@ img {
   flex-wrap: wrap;
   row-gap: 10px;
   column-gap: 10px;
-  /* justify-content: center;
+  justify-content: center;
   align-content: center;
-  width: auto; */
+  width: auto; 
 }
 
 .node-controller {
   /* align-self: flex-start; */
   /* flex-wrap: wrap; */
   order: 0;
+  /* flex: 1 1 100%; */
 }
 
 .node-controller:hover {
@@ -60,6 +61,7 @@ img {
 
 .node-agent {
   order: 1;
+  /* flex: 1 10%; */
 }
 
 .node-agent:hover {
@@ -77,6 +79,7 @@ img {
 .node-ceph {
   /* align-self: flex-end; */
   order: 3;
+  /* align-self: flex-end; */
 }
 
 .node-ceph:hover {
