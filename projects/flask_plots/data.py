@@ -2,6 +2,7 @@
 import random
 
 import os
+from datetime import datetime
 import psutil
 import platform
 
@@ -10,6 +11,10 @@ _MAX_NUMBER = 35
 _SUMM = 100
 
 GBYTES = 1024 * 1024 * 1024  # transform memory in gbytes
+
+
+def get_timestamp():
+    return f'{datetime.utcnow()}'
 
 
 def get_swap_info():
@@ -66,7 +71,7 @@ def get_random_number():
 
 
 def generate_data():
-    rand_number = lambda: random.randrange(1, 15)
+    def rand_number(): return random.randrange(1, 15)
     data_size = 100
     y_data = [rand_number() for _ in range(data_size)]
     x_data = [idx + 1 for idx in range(data_size)]
