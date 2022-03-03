@@ -6,51 +6,67 @@ from contextlib import closing
 from datetime import datetime
 import random
 
-OPENSTACK_SERVICE_TYPE = ['nova-scheduler',
-                          'nova-compute',
-                          'nova-consoleauth',
-                          'nova-conductor',
-                          'nova-controller']
-
-
-def generate_data():
-    data = 1
-    return data
-
 
 def get_timestamp():
     return datetime.utcnow()
 
 
+OPENSTACK_SERVICES = ['nova-scheduler',
+                      'nova-compute',
+                      'nova-consoleauth',
+                      'nova-conductor',
+                      'nova-controller']
+OPENSTACK_ZONES = ['nova', 'internal']
+OPENSTACK_STATES = ['up', 'down']
+OPENSTACK_STATUS = ['enabled', 'disabled']
+
+
+# generate services (binaries)
+def generate_service():
+    rng_service = random.choice(OPENSTACK_SERVICES)
+    return rng_service
+
+
+# generate zones
+def generate_zone():
+    rng_zone = random.choice(OPENSTACK_ZONES)
+    return rng_zone
+
+
+# generate states
+def generate_state():
+    rng_state = random.choice(OPENSTACK_STATES)
+
+
+# generate status
+def generate_status():
+    rng_status = random.choice(OPENSTACK_STATUS)
+    return rng_status
+
+
+# GENERATE HOSTS 1
 def generate_nipne_host(index):
     return f'dual{index}-c.cloudifin.nipne.ro'
 
 
+# GENERATE HOSTS 2
 def generate_cloudifin_host(label):
     return f'dual-{label}.cloudifin'
 
 
+# GENERATE HOSTS 3
 def generate_bcsh_host(index):
     return f'bchs{index}'
 
 
+# GENERATE HOSTS 4
 def generate_dual_host(label):
     return f'dual-{label}'
 
 
+# GENERATE HOSTS 5
 def generate_controller_host(index):
     return f'ctrl-os-{index}'
-
-
-def generate_host(idx):
-    hosts = ['ctrl-os',
-             'dual-a',
-             'dual-c',
-             'dual-d',
-             'bchs',
-             'dual1-c.cloudifin.nipne.ro',
-             'dual-d'
-             ]
 
 
 def db_connect(db_file):
