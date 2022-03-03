@@ -1,0 +1,42 @@
++----+------------------+----------------------------+----------+---------+-------+----------------------------+
+| ID | Binary           | Host                       | Zone     | Status  | State | Updated At                 |
++----+------------------+----------------------------+----------+---------+-------+----------------------------+
+|  1 | nova-scheduler   | ctrl-os                    | internal | enabled | up    | 2022-03-03T11:49:19.000000 |
+| 19 | nova-consoleauth | ctrl-os                    | internal | enabled | up    | 2022-03-03T11:49:15.000000 |
+| 20 | nova-conductor   | ctrl-os                    | internal | enabled | up    | 2022-03-03T11:49:19.000000 |
+| 23 | nova-compute     | bchs65                     | nova     | enabled | down  | 2021-07-18T19:29:34.000000 |
+| 24 | nova-compute     | bchs66                     | nova     | enabled | down  | 2021-07-18T19:30:19.000000 |
+| 25 | nova-compute     | bchs67                     | nova     | enabled | down  | 2021-07-18T19:30:49.000000 |
+| 26 | nova-compute     | bchs68                     | nova     | enabled | down  | 2021-07-18T19:31:29.000000 |
+| 27 | nova-compute     | bchs69                     | nova     | enabled | down  | 2021-07-18T19:32:04.000000 |
+| 28 | nova-compute     | bchs70                     | nova     | enabled | down  | 2021-07-18T19:33:03.000000 |
+| 29 | nova-compute     | bchs71                     | nova     | enabled | down  | 2021-07-18T19:33:18.000000 |
+| 30 | nova-compute     | bchs72                     | nova     | enabled | down  | 2021-07-18T19:33:33.000000 |
+| 31 | nova-compute     | bchs73                     | nova     | enabled | up    | 2022-03-03T11:49:16.000000 |
+| 32 | nova-compute     | bchs74                     | nova     | enabled | down  | 2021-07-18T19:34:20.000000 |
+| 33 | nova-compute     | bchs75                     | nova     | enabled | down  | 2021-07-18T19:34:36.000000 |
+| 34 | nova-compute     | dual-a                     | nova     | enabled | up    | 2022-03-03T11:49:17.000000 |
+| 35 | nova-compute     | dual-c                     | nova     | enabled | down  | 2021-08-26T05:57:14.000000 |
+| 36 | nova-compute     | dual-d.cloudifin           | nova     | enabled | down  | 2020-09-14T08:27:57.000000 |
+| 37 | nova-compute     | dual-d                     | nova     | enabled | down  | 2020-09-17T10:19:28.000000 |
+| 38 | nova-compute     | dual1-c.cloudifin.nipne.ro | nova     | enabled | up    | 2022-03-03T11:49:09.000000 |
+|  1 | nova-scheduler   | ctrl-os                    | internal | enabled | up    | 2022-03-03T11:49:19.000000 |
+| 19 | nova-consoleauth | ctrl-os                    | internal | enabled | up    | 2022-03-03T11:49:15.000000 |
+| 20 | nova-conductor   | ctrl-os                    | internal | enabled | up    | 2022-03-03T11:49:19.000000 |
+| 23 | nova-compute     | bchs65                     | nova     | enabled | down  | 2021-07-18T19:29:34.000000 |
+| 24 | nova-compute     | bchs66                     | nova     | enabled | down  | 2021-07-18T19:30:19.000000 |
+| 25 | nova-compute     | bchs67                     | nova     | enabled | down  | 2021-07-18T19:30:49.000000 |
+| 26 | nova-compute     | bchs68                     | nova     | enabled | down  | 2021-07-18T19:31:29.000000 |
+| 27 | nova-compute     | bchs69                     | nova     | enabled | down  | 2021-07-18T19:32:04.000000 |
+| 28 | nova-compute     | bchs70                     | nova     | enabled | down  | 2021-07-18T19:33:03.000000 |
+| 29 | nova-compute     | bchs71                     | nova     | enabled | down  | 2021-07-18T19:33:18.000000 |
+| 30 | nova-compute     | bchs72                     | nova     | enabled | down  | 2021-07-18T19:33:33.000000 |
+| 31 | nova-compute     | bchs73                     | nova     | enabled | up    | 2022-03-03T11:49:16.000000 |
+| 32 | nova-compute     | bchs74                     | nova     | enabled | down  | 2021-07-18T19:34:20.000000 |
+| 33 | nova-compute     | bchs75                     | nova     | enabled | down  | 2021-07-18T19:34:36.000000 |
+| 34 | nova-compute     | dual-a                     | nova     | enabled | up    | 2022-03-03T11:49:17.000000 |
+| 35 | nova-compute     | dual-c                     | nova     | enabled | down  | 2021-08-26T05:57:14.000000 |
+| 36 | nova-compute     | dual-d.cloudifin           | nova     | enabled | down  | 2020-09-14T08:27:57.000000 |
+| 37 | nova-compute     | dual-d                     | nova     | enabled | down  | 2020-09-17T10:19:28.000000 |
+| 38 | nova-compute     | dual1-c.cloudifin.nipne.ro | nova     | enabled | up    | 2022-03-03T11:49:09.000000 |
++----+------------------+----------------------------+----------+---------+-------+----------------------------+
