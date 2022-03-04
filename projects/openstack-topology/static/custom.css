@@ -1,14 +1,19 @@
 .box {
   padding-left: 20px;
+  padding-right: 20px;
 }
 
 .flexbox {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 5px;
 }
 
 .node-box {
   padding-left: 5px;
+  padding-top: 5px;
   width: 300px;
   height: 200px;
   background-color: aliceblue;
@@ -18,5 +23,61 @@
 
 .node-box:hover {
   background-color: #f0f0f0;
-  border: 2px solid red;
+  border: 2px solid lightseagreen;
+  box-shadow: 2px 2px 2px #ccc;
+}
+
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active,
+.accordion:hover {
+  background-color: #ccc;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+/* create the styling for every type of server */
+
+.controller-tier {
+}
+
+.conductor-tier {
+}
+
+.consoleauth-tier {
+}
+
+.scheduler-tier {
+}
+
+.compute-tier {
+}
+
+.enabled-node {
+}
+
+.disabled-node {
+}
+
+.up-node {
+}
+
+.down-node {
 }

@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block title %} Topology {% endblock %} {% block
 body%}
-<h1>Openstack Topology</h1>
+<h1 style="text-align: center">Openstack Topology</h1>
 
 <div class="box">
   <form action="{{url_for('show_index')}}">
@@ -8,17 +8,83 @@ body%}
   </form>
   <p>The nodes running on the openstack infrastructure.</p>
   {% if nodes %}
+  <button class="accordion">
+    <h3 style="text-align: center">Controller nodes</h3>
+  </button>
+  <div class="panel">Will show all the controller nodes</div>
+  <button class="accordion">
+    <h3 style="text-align: center">Compute nodes</h3>
+  </button>
+  <div class="panel">Will show all the compute nodes</div>
+  <button class="accordion">
+    <h3 style="text-align: center">Conductor nodes</h3>
+  </button>
+  <div class="panel">Will show all the conductor nodes</div>
+  <button class="accordion">
+    <h3 style="text-align: center">Scheduler nodes</h3>
+  </button>
+  <div class="panel">Will show all the scheduler nodes</div>
+  <button class="accordion">
+    <h3 style="text-align: center">Consoleauth nodes</h3>
+  </button>
+  <div class="panel">Will show all the consoleauth nodes</div>
+  <script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+  </script>
+  <script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    }
+  </script>
+  <!-- <p><h3>Controller nodes</h3></p>
   <div class="flexbox">
+  </div>
+  <p><h3>Conductor nodes</h3></p>
+  <div class="flexbox">
+  </div>
+  <p><h3>Consoleauth nodes</h3></p>
+  <div class="flexbox">
+  </div>
+  <p><h3>Scheduler nodes</h3></p>
+  <div class="flexbox">
+  </div>
+  <p><h3>Compute nodes</h3></p>
+  <div class="flexbox">
+  </div> -->
+  <!-- <div class="flexbox">
     {% for node in nodes %}
     <div class="node-box">
-      <p><strong>{{node[2]}}</strong></p>
+      <p style="text-align: center;"><strong>{{node[2]}}</strong></p>
       <code>{{ node }}</code>
-      {% endfor %}
     </div>
-    {% else %}
+    {% endfor %} {% else %}
     <p>No nodes found</p>
     {% endif %}
-  </div>
+  </div> -->
 </div>
 
 {% endblock %}
