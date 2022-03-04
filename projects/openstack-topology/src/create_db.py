@@ -36,6 +36,7 @@ def generate_zone():
 # generate states
 def generate_state():
     rng_state = random.choice(OPENSTACK_STATES)
+    return rng_state
 
 
 # generate status
@@ -161,8 +162,15 @@ def db_init_no_drop():
         connection.commit()
 
 
+def show_data(data):
+    for data_element in data:
+        print(data_element)
+
+
 def db_update(data):
     db_object = db_connect_object()
+
+    show_data(data)
 
     connection = db_object[0]
     cursor = db_object[1]
