@@ -14,7 +14,9 @@ def show_index():
 
 @app.route("/topology")
 def show_topology():
-    return render_template('topology.html')
+    node_list = db.pull_db_data(db_file=db.GLOBAL_DB_FILE)
+    return render_template('topology.html',
+                           nodes=node_list)
 
 
 def main():

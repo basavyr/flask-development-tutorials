@@ -3,3 +3,14 @@
 <form action="{{url_for('show_index')}}">
   <input type="submit" value="Back to the main page" />
 </form>
+
+<p>The nodes running on the openstack infrastructure.</p>
+{% if nodes %}
+<ul>
+  {% for node in nodes %}
+  <li>{{ node }}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No nodes found</p>
+{% endif %}

@@ -1,3 +1,4 @@
+from multiprocessing import connection
 import sqlite3 as db
 
 from sqlite3 import Error
@@ -45,22 +46,22 @@ def generate_status():
     return rng_status
 
 
-# GENERATE HOSTS 2
+# GENERATE HOSTS 1
 def generate_cloudifin_host(label):
     return f'dual-{label}.cloudifin'
 
 
-# GENERATE HOSTS 4
+# GENERATE HOSTS 2
 def generate_dual_host(label):
     return f'dual-{label}'
 
 
-# GENERATE HOSTS 1
+# GENERATE HOSTS 3
 def generate_nipne_host(index):
     return f'dual{index}-c.cloudifin.nipne.ro'
 
 
-# GENERATE HOSTS 3
+# GENERATE HOSTS 4
 def generate_bcsh_host(index):
     return f'bchs{index}'
 
@@ -86,20 +87,20 @@ def generate_random_host(host_id):
         return random.choice(indexed_host)
 
 
-DB_FILE = 'openstack_topology.db'
+GLOBAL_DB_FILE = './src/openstack_topology.db'
 
 
-def db_connect_object():
+def db_connect_object(db_file):
     """
     - create a connection and initialize a cursor for the database
-    - database file is fixed as a constant variable
-    - DB_FILE = 'openstack_topology.db'
+    - the database is given via the db_file argument
     """
     try:
-        db_conn = db.connect(DB_FILE)
+        db_conn = db.connect(db_file)
         db_cursor = db_conn.cursor()
     except Error as err:
-        print(f'There was an issue with establishing database connection')
+        print(
+            f'There was an issue with establishing database connection -> {err}')
         return -1, -1
     else:
         print('All good with the db stuff')
@@ -121,12 +122,12 @@ def generate_db_entry(index):
     return db_entry
 
 
-def db_init_drop():
+def db_init_drop(db_file):
     """
     - create a table named HOSTS
     - if the table already exists, it will DELETE it before initializing the connection and cursor objects
     """
-    db_object = db_connect_object()
+    db_object = db_connect_object(db_file)
 
     connection = db_object[0]
     cursor = db_object[1]
@@ -142,12 +143,12 @@ def db_init_drop():
         connection.commit()
 
 
-def db_init_no_drop():
+def db_init_no_drop(db_file):
     """
     - create the table named HOSTS
     - if the table already exists, it will add data to it
     """
-    db_object = db_connect_object()
+    db_object = db_connect_object(db_file)
 
     connection = db_object[0]
     cursor = db_object[1]
@@ -167,8 +168,8 @@ def show_data(data):
         print(data_element)
 
 
-def db_update(data):
-    db_object = db_connect_object()
+def db_update(db_file, data):
+    db_object = db_connect_object(db_file)
 
     show_data(data)
 
@@ -191,12 +192,24 @@ def db_update(data):
     #     updated = str(data_element[6])
 
 
+def pull_db_data(db_file):
+    db_object = db_connect_object(db_file)
+
+    connection = db_object[0]
+    with closing(connection):
+        cursor = db_object[1]
+        raw_db_data = cursor.execute('SELECT * FROM HOSTS').fetchall()
+
+    return raw_db_data
+
+
 def main():
+    LOCAL_DB_FILE = 'opensack_topology.db'
     node_number = 30
     openstack_data = [generate_db_entry(index + 1)
                       for index in range(node_number)]
-    db_init_drop()
-    db_update(openstack_data)
+    db_init_drop(LOCAL_DB_FILE)
+    db_update(LOCAL_DB_FILE, openstack_data)
 
 
 if __name__ == '__main__':
