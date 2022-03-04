@@ -120,8 +120,11 @@ def generate_db_entry(index):
     return db_entry
 
 
-def db_init():
-
+def db_init_drop():
+    """
+    - create a table named HOSTS
+    - if the table already exists, it will DELETE it before initializing the connection and cursor objects
+    """
     db_object = db_connect_object()
 
     connection = db_object[0]
@@ -129,6 +132,26 @@ def db_init():
     with closing(connection):
         cursor.execute('''DROP TABLE IF EXISTS HOSTS''')
         cursor.execute('''CREATE TABLE HOSTS (id_cloud integer primary_key,
+                                              service text,
+                                              host text,
+                                              zone text,
+                                              status text, 
+                                              state text, 
+                                              updated text)''')
+        connection.commit()
+
+
+def db_init_no_drop():
+    """
+    - create the table named HOSTS
+    - if the table already exists, it will add data to it
+    """
+    db_object = db_connect_object()
+
+    connection = db_object[0]
+    cursor = db_object[1]
+    with closing(connection):
+        cursor.execute('''CREATE TABLE IF NOT EXISTS HOSTS (id_cloud integer primary_key,
                                               service text,
                                               host text,
                                               zone text,
@@ -164,7 +187,7 @@ def main():
     node_number = 30
     openstack_data = [generate_db_entry(index + 1)
                       for index in range(node_number)]
-    db_init()
+    db_init_drop()
     db_update(openstack_data)
 
 
