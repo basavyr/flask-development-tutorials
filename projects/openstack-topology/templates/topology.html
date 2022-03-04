@@ -15,10 +15,17 @@ body%}
     <div class="flexbox">
       {% for node in nodes %} 
       {% if node[1]=='nova-controller' %}
-       <div class="node-box">
+      {% if node[4]=='enabled' %}
+       <div class="enabled-node-box">
          <h4 style="text-align:center">#{{node[0]}}: {{node[2]}}</h4>
          <p><code>{{node}}</code></p>
        </div>
+      {% else %}
+        <div class="disabled-node-box">
+          <h4 style="text-align:center">#{{node[0]}}: {{node[2]}}</h4>
+          <p><code>{{node}}</code></p>
+        </div>
+        {%endif %}
         {%endif %}
         {% endfor %}
       </div>
