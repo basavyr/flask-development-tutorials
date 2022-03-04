@@ -122,7 +122,7 @@ def db_init():
     with closing(connection):
         cursor.execute('''DROP TABLE IF EXISTS HOSTS''')
         cursor.execute('''CREATE TABLE HOSTS (id_cloud integer primary_key,
-                                              service text,
+                                              service/binary text,
                                               host text,
                                               zone text,
                                               status text, 
