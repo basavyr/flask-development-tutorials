@@ -15,7 +15,10 @@ body%}
     <div class="flexbox">
       {% for node in nodes %} 
       {% if node[1]=='nova-controller' %}
-       {{node}}
+       <div class="node-box">
+         <h4 style="text-align:center">#{{node[0]}}: {{node[2]}}</h4>
+         <p><code>{{node}}</code></p>
+       </div>
         {%endif %}
         {% endfor %}
       </div>
@@ -26,19 +29,79 @@ body%}
   <button class="accordion">
     <h3 style="text-align: center">Compute nodes</h3>
   </button>
-  <div class="panel">Will show all the compute nodes.</div>
+  <div class="panel">
+    {% if nodes %}
+    <div class="flexbox">
+      {% for node in nodes %} 
+      {% if node[1]=='nova-compute' %}
+       <div class="node-box">
+         <h4 style="text-align:center">#{{node[0]}}: {{node[2]}}</h4>
+         <p><code>{{node}}</code></p>
+       </div>
+        {%endif %}
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>No controller nodes found.</p>
+      {% endif %}
+  </div>
   <button class="accordion">
     <h3 style="text-align: center">Conductor nodes</h3>
   </button>
-  <div class="panel">Will show all the conductor nodes.</div>
+  <div class="panel">
+    {% if nodes %}
+    <div class="flexbox">
+      {% for node in nodes %} 
+      {% if node[1]=='nova-conductor' %}
+       <div class="node-box">
+         <h4 style="text-align:center">#{{node[0]}}: {{node[2]}}</h4>
+         <p><code>{{node}}</code></p>
+       </div>
+        {%endif %}
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>No controller nodes found.</p>
+      {% endif %}
+  </div>
   <button class="accordion">
     <h3 style="text-align: center">Scheduler nodes</h3>
   </button>
-  <div class="panel">Will show all the scheduler nodes.</div>
+  <div class="panel">
+    {% if nodes %}
+    <div class="flexbox">
+      {% for node in nodes %} 
+      {% if node[1]=='nova-scheduler' %}
+       <div class="node-box">
+         <h4 style="text-align:center">#{{node[0]}}: {{node[2]}}</h4>
+         <p><code>{{node}}</code></p>
+       </div>
+        {%endif %}
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>No controller nodes found.</p>
+      {% endif %}
+  </div>
   <button class="accordion">
     <h3 style="text-align: center">Consoleauth nodes</h3>
   </button>
-  <div class="panel">Will show all the consoleauth nodes.</div>
+  <div class="panel">
+    {% if nodes %}
+    <div class="flexbox">
+      {% for node in nodes %} 
+      {% if node[1]=='nova-consoleauth' %}
+       <div class="node-box">
+         <h4 style="text-align:center">#{{node[0]}}: {{node[2]}}</h4>
+         <p><code>{{node}}</code></p>
+       </div>
+        {%endif %}
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>No controller nodes found.</p>
+      {% endif %}
+  </div>
 
   <script>
     var acc = document.getElementsByClassName("accordion");

@@ -8,7 +8,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   row-gap: 10px;
-  column-gap: 5px;
+  column-gap: 10px;
+  justify-content: center;
 }
 
 .node-box {
@@ -46,7 +47,8 @@
 }
 
 .panel {
-  padding: 0 18px;
+  padding-top: 10px;
+  /* padding-bottom: 10px; */
   background-color: white;
   max-height: 0;
   overflow: hidden;
