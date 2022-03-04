@@ -17,7 +17,7 @@ body%}
       {% if node[1]=='nova-controller' %}
       {% if node[4]=='enabled' %}
        <div class="enabled-node-box">
-         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4>
          <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
          <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
          <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
@@ -26,7 +26,7 @@ body%}
         </div>
         {% else %}
         <div class="disabled-node-box">
-          <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+          <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🔴 #{{node[0]}}: {{node[2]}}</h4>
           <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
           <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
           <p><strong>Status: </strong><code>{{node[4]}}</code></p>

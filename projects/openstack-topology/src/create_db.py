@@ -18,7 +18,7 @@ OPENSTACK_SERVICES = ['nova-scheduler',
                       'nova-conductor',
                       'nova-controller']
 OPENSTACK_ZONES = ['nova', 'internal']
-OPENSTACK_STATES = ['up', 'down']
+OPENSTACK_STATES = ['up 🟩', 'down 🟥']
 OPENSTACK_STATUS = ['enabled', 'disabled']
 
 
@@ -204,7 +204,7 @@ def pull_db_data(db_file):
 
 
 def main():
-    LOCAL_DB_FILE = 'opensack_topology.db'
+    LOCAL_DB_FILE = 'openstack_topology.db'
     node_number = 30
     openstack_data = [generate_db_entry(index + 1)
                       for index in range(node_number)]
