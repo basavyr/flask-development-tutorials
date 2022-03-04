@@ -69,19 +69,6 @@ def generate_controller_host(index):
     return f'ctrl-os-{index}'
 
 
-def db_connect(db_file):
-    try:
-        db_conn = db.connect(db_file)
-        db_cursor = db_conn.cursor()
-    except Error as err:
-        print(f'There was an issue with establishing database connection')
-        return -1, -1
-    else:
-        print('All good with the db stuff')
-
-        return db_conn, db_cursor
-
-
 # host generation stage
 def generate_random_host(host_id):
     if isinstance(host_id, str):
@@ -98,48 +85,87 @@ def generate_random_host(host_id):
         return random.choice(indexed_host)
 
 
+DB_FILE = 'openstack_topology.db'
+
+
+def db_connect_object():
+    """
+    - create a connection and initialize a cursor for the database
+    - database file is fixed as a constant variable
+    - DB_FILE = 'openstack_topology.db'
+    """
+    try:
+        db_conn = db.connect(DB_FILE)
+        db_cursor = db_conn.cursor()
+    except Error as err:
+        print(f'There was an issue with establishing database connection')
+        return -1, -1
+    else:
+        print('All good with the db stuff')
+
+        return db_conn, db_cursor
+
+
 def generate_db_entry(index):
     host_id = ['a', 'c', 'd', 1, 2, 3, 4]
 
-    db_entry = [index,
+    db_entry = (index,
                 generate_service(),
                 generate_random_host(random.choice(host_id)),
                 generate_zone(),
                 generate_status(),
                 generate_state(),
                 generate_update_timestamp(),
-                ]
+                )
     return db_entry
 
 
 def db_init():
-    dbFile = 'openstack_topology.db'
 
-    db_object = db_connect(db_file=dbFile)
+    db_object = db_connect_object()
 
     connection = db_object[0]
     cursor = db_object[1]
     with closing(connection):
         cursor.execute('''DROP TABLE IF EXISTS HOSTS''')
         cursor.execute('''CREATE TABLE HOSTS (id_cloud integer primary_key,
-                                              service/binary text,
+                                              service text,
                                               host text,
                                               zone text,
                                               status text, 
                                               state text, 
                                               updated text)''')
-        cursor.close()
         connection.commit()
 
 
 def db_update(data):
-    for data_element in data:
-        pass
+    db_object = db_connect_object()
+
+    connection = db_object[0]
+    cursor = db_object[1]
+
+    # data is given as a list of tuples
+    # each element of the list will be added in the database
+    with closing(connection):
+        cursor.executemany('INSERT INTO HOSTS VALUES (?,?,?,?,?,?,?)', data)
+        connection.commit()
+
+    # for data_element in data:
+    #     id_cloud = int(data_element[0])
+    #     service = str(data_element[1])
+    #     host = str(data_element[2])
+    #     zone = str(data_element[3])
+    #     status = str(data_element[4])
+    #     state = str(data_element[5])
+    #     updated = str(data_element[6])
 
 
 def main():
-    openstack_data = [generate_db_entry(index) for index in range(100)]
+    node_number = 30
+    openstack_data = [generate_db_entry(index + 1)
+                      for index in range(node_number)]
     db_init()
+    db_update(openstack_data)
 
 
 if __name__ == '__main__':
