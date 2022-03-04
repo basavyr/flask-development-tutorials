@@ -1,17 +1,24 @@
+{% extends "base.html" %} {% block title %} Topology {% endblock %} {% block
+body%}
 <h1>Openstack Topology</h1>
 
-<form action="{{url_for('show_index')}}">
-  <input type="submit" value="Back to the main page" />
-</form>
+<div class="box">
+  <form action="{{url_for('show_index')}}">
+    <input type="submit" value="Back to the main page" />
+  </form>
+  <p>The nodes running on the openstack infrastructure.</p>
+  {% if nodes %}
+  <div class="flexbox">
+    {% for node in nodes %}
+    <div class="node-box">
+      <p><strong>{{node[2]}}</strong></p>
+      <code>{{ node }}</code>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p>No nodes found</p>
+    {% endif %}
+  </div>
+</div>
 
-<p>The nodes running on the openstack infrastructure.</p>
-{% if nodes %}
-<ul>
-  {% for node in nodes %}
-  <p><strong>{{node[2]}}</strong></p>
-  <li><code>{{ node }}</code></li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>No nodes found</p>
-{% endif %}
+{% endblock %}
