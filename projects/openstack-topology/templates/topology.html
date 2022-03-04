@@ -17,13 +17,21 @@ body%}
       {% if node[1]=='nova-controller' %}
       {% if node[4]=='enabled' %}
        <div class="enabled-node-box">
-         <h4 style="text-align:center">#{{node[0]}}: {{node[2]}}</h4>
-         <p><code>{{node}}</code></p>
-       </div>
-      {% else %}
+         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+         <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
+         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
+        </div>
+        {% else %}
         <div class="disabled-node-box">
-          <h4 style="text-align:center">#{{node[0]}}: {{node[2]}}</h4>
-          <p><code>{{node}}</code></p>
+          <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+          <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+          <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+          <p><strong>Status: </strong><code>{{node[4]}}</code></p>
+          <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+          <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
         </div>
         {%endif %}
         {%endif %}
@@ -39,12 +47,27 @@ body%}
   <div class="panel">
     {% if nodes %}
     <div class="flexbox">
-      {% for node in nodes %} 
+      {% for node in nodes %}
       {% if node[1]=='nova-compute' %}
-       <div class="node-box">
-         <h4 style="text-align:center">#{{node[0]}}: {{node[2]}}</h4>
-         <p><code>{{node}}</code></p>
+      {% if node[4]=='enabled' %}
+      <div class="enabled-node-box">
+        <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+        <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+        <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+        <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
+        <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+        <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
        </div>
+       {% else %}
+       <div class="disabled-node-box">
+         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+         <p><strong>Status: </strong><code>{{node[4]}}</code></p>
+         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
+       </div>
+        {%endif %}
         {%endif %}
         {% endfor %}
       </div>
@@ -60,13 +83,28 @@ body%}
     <div class="flexbox">
       {% for node in nodes %} 
       {% if node[1]=='nova-conductor' %}
-       <div class="node-box">
-         <h4 style="text-align:center">#{{node[0]}}: {{node[2]}}</h4>
-         <p><code>{{node}}</code></p>
+      {% if node[4]=='enabled' %}
+      <div class="enabled-node-box">
+        <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+        <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+        <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+        <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
+        <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+        <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
        </div>
-        {%endif %}
-        {% endfor %}
-      </div>
+       {% else %}
+       <div class="disabled-node-box">
+         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+         <p><strong>Status: </strong><code>{{node[4]}}</code></p>
+         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
+       </div>
+       {%endif %}
+       {%endif %}
+       {% endfor %}
+     </div>
       {% else %}
       <p>No controller nodes found.</p>
       {% endif %}
@@ -79,10 +117,25 @@ body%}
     <div class="flexbox">
       {% for node in nodes %} 
       {% if node[1]=='nova-scheduler' %}
-       <div class="node-box">
-         <h4 style="text-align:center">#{{node[0]}}: {{node[2]}}</h4>
-         <p><code>{{node}}</code></p>
+      {% if node[4]=='enabled' %}
+      <div class="enabled-node-box">
+        <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+        <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+        <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+        <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
+        <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+        <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
        </div>
+       {% else %}
+       <div class="disabled-node-box">
+         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+         <p><strong>Status: </strong><code>{{node[4]}}</code></p>
+         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
+       </div>
+        {%endif %}
         {%endif %}
         {% endfor %}
       </div>
@@ -98,13 +151,28 @@ body%}
     <div class="flexbox">
       {% for node in nodes %} 
       {% if node[1]=='nova-consoleauth' %}
-       <div class="node-box">
-         <h4 style="text-align:center">#{{node[0]}}: {{node[2]}}</h4>
-         <p><code>{{node}}</code></p>
+      {% if node[4]=='enabled' %}
+      <div class="enabled-node-box">
+        <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+        <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+        <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+        <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
+        <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+        <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
        </div>
-        {%endif %}
-        {% endfor %}
-      </div>
+       {% else %}
+       <div class="disabled-node-box">
+         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+         <p><strong>Status: </strong><code>{{node[4]}}</code></p>
+         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
+       </div>
+       {%endif %}
+       {%endif %}
+       {% endfor %}
+     </div>
       {% else %}
       <p>No controller nodes found.</p>
       {% endif %}
