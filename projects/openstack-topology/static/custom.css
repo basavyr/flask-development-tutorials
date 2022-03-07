@@ -16,7 +16,7 @@
   padding-left: 5px;
   padding-top: 5px;
   width: 300px;
-  height: 200px;
+  height: 250px;
   background-color: aliceblue;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -27,8 +27,8 @@
   padding-right: 5px;
   padding-top: 5px;
   padding-bottom: 5px;
-  width: 300px;
-  height: 300px;
+  width: 340px;
+  height: 320px;
   background-color: lightgreen;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -40,8 +40,8 @@
   padding-top: 5px;
   padding-right: 5px;
   padding-bottom: 5px;
-  width: 300px;
-  height: 300px;
+  width: 340px;
+  height: 320px;
   background-color: lightpink;
   border: 1px solid #ccc;
   border-radius: 10px;
