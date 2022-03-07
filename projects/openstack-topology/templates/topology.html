@@ -21,7 +21,11 @@ body%}
          <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
          <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
          <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
-         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+         {% if node[5]=='up' %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+         {% else %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+         {% endif %}
          <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
         </div>
         {% else %}
@@ -30,7 +34,11 @@ body%}
           <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
           <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
           <p><strong>Status: </strong><code>{{node[4]}}</code></p>
-          <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+          {% if node[5]=='up' %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+         {% else %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+         {% endif %}
           <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
         </div>
         {%endif %}
@@ -55,7 +63,11 @@ body%}
         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
         <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
-        <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+        {% if node[5]=='up' %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+         {% else %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+         {% endif %}
         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
        </div>
        {% else %}
@@ -64,7 +76,11 @@ body%}
          <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
          <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
          <p><strong>Status: </strong><code>{{node[4]}}</code></p>
-         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+         {% if node[5]=='up' %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+         {% else %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+         {% endif %}
          <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
        </div>
         {%endif %}
@@ -89,7 +105,11 @@ body%}
         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
         <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
-        <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+        {% if node[5]=='up' %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+         {% else %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+         {% endif %}
         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
        </div>
        {% else %}
@@ -98,7 +118,11 @@ body%}
          <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
          <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
          <p><strong>Status: </strong><code>{{node[4]}}</code></p>
-         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+         {% if node[5]=='up' %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+         {% else %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+         {% endif %}
          <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
        </div>
        {%endif %}
@@ -123,7 +147,11 @@ body%}
         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
         <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
-        <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+        {% if node[5]=='up' %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+         {% else %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+         {% endif %}
         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
        </div>
        {% else %}
@@ -132,7 +160,11 @@ body%}
          <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
          <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
          <p><strong>Status: </strong><code>{{node[4]}}</code></p>
-         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+         {% if node[5]=='up' %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+         {% else %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+         {% endif %}
          <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
        </div>
         {%endif %}
@@ -157,7 +189,11 @@ body%}
         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
         <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
-        <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+        {% if node[5]=='up' %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+         {% else %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+         {% endif %}
         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
        </div>
        {% else %}
@@ -166,7 +202,11 @@ body%}
          <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
          <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
          <p><strong>Status: </strong><code>{{node[4]}}</code></p>
-         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+         {% if node[5]=='up' %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+         {% else %}
+         <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+         {% endif %}
          <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
        </div>
        {%endif %}
