@@ -18,7 +18,7 @@ OPENSTACK_SERVICES = ['nova-scheduler',
                       'nova-conductor',
                       'nova-controller']
 OPENSTACK_ZONES = ['nova', 'internal']
-OPENSTACK_STATES = ['up 🟩', 'down 🟥']
+OPENSTACK_STATES = ['up', 'down']
 OPENSTACK_STATUS = ['enabled', 'disabled']
 
 

@@ -48,7 +48,6 @@
   order: 1;
 }
 
-
 .enabled-node-box:hover {
   background-color: #f0f0f0;
   border: 2px solid lightseagreen;
@@ -90,33 +89,4 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-}
-
-/* create the styling for every type of server */
-
-.controller-tier {
-}
-
-.conductor-tier {
-}
-
-.consoleauth-tier {
-}
-
-.scheduler-tier {
-}
-
-.compute-tier {
-}
-
-.enabled-node {
-}
-
-.disabled-node {
-}
-
-.up-node {
-}
-
-.down-node {
 }
