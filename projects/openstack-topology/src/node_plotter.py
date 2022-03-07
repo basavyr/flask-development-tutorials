@@ -44,7 +44,8 @@ def make_histogram(data):
     fig.autofmt_xdate(rotation=30)
     # https://www.delftstack.com/howto/matplotlib/how-to-rotate-x-axis-tick-label-text-in-matplotlib/
 
-    fig.savefig('openstack_nodes.png', bbox_inches='tight', dpi=400)
+    # fig.savefig('openstack_nodes.png', bbox_inches='tight', dpi=400)
+    # fig.savefig('openstack_nodes.png', dpi=400)
 
     # Save it to a temporary buffer
     buffer = BytesIO()

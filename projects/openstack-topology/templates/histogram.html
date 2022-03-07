@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block title %} Topology {% endblock %} {% block
+body%}
+<h1 style="text-align: center">Openstack Topology</h1>
+<div class="box">
+  <form action="{{url_for('show_index')}}">
+    <input type="submit" value="Back to the main page" />
+  </form>
+  <p>Histogram view of the nodes running on the openstack infrastructure.</p>
+</div>
+<div style="padding: 10px;">
+  <img src="data:image/png;base64,{{histogram}}" width="800px" />
+</div>
+{% endblock %}
