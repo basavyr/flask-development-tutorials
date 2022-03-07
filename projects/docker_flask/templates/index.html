@@ -4,4 +4,9 @@ body%}
 {% if sys_info %}
 <p><code>{{sys_info}}</code></p>
 {% endif %}
+{% if db_content %}
+{% for ct in db_content %}
+<p>{{ct}}</p>
+{% endfor %}
+{% endif %}
 {% endblock %}
