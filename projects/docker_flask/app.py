@@ -25,8 +25,12 @@ def clean_states(raw_states):
     return clean_states
 
 
-def get_db_content(db_file):
-    db_connection = sqlite3.connect(db_file)
+def clean_state_column():
+    """
+    - take the initial database with the state column from table HOSTS
+    - remove the emojies from each entry
+    """
+    db_connection = sqlite3.connect(DB_FILE)
 
     # parse the state column which has extra characters
     with closing(db_connection):
@@ -39,6 +43,14 @@ def get_db_content(db_file):
             db_cursor.execute(sql_message, parsed_states[idx])
 
         db_connection.commit()
+
+
+def get_db_content(db_file):
+    db_connection = sqlite3.connect(db_file)
+
+    with closing(db_connection):
+        db_cursor = db_connection.cursor()
+
         # fetch the entire database and save it as a list
         full_db_data = db_cursor.execute('SELECT * FROM HOSTS').fetchall()
 
