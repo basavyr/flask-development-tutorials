@@ -17,7 +17,6 @@ def main():
     local_ip_addr = socket.gethostbyname(socket.gethostname())
     port = 5051
     app.run(debug=True, host=local_ip_addr, port=port)
-    # print(local_ip_addr)
 
 
 if __name__ == "__main__":
