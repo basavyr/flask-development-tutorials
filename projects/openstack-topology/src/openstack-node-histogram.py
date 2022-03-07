@@ -1,8 +1,16 @@
+from datetime import datetime
+from turtle import color
 from matplotlib.figure import Figure
 import sqlite3 as db
 from contextlib import closing
 import base64
 from io import BytesIO
+
+import platform
+
+HOST = platform.uname()[0]
+
+GLOBAL_DB_FILE = 'src/openstack_topology.db'
 
 
 def get_db_content(db_file):
@@ -25,14 +33,27 @@ def get_openstack_node_types(openstack_list):
 def make_histogram(data):
     fig = Figure()
     ax = fig.subplots()
-    ax.hist(data)
-    fig.suptitle('Openstack Nodes', fontsize=14)
+    ax.hist(data, color='#79B473')
+    # ax.hist(data,color=[['#79B473','#70A37F','#41658A','#414073','#4C3957']])
+    time_stamp = f'{datetime.utcnow()}'[:-7]
+    fig.suptitle(
+        f'Openstack Nodes runnuing on\n<<{HOST}>> @ {time_stamp}', fontsize=14)
+
     # ax.set_xticks(rotation=30, ha='right')
     # rotate the labels according to the link below
     fig.autofmt_xdate(rotation=30)
     # https://www.delftstack.com/howto/matplotlib/how-to-rotate-x-axis-tick-label-text-in-matplotlib/
 
     fig.savefig('openstack_nodes.png', bbox_inches='tight', dpi=400)
+
+    # Save it to a temporary buffer
+    buffer = BytesIO()
+    # fig.savefig('swap-pie-chart.pdf', dpi=300, bbox_inches='tight')
+    fig.savefig(buffer, format="png")
+
+    # Embed the result in the html output.
+    data = base64.b64encode(buffer.getbuffer()).decode("ascii")
+    return data
 
 
 def main():
