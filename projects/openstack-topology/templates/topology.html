@@ -68,7 +68,10 @@ body%}
       {% if node[1]=='nova-compute' %}
       {% if node[4]=='enabled' %}
       <div class="enabled-node-box">
-        <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4>
+        <div style="display: flex; align-items:center;justify-content:center;column-gap: 5px;">
+          <img src="static/compute_node.png" width="68">
+          <h4 style="text-align:center;padding: 5px; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4>
+         </div>
         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
         <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
@@ -81,7 +84,10 @@ body%}
        </div>
        {% else %}
        <div class="disabled-node-box">
-         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🔴 #{{node[0]}}: {{node[2]}}</h4>
+          <div style="display: flex; align-items:center;justify-content:center;column-gap: 5px;">
+            <img src="static/compute_node.png" width="68">
+            <h4 style="text-align:center;padding: 5px; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4>
+           </div>
          <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
          <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
          <p><strong>Status: </strong><code>{{node[4]}}</code></p>
@@ -110,7 +116,10 @@ body%}
       {% if node[1]=='nova-conductor' %}
       {% if node[4]=='enabled' %}
       <div class="enabled-node-box">
-        <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4>
+          <div style="display: flex; align-items:center;justify-content:center;column-gap: 5px;">
+            <img src="static/conductor_node.png" width="68">
+            <h4 style="text-align:center;padding: 5px; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4>
+           </div>
         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
         <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
@@ -123,7 +132,10 @@ body%}
        </div>
        {% else %}
        <div class="disabled-node-box">
-         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🔴 #{{node[0]}}: {{node[2]}}</h4>
+        <div style="display: flex; align-items:center;justify-content:center;column-gap: 5px;">
+          <img src="static/conductor_node.png" width="68">
+          <h4 style="text-align:center;padding: 5px; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4>
+         </div>
          <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
          <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
          <p><strong>Status: </strong><code>{{node[4]}}</code></p>
@@ -152,7 +164,10 @@ body%}
       {% if node[1]=='nova-scheduler' %}
       {% if node[4]=='enabled' %}
       <div class="enabled-node-box">
-        <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4>
+        <div style="display: flex; align-items:center;justify-content:center;column-gap: 5px;">
+          <img src="static/scheduler_node.png" width="68">
+          <h4 style="text-align:center;padding: 5px; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4>
+         </div>
         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
         <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
@@ -165,7 +180,10 @@ body%}
        </div>
        {% else %}
        <div class="disabled-node-box">
-         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🔴 #{{node[0]}}: {{node[2]}}</h4>
+        <div style="display: flex; align-items:center;justify-content:center;column-gap: 5px;">
+          <img src="static/scheduler_node.png" width="68">
+          <h4 style="text-align:center;padding: 5px; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4>
+         </div>
          <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
          <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
          <p><strong>Status: </strong><code>{{node[4]}}</code></p>
@@ -194,7 +212,10 @@ body%}
       {% if node[1]=='nova-consoleauth' %}
       {% if node[4]=='enabled' %}
       <div class="enabled-node-box">
-        <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4>
+        <div style="display: flex; align-items:center;justify-content:center;column-gap: 5px;">
+          <img src="static/console_auth_node.png" width="68">
+          <h4 style="text-align:center;padding: 5px; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4>
+         </div>
         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
         <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
@@ -207,7 +228,10 @@ body%}
        </div>
        {% else %}
        <div class="disabled-node-box">
-         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🔴 #{{node[0]}}: {{node[2]}}</h4>
+        <div style="display: flex; align-items:center;justify-content:center;column-gap: 5px;">
+          <img src="static/console_auth_node.png" width="68">
+          <h4 style="text-align:center;padding: 5px; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4>
+         </div>
          <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
          <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
          <p><strong>Status: </strong><code>{{node[4]}}</code></p>
