@@ -1,5 +1,7 @@
-{% extends "base.html" %} {% block title %} Topology {% endblock %} {% block
+{% extends "base.html" %} {% block title %} py-app {% endblock %} {% block
 body%}
-<h2>This is the index</h2>
-
+<h2>This is {{app}}</h2>
+{% if sys_info %}
+<p><code>{{sys_info}}</code></p>
+{% endif %}
 {% endblock %}

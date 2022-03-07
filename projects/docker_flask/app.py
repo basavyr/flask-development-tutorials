@@ -9,15 +9,16 @@ app = Flask(__name__)
 @app.route("/")
 def show_index():
     return render_template('index.html',
-                           sys_info=str(platform.uname()))
+                           sys_info=str(platform.uname()),
+                           app=f'{app}')
 
 
 def main():
-    #app.run(debug=True, host='172.17.0.2',port=5051)
-    local_ip_addr=socket.gethostbyname(socket.gethostname())
-    print(local_ip_addr)
+    local_ip_addr = socket.gethostbyname(socket.gethostname())
+    port = 5051
+    app.run(debug=True, host=local_ip_addr, port=port)
+    # print(local_ip_addr)
+
 
 if __name__ == "__main__":
     main()
-
-
