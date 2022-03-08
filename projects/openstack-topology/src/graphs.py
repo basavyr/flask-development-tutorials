@@ -143,7 +143,7 @@ def virtual_memory_pie_char():
     ax.legend(title='Virtual memory',
               labels=data_labels,
               loc='upper right',
-              bbox_to_anchor=(0.3, 0.7),
+              bbox_to_anchor=(0.2, 0.95),
               )
     fig.tight_layout()
 
