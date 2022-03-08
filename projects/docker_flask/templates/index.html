@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block title %} py-app {% endblock %} {% block
+body%}
+<h2>This is {{app}}</h2>
+{% if sys_info %}
+<p><code>{{sys_info}}</code></p>
+{% endif %}
+{% if db_content %}
+{% for ct in db_content %}
+<p>{{ct}}</p>
+{% endfor %}
+{% endif %}
+{% endblock %}

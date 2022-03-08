@@ -2,10 +2,10 @@
 body%}
 <h1 style="text-align: center">Openstack Topology</h1>
 
-<div class="box">
-  <form action="{{url_for('show_index')}}">
+<div class="box" style="text-align: center">
+  <!-- <form action="{{url_for('show_index')}}">
     <input type="submit" value="Back to the main page" />
-  </form>
+  </form> -->
   <p>The nodes running on the openstack infrastructure.</p>
   <button class="accordion">
     <h3 style="text-align: center">Controller nodes</h3>
@@ -13,33 +13,81 @@ body%}
   <div class="panel">
     {% if nodes %}
     <div class="flexbox">
-      {% for node in nodes %} 
-      {% if node[1]=='nova-controller' %}
-      {% if node[4]=='enabled' %}
-       <div class="enabled-node-box">
-         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4>
-         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
-         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
-         <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
-         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
-         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
+      {% for node in nodes %} {% if node[1]=='nova-controller' %} {% if
+      node[4]=='enabled' %}
+      <div class="enabled-node-box">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 5px;
+          "
+        >
+          <img src="static/controller_node.png" width="72" />
+          <!-- <img src="static/controller_node.png" width="72" style="float: left;padding: 5px;"> -->
+          <h4
+            style="
+              text-align: center;
+              padding: 5px;
+              background-color: cadetblue;
+              border-radius: 10px;
+              color: aliceblue;
+            "
+          >
+            🟢 #{{node[0]}}: {{node[2]}}
+          </h4>
+          <!-- <h4 style="text-align:center;display: table;padding: 5px; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🟢 #{{node[0]}}: {{node[2]}}</h4> -->
         </div>
+        <!-- <br style="clear:both" /> -->
+        <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+        <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+        <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
+        {% if node[5]=='up' %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
         {% else %}
-        <div class="disabled-node-box">
-          <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">🔴 #{{node[0]}}: {{node[2]}}</h4>
-          <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
-          <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
-          <p><strong>Status: </strong><code>{{node[4]}}</code></p>
-          <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
-          <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
-        </div>
-        {%endif %}
-        {%endif %}
-        {% endfor %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+        {% endif %}
+        <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
       </div>
       {% else %}
-      <p>No controller nodes found.</p>
-      {% endif %}
+      <div class="disabled-node-box">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 5px;
+          "
+        >
+          <img src="static/controller_node.png" width="72" />
+          <h4
+            style="
+              text-align: center;
+              padding: 5px;
+              background-color: cadetblue;
+              border-radius: 10px;
+              color: aliceblue;
+            "
+          >
+            🔴 #{{node[0]}}: {{node[2]}}
+          </h4>
+        </div>
+        <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+        <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+        <p><strong>Status: </strong><code>{{node[4]}}</code></p>
+        {% if node[5]=='up' %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+        {% else %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+        {% endif %}
+        <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
+      </div>
+      {%endif %} {%endif %} {% endfor %}
+    </div>
+    {% else %}
+    <p>No controller nodes found.</p>
+    {% endif %}
   </div>
   <button class="accordion">
     <h3 style="text-align: center">Compute nodes</h3>
@@ -47,33 +95,78 @@ body%}
   <div class="panel">
     {% if nodes %}
     <div class="flexbox">
-      {% for node in nodes %}
-      {% if node[1]=='nova-compute' %}
-      {% if node[4]=='enabled' %}
+      {% for node in nodes %} {% if node[1]=='nova-compute' %} {% if
+      node[4]=='enabled' %}
       <div class="enabled-node-box">
-        <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 5px;
+          "
+        >
+          <img src="static/compute_node.png" width="68" />
+          <h4
+            style="
+              text-align: center;
+              padding: 5px;
+              background-color: cadetblue;
+              border-radius: 10px;
+              color: aliceblue;
+            "
+          >
+            🟢 #{{node[0]}}: {{node[2]}}
+          </h4>
+        </div>
         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
         <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
-        <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+        {% if node[5]=='up' %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+        {% else %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+        {% endif %}
         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
-       </div>
-       {% else %}
-       <div class="disabled-node-box">
-         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
-         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
-         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
-         <p><strong>Status: </strong><code>{{node[4]}}</code></p>
-         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
-         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
-       </div>
-        {%endif %}
-        {%endif %}
-        {% endfor %}
       </div>
       {% else %}
-      <p>No controller nodes found.</p>
-      {% endif %}
+      <div class="disabled-node-box">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 5px;
+          "
+        >
+          <img src="static/compute_node.png" width="68" />
+          <h4
+            style="
+              text-align: center;
+              padding: 5px;
+              background-color: cadetblue;
+              border-radius: 10px;
+              color: aliceblue;
+            "
+          >
+            🟢 #{{node[0]}}: {{node[2]}}
+          </h4>
+        </div>
+        <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+        <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+        <p><strong>Status: </strong><code>{{node[4]}}</code></p>
+        {% if node[5]=='up' %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+        {% else %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+        {% endif %}
+        <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
+      </div>
+      {%endif %} {%endif %} {% endfor %}
+    </div>
+    {% else %}
+    <p>No controller nodes found.</p>
+    {% endif %}
   </div>
   <button class="accordion">
     <h3 style="text-align: center">Conductor nodes</h3>
@@ -81,33 +174,78 @@ body%}
   <div class="panel">
     {% if nodes %}
     <div class="flexbox">
-      {% for node in nodes %} 
-      {% if node[1]=='nova-conductor' %}
-      {% if node[4]=='enabled' %}
+      {% for node in nodes %} {% if node[1]=='nova-conductor' %} {% if
+      node[4]=='enabled' %}
       <div class="enabled-node-box">
-        <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 5px;
+          "
+        >
+          <img src="static/conductor_node.png" width="68" />
+          <h4
+            style="
+              text-align: center;
+              padding: 5px;
+              background-color: cadetblue;
+              border-radius: 10px;
+              color: aliceblue;
+            "
+          >
+            🟢 #{{node[0]}}: {{node[2]}}
+          </h4>
+        </div>
         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
         <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
-        <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+        {% if node[5]=='up' %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+        {% else %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+        {% endif %}
         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
-       </div>
-       {% else %}
-       <div class="disabled-node-box">
-         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
-         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
-         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
-         <p><strong>Status: </strong><code>{{node[4]}}</code></p>
-         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
-         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
-       </div>
-       {%endif %}
-       {%endif %}
-       {% endfor %}
-     </div>
+      </div>
       {% else %}
-      <p>No controller nodes found.</p>
-      {% endif %}
+      <div class="disabled-node-box">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 5px;
+          "
+        >
+          <img src="static/conductor_node.png" width="68" />
+          <h4
+            style="
+              text-align: center;
+              padding: 5px;
+              background-color: cadetblue;
+              border-radius: 10px;
+              color: aliceblue;
+            "
+          >
+            🟢 #{{node[0]}}: {{node[2]}}
+          </h4>
+        </div>
+        <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+        <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+        <p><strong>Status: </strong><code>{{node[4]}}</code></p>
+        {% if node[5]=='up' %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+        {% else %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+        {% endif %}
+        <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
+      </div>
+      {%endif %} {%endif %} {% endfor %}
+    </div>
+    {% else %}
+    <p>No controller nodes found.</p>
+    {% endif %}
   </div>
   <button class="accordion">
     <h3 style="text-align: center">Scheduler nodes</h3>
@@ -115,33 +253,78 @@ body%}
   <div class="panel">
     {% if nodes %}
     <div class="flexbox">
-      {% for node in nodes %} 
-      {% if node[1]=='nova-scheduler' %}
-      {% if node[4]=='enabled' %}
+      {% for node in nodes %} {% if node[1]=='nova-scheduler' %} {% if
+      node[4]=='enabled' %}
       <div class="enabled-node-box">
-        <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 5px;
+          "
+        >
+          <img src="static/scheduler_node.png" width="68" />
+          <h4
+            style="
+              text-align: center;
+              padding: 5px;
+              background-color: cadetblue;
+              border-radius: 10px;
+              color: aliceblue;
+            "
+          >
+            🟢 #{{node[0]}}: {{node[2]}}
+          </h4>
+        </div>
         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
         <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
-        <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+        {% if node[5]=='up' %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+        {% else %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+        {% endif %}
         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
-       </div>
-       {% else %}
-       <div class="disabled-node-box">
-         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
-         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
-         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
-         <p><strong>Status: </strong><code>{{node[4]}}</code></p>
-         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
-         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
-       </div>
-        {%endif %}
-        {%endif %}
-        {% endfor %}
       </div>
       {% else %}
-      <p>No controller nodes found.</p>
-      {% endif %}
+      <div class="disabled-node-box">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 5px;
+          "
+        >
+          <img src="static/scheduler_node.png" width="68" />
+          <h4
+            style="
+              text-align: center;
+              padding: 5px;
+              background-color: cadetblue;
+              border-radius: 10px;
+              color: aliceblue;
+            "
+          >
+            🟢 #{{node[0]}}: {{node[2]}}
+          </h4>
+        </div>
+        <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+        <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+        <p><strong>Status: </strong><code>{{node[4]}}</code></p>
+        {% if node[5]=='up' %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+        {% else %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+        {% endif %}
+        <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
+      </div>
+      {%endif %} {%endif %} {% endfor %}
+    </div>
+    {% else %}
+    <p>No controller nodes found.</p>
+    {% endif %}
   </div>
   <button class="accordion">
     <h3 style="text-align: center">Consoleauth nodes</h3>
@@ -149,33 +332,78 @@ body%}
   <div class="panel">
     {% if nodes %}
     <div class="flexbox">
-      {% for node in nodes %} 
-      {% if node[1]=='nova-consoleauth' %}
-      {% if node[4]=='enabled' %}
+      {% for node in nodes %} {% if node[1]=='nova-consoleauth' %} {% if
+      node[4]=='enabled' %}
       <div class="enabled-node-box">
-        <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 5px;
+          "
+        >
+          <img src="static/console_auth_node.png" width="68" />
+          <h4
+            style="
+              text-align: center;
+              padding: 5px;
+              background-color: cadetblue;
+              border-radius: 10px;
+              color: aliceblue;
+            "
+          >
+            🟢 #{{node[0]}}: {{node[2]}}
+          </h4>
+        </div>
         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
         <p><strong>Node Status: </strong><code>{{node[4]}}</code></p>
-        <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
+        {% if node[5]=='up' %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+        {% else %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+        {% endif %}
         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
-       </div>
-       {% else %}
-       <div class="disabled-node-box">
-         <h4 style="text-align:center; background-color:cadetblue; border-radius: 10px; color: aliceblue;">#{{node[0]}}: {{node[2]}}</h4>
-         <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
-         <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
-         <p><strong>Status: </strong><code>{{node[4]}}</code></p>
-         <p><strong>Node State: </strong><code>{{node[5]}}</code></p>
-         <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
-       </div>
-       {%endif %}
-       {%endif %}
-       {% endfor %}
-     </div>
+      </div>
       {% else %}
-      <p>No controller nodes found.</p>
-      {% endif %}
+      <div class="disabled-node-box">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 5px;
+          "
+        >
+          <img src="static/console_auth_node.png" width="68" />
+          <h4
+            style="
+              text-align: center;
+              padding: 5px;
+              background-color: cadetblue;
+              border-radius: 10px;
+              color: aliceblue;
+            "
+          >
+            🟢 #{{node[0]}}: {{node[2]}}
+          </h4>
+        </div>
+        <p><strong>Service Type: </strong><code>{{node[1]}}</code></p>
+        <p><strong>Zone: </strong><code>{{node[3]}}</code></p>
+        <p><strong>Status: </strong><code>{{node[4]}}</code></p>
+        {% if node[5]=='up' %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟩</code></p>
+        {% else %}
+        <p><strong>Node State: </strong><code>{{node[5]}} 🟥</code></p>
+        {% endif %}
+        <p><strong>Last updated at: </strong><code>{{node[6]}}</code></p>
+      </div>
+      {%endif %} {%endif %} {% endfor %}
+    </div>
+    {% else %}
+    <p>No controller nodes found.</p>
+    {% endif %}
   </div>
 
   <script>
@@ -210,6 +438,9 @@ body%}
       });
     }
   </script>
+</div>
+<div style="padding: 10px">
+  <p>Information generated at <code>{{time_stamp}}</code>.</p>
 </div>
 
 {% endblock %}

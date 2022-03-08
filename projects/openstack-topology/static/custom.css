@@ -16,7 +16,7 @@
   padding-left: 5px;
   padding-top: 5px;
   width: 300px;
-  height: 200px;
+  height: 250px;
   background-color: aliceblue;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -27,8 +27,8 @@
   padding-right: 5px;
   padding-top: 5px;
   padding-bottom: 5px;
-  width: 300px;
-  height: 300px;
+  width: 340px;
+  height: 320px;
   background-color: lightgreen;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -40,14 +40,13 @@
   padding-top: 5px;
   padding-right: 5px;
   padding-bottom: 5px;
-  width: 300px;
-  height: 300px;
+  width: 340px;
+  height: 320px;
   background-color: lightpink;
   border: 1px solid #ccc;
   border-radius: 10px;
   order: 1;
 }
-
 
 .enabled-node-box:hover {
   background-color: #f0f0f0;
@@ -92,31 +91,12 @@
   transition: max-height 0.2s ease-out;
 }
 
-/* create the styling for every type of server */
 
-.controller-tier {
-}
-
-.conductor-tier {
-}
-
-.consoleauth-tier {
-}
-
-.scheduler-tier {
-}
-
-.compute-tier {
-}
-
-.enabled-node {
-}
-
-.disabled-node {
-}
-
-.up-node {
-}
-
-.down-node {
+.centered-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
 }

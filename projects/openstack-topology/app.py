@@ -1,8 +1,11 @@
 from flask import Flask, render_template
 
 
-import src.create_db as db
+import logging
 
+import src.create_db as db
+import src.node_plotter as plotter
+import src.graphs as graf
 
 app = Flask(__name__)
 
@@ -14,13 +17,31 @@ def show_index():
 
 @app.route("/topology")
 def show_topology():
-    # node_list = [db.pull_db_data(db_file=db.GLOBAL_DB_FILE)[0]]
     node_list = db.pull_db_data(db_file=db.GLOBAL_DB_FILE)
     return render_template('topology.html',
-                           nodes=node_list)
+                           nodes=node_list,
+                           time_stamp=db.generate_update_timestamp())
+
+
+@app.route('/histogram')
+def show_histogram():
+    openstack_nodes = plotter.get_db_content(plotter.GLOBAL_DB_FILE)
+    node_types = plotter.get_openstack_node_types(
+        openstack_list=openstack_nodes)
+    hist = plotter.make_histogram(node_types)
+    return render_template('histogram.html',
+                           histogram=hist)
+
+
+@app.route('/graphs')
+def show_graphs():
+    graph_data = graf.give_graph_data()
+    return render_template('graphs.html',
+                           graph_data=graph_data)
 
 
 def main():
+    logging.basicConfig(filename='flask_app_errors.log', level=logging.DEBUG)
     app.run(debug=True, port=5050)
 
 
