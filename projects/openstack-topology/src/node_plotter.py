@@ -37,11 +37,12 @@ def make_histogram(data):
     # ax.hist(data,color=[['#79B473','#70A37F','#41658A','#414073','#4C3957']])
     time_stamp = f'{datetime.utcnow()}'[:-7]
     fig.suptitle(
-        f'Openstack Nodes runnuing on\n<<{HOST}>> @ {time_stamp}', fontsize=14)
+        f'Openstack Nodes running on\n<<{HOST}>> @ {time_stamp}', fontsize=14)
 
     # ax.set_xticks(rotation=30, ha='right')
     # rotate the labels according to the link below
     fig.autofmt_xdate(rotation=30)
+    ax.set_xticklabels(data,fontweight='bold')
     # https://www.delftstack.com/howto/matplotlib/how-to-rotate-x-axis-tick-label-text-in-matplotlib/
 
     # fig.savefig('openstack_nodes.png', bbox_inches='tight', dpi=400)
