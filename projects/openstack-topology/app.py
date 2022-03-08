@@ -1,6 +1,8 @@
 from flask import Flask, render_template
 
 
+import logging
+
 import src.create_db as db
 import src.node_plotter as plotter
 
@@ -36,6 +38,7 @@ def show_graphs():
 
 
 def main():
+    logging.basicConfig(filename='flask_app_errors.log', level=logging.DEBUG)
     app.run(debug=True, port=5050)
 
 

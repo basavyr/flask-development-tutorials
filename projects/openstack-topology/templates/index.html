@@ -1,13 +1,13 @@
 {% extends "base.html" %} {% block title %} Topology {% endblock %} {% block
 body%}
 
-<div style="display: flex; flex-direction: row; flex-wrap: wrap;padding: 10px; row-gap: 10px; column-gap: 10px;">
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;padding: 10px; row-gap: 10px; column-gap: 10px;justify-content: center;">
   <a href="{{url_for('show_topology')}}" style="text-decoration: none; color: black;">
-<div class="card" style="max-width: 500px">
+<div class="card" style="max-width: 500px;  height: 350px; ">
   <div class="card-body">
     <h4 class="card-title">Topology view</h4>
     <p class="card-text">
-      Shows a topological view with all the nodes available on the Openstack
+      Shows a topological view with all the nodes available on the <strong>Openstack</strong>
       infrastructure. The node types are organized hierarchically, with the top
       priority being for the
       <code>controller</code> nodes.
@@ -20,21 +20,30 @@ body%}
 </div>
 </a>
 <a href="{{url_for('show_histogram')}}" style="text-decoration: none; color: black;">
-<div class="card" style="max-width: 500px">
+<div class="card" style="max-width: 500px;  height: 350px;">
   <div class="card-body">
     <h4 class="card-title">Histogram view</h4>
     <p class="card-text">
-      Draws a histogram with all the node types available on the Openstack infrastructure. There are five types of nodes in the current Openstack cluster, and for each type, the total number of nodes is graphically represented.
+      Draws a histogram with all the node types available on the <strong>Openstack</strong> infrastructure. There are five types of nodes in the current <strong>Openstack</strong> cluster.
+      <ul>
+        <li><code>controller-nodes</code></li>
+        <li><code>compute-nodes</code></li>
+        <li><code>conductor-nodes</code></li>
+        <li><code>scheduler-nodes</code></li>
+        <li><code>consoleauth-nodes</code></li>
+      </ul>
+    </p>
+      <p class="card-text">For each type, the total number of nodes is graphically represented.
     </p>
   </div>
 </div>
 </a>
 <a href="{{url_for('show_graphs')}}" style="text-decoration: none; color: black;">
-<div class="card" style="max-width: 500px">
+<div class="card" style="max-width: 500px;  height: 350px;">
   <div class="card-body">
     <h4 class="card-title">Graph view</h4>
     <p class="card-text">
-      This service shows system information and statistics for the main node on which the Openstack cluster is deployed. Data is generated when the webpage is accessed.
+      This service shows system information and statistics for the main node on which the <strong>Openstack</strong> cluster is deployed. Data is generated when the webpage is accessed.
     </p>
   </div>
 </div>
@@ -65,7 +74,7 @@ body%}
           <div class="accordion-body">
             <p>
               Shows a topological view with all the nodes available on the
-              Openstack infrastructure. The node types are organized
+              <strong>Openstack</strong> infrastructure. The node types are organized
               herarhically, with the top priority being for the
               <code>controller</code> nodes.
             </p>
@@ -98,8 +107,8 @@ body%}
           <div class="accordion-body">
             <p>
               Draws a histogram with all the node types avaialable on the
-              Openstack infrastructure. There are five types of nodes in the
-              current Openstack cluster, and for each type, the total number of
+              <strong>Openstack</strong> infrastructure. There are five types of nodes in the
+              current <strong>Openstack</strong> cluster, and for each type, the total number of
               nodes is graphically represented.
             </p>
           </div>
@@ -127,7 +136,7 @@ body%}
           <div class="accordion-body">
             <p>
               This service shows system information and statistics for the main
-              node on which the Openstack cluster is deployed. Data is generated
+              node on which the <strong>Openstack</strong> cluster is deployed. Data is generated
               when the webpage is accessed.
             </p>
           </div>
