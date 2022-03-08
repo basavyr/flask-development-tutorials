@@ -30,6 +30,11 @@ def show_histogram():
                            histogram=hist)
 
 
+@app.route('/graphs')
+def show_graphs():
+    return render_template('graphs.html')
+
+
 def main():
     app.run(debug=True, port=5050)
 
