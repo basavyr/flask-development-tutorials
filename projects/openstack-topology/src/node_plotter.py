@@ -42,7 +42,7 @@ def make_histogram(data):
     # ax.set_xticks(rotation=30, ha='right')
     # rotate the labels according to the link below
     fig.autofmt_xdate(rotation=30)
-    ax.set_xticklabels(data, fontweight='bold')
+    ax.set_xticklabels(data,fontsize=11, fontweight='bold')
     # https://www.delftstack.com/howto/matplotlib/how-to-rotate-x-axis-tick-label-text-in-matplotlib/
 
     # fig.savefig('openstack_nodes.png', bbox_inches='tight', dpi=400)

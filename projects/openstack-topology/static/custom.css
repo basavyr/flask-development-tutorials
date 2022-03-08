@@ -4,7 +4,6 @@ img {
   display: block;
 }
 
-
 .box {
   padding-left: 20px;
   padding-right: 20px;
@@ -98,20 +97,9 @@ img {
   transition: max-height 0.2s ease-out;
 }
 
-
-.centered-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -moz-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-}
-
-
 .plot_box {
-  height: 500px;
-  width: 500px;
+  height: 450px;
+  width: 450px;
 }
 
 .column-main {
@@ -133,4 +121,3 @@ img {
   justify-content: center;
   align-content: center;
 }
-
