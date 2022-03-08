@@ -8,6 +8,9 @@ from datetime import datetime
 import random
 
 
+LOGGING_FILE = 'flask_app_errors.log'
+
+
 def generate_update_timestamp():
     return f'{datetime.utcnow()}'
 
@@ -99,11 +102,15 @@ def db_connect_object(db_file):
         db_conn = db.connect(db_file)
         db_cursor = db_conn.cursor()
     except Error as err:
-        print(
-            f'There was an issue with establishing database connection -> {err}')
+        with open(LOGGING_FILE, 'a+') as db_logger:
+            db_logger.write(
+                f'{generate_update_timestamp()} - There was an issue with establishing database connection...\n')
+            db_logger.write(f'{err}\n')
         return -1, -1
     else:
-        print('All good with the db stuff')
+        with open(LOGGING_FILE, 'a+') as db_logger:
+            db_logger.write(
+                f'{generate_update_timestamp()} - All good with the db stuff\n')
 
         return db_conn, db_cursor
 
