@@ -7240,3 +7240,17 @@ INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:48:26] "[36mGET /static/console_aut
 INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:48:26] "[36mGET /static/compute_node.png HTTP/1.1[0m" 304 -
 INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:48:27] "[36mGET /static/controller_node.png HTTP/1.1[0m" 304 -
 INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:48:27] "[36mGET /static/scheduler_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Running on http://127.0.0.1:5050/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 155-919-971
+2022-03-08 13:47:05 - All good with the db stuff
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 13:47:05] "GET /topology HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 13:47:05] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 13:47:05] "[36mGET /static/compute_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 13:47:05] "[36mGET /static/conductor_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 13:47:05] "[36mGET /static/scheduler_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 13:47:05] "[36mGET /static/controller_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 13:47:05] "[36mGET /static/console_auth_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 13:47:08] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 13:47:08] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -

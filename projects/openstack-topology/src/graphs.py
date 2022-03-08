@@ -93,8 +93,8 @@ def swap_pie_chart():
 
     # Save it to a temporary buffer
     buffer = BytesIO()
-    # fig.savefig('swap-pie-chart.pdf', dpi=300, bbox_inches='tight')
     fig.savefig(buffer, format="png")
+    # fig.savefig('swap-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
     # Embed the result in the html output.
     data = base64.b64encode(buffer.getbuffer()).decode("ascii")
@@ -149,8 +149,8 @@ def virtual_memory_pie_char():
 
     # Save it to a temporary buffer
     buffer = BytesIO()
-    # fig.savefig('virtual-memory-pie-chart.pdf', dpi=300, bbox_inches='tight')
     fig.savefig(buffer, format="png")
+    # fig.savefig('virtual-memory-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
     # Embed the result in the html output.
     data = base64.b64encode(buffer.getbuffer()).decode("ascii")
@@ -205,8 +205,8 @@ def disk_pie_chart():
     fig.tight_layout()
     # Save it to a temporary buffer
     buffer = BytesIO()
-    fig.savefig('disk-pie-chart.pdf', dpi=300, bbox_inches='tight')
     fig.savefig(buffer, format="png")
+    # fig.savefig('disk-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
     # Embed the result in the html output.
     data = base64.b64encode(buffer.getbuffer()).decode("ascii")
@@ -291,8 +291,8 @@ def cpu_info_chart():
 
     # Save it to a temporary buffer
     buffer = BytesIO()
-    fig.savefig('cpu-chart.pdf', dpi=300, bbox_inches='tight')
     fig.savefig(buffer, format="png")
+    # fig.savefig('cpu-chart.pdf', dpi=300, bbox_inches='tight')
 
     # Embed the result in the html output.
     data = base64.b64encode(buffer.getbuffer()).decode("ascii")

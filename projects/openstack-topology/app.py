@@ -4,7 +4,7 @@ from flask import Flask, render_template
 import logging
 
 import src.create_db as db
-import src.node_plotter as plotter
+import src.plotter as plotter
 import src.graphs as graf
 
 app = Flask(__name__)
