@@ -19,7 +19,8 @@ def show_index():
 def show_topology():
     node_list = db.pull_db_data(db_file=db.GLOBAL_DB_FILE)
     return render_template('topology.html',
-                           nodes=node_list)
+                           nodes=node_list,
+                           time_stamp=db.generate_update_timestamp())
 
 
 @app.route('/histogram')

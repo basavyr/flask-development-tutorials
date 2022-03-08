@@ -12,7 +12,8 @@ LOGGING_FILE = 'flask_app_errors.log'
 
 
 def generate_update_timestamp():
-    return f'{datetime.utcnow()}'
+    time = str(datetime.utcnow())
+    return f'{time[:-7]}'
 
 
 OPENSTACK_SERVICES = ['nova-scheduler',

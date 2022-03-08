@@ -165,3 +165,53 @@ INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:33:47] "[36mGET /static/compute_nod
 INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:33:47] "[36mGET /static/conductor_node.png HTTP/1.1[0m" 304 -
 INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:33:48] "[36mGET /static/console_auth_node.png HTTP/1.1[0m" 304 -
 INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:33:48] "[36mGET /static/scheduler_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:39:53] "GET /histogram HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:39:53] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:40:16] "GET /histogram HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:40:16] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -
+2022-03-08 08:40:19.174442 - All good with the db stuff
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:40:19] "GET /topology HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:40:19] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:40:19] "[36mGET /static/compute_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:40:19] "[36mGET /static/conductor_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:40:19] "[36mGET /static/scheduler_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:40:19] "[36mGET /static/controller_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:40:19] "[36mGET /static/console_auth_node.png HTTP/1.1[0m" 304 -
+2022-03-08 08:41:38.413705 - All good with the db stuff
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:41:38] "GET /topology HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:41:38] "[36mGET /static/compute_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:41:38] "[36mGET /static/controller_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:41:39] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:41:39] "[36mGET /static/conductor_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:41:39] "[36mGET /static/console_auth_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:41:39] "[36mGET /static/scheduler_node.png HTTP/1.1[0m" 304 -
+2022-03-08 08:41:58.403486 - All good with the db stuff
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:41:58] "GET /topology HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:41:58] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:41:58] "[36mGET /static/controller_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:41:59] "[36mGET /static/scheduler_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:41:59] "[36mGET /static/console_auth_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:41:59] "[36mGET /static/conductor_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:41:59] "[36mGET /static/compute_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in '/root/dev/flask-development-tutorials/projects/openstack-topology/app.py', reloading
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 155-919-971
+2022-03-08 08:42:35.398454 - All good with the db stuff
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:42:35] "GET /topology HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:42:35] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:42:35] "[36mGET /static/compute_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:42:36] "[36mGET /static/console_auth_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:42:36] "[36mGET /static/controller_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:42:36] "[36mGET /static/scheduler_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:42:36] "[36mGET /static/conductor_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in '/root/dev/flask-development-tutorials/projects/openstack-topology/src/create_db.py', reloading
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 155-919-971
+2022-03-08 08:43:19 - All good with the db stuff
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:43:19] "GET /topology HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:43:20] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:43:20] "[36mGET /static/controller_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:43:20] "[36mGET /static/conductor_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:43:20] "[36mGET /static/scheduler_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:43:20] "[36mGET /static/compute_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 08:43:20] "[36mGET /static/console_auth_node.png HTTP/1.1[0m" 304 -
