@@ -84,12 +84,19 @@ body%}
           {% endfor %}
         </ul>
         {% endif %}
-        <div style="padding: 5px"></div>
+        <ul>
+          <li>
+            <p><strong>Architecture: </strong>{{arch}}</p>
+          </li>
+          <li>
+            <p><strong>N.o. CPU Cores: </strong>{{cpu_info[1]}}</p>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </div>
-<div style="padding: 10px;">
+<div style="padding: 10px">
   <p>System stats generated at <code>{{time_stamp}}</code>.</p>
 </div>
 {% endblock %}
