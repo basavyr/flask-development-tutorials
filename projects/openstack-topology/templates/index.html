@@ -1,16 +1,46 @@
 {% extends "base.html" %} {% block title %} Topology {% endblock %} {% block
 body%}
 
-<div class="card">
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;padding: 10px; row-gap: 10px; column-gap: 10px;">
+  <a href="{{url_for('show_topology')}}" style="text-decoration: none; color: black;">
+<div class="card" style="max-width: 500px">
   <div class="card-body">
-    <h4 class="card-title">Card title</h4>
+    <h4 class="card-title">Topology view</h4>
     <p class="card-text">
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+      Shows a topological view with all the nodes available on the Openstack
+      infrastructure. The node types are organized hierarchically, with the top
+      priority being for the
+      <code>controller</code> nodes.
+    </p>
+    <p class="card-text">
+      The information for each node is pulled from a database that is
+      created/updated before the webpage is loaded.
     </p>
   </div>
-
-  <div style="padding: 10px">
+</div>
+</a>
+<a href="{{url_for('show_histogram')}}" style="text-decoration: none; color: black;">
+<div class="card" style="max-width: 500px">
+  <div class="card-body">
+    <h4 class="card-title">Histogram view</h4>
+    <p class="card-text">
+      Draws a histogram with all the node types available on the Openstack infrastructure. There are five types of nodes in the current Openstack cluster, and for each type, the total number of nodes is graphically represented.
+    </p>
+  </div>
+</div>
+</a>
+<a href="{{url_for('show_index')}}" style="text-decoration: none; color: black;">
+<div class="card" style="max-width: 500px">
+  <div class="card-body">
+    <h4 class="card-title">Graph view</h4>
+    <p class="card-text">
+      This service shows system information and statistics for the main node on which the Openstack cluster is deployed. Data is generated when the webpage is accessed.
+    </p>
+  </div>
+</div>
+</div>
+</a>
+  <!-- <div style="padding: 10px">
     <div class="accordion" id="accordionExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
@@ -104,13 +134,7 @@ body%}
         </div>
       </div>
     </div>
-  </div>
-  <!-- <h1>Flask App</h1> -->
-
-  <!-- 
-<form action="{{url_for('show_topology')}}">
-  <input type="submit" value="Show Topology" />
-</form> -->
+  </div> -->
 
   {% endblock %}
 </div>
