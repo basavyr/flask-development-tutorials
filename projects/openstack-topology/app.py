@@ -17,26 +17,31 @@ def show_index():
 
 @app.route("/topology")
 def show_topology():
+    topology_template = 'topology.html'
     node_list = db.pull_db_data(db_file=db.GLOBAL_DB_FILE)
-    return render_template('topology.html',
+
+    return render_template(topology_template,
                            nodes=node_list,
                            time_stamp=db.generate_update_timestamp())
 
 
 @app.route('/histogram')
 def show_histogram():
-    openstack_nodes = plotter.get_db_content(plotter.GLOBAL_DB_FILE)
-    node_types = plotter.get_openstack_node_types(
-        openstack_list=openstack_nodes)
+    histogram_template = 'histogram.html'
+    nodes = plotter.get_db_content(plotter.GLOBAL_DB_FILE)
+    node_types = plotter.get_openstack_node_types(nodes)
     hist = plotter.make_histogram(node_types)
-    return render_template('histogram.html',
+
+    return render_template(histogram_template,
                            histogram=hist)
 
 
 @app.route('/graphs')
 def show_graphs():
+    graph_template = 'graphs.html'
     graph_data = graf.give_graph_data()
-    return render_template('graphs.html',
+
+    return render_template(graph_template,
                            graph_data=graph_data,
                            disk_pie_chart=graf.disk_pie_chart(),
                            swap_pie_chart=graf.swap_pie_chart(),
