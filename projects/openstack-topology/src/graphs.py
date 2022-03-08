@@ -289,6 +289,9 @@ def cpu_info_chart():
     ax.set_ylabel('%')
     # ax.set_ylim([0, 100])
 
+    # adjust the sizing and padding of the figure
+    fig.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.90)
+
     # Save it to a temporary buffer
     buffer = BytesIO()
     fig.savefig(buffer, format="png")
