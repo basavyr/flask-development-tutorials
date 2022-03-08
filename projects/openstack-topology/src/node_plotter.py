@@ -1,5 +1,5 @@
 from datetime import datetime
-from turtle import color
+from turtle import color, left
 from matplotlib.figure import Figure
 import sqlite3 as db
 from contextlib import closing
@@ -47,10 +47,11 @@ def make_histogram(data):
     # fig.savefig('openstack_nodes.png', bbox_inches='tight', dpi=400)
     # fig.savefig('openstack_nodes.png', dpi=400)
 
+    fig.subplots_adjust(bottom=0.25, left=0.2, right=0.95, top=0.90)
     # Save it to a temporary buffer
     buffer = BytesIO()
     # fig.savefig('swap-pie-chart.pdf', dpi=300, bbox_inches='tight')
-    fig.savefig(buffer, format="png")
+    fig.savefig(buffer, format="png", aspect='equal')
 
     # Embed the result in the html output.
     data = base64.b64encode(buffer.getbuffer()).decode("ascii")
