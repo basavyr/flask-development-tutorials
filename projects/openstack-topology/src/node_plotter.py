@@ -42,7 +42,7 @@ def make_histogram(data):
     # ax.set_xticks(rotation=30, ha='right')
     # rotate the labels according to the link below
     fig.autofmt_xdate(rotation=30)
-    ax.set_xticklabels(data,fontweight='bold')
+    ax.set_xticklabels(data, fontweight='bold')
     # https://www.delftstack.com/howto/matplotlib/how-to-rotate-x-axis-tick-label-text-in-matplotlib/
 
     # fig.savefig('openstack_nodes.png', bbox_inches='tight', dpi=400)
@@ -52,7 +52,7 @@ def make_histogram(data):
     # Save it to a temporary buffer
     buffer = BytesIO()
     # fig.savefig('swap-pie-chart.pdf', dpi=300, bbox_inches='tight')
-    fig.savefig(buffer, format="png", aspect='equal')
+    fig.savefig(buffer, format="png", aspect='equal', dpi=450)
 
     # Embed the result in the html output.
     data = base64.b64encode(buffer.getbuffer()).decode("ascii")

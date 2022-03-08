@@ -5,7 +5,7 @@ import logging
 
 import src.create_db as db
 import src.node_plotter as plotter
-
+import src.graphs as graf
 
 app = Flask(__name__)
 
@@ -35,7 +35,9 @@ def show_histogram():
 
 @app.route('/graphs')
 def show_graphs():
-    return render_template('graphs.html')
+    graph_data = graf.give_graph_data()
+    return render_template('graphs.html',
+                           graph_data=graph_data)
 
 
 def main():
