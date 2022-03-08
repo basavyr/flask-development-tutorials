@@ -86,7 +86,7 @@ def swap_pie_chart():
 
     ax.legend(title='Swap memory',
               labels=data_labels,
-              bbox_to_anchor=(0.35, 0.7),
+              bbox_to_anchor=(0.20, 0.95),
               loc='upper right',
               )
     fig.tight_layout()
