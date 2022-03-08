@@ -37,7 +37,15 @@ def show_histogram():
 def show_graphs():
     graph_data = graf.give_graph_data()
     return render_template('graphs.html',
-                           graph_data=graph_data)
+                           graph_data=graph_data,
+                           disk_pie_chart=graf.disk_pie_chart(),
+                           swap_pie_chart=graf.swap_pie_chart(),
+                           virtual_memory_pie_chart=graf.virtual_memory_pie_char(),
+                           cpu_chart=graf.cpu_info_chart(),
+                           node_name=graf.local_data.get_node_name(),
+                           sys_info=graf.local_data.get_sys_info(),
+                           time_stamp=graf.local_data.get_timestamp(),
+                           )
 
 
 def main():
