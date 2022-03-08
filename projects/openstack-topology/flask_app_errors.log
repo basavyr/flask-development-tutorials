@@ -7176,3 +7176,59 @@ DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/s
 DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
 INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:40:43] "GET /graphs HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:40:44] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F1' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F2' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F1' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F2' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:41:50] "GET /graphs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:41:50] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F1' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F2' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F1' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F2' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:44:21] "GET /graphs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:44:22] "GET /static/custom.css HTTP/1.1" 200 -
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F1' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F2' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F1' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F2' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:45:27] "GET /graphs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:45:28] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F1' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F2' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F1' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Assigning font /b'F2' = '/usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf'
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf.
+DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:45:54] "GET /graphs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:45:54] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -

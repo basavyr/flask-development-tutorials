@@ -10,89 +10,85 @@ body%}
 <h2 style="text-align: center"><< node: <code>{{node_name}}</code> >></h2>
 {% endif %}
 <div class="flex-container">
-  <div class="column-main">
-    <div class="column-child">
-      <div class="card bg-light mb-3">
-        <div class="card-header"><strong>DISK</strong></div>
-        <div class="card-text">
-          {% if disk_pie_chart %}
-          <p class="card-text">
-            The current <code>disk</code> usage of the system.
-          </p>
-          <div class="card-body">
-            <div class="plot_box">
-              <img src="data:image/png;base64,{{disk_pie_chart}}" />
-            </div>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="column-child">
-      <div class="card bg-light mb-3">
-        <div class="card-header"><strong>SWAP</strong></div>
-        {% if swap_pie_chart %}
+  <div class="column-child">
+    <div class="card bg-light mb-3">
+      <div class="card-header"><strong>DISK</strong></div>
+      <div class="card-text">
+        {% if disk_pie_chart %}
         <p class="card-text">
-          The current <code>swap memory</code> stats of the system.
+          The current <code>disk</code> usage of the system.
         </p>
         <div class="card-body">
-          <div class="plot_box">
-            <img src="data:image/png;base64,{{swap_pie_chart}}" />
-          </div>
+          <!-- <div class="plot_box"> -->
+          <img src="data:image/png;base64,{{disk_pie_chart}}" />
+          <!-- </div> -->
           {% endif %}
         </div>
       </div>
     </div>
-    <div class="column-child">
-      <div class="card bg-light mb-3">
-        <div class="card-header"><strong>VIRTUAL MEMORY</strong></div>
-        {% if virtual_memory_pie_chart %}
-        <p class="card-text">
-          The current <code>virtual memory</code> stats of the system.
-        </p>
-        <div class="card-body">
-          <div class="plot_box">
-            <img src="data:image/png;base64,{{virtual_memory_pie_chart}}" />
-          </div>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div class="column-child">
-      <div class="card bg-light mb-3">
-        <div class="card-header"><strong>Processing Unit</strong></div>
-        {% if cpu_chart %}
-        <p class="card-text">
-          The average <code>CPU</code> load of the system.
-        </p>
-        <div class="card-body">
-          <div class="plot_box">
-            <img src="data:image/png;base64,{{cpu_chart}}" />
-          </div>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div class="column-child">
-      <div class="card bg-light mb-3">
-        <div class="card-header"><strong>System Information</strong></div>
-        {% if sys_info %}
-        <ul>
-          {% for key in sys_info %}
-          <li><strong>{{key}}:</strong></li>
-          <p><code>{{sys_info[key]}}</code></p>
-          {% endfor %}
-        </ul>
+  </div>
+  <div class="column-child">
+    <div class="card bg-light mb-3">
+      <div class="card-header"><strong>SWAP</strong></div>
+      {% if swap_pie_chart %}
+      <p class="card-text">
+        The current <code>swap memory</code> stats of the system.
+      </p>
+      <div class="card-body">
+        <!-- <div class="plot_box"> -->
+        <img src="data:image/png;base64,{{swap_pie_chart}}" />
+        <!-- </div> -->
         {% endif %}
-        <ul>
-          <li>
-            <p><strong>Architecture: </strong>{{arch}}</p>
-          </li>
-          <li>
-            <p><strong>N.o. CPU Cores: </strong>{{cpu_info[1]}}</p>
-          </li>
-        </ul>
       </div>
+    </div>
+  </div>
+  <div class="column-child">
+    <div class="card bg-light mb-3">
+      <div class="card-header"><strong>VIRTUAL MEMORY</strong></div>
+      {% if virtual_memory_pie_chart %}
+      <p class="card-text">
+        The current <code>virtual memory</code> stats of the system.
+      </p>
+      <div class="card-body">
+        <!-- <div class="plot_box"> -->
+        <img src="data:image/png;base64,{{virtual_memory_pie_chart}}" />
+        <!-- </div> -->
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="column-child">
+    <div class="card bg-light mb-3">
+      <div class="card-header"><strong>Processing Unit</strong></div>
+      {% if cpu_chart %}
+      <p class="card-text">The average <code>CPU</code> load of the system.</p>
+      <div class="card-body">
+        <!-- <div class="plot_box"> -->
+        <img src="data:image/png;base64,{{cpu_chart}}" />
+        <!-- </div> -->
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="column-child">
+    <div class="card bg-light mb-3">
+      <div class="card-header"><strong>System Information</strong></div>
+      {% if sys_info %}
+      <ul>
+        {% for key in sys_info %}
+        <li><strong>{{key}}:</strong></li>
+        <p><code>{{sys_info[key]}}</code></p>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <ul>
+        <li>
+          <p><strong>Architecture: </strong>{{arch}}</p>
+        </li>
+        <li>
+          <p><strong>N.o. CPU Cores: </strong>{{cpu_info[1]}}</p>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
