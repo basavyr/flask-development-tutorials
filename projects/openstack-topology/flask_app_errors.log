@@ -7232,3 +7232,11 @@ DEBUG:matplotlib.backends.backend_pdf:Embedding font /usr/local/lib/python3.10/s
 DEBUG:matplotlib.backends.backend_pdf:Writing TrueType font.
 INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:45:54] "GET /graphs HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:45:54] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -
+2022-03-08 11:48:26 - All good with the db stuff
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:48:26] "GET /topology HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:48:26] "[36mGET /static/custom.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:48:26] "[36mGET /static/conductor_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:48:26] "[36mGET /static/console_auth_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:48:26] "[36mGET /static/compute_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:48:27] "[36mGET /static/controller_node.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [08/Mar/2022 11:48:27] "[36mGET /static/scheduler_node.png HTTP/1.1[0m" 304 -
