@@ -214,7 +214,7 @@ def disk_pie_chart():
 
 
 def cpu_info_chart():
-    cpu_usages, cpu_count = local_data.get_cpu_info()
+    cpu_usages, _ = local_data.get_cpu_info()
 
     bar_labels = [f'last\n{idx} minute(s)' for idx in [1, 5, 15]]
 

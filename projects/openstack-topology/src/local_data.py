@@ -71,13 +71,15 @@ def get_node_name():
 
 
 def get_sys_info():
-    sys_info = platform.uname()
-    labels = [f'system', f'node', f'release',
-              f'version', f'machine', f'processor']
+    labels = [x for x in platform.uname()._fields]
+    # print(labels)
+
+    sys_info = [x for x in platform.uname() if x != '']
+    # print(sys_info)
 
     data_dict = {f'{labels[idx]}': sys_info[idx]
                  for idx in range(len(sys_info))}
-
+    # print(data_dict)
     return data_dict
 
 
@@ -87,6 +89,7 @@ def main():
     print(f'DISK: {get_disk_info()}')
     print(f'CPU: usage:{get_cpu_info()[0]} cpu_count:{get_cpu_info()[1]} ')
     print(f'ARCH: {get_platform_arch()}')
+    print(f'SYS_INFO: {get_sys_info()}')
 
 
 if __name__ == '__main__':

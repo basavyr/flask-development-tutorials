@@ -45,6 +45,8 @@ def show_graphs():
                            node_name=graf.local_data.get_node_name(),
                            sys_info=graf.local_data.get_sys_info(),
                            time_stamp=graf.local_data.get_timestamp(),
+                           arch=graf.local_data.get_platform_arch(),
+                           cpu_info=graf.local_data.get_cpu_info(),
                            )
 
 
