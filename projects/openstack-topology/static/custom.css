@@ -16,6 +16,7 @@ img {
   row-gap: 10px;
   column-gap: 10px;
   justify-content: center;
+  padding-bottom: 10px;
 }
 
 .node-box {
