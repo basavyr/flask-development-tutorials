@@ -8,3 +8,7 @@ projects/flask_plots/.DS_Store
 .idea/modules.xml
 .idea/inspectionProfiles/profiles_settings.xml
 .idea/flask-development-tutorials.iml
+*.pyc
+projects/openstack-topology/src/__pycache__/plotter.cpython-39.pyc
+*.log
+projects/openstack-topology/flask_app_errors.log
