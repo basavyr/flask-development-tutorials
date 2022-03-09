@@ -1,6 +1,7 @@
 from datetime import datetime
 from turtle import color, left
 from matplotlib.figure import Figure
+from matplotlib import ticker
 import sqlite3 as db
 from contextlib import closing
 import base64
@@ -44,6 +45,11 @@ def make_histogram(data):
     fig.autofmt_xdate(rotation=30)
 
     # gives a user warning (potential bug in matplotlib)
+    labels = [x for x in data]
+    print(labels)
+    positions = [x+1 for x in range(len(labels))]
+    ax.xaxis.set_major_locator(ticker.FixedLocator(positions))
+    ax.xaxis.set_major_formatter(ticker.FixedFormatter(labels))
     # ax.set_xticklabels(data, fontsize=8, fontweight='bold')
 
     # https://www.delftstack.com/howto/matplotlib/how-to-rotate-x-axis-tick-label-text-in-matplotlib/
@@ -62,11 +68,27 @@ def make_histogram(data):
     return data
 
 
+def apparition_counter(data):
+    fake_data = ['nova-consoleauth', 'nova-conductor', 'nova-conductor', 'nova-controller', 'nova-controller', 'nova-conductor', 'nova-scheduler', 'nova-conductor', 'nova-compute', 'nova-conductor', 'nova-compute', 'nova-controller', 'nova-compute', 'nova-scheduler', 'nova-consoleauth',
+                 'nova-scheduler', 'nova-scheduler', 'nova-scheduler', 'nova-scheduler', 'nova-consoleauth', 'nova-conductor', 'nova-scheduler', 'nova-scheduler', 'nova-consoleauth', 'nova-compute', 'nova-conductor', 'nova-conductor', 'nova-conductor', 'nova-consoleauth', 'nova-compute']
+    originals = []
+    for x in fake_data:
+        if x in originals:
+            # print(f'{x} is in dd')
+            pass
+        else:
+            # print(f'{x} is not in dd')
+            originals.append(x)
+
+    return originals
+
+
 def main():
-    LOCAL_DB_FILE = 'openstack_topology.db'
-    openstack_list = get_db_content(LOCAL_DB_FILE)
-    node_types = get_openstack_node_types(openstack_list)
-    make_histogram(node_types)
+    # LOCAL_DB_FILE = 'openstack_topology.db'
+    # openstack_list = get_db_content(LOCAL_DB_FILE)
+    # node_types = get_openstack_node_types(openstack_list)
+    # make_histogram(node_types)
+    apparition_counter(1)
 
 
 if __name__ == '__main__':

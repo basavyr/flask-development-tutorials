@@ -12,3 +12,4 @@ projects/flask_plots/.DS_Store
 projects/openstack-topology/src/__pycache__/plotter.cpython-39.pyc
 *.log
 projects/openstack-topology/flask_app_errors.log
+*.pyc
