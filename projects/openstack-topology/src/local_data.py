@@ -73,7 +73,7 @@ def get_node_name():
 def get_sys_info():
 
     sys_info = [x for x in platform.uname()]
-    sys_info[5] = ''
+    # sys_info[5] = ''
     # fix the case when the system does not return a processor value
     if (sys_info[5] == ''):
         labels = ['System', 'Node', 'Release',
