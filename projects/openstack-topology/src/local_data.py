@@ -71,11 +71,17 @@ def get_node_name():
 
 
 def get_sys_info():
-    labels = [x for x in platform.uname()._fields]
-    # print(labels)
 
-    sys_info = [x for x in platform.uname() if x != '']
-    # print(sys_info)
+    sys_info = [x for x in platform.uname()]
+    sys_info[5] = ''
+    # fix the case when the system does not return a processor value
+    if (sys_info[5] == ''):
+        labels = ['System', 'Node', 'Release',
+                  'Version', 'Machine', 'Machinex2']
+        sys_info[5] = platform.machine()
+    else:
+        labels = ['System', 'Node', 'Release',
+                  'Version', 'Machine', 'Processor']
 
     data_dict = {f'{labels[idx]}': sys_info[idx]
                  for idx in range(len(sys_info))}
