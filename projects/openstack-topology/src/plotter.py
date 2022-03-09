@@ -14,6 +14,21 @@ HOST = platform.uname()[0]
 GLOBAL_DB_FILE = 'src/openstack_topology.db'
 
 
+def apparition_counter(data):
+    fake_data = ['nova-consoleauth', 'nova-conductor', 'nova-conductor', 'nova-controller', 'nova-controller', 'nova-conductor', 'nova-scheduler', 'nova-conductor', 'nova-compute', 'nova-conductor', 'nova-compute', 'nova-controller', 'nova-compute', 'nova-scheduler', 'nova-consoleauth',
+                 'nova-scheduler', 'nova-scheduler', 'nova-scheduler', 'nova-scheduler', 'nova-consoleauth', 'nova-conductor', 'nova-scheduler', 'nova-scheduler', 'nova-consoleauth', 'nova-compute', 'nova-conductor', 'nova-conductor', 'nova-conductor', 'nova-consoleauth', 'nova-compute']
+    originals = []
+    for x in data:
+        if x in originals:
+            # print(f'{x} is in originals')
+            pass
+        else:
+            # print(f'{x} is not in originals')
+            originals.append(x)
+
+    return originals
+
+
 def get_db_content(db_file):
     db_connection = db.connect(db_file)
     with closing(db_connection):
@@ -45,12 +60,11 @@ def make_histogram(data):
     fig.autofmt_xdate(rotation=30)
 
     # gives a user warning (potential bug in matplotlib)
-    labels = [x for x in data]
-    print(labels)
-    positions = [x+1 for x in range(len(labels))]
+    labels = apparition_counter(data)
+    positions = [0, 1, 2, 3, 4]
     ax.xaxis.set_major_locator(ticker.FixedLocator(positions))
     ax.xaxis.set_major_formatter(ticker.FixedFormatter(labels))
-    # ax.set_xticklabels(data, fontsize=8, fontweight='bold')
+    ax.set_xticklabels(labels, fontsize=8, fontweight='bold')
 
     # https://www.delftstack.com/howto/matplotlib/how-to-rotate-x-axis-tick-label-text-in-matplotlib/
 
@@ -66,21 +80,6 @@ def make_histogram(data):
     # Embed the result in the html output.
     data = base64.b64encode(buffer.getbuffer()).decode("ascii")
     return data
-
-
-def apparition_counter(data):
-    fake_data = ['nova-consoleauth', 'nova-conductor', 'nova-conductor', 'nova-controller', 'nova-controller', 'nova-conductor', 'nova-scheduler', 'nova-conductor', 'nova-compute', 'nova-conductor', 'nova-compute', 'nova-controller', 'nova-compute', 'nova-scheduler', 'nova-consoleauth',
-                 'nova-scheduler', 'nova-scheduler', 'nova-scheduler', 'nova-scheduler', 'nova-consoleauth', 'nova-conductor', 'nova-scheduler', 'nova-scheduler', 'nova-consoleauth', 'nova-compute', 'nova-conductor', 'nova-conductor', 'nova-conductor', 'nova-consoleauth', 'nova-compute']
-    originals = []
-    for x in fake_data:
-        if x in originals:
-            # print(f'{x} is in dd')
-            pass
-        else:
-            # print(f'{x} is not in dd')
-            originals.append(x)
-
-    return originals
 
 
 def main():
