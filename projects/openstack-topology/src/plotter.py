@@ -88,6 +88,7 @@ def main():
     # openstack_list = get_db_content(LOCAL_DB_FILE)
     # node_types = get_openstack_node_types(openstack_list)
     # make_histogram(node_types)
+    print(1)
 
 
 if __name__ == '__main__':
