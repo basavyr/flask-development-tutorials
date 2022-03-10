@@ -15,7 +15,7 @@ LOCALHOST = '127.0.0.1'
 # define the flask app
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
-app.config['DEBUG'] = True
+# app.config['DEBUG'] = True
 
 socketio = SocketIO(app)
 
