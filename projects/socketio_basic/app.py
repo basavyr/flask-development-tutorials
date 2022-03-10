@@ -1,5 +1,6 @@
 # Start with a basic flask app webpage.
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO
+from flask_socketio import send, emit
 from flask import Flask, render_template, url_for, copy_current_request_context
 from random import random
 from time import sleep
@@ -27,8 +28,8 @@ def show_index():
 
 @socketio.on('connect')
 def test_connect():
-    print('Connection Established')
-    # emit('my response', {'data': 'Connected'})
+    print('Connection Established ')
+    emit('connection response', {'data': 'Connected'})
 
 
 @socketio.on('disconnect')
@@ -36,9 +37,17 @@ def test_disconnect():
     print('Client disconnected')
 
 
+@socketio.on("test")
+def test_message(message):
+    print("received test message: " + message)
+    # emit("test response", {"data": message})
+
+
 @socketio.on('message')
 def handle_message(data):
+    print('this is on the server')
     print('received message: ' + data)
+    emit(data)
 
 
 def main():
