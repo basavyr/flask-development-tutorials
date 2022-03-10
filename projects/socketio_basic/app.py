@@ -27,8 +27,8 @@ def show_index():
 
 @socketio.on('connect')
 def test_connect():
-    print('connection finished')
-    emit('my response', {'data': 'Connected'})
+    print('Connection Established')
+    # emit('my response', {'data': 'Connected'})
 
 
 @socketio.on('disconnect')
