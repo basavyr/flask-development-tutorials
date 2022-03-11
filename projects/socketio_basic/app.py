@@ -40,11 +40,32 @@ def test_disconnect():
     print('Client disconnected')
 
 
+# define the tree test channels
+@socketio.event
+def channel1(data):
+    print('received args on channel1: ' + data)
+    # emit('channel1 response', {'data': data})
+
+
+@socketio.on('channel2')
+def channel2(data):
+    print('received args on channel2: ' + data)
+    # emit('channel2 response', {'data': 'channel2 response'})
+
+
+@socketio.on('channel3')
+def channel2(data):
+    print('received args on channel3: ' + data)
+    # emit('channel3 response', {'data': 'channel3 response'})
+
+
 # log any incoming message that was emitted by the client
 @socketio.on('message')
 def handle_unnamed_message(data):
-    print('Server-side message: ' + data)
-    pass
+    print('...(received from client)...')
+    print(f'Server-side message: {data}')
+    print('...')
+    # emit('message', {'data': data})
 
 
 def main():
