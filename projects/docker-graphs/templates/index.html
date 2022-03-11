@@ -71,7 +71,7 @@
       });
     });
     socket.on("psutil-info", (data) => {
-      $("#system-info").empty();
+    //   $("#system-info").empty();
       $("#system-info").append("<p>" + data["virtual_memory"] + "</p>");
     });
   });

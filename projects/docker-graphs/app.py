@@ -1,5 +1,5 @@
 from flask_socketio import SocketIO
-from flask_socketio import send, emit
+from flask_socketio import emit
 from flask import Flask, render_template
 from random import random
 import time
@@ -32,6 +32,18 @@ app.config['DEBUG'] = True
 socketio = SocketIO(app, async_mode=async_mode)
 
 
+# define the background thread
+def background_thread():
+    """Example of how to send server generated events to clients."""
+    count = 0
+    while True:
+        socketio.sleep(3)
+        count += 1
+        socketio.emit('psutil-info',
+             {"virtual_memory": tools.get_system_info(), }
+             )
+
+
 # define the index page
 @app.route('/')
 def index():
@@ -39,13 +51,13 @@ def index():
                            app_name=f'{app}')
 
 
-@socketio.event
-def connect():
+@socketio.on('connect')
+def on_connect():
     global thread
     with thread_lock:
         if thread is None:
-            print('nice')
-            # thread = socketio.start_background_task(background_thread)
+            print('starting the background thread...')
+            thread = socketio.start_background_task(background_thread)
     # emit('my_response', {'data': 'Connected', 'count': 0})
     emit('psutil-info',
          {"virtual_memory": tools.get_system_info(), }
