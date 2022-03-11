@@ -1,0 +1,90 @@
+{% extends "base.html" %} {% block title %}Index{% endblock %} {% block body %}
+
+<h1>{{app_name}}</h1>
+
+This is an application that renders background tasks evaluated by the python
+server.
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    //generate a random key
+    var client_id = CryptoJS.lib.WordArray.random(2).toString(CryptoJS.enc.Hex);
+    console.log(client_id);
+
+    var socket = io();
+
+    req_number = 0;
+
+    socket.on("connect", () => {
+      console.log("connected");
+    });
+
+    socket.on("disconnect", () => {
+      socket.emit("disconnect", "disconnected");
+    });
+
+    socket.on("system_info_response", (msg) => {
+      console.log("recieved a response with system info from the server");
+      //append a paragraph to the system info div
+      // $("#system_info").append(
+      //   "<p>" +
+      //     "a request has been approved by the server: " +
+      //     msg["data"] +
+      //     "</p>"
+      // );
+      $("#system_info").append(
+        "<p>A request has been approved by the server: <strong>" +
+          msg["data"] +
+          "</strong>.</p>"
+      );
+    });
+
+    $("#sys-button").click(function () {
+      // console.log("button was pressed " + (req_number + 1) + " times");
+      // socket.emit("message", "[REQ] system info");
+      data = { header: "req-#" + req_number + 1, clientid: client_id };
+      socket.emit("system_info_request", data);
+      req_number += 1;
+    });
+
+    $("#vm-button").click(() => {
+      console.log("client requested the VM list");
+      socket.emit("get_vm_list");
+    });
+
+    $("#flex-box").click(() => {
+      //get the text from the input box
+      var text = $("#flex-box").text();
+      console.log("user clicked on the box:" + text);
+    });
+
+    //handle the vm list response
+    socket.on("vm_list_response", (msg) => {
+      console.log("vm list: " + msg["vm_list"]);
+    });
+  });
+</script>
+
+<h2>System Information</h2>
+<button id="sys-button">Get System Information</button>
+<div id="system_info"></div>
+<h2>VM List</h2>
+<button id="vm-button">Get Virtual Machines</button>
+<div id="vm-list"></div>
+<!-- 
+<div class="flex-container">
+  <div class="flex-box" id="flex-box">
+    <p>this is a box</p>
+  </div>
+  <div class="flex-box">
+    <p>this is a box</p>
+  </div>
+  <div class="flex-box">
+    <p>this is a box</p>
+  </div>
+  <div class="flex-box">
+    <p>this is a box</p>
+  </div>
+</div> -->
+
+{% endblock %}

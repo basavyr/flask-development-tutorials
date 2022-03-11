@@ -10,3 +10,8 @@ projects/flask_plots/.DS_Store
 .idea/flask-development-tutorials.iml
 *.pyc
 projects/openstack-topology/.DS_Store
+projects/.DS_Store
+projects/.DS_Store
+projects/openstack-topology/src/.DS_Store
+*.log
+*.pyc

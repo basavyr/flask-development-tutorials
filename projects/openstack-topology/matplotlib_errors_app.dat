@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/Users/basavyr/.pyenv/versions/3.9.1/envs/flask/lib/python3.9/site-packages/flask/app.py", line 2091, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Users/basavyr/.pyenv/versions/3.9.1/envs/flask/lib/python3.9/site-packages/flask/app.py", line 2076, in wsgi_app
+    response = self.handle_exception(e)
+  File "/Users/basavyr/.pyenv/versions/3.9.1/envs/flask/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/basavyr/.pyenv/versions/3.9.1/envs/flask/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/basavyr/.pyenv/versions/3.9.1/envs/flask/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/basavyr/.pyenv/versions/3.9.1/envs/flask/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/Users/basavyr/Documents/Work/DevWorkspace/Python/flask-development-tutorials/projects/openstack-topology/app.py", line 33, in show_histogram
+    hist = plotter.make_histogram(node_types)
+  File "/Users/basavyr/Documents/Work/DevWorkspace/Python/flask-development-tutorials/projects/openstack-topology/src/plotter.py", line 67, in make_histogram
+    ax.set_xticklabels(data, fontsize=8, fontweight='bold')
+  File "/Users/basavyr/.pyenv/versions/3.9.1/envs/flask/lib/python3.9/site-packages/matplotlib/axes/_base.py", line 75, in wrapper
+    return get_method(self)(*args, **kwargs)
+  File "/Users/basavyr/.pyenv/versions/3.9.1/envs/flask/lib/python3.9/site-packages/matplotlib/axis.py", line 1798, in _set_ticklabels
+    return self.set_ticklabels(labels, minor=minor, **kwargs)
+  File "/Users/basavyr/.pyenv/versions/3.9.1/envs/flask/lib/python3.9/site-packages/matplotlib/axis.py", line 1720, in set_ticklabels
+    raise ValueError(
+ValueError: The number of FixedLocator locations (5), usually from a call to set_ticks, does not match the number of ticklabels (30).
+^C%                    
