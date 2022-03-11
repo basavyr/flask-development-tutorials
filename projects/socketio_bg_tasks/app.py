@@ -6,6 +6,8 @@ import time
 from threading import Thread, Event
 
 
+import src.local_tools as tools
+
 # define the port and host that the app will run on
 PORT = 6868
 LOCALHOST = '127.0.0.1'
@@ -52,10 +54,18 @@ def on_message(message):
 def sir_handler(data):
     print('server -> system information have been requested by the server')
     time.sleep(3)
-    emit('system_info_response', {'data': 'System information',
-                                  'status': 1,
-                                  })
-    print('sent the response to the client')
+    try:
+        emit('system_info_response', {'header': 'System information',
+                                      'data': tools.get_uname(),
+                                      'status': 1,
+                                      })
+    except Exception as issue:
+        emit('system_info_response', {'header': 'System information',
+                                      'data': '',
+                                      'status': 0,
+                                      })
+    finally:
+        print('sent the response to the client')
 
 
 def main():
