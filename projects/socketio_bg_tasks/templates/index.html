@@ -5,8 +5,6 @@
 This is an application that renders background tasks evaluated by the python
 server.
 
-<!-- get jquery  -->
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     var socket = io();
@@ -18,7 +16,16 @@ server.
     socket.on("disconnect", () => {
       socket.emit("disconnect", "disconnected");
     });
+
+    $("#button").click(function () {
+      console.log("button was pressed");
+      socket.emit("message", "[REQ] system info");
+    });
   });
 </script>
+
+<h2>System Information</h2>
+<button id="button">Get System Information</button>
+<div id="sys_info"></div>
 
 {% endblock %}

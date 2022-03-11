@@ -41,6 +41,11 @@ def on_disconnect():
     #                     'status': 1})
 
 
+@socketio.on('message')
+def on_message(message):
+    print('Server -> recieved from client: ' + message)
+
+
 def main():
     socketio.run(app, port=PORT, host=LOCALHOST)
 
