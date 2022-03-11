@@ -24,11 +24,26 @@
       });
       request_number += 1;
     });
+
+    //process the response event from the server with the container list
+    socket.on("response_docker_containers", (data) => {
+      console.log(
+        "Req #" +
+          request_number +
+          "-> the docker container list has been retrieved from the server"
+      );
+      //get the container list
+      $("#docker-box").append("<p>The docker container list:</p>");
+      $("#container-list").append("<p>" + data["container_list"] + "</p>");
+    });
   });
 </script>
 <p>
   This is a service that shows all the running docker containers on the machine.
 </p>
 <button id="request_docker_containers">Show docker containers</button>
-
+<div id="docker-box"></div>
+<div class="flexbox">
+  <div id="container-list"></div>
+</div>
 {% endblock %}

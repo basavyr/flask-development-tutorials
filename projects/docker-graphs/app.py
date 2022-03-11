@@ -34,6 +34,15 @@ def request_docker_containers(request_number):
     print(
         f'REQ#{request_number["request_number"]}: the client requested the docker container list')
 
+    container_list = tools.get_docker_containers()
+
+    # take a break to make sure the container list is properly processed
+    time.sleep(3)
+
+    # send the container list once it has been retrieved
+    emit('response_docker_containers', {"container_list": container_list, })
+    print('the container list has been sent to the client')
+
 
 def main():
     socketio.run(app, port=PORT, host=LOCALHOST)
