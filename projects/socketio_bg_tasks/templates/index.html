@@ -1,2 +1,24 @@
 {% extends "base.html" %} {% block title %}Index{% endblock %} {% block body %}
+
+<h1>{{app_name}}</h1>
+
+This is an application that renders background tasks evaluated by the python
+server.
+
+<!-- get jquery  -->
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    var socket = io();
+
+    socket.on("connect", () => {
+      console.log("connected");
+    });
+
+    socket.on("disconnect", () => {
+      socket.emit("disconnect", "disconnected");
+    });
+  });
+</script>
+
 {% endblock %}
