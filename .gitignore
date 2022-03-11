@@ -8,3 +8,5 @@ projects/flask_plots/.DS_Store
 .idea/modules.xml
 .idea/inspectionProfiles/profiles_settings.xml
 .idea/flask-development-tutorials.iml
+*.pyc
+projects/openstack-topology/.DS_Store
