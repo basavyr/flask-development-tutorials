@@ -9,6 +9,7 @@ from threading import Thread, Event
 
 import src.local_tools as tools
 
+# define the port and host that the app will run on
 PORT = 6969
 LOCALHOST = '127.0.0.1'
 
@@ -18,12 +19,14 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 # app.config['DEBUG'] = True
 
+# define the socketio object
 socketio = SocketIO(app)
 
 
+# define the main page
 @app.route("/", methods=['GET'])
 def show_index():
-    return render_template('index.html')
+    return render_template('index.html', time=tools.get_time())
 
 
 @socketio.on('connect')
