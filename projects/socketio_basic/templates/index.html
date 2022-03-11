@@ -8,33 +8,43 @@
   $(document).ready(function () {
     var socket = io();
 
-    let x = 0;
+    let counter = 1;
 
     socket.on("connect", function (data) {
       socket.send("User has connected!");
       //test the connection event by sending messages on three different channels
-      socket.emit("channel1", "User has connected!");
+      //   socket.emit("channel1", "User has connected!");
       socket.emit("channel2", "User has connected!");
-      socket.emit("channel3", "User has connected!");
+      //   socket.emit("channel3", "User has connected!");
     });
 
     socket.on("message", function (msg) {
       //ingore the message if the text is "User has connectedd!"
-      if (msg['data'] == "User has connected!") {
-        // pass;
-        // $("#messages").append($("<li>").text(msg));
+      if (msg["data"] == "User has connected!") {
       } else {
+        //alternate way of writing the list element using jQuery
         $("#messages").append($("<li>").text(msg["data"]));
         // $("#messages").append("<li>" + msg["data"] + "</li>");
       }
-      socket.emit("channel2", "some content was submitted");
-      //   console.log("This is from the server: " + msg);
+      socket.emit("channel2", msg["data"]);
     });
 
     socket.on("channel2 response", function (msg) {
-      $("#texts").append("<p>" + x + "->" + msg + "</p>");
-      console.log("This is from the server: " + msg);
-      x = x + 1;
+      //unpack the message tuple
+      $("#texts").append(
+        "<p>" +
+          "#" +
+          counter +
+          " -> " +
+          msg["time"] +
+          " " +
+          msg["user"] +
+          ": " +
+          msg["content"] +
+          "</p>"
+      );
+      console.log("ch2 -> This is from the server: " + msg);
+      counter = counter + 1;
     });
 
     socket.on("connection_response", function (msg) {
@@ -49,6 +59,7 @@
     $("#button").on("click", function () {
       socket.send($("#myMessage").val());
       $("#myMessage").val("");
+      socket.emit("tasks", "input submitted");
     });
   });
 </script>
@@ -57,6 +68,8 @@
 <button id="button">Send</button>
 <h3>Texts received</h3>
 <div id="texts"></div>
+<h3>Background python tasks</h3>
+<div id="tasks"></div>
 
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"

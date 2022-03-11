@@ -31,7 +31,6 @@ def show_index():
 
 @socketio.on('connect')
 def test_connect():
-    print('Connection Established')
     # this sends a dict to the client
     emit('connection_response',
          {
@@ -42,35 +41,33 @@ def test_connect():
 
 @socketio.on('disconnect')
 def test_disconnect():
-    print('Client disconnected')
+    pass
+    # print('Client disconnected')
 
 
 # define the tree test channels
 @socketio.event
 def channel1(data):
-    pass
-    # print('received args on channel1: ' + data)
-    # emit('channel1 response', {'data': data})
+    emit('channel1 response', {'data': data})
 
 
 @socketio.on('channel2')
 def channel2(data):
-    # print('received args on channel2: ' + data)
-    emit('channel2 response', ('received message on channel2',
-                               tools.get_time(),
-                               tools.get_uname())
-         )
+    print('server -> received args on channel2 from client: ' + data)
+    emit('channel2 response', {
+        'time': tools.get_time(),
+        'user': tools.get_uname(),
+        'content': data,
+    }
+    )
 
 
-@socketio.on('channel3')
+@socketio.event
 def channel3(data):
-    pass
-    # print('received args on channel3: ' + data)
-    # emit('channel3 response', {'data': 'channel3 response'})
-
-    # log any incoming message that was emitted by the client
+    emit('channel3 response', {'data': data})
 
 
+# log any incoming message that was emitted by the client
 @socketio.on('message')
 def handle_unnamed_message(data):
     print('...(received from client)...')

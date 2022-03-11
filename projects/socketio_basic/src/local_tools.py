@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 def get_uname():
-    return f'{platform.uname()}'
+    return f'{platform.uname()[0]}'
 
 
 def get_time():
