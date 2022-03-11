@@ -8,6 +8,8 @@
   $(document).ready(function () {
     var socket = io();
 
+    let x = 0;
+
     socket.on("connect", function (data) {
       socket.send("User has connected!");
       //test the connection event by sending messages on three different channels
@@ -17,15 +19,21 @@
     });
 
     socket.on("message", function (msg) {
-      $("#messages").append("<li>" + msg + "</li>");
+      $("#messages").append("<li>" + msg["data"] + "</li>");
+      socket.emit("channel2", "some content was submitted");
       //   console.log("This is from the server: " + msg);
     });
 
+    socket.on("channel2 response", function (msg) {
+      $("#texts").append("<p>" + x + "->" + msg + "</p>");
+      console.log("This is from the server: " + msg);
+      x = x + 1;
+    });
+
     socket.on("connection_response", function (msg) {
-      //   $("#messages").append("<li>" + msg + "</li>");
       console.log(
         "Connection response from the server: " +
-          msg["data"] +
+          msg["message"] +
           " at " +
           msg["time"]
       );
@@ -40,6 +48,7 @@
 <ul id="messages"></ul>
 <input type="text" id="myMessage" />
 <button id="button">Send</button>
+<div id="texts"></div>
 
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
