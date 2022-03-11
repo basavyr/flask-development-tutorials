@@ -72,7 +72,7 @@ def channel3(data):
 def handle_unnamed_message(data):
     print('...(received from client)...')
     print(f'Server-side message: {data}')
-    print('...')
+    print('............................')
     emit('message', {'data': data})
 
 
