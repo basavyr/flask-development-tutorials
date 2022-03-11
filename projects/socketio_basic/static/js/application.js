@@ -1,1 +1,1 @@
-console.log("This is Application.js");
+// console.log("This is Application.js");

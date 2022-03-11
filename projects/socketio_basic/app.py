@@ -37,17 +37,11 @@ def test_disconnect():
     print('Client disconnected')
 
 
-@socketio.on("test")
-def test_message(message):
-    print("received test message: " + message)
-    # emit("test response", {"data": message})
-
-
+# log any incoming message that was emitted by the client
 @socketio.on('message')
-def handle_message(data):
-    print('this is on the server')
-    print('received message: ' + data)
-    emit(data)
+def handle_unnamed_message(data):
+    print('Server-side message: ' + data)
+    pass
 
 
 def main():
