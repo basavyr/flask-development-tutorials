@@ -9,6 +9,8 @@ server.
   $(document).ready(function () {
     var socket = io();
 
+    req_number = 0;
+
     socket.on("connect", () => {
       console.log("connected");
     });
@@ -19,7 +21,10 @@ server.
 
     $("#button").click(function () {
       console.log("button was pressed");
-      socket.emit("message", "[REQ] system info");
+      // socket.emit("message", "[REQ] system info");
+      data = "req-#" + req_number;
+      socket.emit("system_info_request", data);
+      req_number += 1;
     });
   });
 </script>

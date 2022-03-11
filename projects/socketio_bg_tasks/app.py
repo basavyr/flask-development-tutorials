@@ -41,9 +41,17 @@ def on_disconnect():
     #                     'status': 1})
 
 
+# only use this for testing
 @socketio.on('message')
 def on_message(message):
     print('Server -> recieved from client: ' + message)
+
+
+# trigger the retreival of system info
+@socketio.on('system_info_request')
+def sir_handler(data):
+    print('server -> system information have been requested by the server')
+    print(f'data: {data}')
 
 
 def main():
