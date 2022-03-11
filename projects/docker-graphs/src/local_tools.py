@@ -3,6 +3,7 @@ from subprocess import PIPE
 from subprocess import STDOUT
 from sys import stderr, stdout
 import subprocess
+import psutil
 
 
 def docker_ps():
@@ -15,6 +16,10 @@ def docker_ps():
         return stdout.decode('utf-8')
     else:
         return ''
+
+
+def get_system_info():
+    return f'{psutil.virtual_memory()}'
 
 
 def get_docker_containers():

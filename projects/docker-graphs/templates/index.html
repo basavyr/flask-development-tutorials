@@ -70,12 +70,20 @@
         container_name: docker_container,
       });
     });
+    socket.on("psutil-info", (data) => {
+      $("#system-info").empty();
+      $("#system-info").append("<p>" + data["virtual_memory"] + "</p>");
+    });
   });
 </script>
+
+<h2>Docker containers</h2>
 <p>
   This is a service that shows all the running docker containers on the machine.
 </p>
 <button id="request_docker_containers">Show docker containers</button>
 <div id="docker-box"></div>
 <div class="flexbox" id="container-list"></div>
+<h2>System info</h2>
+<div id="system-info"></div>
 {% endblock %}
