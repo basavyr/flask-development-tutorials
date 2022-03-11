@@ -37,7 +37,7 @@ def request_docker_containers(request_number):
     container_list = tools.get_docker_containers()
 
     # take a break to make sure the container list is properly processed
-    time.sleep(3)
+    time.sleep(1)
 
     # send the container list once it has been retrieved
     emit('response_docker_containers', {"container_list": container_list, })

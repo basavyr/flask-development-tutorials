@@ -34,7 +34,13 @@
       );
       //get the container list
       $("#docker-box").append("<p>The docker container list:</p>");
-      $("#container-list").append("<p>" + data["container_list"] + "</p>");
+
+      my_vector = data["container_list"];
+      for (i = 0; i < my_vector.length; ++i) {
+        //create a new div for each container
+        new_div = '<div class="container"> <p>' + my_vector[i] + "</p> </div>";
+        $("#container-list").append(new_div);
+      }
     });
   });
 </script>
@@ -43,7 +49,5 @@
 </p>
 <button id="request_docker_containers">Show docker containers</button>
 <div id="docker-box"></div>
-<div class="flexbox">
-  <div id="container-list"></div>
-</div>
+<div class="flexbox" id="container-list"></div>
 {% endblock %}
