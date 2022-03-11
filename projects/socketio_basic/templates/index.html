@@ -8,7 +8,7 @@
   $(document).ready(function () {
     var socket = io();
 
-    socket.on("connect", function () {
+    socket.on("connect", function (data) {
       socket.send("User has connected!");
       //test the connection event by sending messages on three different channels
       socket.emit("channel1", "User has connected!");
@@ -19,6 +19,16 @@
     socket.on("message", function (msg) {
       $("#messages").append("<li>" + msg + "</li>");
       //   console.log("This is from the server: " + msg);
+    });
+
+    socket.on("connection_response", function (msg) {
+      //   $("#messages").append("<li>" + msg + "</li>");
+      console.log(
+        "Connection response from the server: " +
+          msg["data"] +
+          " at " +
+          msg["time"]
+      );
     });
 
     $("#button").on("click", function () {
