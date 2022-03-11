@@ -6,6 +6,8 @@
   align-items: center;
   row-gap: 10px;
   column-gap: 10px;
+  /* background-color: lightgray; */
+  padding: 20px;
 }
 
 .container {

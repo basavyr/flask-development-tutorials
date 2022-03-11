@@ -27,20 +27,38 @@
 
     //process the response event from the server with the container list
     socket.on("response_docker_containers", (data) => {
+      // show the request
       console.log(
         "Req #" +
           request_number +
           "-> the docker container list has been retrieved from the server"
       );
+
       //get the container list
       $("#docker-box").append("<p>The docker container list:</p>");
-
       my_vector = data["container_list"];
+
+      // draw a flex item for every docker container
       for (i = 0; i < my_vector.length; ++i) {
         //create a new div for each container
-        new_div = '<div class="container"> <p>' + my_vector[i] + "</p> </div>";
+        // new_div =
+        //   '<div class="container" id="docker-container-' +
+        //   i +
+        //   '"> <p>' +
+        //   my_vector[i] +
+        //   "</p> </div>";
+
+        //create a simple div that only has a class and no id
+        new_div = '<div class="container"><p>' + my_vector[i] + "</p> </div>";
         $("#container-list").append(new_div);
       }
+    });
+
+    //console log the text inside a container when the client clicks on it
+    $("#container-list").on("click", ".container", function () {
+      console.log(
+        "client wants more info about the " + $(this).text() + " container"
+      );
     });
   });
 </script>
