@@ -70,9 +70,16 @@
         container_name: docker_container,
       });
     });
+
+    //show the virtual memory information
+    check_vmem = 0;
     socket.on("psutil-info", (data) => {
-    //   $("#system-info").empty();
-      $("#system-info").append("<p>" + data["virtual_memory"] + "</p>");
+      $("#system-info").empty();
+      if (check_vmem == 0) {
+        $("#system-info").append("<p>Virtual Memory:</p>");
+        // check_vmem = 1;
+      }
+      $("#system-info").append('<p class="red-text">' + data["virtual_memory"] + "</p>");
     });
   });
 </script>

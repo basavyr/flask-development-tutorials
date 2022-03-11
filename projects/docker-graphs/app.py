@@ -37,11 +37,12 @@ def background_thread():
     """Example of how to send server generated events to clients."""
     count = 0
     while True:
-        socketio.sleep(3)
+        # update the system information each 5 seconds
+        socketio.sleep(5)
         count += 1
         socketio.emit('psutil-info',
-             {"virtual_memory": tools.get_system_info(), }
-             )
+                      {"virtual_memory": tools.get_system_info(), }
+                      )
 
 
 # define the index page
