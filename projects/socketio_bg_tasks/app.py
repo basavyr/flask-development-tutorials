@@ -50,8 +50,11 @@ def on_message(message):
 # trigger the retreival of system info
 @socketio.on('system_info_request')
 def sir_handler(data):
-    print('server -> system information have been requested by the server')
-    print(f'data: {data}')
+    # print('server -> system information have been requested by the server')
+    # print(f'data: {data}')
+    emit('system_info_response', {'data': 'System information',
+                                  'status': 1,
+                                  })
 
 
 def main():

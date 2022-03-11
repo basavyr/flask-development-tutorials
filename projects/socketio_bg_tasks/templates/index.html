@@ -19,10 +19,14 @@ server.
       socket.emit("disconnect", "disconnected");
     });
 
+    socket.on("system_info_response", (msg) => {
+      console.log("recieved a response with system info");
+    });
+
     $("#button").click(function () {
-      console.log("button was pressed");
+      console.log("button was pressed " + (req_number + 1) + " times");
       // socket.emit("message", "[REQ] system info");
-      data = "req-#" + req_number;
+      data = "req-#" + req_number + 1;
       socket.emit("system_info_request", data);
       req_number += 1;
     });
