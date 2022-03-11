@@ -13,4 +13,16 @@
   height: 200px;
   border: 1px solid black;
   background-color: lightblue;
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+  /* make the text centered */
+}
+
+.container:hover {
+  background-color: lightgreen;
+  border: 2px solid black;
+  color: black;
+  font-weight: bold;
+  font-size: 21px;
 }
