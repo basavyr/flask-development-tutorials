@@ -52,7 +52,8 @@ def on_message(message):
 # trigger the retreival of system info
 @socketio.on('system_info_request')
 def sir_handler(data):
-    print('server -> system information have been requested by the server')
+    print('server -> system information have been requested by the client: ' +
+          data['clientid'])
     time.sleep(3)
     try:
         emit('system_info_response', {'header': 'System information',
