@@ -19,7 +19,14 @@
     });
 
     socket.on("message", function (msg) {
-      $("#messages").append("<li>" + msg["data"] + "</li>");
+      //ingore the message if the text is "User has connectedd!"
+      if (msg['data'] == "User has connected!") {
+        // pass;
+        // $("#messages").append($("<li>").text(msg));
+      } else {
+        $("#messages").append($("<li>").text(msg["data"]));
+        // $("#messages").append("<li>" + msg["data"] + "</li>");
+      }
       socket.emit("channel2", "some content was submitted");
       //   console.log("This is from the server: " + msg);
     });
@@ -48,6 +55,7 @@
 <ul id="messages"></ul>
 <input type="text" id="myMessage" />
 <button id="button">Send</button>
+<h3>Texts received</h3>
 <div id="texts"></div>
 
 <script
