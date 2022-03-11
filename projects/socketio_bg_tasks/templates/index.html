@@ -46,6 +46,12 @@ server.
       socket.emit("system_info_request", data);
       req_number += 1;
     });
+
+    $("#flex-box").click(() => {
+      //get the text from the input box
+      var text = $("#flex-box").text();
+      console.log("user clicked on the box:" + text);
+    });
   });
 </script>
 
@@ -54,6 +60,15 @@ server.
 <div id="system_info"></div>
 
 <div class="flex-container">
+  <div class="flex-box" id="flex-box">
+    <p>this is a box</p>
+  </div>
+  <div class="flex-box">
+    <p>this is a box</p>
+  </div>
+  <div class="flex-box">
+    <p>this is a box</p>
+  </div>
   <div class="flex-box">
     <p>this is a box</p>
   </div>

@@ -1,16 +1,22 @@
 .flex-container {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
   background-color: #f1f1f1;
+  row-gap: 5px;
+  column-gap: 5px;
   padding: 10px;
 }
 
 .flex-box {
-  background-color: #f1f1f1;
-  width: 100%;
-  margin: 10px;
+  background-color: lightblue;
+  padding: 5px;
   text-align: center;
-  line-height: 75px;
-  font-size: 30px;
-  color: #666;
+  border: 2px solid black;
+}
+
+.flex-box:hover {
+  background-color: lightcyan;
+  box-shadow: 1px 1px 1px lightgrey;
+  border: 2px solid coral;
 }
