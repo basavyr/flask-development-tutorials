@@ -1,0 +1,96 @@
+{% extends "base.html" %} {% block title %}Index{% endblock %} {% block body %}
+
+<h1>{{app_name}}</h1>
+
+<script>
+  $(document).ready(() => {
+    var socket = io();
+
+    request_number = 1;
+
+    socket.on("connect", () => {
+      console.log("Connection established...");
+    });
+
+    $("#request_docker_containers").click(() => {
+      console.log(
+        "Req #" +
+          request_number +
+          " -> client requested the docker container list"
+      );
+      //send the event to the server
+      socket.emit("request_docker_containers", {
+        request_number: request_number,
+      });
+      request_number += 1;
+    });
+
+    //process the response event from the server with the container list
+    socket.on("response_docker_containers", (data) => {
+      // show the request
+      console.log(
+        "Req #" +
+          request_number +
+          "-> the docker container list has been retrieved from the server"
+      );
+
+      //clear the docker-box div before appending it again
+      $("#docker-box").empty();
+
+      //get the container list
+      $("#docker-box").append("<p>The docker container list:</p>");
+      my_vector = data["container_list"];
+
+      //clear the container-list div
+      $("#container-list").empty();
+
+      // draw a flex item for every docker container
+      for (i = 0; i < my_vector.length; ++i) {
+        //create a new div for each container
+        // new_div =
+        //   '<div class="container" id="docker-container-' +
+        //   i +
+        //   '"> <p>' +
+        //   my_vector[i] +
+        //   "</p> </div>";
+
+        //create a simple div that only has a class and no id
+        new_div = '<div class="container"><p>' + my_vector[i] + "</p> </div>";
+        $("#container-list").append(new_div);
+      }
+    });
+
+    //console log the text inside a container when the client clicks on it
+    $("#container-list").on("click", ".container", function () {
+      docker_container = $(this).text();
+      console.log(
+        "client wants more info about the " + docker_container + " container"
+      );
+      socket.emit("request_docker_container_info", {
+        container_name: docker_container,
+      });
+    });
+
+    //show the virtual memory information
+    check_vmem = 0;
+    socket.on("psutil-info", (data) => {
+      $("#system-info").empty();
+      if (check_vmem == 0) {
+        $("#system-info").append("<p>Virtual Memory:</p>");
+        // check_vmem = 1;
+      }
+      $("#system-info").append('<p class="red-text">' + data["virtual_memory"] + "</p>");
+    });
+  });
+</script>
+
+<h2>Docker containers</h2>
+<p>
+  This is a service that shows all the running docker containers on the machine.
+</p>
+<button id="request_docker_containers">Show docker containers</button>
+<div id="docker-box"></div>
+<div class="flexbox" id="container-list"></div>
+<h2>System info</h2>
+<div id="system-info"></div>
+{% endblock %}
