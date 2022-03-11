@@ -34,9 +34,15 @@
           "-> the docker container list has been retrieved from the server"
       );
 
+      //clear the docker-box div before appending it again
+      $("#docker-box").empty();
+
       //get the container list
       $("#docker-box").append("<p>The docker container list:</p>");
       my_vector = data["container_list"];
+
+      //clear the container-list div
+      $("#container-list").empty();
 
       // draw a flex item for every docker container
       for (i = 0; i < my_vector.length; ++i) {
@@ -56,9 +62,13 @@
 
     //console log the text inside a container when the client clicks on it
     $("#container-list").on("click", ".container", function () {
+      docker_container = $(this).text();
       console.log(
-        "client wants more info about the " + $(this).text() + " container"
+        "client wants more info about the " + docker_container + " container"
       );
+      socket.emit("request_docker_container_info", {
+        container_name: docker_container,
+      });
     });
   });
 </script>

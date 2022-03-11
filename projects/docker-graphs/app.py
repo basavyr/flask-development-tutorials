@@ -50,6 +50,12 @@ def request_docker_containers(request_number):
     print('the container list has been sent to the client')
 
 
+@socketio.event
+def request_docker_container_info(message):
+    container = message['container_name']
+    print(f'will get info about the container {container}')
+
+
 def main():
     socketio.run(app, port=PORT, host=LOCALHOST)
 
