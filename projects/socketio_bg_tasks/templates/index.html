@@ -39,12 +39,17 @@ server.
       );
     });
 
-    $("#button").click(function () {
-      console.log("button was pressed " + (req_number + 1) + " times");
+    $("#sys-button").click(function () {
+      // console.log("button was pressed " + (req_number + 1) + " times");
       // socket.emit("message", "[REQ] system info");
       data = { header: "req-#" + req_number + 1, clientid: client_id };
       socket.emit("system_info_request", data);
       req_number += 1;
+    });
+
+    $("#vm-button").click(() => {
+      console.log("client requested the VM list");
+      socket.emit("get_vm_list", {});
     });
 
     $("#flex-box").click(() => {
@@ -56,9 +61,12 @@ server.
 </script>
 
 <h2>System Information</h2>
-<button id="button">Get System Information</button>
+<button id="sys-button">Get System Information</button>
 <div id="system_info"></div>
-
+<h2>VM List</h2>
+<button id="vm-button">Get Virtual Machines</button>
+<div id="vm-list"></div>
+<!-- 
 <div class="flex-container">
   <div class="flex-box" id="flex-box">
     <p>this is a box</p>
@@ -72,6 +80,6 @@ server.
   <div class="flex-box">
     <p>this is a box</p>
   </div>
-</div>
+</div> -->
 
 {% endblock %}
