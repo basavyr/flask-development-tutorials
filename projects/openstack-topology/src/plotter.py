@@ -1,6 +1,7 @@
 from datetime import datetime
 from turtle import color, left
 from matplotlib.figure import Figure
+from matplotlib import ticker
 import sqlite3 as db
 from contextlib import closing
 import base64
@@ -11,6 +12,21 @@ import platform
 HOST = platform.uname()[0]
 
 GLOBAL_DB_FILE = 'src/openstack_topology.db'
+
+
+def apparition_counter(data):
+    fake_data = ['nova-consoleauth', 'nova-conductor', 'nova-conductor', 'nova-controller', 'nova-controller', 'nova-conductor', 'nova-scheduler', 'nova-conductor', 'nova-compute', 'nova-conductor', 'nova-compute', 'nova-controller', 'nova-compute', 'nova-scheduler', 'nova-consoleauth',
+                 'nova-scheduler', 'nova-scheduler', 'nova-scheduler', 'nova-scheduler', 'nova-consoleauth', 'nova-conductor', 'nova-scheduler', 'nova-scheduler', 'nova-consoleauth', 'nova-compute', 'nova-conductor', 'nova-conductor', 'nova-conductor', 'nova-consoleauth', 'nova-compute']
+    originals = []
+    for x in data:
+        if x in originals:
+            # print(f'{x} is in originals')
+            pass
+        else:
+            # print(f'{x} is not in originals')
+            originals.append(x)
+
+    return originals
 
 
 def get_db_content(db_file):
@@ -42,7 +58,14 @@ def make_histogram(data):
     # ax.set_xticks(rotation=30, ha='right')
     # rotate the labels according to the link below
     fig.autofmt_xdate(rotation=30)
-    ax.set_xticklabels(data, fontweight='bold')
+
+    # gives a user warning (potential bug in matplotlib)
+    labels = apparition_counter(data)
+    positions = [0, 1, 2, 3, 4]
+    ax.xaxis.set_major_locator(ticker.FixedLocator(positions))
+    ax.xaxis.set_major_formatter(ticker.FixedFormatter(labels))
+    ax.set_xticklabels(labels, fontsize=8, fontweight='bold')
+
     # https://www.delftstack.com/howto/matplotlib/how-to-rotate-x-axis-tick-label-text-in-matplotlib/
 
     # fig.savefig('openstack_nodes.png', bbox_inches='tight', dpi=400)
@@ -51,8 +74,8 @@ def make_histogram(data):
     fig.subplots_adjust(bottom=0.25, left=0.2, right=0.95, top=0.90)
     # Save it to a temporary buffer
     buffer = BytesIO()
-    # fig.savefig('swap-pie-chart.pdf', dpi=300, bbox_inches='tight')
     fig.savefig(buffer, format="png", aspect='equal', dpi=450)
+    # fig.savefig('swap-pie-chart.pdf', dpi=300, bbox_inches='tight')
 
     # Embed the result in the html output.
     data = base64.b64encode(buffer.getbuffer()).decode("ascii")
@@ -60,11 +83,11 @@ def make_histogram(data):
 
 
 def main():
-    LOCAL_DB_FILE = 'openstack_topology.db'
-    openstack_list = get_db_content(LOCAL_DB_FILE)
-    node_types = get_openstack_node_types(openstack_list)
-    print(node_types)
-    make_histogram(node_types)
+    # LOCAL_DB_FILE = 'openstack_topology.db'
+    # openstack_list = get_db_content(LOCAL_DB_FILE)
+    # node_types = get_openstack_node_types(openstack_list)
+    # make_histogram(node_types)
+    print(1)
 
 
 if __name__ == '__main__':

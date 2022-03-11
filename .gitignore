@@ -14,4 +14,4 @@ projects/.DS_Store
 projects/.DS_Store
 projects/openstack-topology/src/.DS_Store
 *.log
-*.pyc
+
