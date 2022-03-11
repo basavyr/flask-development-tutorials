@@ -29,6 +29,12 @@ def index():
                            app_name=f'{app}')
 
 
+@socketio.on('connect')
+def on_connect():
+    container_list = tools.get_docker_containers()
+    emit('response_docker_containers', {"container_list": container_list, })
+
+
 @socketio.event
 def request_docker_containers(request_number):
     print(
@@ -37,7 +43,7 @@ def request_docker_containers(request_number):
     container_list = tools.get_docker_containers()
 
     # take a break to make sure the container list is properly processed
-    time.sleep(1)
+    # time.sleep(1)
 
     # send the container list once it has been retrieved
     emit('response_docker_containers', {"container_list": container_list, })
