@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block title %}Index{% endblock %} {% block body %}
+
+<h1>{{app_name}}</h1>
+
+<script>
+  $(document).ready(() => {
+    var socket = io();
+
+    request_number = 1;
+
+    socket.on("connect", () => {
+      console.log("Connection established...");
+    });
+
+    $("#request_docker_containers").click(() => {
+      console.log(
+        "Req #" +
+          request_number +
+          " -> client requested the docker container list"
+      );
+      //send the event to the server
+      socket.emit("request_docker_containers", {
+        request_number: request_number,
+      });
+      request_number += 1;
+    });
+  });
+</script>
+<p>
+  This is a service that shows all the running docker containers on the machine.
+</p>
+<button id="request_docker_containers">Show docker containers</button>
+
+{% endblock %}
