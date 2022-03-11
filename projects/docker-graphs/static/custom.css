@@ -1,0 +1,35 @@
+.flexbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+  column-gap: 10px;
+  /* background-color: lightgray; */
+  padding: 20px;
+}
+
+.container {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  background-color: lightblue;
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+  /* make the text centered */
+}
+
+.container:hover {
+  background-color: lightgreen;
+  border: 2px solid black;
+  color: black;
+  font-weight: bold;
+  font-size: 21px;
+}
+
+.red-text {
+  color: green;
+  font-weight: bold;
+}
