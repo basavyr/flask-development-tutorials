@@ -2,7 +2,7 @@ from flask_socketio import SocketIO
 from flask_socketio import send, emit
 from flask import Flask, render_template
 from random import random
-from time import sleep
+import time
 from threading import Thread, Event
 
 
@@ -50,11 +50,12 @@ def on_message(message):
 # trigger the retreival of system info
 @socketio.on('system_info_request')
 def sir_handler(data):
-    # print('server -> system information have been requested by the server')
-    # print(f'data: {data}')
+    print('server -> system information have been requested by the server')
+    time.sleep(3)
     emit('system_info_response', {'data': 'System information',
                                   'status': 1,
                                   })
+    print('sent the response to the client')
 
 
 def main():

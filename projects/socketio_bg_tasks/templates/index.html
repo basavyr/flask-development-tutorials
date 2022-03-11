@@ -21,6 +21,8 @@ server.
 
     socket.on("system_info_response", (msg) => {
       console.log("recieved a response with system info");
+      //append a paragraph to the system info div
+      $("#system_info").append("<p>" + "a request has been approved" + "</p>");
     });
 
     $("#button").click(function () {
@@ -35,6 +37,6 @@ server.
 
 <h2>System Information</h2>
 <button id="button">Get System Information</button>
-<div id="sys_info"></div>
+<div id="system_info"></div>
 
 {% endblock %}
