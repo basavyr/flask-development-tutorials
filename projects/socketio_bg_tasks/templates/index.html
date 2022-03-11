@@ -49,13 +49,18 @@ server.
 
     $("#vm-button").click(() => {
       console.log("client requested the VM list");
-      socket.emit("get_vm_list", {});
+      socket.emit("get_vm_list");
     });
 
     $("#flex-box").click(() => {
       //get the text from the input box
       var text = $("#flex-box").text();
       console.log("user clicked on the box:" + text);
+    });
+
+    //handle the vm list response
+    socket.on("vm_list_response", (msg) => {
+      console.log("vm list: " + msg["vm_list"]);
     });
   });
 </script>

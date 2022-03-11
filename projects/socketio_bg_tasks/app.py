@@ -69,6 +69,13 @@ def sir_handler(data):
         print('sent the response to the client')
 
 
+# trigger the vm retrieval when a 'get_vm_list' event arrives
+@socketio.event
+def get_vm_list():
+    vm_list = tools.generate_vm_list()
+    emit('vm_list_response', {'vm_list': vm_list})
+
+
 def main():
     socketio.run(app, port=PORT, host=LOCALHOST)
 
