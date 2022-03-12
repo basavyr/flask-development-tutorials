@@ -1,12 +1,26 @@
 {% extends "base.html" %} {% block title %} {% endblock %} {%block body%}
 
 <h1>Sequences</h1>
-<p>{{sequence}}</p>
 
 <script>
   $(document).ready(() => {
     var socket = io();
+
+    ok = 0;
+    socket.on("sequence", (msg) => {
+      console.log("received a new random sequence");
+      if (ok == 0) {
+        $("#sequence-tile").append("<p> The random sequence</p>");
+        ok = 1;
+      }
+      $("#seq-list").append("<li>" + msg.data + "</li>");
+    });
   });
 </script>
+
+<div id="sequence-tile"></div>
+<div id="seq-list-div">
+  <ul id="seq-list"></ul>
+</div>
 
 {% endblock %}
