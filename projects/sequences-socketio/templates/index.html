@@ -6,6 +6,8 @@
   $(document).ready(() => {
     var socket = io();
 
+    sequence_counter = 1;
+
     ok = 0;
     socket.on("sequence", (msg) => {
       console.log("received a new random sequence");
@@ -13,7 +15,11 @@
         $("#sequence-tile").append("<p> The random sequence</p>");
         ok = 1;
       }
+      $("#seq-list").append(
+        "<p>" + "Generated a new sequence: #" + sequence_counter + "</p>"
+      );
       $("#seq-list").append("<li>" + msg.data + "</li>");
+      sequence_counter++;
     });
   });
 </script>
