@@ -20,6 +20,7 @@
       );
       $("#seq-list").append("<li>" + msg.data + "</li>");
       sequence_counter++;
+      socket.emit("request_sequence_calculation", { sequence: msg.data });
     });
   });
 </script>
