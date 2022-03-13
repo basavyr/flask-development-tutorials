@@ -8,6 +8,13 @@
 
     sequence_counter = 1;
 
+    socket.on("connect", () => {
+      console.log("Connected to server.");
+      socket.emit("refresh_bg_taks", () => {
+        request: "refresh_bg_taks";
+      });
+    });
+
     ok = 0;
     socket.on("sequence", (msg) => {
       console.log("Iteration " + sequence_counter);
@@ -21,7 +28,10 @@
       );
       $("#seq-list").append("<li>" + msg.sequence + "</li>");
       sequence_counter++;
-      socket.emit("request_sequence_calculation", { sequence: msg.sequence });
+      socket.emit("request_sequence_calculation", {
+        sequence: msg.sequence,
+        iteration: sequence_counter,
+      });
     });
   });
 </script>
