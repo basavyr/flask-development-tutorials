@@ -36,20 +36,25 @@ socketio = SocketIO(app, async_mode=async_mode)
 def background_thread():
     """Example of how to send server generated events to clients."""
     count = 0
-    while True:
+    limit = 20
+
+    ok = True
+    while ok:
         # generate a new random sequence every 5 seconds
-        print('generating a new random sequence...')
+        # print('generating a new random sequence...')
         socketio.sleep(5)
-        count += 1
         socketio.emit('sequence',
-                      {"data": tools.get_sequence(), }
+                      {"sequence": tools.get_sequence(), }
                       )
+        count += 1
+        if count == limit:
+            ok = False
 
 
 @app.route("/", methods=['GET'])
 def show_index():
-    seq = tools.get_sequence()
-    return render_template('index.html', sequence=seq)
+    sequence = tools.get_sequence()
+    return render_template('index.html', sequence=sequence)
 
 
 @socketio.on('connect')
@@ -57,8 +62,14 @@ def on_connect():
     global thread
     with thread_lock:
         if thread is None:
-            print('starting the background thread...')
+            print('server -> starting the background thread...')
             thread = socketio.start_background_task(background_thread)
+
+
+@socketio.event
+def request_sequence_calculation(msg):
+    """handle the request to analyze a sequence"""
+    print('server -> request to handle a sequence was recieved from the client')
 
 
 def main():

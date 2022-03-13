@@ -10,7 +10,8 @@
 
     ok = 0;
     socket.on("sequence", (msg) => {
-      console.log("received a new random sequence");
+      console.log("Iteration " + sequence_counter);
+      console.log("Received a new random sequence");
       if (ok == 0) {
         $("#sequence-tile").append("<p> The random sequence</p>");
         ok = 1;
@@ -18,9 +19,9 @@
       $("#seq-list").append(
         "<p>" + "Generated a new sequence: #" + sequence_counter + "</p>"
       );
-      $("#seq-list").append("<li>" + msg.data + "</li>");
+      $("#seq-list").append("<li>" + msg.sequence + "</li>");
       sequence_counter++;
-      socket.emit("request_sequence_calculation", { sequence: msg.data });
+      socket.emit("request_sequence_calculation", { sequence: msg.sequence });
     });
   });
 </script>
