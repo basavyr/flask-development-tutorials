@@ -74,7 +74,7 @@ def on_connect():
         if thread is None:
             print('server -> starting the background thread...')
             thread = socketio.start_background_task(
-                background_thread, arg1=5, arg2=3)
+                background_thread, arg1=5, arg2=100)
 
 
 @socketio.event

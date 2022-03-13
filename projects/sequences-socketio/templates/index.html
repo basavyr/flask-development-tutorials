@@ -26,11 +26,14 @@
       $("#seq-list").append(
         "<p>" + "Generated a new sequence: #" + sequence_counter + "</p>"
       );
-      $("#seq-list").append("<li>" + msg.sequence + "</li>");
+      $("#seq-list").append('<li class="function">' + msg.sequence + "</li>");
       sequence_counter++;
-      socket.emit("request_sequence_calculation", {
-        sequence: msg.sequence,
-        iteration: sequence_counter,
+      //   socket.emit("request_sequence_calculation", {
+      //     sequence: msg.sequence,
+      //     iteration: sequence_counter,
+      //   });
+      $("#seq-list").on("click", ".function", () => {
+        console.log("client clicked on a sequence`");
       });
     });
   });
