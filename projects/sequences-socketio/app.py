@@ -80,9 +80,9 @@ def on_connect():
 @socketio.event
 def request_sequence_calculation(msg):
     """handle the request to analyze a sequence"""
-    print('server -> request to handle a sequence was recieved from the client')
-    print('the sequence:')
-    print(msg['sequence'])
+    # print('server -> request to handle a sequence was received from the client')
+    # print('the sequence:')
+    tools.process_sequence(msg['sequence'])
 
 
 def main():

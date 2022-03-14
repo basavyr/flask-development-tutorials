@@ -6,3 +6,8 @@ def get_sequence():
     sequence = [int(random.choice([1, 0])) for _ in range(rd_limit)]
 
     return sequence
+
+
+def process_sequence(sequence):
+    proc = sequence
+    print(proc)
