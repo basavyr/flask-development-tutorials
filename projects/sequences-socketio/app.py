@@ -81,6 +81,8 @@ def on_connect():
 def request_sequence_calculation(msg):
     """handle the request to analyze a sequence"""
     print('server -> request to handle a sequence was recieved from the client')
+    print('the sequence:')
+    print(msg['sequence'])
 
 
 def main():
