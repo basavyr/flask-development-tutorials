@@ -9,5 +9,11 @@ def get_sequence():
 
 
 def process_sequence(sequence):
-    proc = sequence
-    print(proc)
+    raw_sequence = str(sequence).strip().split(',')
+    seq = [int(x) for x in raw_sequence]
+    sum_seq = sum_sequence(seq)
+    print(sum_seq)
+
+
+def sum_sequence(sequence):
+    return sum(sequence)
