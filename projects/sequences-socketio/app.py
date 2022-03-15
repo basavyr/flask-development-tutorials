@@ -18,7 +18,9 @@ HOST = '127.0.0.1'
 # Set this variable to "threading", "eventlet" or "gevent" to test the
 # different async modes, or leave it set to None for the application to choose
 # the best option based on installed packages.
+# source of the doc => https://github.com/miguelgrinberg/Flask-SocketIO/blob/main/example/app.py
 async_mode = None
+
 thread = None
 thread_lock = Lock()
 
@@ -65,16 +67,19 @@ def show_index():
 
 @socketio.on('connect')
 def on_connect():
+    print('Connection established...')
     # define the arguments to be used in the background task
     # arg1 represents the time between each iteration
     # arg2 represents the number of iterations
+    arg1 = 5
+    arg2 = 100
 
     global thread
     with thread_lock:
         if thread is None:
             print('server -> starting the background thread...')
             thread = socketio.start_background_task(
-                background_thread, arg1=5, arg2=100)
+                background_thread, arg1=arg1, arg2=arg2)
 
 
 @socketio.event
@@ -83,6 +88,11 @@ def request_sequence_calculation(msg):
     # print('server -> request to handle a sequence was received from the client')
     # print('the sequence:')
     tools.process_sequence(msg['sequence'])
+
+
+@socketio.event
+def refresh_bg_task():
+    print('will request the bg task to refresh')
 
 
 def main():
