@@ -92,7 +92,12 @@ def request_sequence_calculation(msg):
 
 @socketio.event
 def refresh_bg_task():
-    print('will request the bg task to refresh')
+    print('will refresh the bg task')
+
+
+@socketio.event
+def stop_task():
+    print('will stop the bg task')
 
 
 def main():

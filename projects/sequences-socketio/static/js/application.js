@@ -31,4 +31,9 @@ $(document).ready(() => {
       sequence: $(this).text(),
     });
   });
+
+  $("#stopping_button").click(() => {
+    console.log("Will stop the task");
+    socket.emit("stop_task");
+  });
 });
