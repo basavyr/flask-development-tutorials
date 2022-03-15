@@ -85,14 +85,10 @@ def on_connect():
 @socketio.event
 def request_sequence_calculation(msg):
     """handle the request to analyze a sequence"""
+    sequence = msg['sequence']
     # print('server -> request to handle a sequence was received from the client')
     # print('the sequence:')
-    tools.process_sequence(msg['sequence'])
-
-
-@socketio.event
-def refresh_bg_task():
-    print('will refresh the bg task')
+    tools.process_sequence(sequence)
 
 
 @socketio.event
