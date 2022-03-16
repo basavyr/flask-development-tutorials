@@ -24,8 +24,8 @@ def on_disconnect(client, userdata, rc):
         print('Successfully disconnected from the MQTT broker.')
 
 
-def publish_message(topic, msg, c_id):
-    client = mqtt.Client(client_id=c_id)
+def publish_message(topic, msg, client_id):
+    client = mqtt.Client(client_id=client_id)
 
     client.on_connect = on_connect
     client.on_disconnect = on_disconnect
