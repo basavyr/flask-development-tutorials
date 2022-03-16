@@ -41,6 +41,6 @@ $(document).ready(() => {
         topic +
         "</strong>.</p>"
     );
-    socketio.emit("client-request", { topic: topic, msg: msg });
+    socketio.emit("client-request", { client: client, topic: topic, msg: msg });
   });
 });
