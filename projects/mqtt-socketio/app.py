@@ -8,6 +8,9 @@ from threading import Thread, Event
 from threading import Lock
 
 
+import src.workflow as tools
+
+
 # define the port and host that the app will run on
 PORT = 5051
 HOST = '127.0.0.1'
@@ -34,7 +37,8 @@ def show_index():
 
 @sio.on('client-request')
 def request(msg):
-    print(f"Receive: {msg['data']}")
+    c_id = msg['data']
+    tools.process_client(c_id)
 
 
 def main():
