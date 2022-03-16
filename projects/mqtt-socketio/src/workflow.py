@@ -12,11 +12,30 @@ def on_connect(client, userdata, flags, rc):
     print("Connected to the MQTT broker with result code " + str(rc))
 
 
+# The callback for when a PUBLISH message is received from the server.
+def on_message(client, userdata, msg):
+    print(msg.topic + " " + str(msg.payload))
+
+
+def on_disconnect(client, userdata, rc):
+    if rc != 0:
+        print("Unexpected disconnection.")
+    else:
+        print('Successfully disconnected from the MQTT broker.')
+
+
 def publish_message(topic, msg, c_id):
     client = mqtt.Client(client_id=c_id)
+
     client.on_connect = on_connect
+    client.on_disconnect = on_disconnect
+
     client.connect(HOST, PORT, KEEP_ALIVE)
+    client.loop_start()
+    time.sleep(1)
     client.publish(topic, msg)
+    time.sleep(1)
+    client.loop_stop()
     client.disconnect()
 
 
@@ -26,9 +45,11 @@ def process_client(topic, msg, client_id):
 
 
 def main():
-    for idx in range(10):
-        publish_message(topic='clients/',
-                        msg=f'message #{idx}', c_id=f'client{idx}')
+    # for idx in range(10):
+    #     publish_message(topic='clients/topic1',
+    #                     msg=f'message #{idx}', c_id=f'client{idx}')
+    publish_message(topic='clients/topic1',
+                    msg=f'message #{1}', c_id=f'client{1}')
 
 
 if __name__ == '__main__':
