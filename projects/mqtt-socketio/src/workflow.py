@@ -21,7 +21,8 @@ def publish_message(topic, msg, c_id):
 
 
 def process_client(topic, msg, client_id):
-    publish_message(topic, msg, client_id)
+    proper_topic = TOPIC + topic
+    publish_message(proper_topic, msg, client_id)
 
 
 def main():
