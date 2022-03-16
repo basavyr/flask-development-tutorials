@@ -1,1 +1,3 @@
-console.log("Connection is good");
+$(document).ready(() => {
+  console.log("Connection is good");
+});
