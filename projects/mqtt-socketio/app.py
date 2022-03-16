@@ -35,11 +35,11 @@ def show_index():
     return render_template('index.html')
 
 
-@sio.on('client-request')
-def request(msg):
-    c_id = msg['data']
-    tools.process_client(
-        tools.TOPIC, f'test message from client: {c_id}', c_id)
+# @sio.on('client-request')
+# def request(msg):
+#     c_id = msg['data']
+#     tools.process_client(
+#         tools.TOPIC, f'test message from client: {c_id}', c_id)
 
 
 def main():

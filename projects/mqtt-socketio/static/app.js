@@ -9,15 +9,23 @@ $(document).ready(() => {
   $("#topic").change(() => {
     var element_text = $("#topic option:selected").text();
     var element_value = $("#topic option:selected").val();
-    console.log("{ " + element_value + " }" + " -> " + element_text);
+    console.log("TOPIC: { " + element_value + " }" + " -> " + element_text);
+  });
+
+  //get the information from the message dropdown list
+  $("#message").change(() => {
+    var element_text = $("#message option:selected").text();
+    var element_value = $("#message option:selected").val();
+    console.log("MSG: { " + element_value + " }" + " -> " + element_text);
   });
 
   $("#client-submit").click(() => {
-    var sub_value = $("#topic option:selected").val();
-    console.log("submitted the client: " + sub_value);
+    var client = $("#topic option:selected").val();
+    var msg = $("#message option:selected").val();
+    // console.log("submitted the client: " + sub_value);
     $("#client-show").html(
-      "<p> Will connect to the client: " + sub_value + "</p>"
+      "<p> Client <strong>" + client + "</strong> will publish message: <strong>" + msg + "</strong>.</p>"
     );
-    socketio.emit("client-request", { data: sub_value });
+    socketio.emit("client-request", { topic: topic, msg: msg });
   });
 });
