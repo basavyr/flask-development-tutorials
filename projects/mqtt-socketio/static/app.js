@@ -1,5 +1,9 @@
 $(document).ready(() => {
-  console.log("Connection is OK");
+  var socketio = io();
+
+  socketio.on("connect", () => {
+    console.log("Connection established");
+  });
 
   // console log the text from the dropdown list
   $("#topic").change(() => {
@@ -12,5 +16,8 @@ $(document).ready(() => {
   $("#client-submit").click(() => {
     var sub_value = $("#topic option:selected").val();
     console.log("submitted the client: " + sub_value);
+    $("#client-show").html(
+      "<p> Will connect to the client: " + sub_value + "</p>"
+    );
   });
 });
