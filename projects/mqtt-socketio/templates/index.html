@@ -5,13 +5,16 @@
 <h1>MQTT-SocketIO</h1>
 
 <div class="simple-box">
-  <p>The list of clients.</p>
+  <!-- <p>The list of clients.</p> -->
 
-  <select id="topic">
-    <option value="test">Client-1</option>
-    <option value="test">Client-2</option>
-    <option value="test">Client-3</option>
-  </select>
+  <form action="#">
+    <label for="clients"> <p>The list of MQTT clients.</p> </label>
+    <select id="topic">
+      <option value="client1">Client-1</option>
+      <option value="client2">Client-2</option>
+      <option value="client3">Client-3</option>
+    </select>
+  </form>
 </div>
 
 {%endblock %}
