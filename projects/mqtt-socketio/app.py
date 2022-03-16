@@ -32,6 +32,11 @@ def show_index():
     return render_template('index.html')
 
 
+@sio.on('client-request')
+def request(msg):
+    print(f"Receive: {msg['data']}")
+
+
 def main():
     sio.run(app, port=PORT, host=HOST)
 
