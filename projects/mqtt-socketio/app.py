@@ -39,7 +39,7 @@ def show_index():
 def request(msg):
     c_id = str(msg['client'])
     topic = str(msg['topic'])
-    message = str(msg['msg'])
+    message = str(msg['msg']) + " from client: " + c_id
     tools.process_client(topic, message, c_id)
 
 
