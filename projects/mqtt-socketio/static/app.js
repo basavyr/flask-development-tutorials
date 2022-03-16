@@ -19,5 +19,6 @@ $(document).ready(() => {
     $("#client-show").html(
       "<p> Will connect to the client: " + sub_value + "</p>"
     );
+    socketio.emit("client-request", { data: sub_value });
   });
 });
