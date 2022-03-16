@@ -27,14 +27,18 @@ $(document).ready(() => {
   });
 
   $("#client-submit").click(() => {
-    var client = $("#topic option:selected").val();
-    var msg = $("#message option:selected").val();
-    // console.log("submitted the client: " + sub_value);
+    var client = $("#client option:selected").val();
+    var msg = $("#message option:selected").text();
+    var topic = $("#topic option:selected").val();
+
     $("#client-show").html(
       "<p> Client <strong>" +
         client +
         "</strong> will publish message: <strong>" +
         msg +
+        " </strong>" +
+        "on topic <strong>" +
+        topic +
         "</strong>.</p>"
     );
     socketio.emit("client-request", { topic: topic, msg: msg });
