@@ -2,19 +2,14 @@ import paho.mqtt.client as mqtt
 import time
 
 
-# The callback for when the client receives a CONNACK response from the server.
-def on_connect(client, userdata, flags, rc):
-    print("Connected with result code " + str(rc))
-
-
-def process_client(client_id):
-    print(f'Processing client {client_id}...')
-
-
 TOPIC = 'clients/'
 HOST = '127.0.0.1'
 PORT = 1883
 KEEP_ALIVE = 60
+
+
+def on_connect(client, userdata, flags, rc):
+    print("Connected to the MQTT broker with result code " + str(rc))
 
 
 def publish_message(topic, msg, c_id):
@@ -23,6 +18,10 @@ def publish_message(topic, msg, c_id):
     client.connect(HOST, PORT, KEEP_ALIVE)
     client.publish(topic, msg)
     client.disconnect()
+
+
+def process_client(topic, msg, client_id):
+    publish_message(topic, msg, client_id)
 
 
 def main():
