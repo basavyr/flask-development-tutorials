@@ -25,8 +25,12 @@ def on_disconnect(client, userdata, rc):
 def docker_command(cmd):
     process = subprocess.Popen(cmd, stdout=PIPE, stderr=PIPE)
     stdout, stderr = process.communicate()
-    print(stdout)
-    print(stderr)
+    # print(stdout)
+    try:
+        assert stderr == b'', 'There were errors!'
+    except AssertionError as error:
+        print(error)
+    # print(stderr)
 
 
 def publish_message(topic, msg, client_id):
@@ -52,7 +56,7 @@ def process_client(topic, msg, client_id):
 def main():
     # publish_message(topic='clients/topic1',
     #                 msg=f'message #{1}', c_id=f'client{1}')
-    cmd = ['docker', 'exec', 'ubuntu', 'uname', '-a']
+    cmd = ['docker', 'exec', 'python', 'uname', '-a']
     docker_command(cmd)
 
 
