@@ -33,8 +33,10 @@ def docker_command(cmd):
     except AssertionError as error:
         error_checker = True
         print(f'err: {stderr.decode(UTF8)}')
+        return -1
     else:
         print(f'out: {stdout.decode(UTF8)}')
+        return stdout.decode(UTF8)
 
 
 def publish_message(topic, msg, client_id):
