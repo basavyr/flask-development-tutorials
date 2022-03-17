@@ -24,8 +24,12 @@ def get_containers():
 
 
 def manipulate_container_string(raw_string):
-    dockers = raw_string.strip()
-    print(dockers)
+    raw_dockers = raw_string.strip()
+    raw_dockers = str(raw_dockers).split('\n')[1:]
+    dockers = [x.split() for x in raw_dockers]
+    print('Containers:')
+    for container in dockers:
+        print(container)
 
 
 def main():
