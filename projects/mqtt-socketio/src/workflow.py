@@ -9,6 +9,7 @@ TOPIC = 'clients/'
 HOST = '127.0.0.1'
 PORT = 1883
 KEEP_ALIVE = 60
+UTF8 = 'utf-8'
 
 
 def on_connect(client, userdata, flags, rc):
@@ -25,12 +26,15 @@ def on_disconnect(client, userdata, rc):
 def docker_command(cmd):
     process = subprocess.Popen(cmd, stdout=PIPE, stderr=PIPE)
     stdout, stderr = process.communicate()
-    # print(stdout)
+
+    error_checker = False
     try:
         assert stderr == b'', 'There were errors!'
     except AssertionError as error:
-        print(error)
-    # print(stderr)
+        error_checker = True
+        print(f'err: {stderr.decode(UTF8)}')
+    else:
+        print(f'out: {stdout.decode(UTF8)}')
 
 
 def publish_message(topic, msg, client_id):
@@ -56,8 +60,10 @@ def process_client(topic, msg, client_id):
 def main():
     # publish_message(topic='clients/topic1',
     #                 msg=f'message #{1}', c_id=f'client{1}')
-    cmd = ['docker', 'exec', 'python', 'uname', '-a']
-    docker_command(cmd)
+    cmd0 = ['docker', 'exec', 'ubuntu', 'uname', '-a']
+    cmd1 = ['docker', 'exec', 'python', 'uname', '-a']
+    docker_command(cmd0)
+    docker_command(cmd1)
 
 
 if __name__ == '__main__':
