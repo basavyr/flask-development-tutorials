@@ -21,4 +21,5 @@ msgs = [{'topic': "paho/test/multiple", 'payload': "multiple 1"},
 # subscribe.simple('clients/topics1', 0)
 # subscribe.simple([("clients/topic1", 0), ("clients/topic1", 0)])
 
-subscribe.callback(on_message_print, "clients/#", hostname="127.0.0.1")
+subscribe.callback(on_message, "clients/#", hostname="127.0.0.1")
+# subscribe.callback(on_message_print, "clients/#", hostname="127.0.0.1")
