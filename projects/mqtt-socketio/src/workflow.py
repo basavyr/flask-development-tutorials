@@ -1,6 +1,9 @@
+from sys import stderr
 import paho.mqtt.client as mqtt
 import time
 import subprocess
+from subprocess import PIPE
+
 
 TOPIC = 'clients/'
 HOST = '127.0.0.1'
@@ -17,6 +20,13 @@ def on_disconnect(client, userdata, rc):
         print("Unexpected disconnection.")
     else:
         print('Successfully disconnected from the MQTT broker.')
+
+
+def docker_command(cmd):
+    process = subprocess.Popen(cmd, stdout=PIPE, stderr=PIPE)
+    stdout, stderr = process.communicate()
+    print(stdout)
+    print(stderr)
 
 
 def publish_message(topic, msg, client_id):
@@ -40,8 +50,10 @@ def process_client(topic, msg, client_id):
 
 
 def main():
-    publish_message(topic='clients/topic1',
-                    msg=f'message #{1}', c_id=f'client{1}')
+    # publish_message(topic='clients/topic1',
+    #                 msg=f'message #{1}', c_id=f'client{1}')
+    cmd = ['docker', 'exec', 'ubuntu', 'uname', '-a']
+    docker_command(cmd)
 
 
 if __name__ == '__main__':
