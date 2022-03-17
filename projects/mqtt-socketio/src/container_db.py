@@ -27,9 +27,13 @@ def manipulate_container_string(raw_string):
     raw_dockers = raw_string.strip()
     raw_dockers = str(raw_dockers).split('\n')[1:]
     dockers = [x.split() for x in raw_dockers]
-    print('Containers:')
-    for container in dockers:
-        print(container)
+    # print('Containers:')
+    # for container in dockers:
+    #     print(container)
+    docker_ids = [container[0] for container in dockers]
+    docker_names= [container[1] for container in dockers]
+    print(docker_ids)
+    print(docker_names)
 
 
 def main():
