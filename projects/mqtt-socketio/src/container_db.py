@@ -31,9 +31,10 @@ def manipulate_container_string(raw_string):
     # for container in dockers:
     #     print(container)
     docker_ids = [container[0] for container in dockers]
-    docker_names= [container[1] for container in dockers]
-    print(docker_ids)
-    print(docker_names)
+    docker_names = [container[1] for container in dockers]
+    # print(docker_ids)
+    # print(docker_names)
+    return docker_ids, docker_names
 
 
 def main():
