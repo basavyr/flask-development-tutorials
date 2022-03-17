@@ -1,6 +1,6 @@
 import paho.mqtt.client as mqtt
 import time
-
+import subprocess
 
 TOPIC = 'clients/'
 HOST = '127.0.0.1'
@@ -10,11 +10,6 @@ KEEP_ALIVE = 60
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to the MQTT broker with result code " + str(rc))
-
-
-# The callback for when a PUBLISH message is received from the server.
-def on_message(client, userdata, msg):
-    print(msg.topic + " " + str(msg.payload))
 
 
 def on_disconnect(client, userdata, rc):
@@ -45,9 +40,6 @@ def process_client(topic, msg, client_id):
 
 
 def main():
-    # for idx in range(10):
-    #     publish_message(topic='clients/topic1',
-    #                     msg=f'message #{idx}', c_id=f'client{idx}')
     publish_message(topic='clients/topic1',
                     msg=f'message #{1}', c_id=f'client{1}')
 
