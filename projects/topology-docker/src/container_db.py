@@ -50,25 +50,46 @@ def create_container_db():
         cursor.execute('''CREATE TABLE IF NOT EXISTS CONTAINERS
                                 (id integer primary_key,
                                 container_id text,
-                                container_name, text
+                                container_name text,
                                 container_status text)''')
 
         DB_CONN.commit()
 
-    return DB_CONN
+    return db.connect(DB_FILE)
 
 
-def add_containers_to_db(containers):
-    conn = create_container_db()
+def add_containers_to_db(db_conn, containers):
+    cursor = db_conn.cursor()
+    idx = 1
     for container in containers:
         print(f'will add this container to the db: {container}')
+        cursor.execute('INSERT INTO CONTAINERS VALUES (?,?,?,?)',
+                       (idx, container[0], container[1], 1))
+        idx = idx + 1
+    db_conn.commit()
 
 
 def main():
     containers_active = get_active_containers()
     containers_all = get_all_containers()
 
-    add_containers_to_db(containers_active)
+    db_conn = create_container_db()
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
+    add_containers_to_db(db_conn, containers_active)
 
 
 if __name__ == '__main__':
