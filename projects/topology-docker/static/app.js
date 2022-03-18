@@ -5,4 +5,9 @@ $("document").ready(() => {
   $("#docker_view").click(() => {
     sio.emit("get_container_db");
   });
+
+  $("#map-button").click(() => {
+    console.log("User clicked the topology button");
+    $("#added-text").html("<p>Will show the map.</p>");
+  });
 });
