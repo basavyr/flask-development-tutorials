@@ -15,9 +15,27 @@ def get_active_containers():
     try:
         assert stderr == b'', 'Error while running the command'
     except AssertionError as issue:
-        return stderr.decode(UTF8)
+        # return stderr.decode(UTF8)
+        return []
     else:
         return stdout.decode(UTF8)
+
+
+def get_all_containers():
+    docker_cmd = ['docker', 'ps', '-a']
+    process = subprocess.Popen(docker_cmd, stdout=PIPE, stderr=PIPE)
+    stdout, stderr = process.communicate()
+
+    try:
+        assert stderr == b'', 'Error while running the command'
+    except AssertionError as issue:
+        return []
+    else:
+        return stdout.decode(UTF8)
+
+
+def manipulate_raw_string(raw_string):
+    return 1
 
 
 def create_container_db():
@@ -37,10 +55,13 @@ def create_container_db():
 
 def main():
     containers_active = get_active_containers()
+    containers_all = get_all_containers()
 
-    create_container_db()
+    # create_container_db()
 
     print(containers_active)
+    print(containers_all)
+
 
 if __name__ == '__main__':
     main()
