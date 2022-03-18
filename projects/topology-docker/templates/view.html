@@ -18,7 +18,9 @@
 <div id="topology-map">
   <!-- <p>The current docker containers that are installed on the system.</p> -->
   <div id="added-text" style="display: none">
-    <p>{{docker_containers|safe}}</p>
+    {% for container in docker_containers %}
+    <p>{{container}}</p>
+    {% endfor %}
   </div>
 </div>
 
