@@ -1,4 +1,5 @@
 # general imports
+from crypt import methods
 from flask_socketio import SocketIO
 from flask_socketio import emit
 from flask import Flask, render_template
@@ -35,6 +36,11 @@ socketio = SocketIO(app, async_mode=async_mode)
 @app.route('/', methods=['GET', 'POST'])
 def show_index():
     return render_template('index.html')
+
+
+@app.route('/docker', methods=['GET', 'POST'])
+def show_docker():
+    return render_template('view.html')
 
 
 def main():
