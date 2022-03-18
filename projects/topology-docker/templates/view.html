@@ -16,8 +16,10 @@
 <button id="map-button">View Docker Map</button>
 
 <div id="topology-map">
-  <p>The current docker containers that are installed on the system.</p>
-  <div id="added-text" style="display: none;">{{docker_containers|safe}}</div>
+  <!-- <p>The current docker containers that are installed on the system.</p> -->
+  <div id="added-text" style="display: none">
+    <p>{{docker_containers|safe}}</p>
+  </div>
 </div>
 
 {% endblock %}
