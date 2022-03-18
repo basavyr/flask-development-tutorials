@@ -9,6 +9,8 @@ from threading import Thread, Event
 from threading import Lock
 
 
+import src.container_db as tools
+
 # define the port and host that the app will run on
 PORT = 5051
 HOST = '127.0.0.1'
@@ -40,7 +42,7 @@ def show_index():
 
 @app.route('/docker', methods=['GET', 'POST'])
 def show_docker():
-    docker_containers = 'This will show a docker map...'
+    docker_containers = tools.get_all_containers()
     return render_template('view.html',
                            docker_containers=docker_containers)
 
