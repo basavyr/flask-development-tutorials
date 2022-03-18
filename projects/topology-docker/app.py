@@ -43,6 +43,11 @@ def show_docker():
     return render_template('view.html')
 
 
+@socketio.event
+def get_container_db():
+    print('a client requested the docker db')
+
+
 def main():
     socketio.run(app, port=PORT, host=HOST)
 
