@@ -1,5 +1,23 @@
+import subprocess
+from subprocess import PIPE
 import sqlite3 as db
 from contextlib import closing
+
+
+UTF8 = 'utf-8'
+
+
+def get_active_containers():
+    docker_cmd = ['docker', 'ps']
+    process = subprocess.Popen(docker_cmd, stdout=PIPE, stderr=PIPE)
+    stdout, stderr = process.communicate()
+
+    try:
+        assert stderr == b'', 'Error while running the command'
+    except AssertionError as issue:
+        return stderr.decode(UTF8)
+    else:
+        return stdout.decode(UTF8)
 
 
 def create_container_db():
@@ -18,8 +36,11 @@ def create_container_db():
 
 
 def main():
+    containers_active = get_active_containers()
+
     create_container_db()
 
+    print(containers_active)
 
 if __name__ == '__main__':
     main()
