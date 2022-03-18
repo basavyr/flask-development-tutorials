@@ -40,7 +40,9 @@ def show_index():
 
 @app.route('/docker', methods=['GET', 'POST'])
 def show_docker():
-    return render_template('view.html')
+    docker_containers = 'This will show a docker map...'
+    return render_template('view.html',
+                           docker_containers=docker_containers)
 
 
 @socketio.event
