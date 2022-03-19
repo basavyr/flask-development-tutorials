@@ -49,7 +49,8 @@ def get_all_containers():
         # store each container and its status within a separate object
         res = []
         for idx in range(len(all_containers)):
-            res.append([all_containers[idx], container_status[idx]])
+            res.append([all_containers[idx][0], all_containers[idx]
+                       [1], container_status[idx]])
         print(res)
 
 
