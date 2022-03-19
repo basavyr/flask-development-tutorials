@@ -75,18 +75,23 @@ def add_containers_to_db(db_conn, containers, container_status):
     for container in containers:
         print(f'will add this container to the db: {container}')
         cursor.execute('INSERT INTO CONTAINERS VALUES (?,?,?,?)',
-                       (idx, container[0], container[1], container_status[idx-1]))
+                       (idx, container[0], container[1], container_status[idx - 1]))
         idx = idx + 1
     db_conn.commit()
 
 
 def main():
+    # retrieve the active docker containers
     containers_active = get_active_containers()
+    # retreive all the docker containers
     containers_all = get_all_containers()
+    # set the status for every docker container within the current machine
     container_status = retrieve_container_status(
         containers_active, containers_all)
 
+    # create the db object
     db_conn = create_container_db()
+    # add the containers to the actual database
     add_containers_to_db(db_conn, containers_all, container_status)
 
 
