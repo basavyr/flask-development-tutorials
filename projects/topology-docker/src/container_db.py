@@ -69,13 +69,13 @@ def create_container_db():
     return db.connect(DB_FILE)
 
 
-def add_containers_to_db(db_conn, containers, status):
+def add_containers_to_db(db_conn, containers, container_status):
     cursor = db_conn.cursor()
     idx = 1
     for container in containers:
         print(f'will add this container to the db: {container}')
         cursor.execute('INSERT INTO CONTAINERS VALUES (?,?,?,?)',
-                       (idx, container[0], container[1], status))
+                       (idx, container[0], container[1], container_status[idx-1]))
         idx = idx + 1
     db_conn.commit()
 
@@ -83,12 +83,11 @@ def add_containers_to_db(db_conn, containers, status):
 def main():
     containers_active = get_active_containers()
     containers_all = get_all_containers()
+    container_status = retrieve_container_status(
+        containers_active, containers_all)
 
-    print(retrieve_container_status(containers_active, containers_all))
-
-    # db_conn = create_container_db()
-    # add_containers_to_db(db_conn, containers_active, 'up')
-    # add_containers_to_db(db_conn, containers_all, 'down')
+    db_conn = create_container_db()
+    add_containers_to_db(db_conn, containers_all, container_status)
 
 
 if __name__ == '__main__':
