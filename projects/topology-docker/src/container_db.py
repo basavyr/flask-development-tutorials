@@ -9,7 +9,8 @@ UTF8 = 'utf-8'
 
 
 def manipulate_raw_string(raw_string):
-    raw_string = [line.split() for line in str(raw_string).strip().split('\n')]
+    raw_string = [line.split()[0:2]
+                  for line in str(raw_string).strip().split('\n')]
     return raw_string[1:]
 
 
@@ -28,8 +29,13 @@ def get_active_containers():
 
 
 def get_all_containers():
+    # retreive the list of active containers
+    active_containers = get_active_containers()
+    # command for getting all the docker containers
     docker_cmd = ['docker', 'ps', '-a']
+    # execute command
     process = subprocess.Popen(docker_cmd, stdout=PIPE, stderr=PIPE)
+    # get the result of the command
     stdout, stderr = process.communicate()
 
     try:
@@ -37,7 +43,8 @@ def get_all_containers():
     except AssertionError as issue:
         return []
     else:
-        return manipulate_raw_string(stdout.decode(UTF8))
+        all_containers = manipulate_raw_string(stdout.decode(UTF8))
+        print(all_containers)
 
 
 def retrieve_container_status(active_containers, all_containers):
@@ -81,18 +88,16 @@ def add_containers_to_db(db_conn, containers, container_status):
 
 
 def main():
-    # retrieve the active docker containers
-    containers_active = get_active_containers()
     # retreive all the docker containers
     containers_all = get_all_containers()
     # set the status for every docker container within the current machine
-    container_status = retrieve_container_status(
-        containers_active, containers_all)
+    # container_status = retrieve_container_status(
+    #     containers_active, containers_all)
 
     # create the db object
-    db_conn = create_container_db()
+    # db_conn = create_container_db()
     # add the containers to the actual database
-    add_containers_to_db(db_conn, containers_all, container_status)
+    # add_containers_to_db(db_conn, containers_all, container_status)
 
 
 if __name__ == '__main__':
