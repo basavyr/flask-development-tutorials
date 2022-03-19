@@ -44,7 +44,13 @@ def get_all_containers():
         return []
     else:
         all_containers = manipulate_raw_string(stdout.decode(UTF8))
-        print(all_containers)
+        container_status = retrieve_container_status(
+            active_containers, all_containers)
+        # store each container and its status within a separate object
+        res = []
+        for idx in range(len(all_containers)):
+            res.append([all_containers[idx], container_status[idx]])
+        print(res)
 
 
 def retrieve_container_status(active_containers, all_containers):
