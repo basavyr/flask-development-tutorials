@@ -40,6 +40,17 @@ def get_all_containers():
         return manipulate_raw_string(stdout.decode(UTF8))
 
 
+def retrieve_container_status(active_containers, all_containers):
+    container_status = []
+    for container in all_containers:
+        if container in active_containers:
+            container_status.append(1)
+        else:
+            container_status.append(0)
+
+    return container_status
+
+
 def create_container_db():
     DB_FILE = 'containers.docker.db'
 
@@ -73,9 +84,11 @@ def main():
     containers_active = get_active_containers()
     containers_all = get_all_containers()
 
-    db_conn = create_container_db()
-    add_containers_to_db(db_conn, containers_active, 'up')
-    add_containers_to_db(db_conn, containers_all, 'down')
+    print(retrieve_container_status(containers_active, containers_all))
+
+    # db_conn = create_container_db()
+    # add_containers_to_db(db_conn, containers_active, 'up')
+    # add_containers_to_db(db_conn, containers_all, 'down')
 
 
 if __name__ == '__main__':
