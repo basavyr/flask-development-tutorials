@@ -28,10 +28,10 @@
   /* margin: 10px; */
   width: 300px;
   height: 100px;
-  background-color: lightgray;
+  background-color: lightcoral;
 }
 
-.container-active:hover {
+.container-inactive:hover {
   background-color: #e5e5e5;
   font-weight: bold;
 }
