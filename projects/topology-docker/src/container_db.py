@@ -63,7 +63,9 @@ def get_docker_containers():
     docker_ps = ['docker', 'ps']
     docker_ps_a = ['docker', 'ps', '-a']
 
+    # execute process for retreiving only the active/started containers from the system
     proc_docker_ps = subprocess.Popen(docker_ps, stdout=PIPE, stderr=PIPE)
+    # execute process for retreiving ALL the containers from the system
     proc_docker_ps_a = subprocess.Popen(docker_ps_a, stdout=PIPE, stderr=PIPE)
 
     stdout_ps, stderr_ps = proc_docker_ps.communicate()
@@ -73,9 +75,21 @@ def get_docker_containers():
         print('there are no active containers')
         print(stderr_ps.decode(UTF8))
     else:
+        # first decode the command result from binary to standard utf8
         decoded_string = stdout_ps.decode(UTF8)
+        # manipulate the raw string to a list
+        # store the active containers in a list
         active_containers = manipulate_raw_string(decoded_string)
-        print(active_containers)
+        # execute the command for getting all the docker containers within the local system
+        stdout_ps_a, stderr_ps_a = proc_docker_ps_a.communicate()
+        if stderr_ps_a != b'':
+            print('Issue with the retrieval of docker containers')
+            return []
+        else:
+            # continue with processing the containers list
+            decoded_string = stdout_ps_a.decode(UTF8)
+            all_containers = manipulate_raw_string(decoded_string)
+            print(all_containers)
 
 
 def retrieve_container_status(active_containers, all_containers):
