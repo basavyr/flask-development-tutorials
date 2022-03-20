@@ -29,30 +29,30 @@ def get_active_containers():
         return manipulate_raw_string(stdout.decode(UTF8))
 
 
-def get_all_containers():
-    # retreive the list of active containers
-    active_containers = get_active_containers()
-    # command for getting all the docker containers
-    docker_cmd = ['docker', 'ps', '-a']
-    # execute command
-    process = subprocess.Popen(docker_cmd, stdout=PIPE, stderr=PIPE)
-    # get the result of the command
-    stdout, stderr = process.communicate()
+# def get_all_containers():
+#     # retreive the list of active containers
+#     active_containers = get_active_containers()
+#     # command for getting all the docker containers
+#     docker_cmd = ['docker', 'ps', '-a']
+#     # execute command
+#     process = subprocess.Popen(docker_cmd, stdout=PIPE, stderr=PIPE)
+#     # get the result of the command
+#     stdout, stderr = process.communicate()
 
-    try:
-        assert stderr == b'', 'Error while running the command'
-    except AssertionError as issue:
-        return []
-    else:
-        all_containers = manipulate_raw_string(stdout.decode(UTF8))
-        container_status = retrieve_container_status(
-            active_containers, all_containers)
-        # store each container and its status within a separate object
-        res = []
-        for idx in range(len(all_containers)):
-            res.append([all_containers[idx][0], all_containers[idx]
-                       [1], container_status[idx]])
-        return res
+#     try:
+#         assert stderr == b'', 'Error while running the command'
+#     except AssertionError as issue:
+#         return []
+#     else:
+#         all_containers = manipulate_raw_string(stdout.decode(UTF8))
+#         container_status = retrieve_container_status(
+#             active_containers, all_containers)
+#         # store each container and its status within a separate object
+#         res = []
+#         for idx in range(len(all_containers)):
+#             res.append([all_containers[idx][0], all_containers[idx]
+#                        [1], container_status[idx]])
+#         return res
 
 
 def get_docker_containers():
@@ -72,8 +72,8 @@ def get_docker_containers():
     try:
         assert stderr_ps == b'', 'Error while running the command'
     except AssertionError as issue:
-        print('there are no active containers')
-        print(stderr_ps.decode(UTF8))
+        # if error occurs, stop the process
+        return -1
     else:
         # first decode the command result from binary to standard utf8
         decoded_string = stdout_ps.decode(UTF8)
@@ -82,9 +82,9 @@ def get_docker_containers():
         active_containers = manipulate_raw_string(decoded_string)
         # execute the command for getting all the docker containers within the local system
         stdout_ps_a, stderr_ps_a = proc_docker_ps_a.communicate()
+
         if stderr_ps_a != b'':
-            print('Issue with the retrieval of docker containers')
-            return []
+            return -1
         else:
             # continue with processing the containers list
             decoded_string = stdout_ps_a.decode(UTF8)
@@ -98,19 +98,18 @@ def get_docker_containers():
                     tuple_item = [all_containers[idx]
                                   [0], all_containers[idx][1], 0]
                 containers.append(tuple_item)
-            print(containers)
             return containers
 
 
-def retrieve_container_status(active_containers, all_containers):
-    container_status = []
-    for container in all_containers:
-        if container in active_containers:
-            container_status.append(1)
-        else:
-            container_status.append(0)
+# def retrieve_container_status(active_containers, all_containers):
+#     container_status = []
+#     for container in all_containers:
+#         if container in active_containers:
+#             container_status.append(1)
+#         else:
+#             container_status.append(0)
 
-    return container_status
+#     return container_status
 
 
 def create_container_db():
@@ -131,29 +130,25 @@ def create_container_db():
     return db.connect(DB_FILE)
 
 
-def add_containers_to_db(db_conn, containers, container_status):
+def add_containers_to_db(db_conn, containers):
     cursor = db_conn.cursor()
     idx = 1
     for container in containers:
         print(f'will add this container to the db: {container}')
+        current_tuple = (idx, container[0], container[1], container[2])
         cursor.execute('INSERT INTO CONTAINERS VALUES (?,?,?,?)',
-                       (idx, container[0], container[1], container_status[idx - 1]))
+                       current_tuple)
         idx = idx + 1
     db_conn.commit()
 
 
 def main():
-    get_docker_containers()
-    # retreive all the docker containers
-    # containers_all = get_all_containers()
-    # set the status for every docker container within the current machine
-    # container_status = retrieve_container_status(
-    #     containers_active, containers_all)
+    containers = get_docker_containers()
 
     # create the db object
-    # db_conn = create_container_db()
+    db_conn = create_container_db()
     # add the containers to the actual database
-    # add_containers_to_db(db_conn, containers_all, container_status)
+    add_containers_to_db(db_conn, containers)
 
 
 if __name__ == '__main__':
