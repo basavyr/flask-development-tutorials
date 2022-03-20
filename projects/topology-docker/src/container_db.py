@@ -3,6 +3,7 @@ import subprocess
 from subprocess import PIPE
 import sqlite3 as db
 from contextlib import closing
+from sys import stderr
 
 
 UTF8 = 'utf-8'
@@ -54,6 +55,29 @@ def get_all_containers():
         return res
 
 
+def get_docker_containers():
+    """
+    - Retreive all the docker containers that are installed on the current machine
+    - The function returns a tuple list containing the ID, the name, and the status of the container
+    """
+    docker_ps = ['docker', 'ps']
+    docker_ps_a = ['docker', 'ps', '-a']
+
+    proc_docker_ps = subprocess.Popen(docker_ps, stdout=PIPE, stderr=PIPE)
+    proc_docker_ps_a = subprocess.Popen(docker_ps_a, stdout=PIPE, stderr=PIPE)
+
+    stdout_ps, stderr_ps = proc_docker_ps.communicate()
+    try:
+        assert stderr_ps == b'', 'Error while running the command'
+    except AssertionError as issue:
+        print('there are no active containers')
+        print(stderr_ps.decode(UTF8))
+    else:
+        decoded_string = stdout_ps.decode(UTF8)
+        active_containers = manipulate_raw_string(decoded_string)
+        print(active_containers)
+
+
 def retrieve_container_status(active_containers, all_containers):
     container_status = []
     for container in all_containers:
@@ -95,8 +119,9 @@ def add_containers_to_db(db_conn, containers, container_status):
 
 
 def main():
+    get_docker_containers()
     # retreive all the docker containers
-    containers_all = get_all_containers()
+    # containers_all = get_all_containers()
     # set the status for every docker container within the current machine
     # container_status = retrieve_container_status(
     #     containers_active, containers_all)
