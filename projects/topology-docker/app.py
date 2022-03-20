@@ -49,7 +49,7 @@ def show_docker():
 
 @socketio.event
 def get_container_db():
-    print('Will retreive the db with containers')
+    emit('container_db', {"db": tools.get_docker_containers()})
 
 
 def main():
