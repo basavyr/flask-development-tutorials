@@ -42,14 +42,14 @@ def show_index():
 
 @app.route('/docker', methods=['GET', 'POST'])
 def show_docker():
-    docker_containers = tools.get_all_containers()
+    docker_containers = tools.get_docker_containers()
     return render_template('view.html',
                            docker_containers=docker_containers)
 
 
 @socketio.event
 def get_container_db():
-    print('a client requested the docker db')
+    print('Will retreive the db with containers')
 
 
 def main():

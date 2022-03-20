@@ -2,9 +2,12 @@ $("document").ready(() => {
   console.log("App started successfully");
   sio = io();
 
-  $("#docker_view").click(() => {
+  var retrieve_db_on_document_ready = true;
+
+  if (retrieve_db_on_document_ready) {
+    console.log("Will retrieve db on document ready");
     sio.emit("get_container_db");
-  });
+  } else console.log("No db retrieval required");
 
   // // set the added-text div to hidden
   // $("#added-text").hide();
