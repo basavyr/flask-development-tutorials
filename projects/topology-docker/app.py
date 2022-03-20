@@ -49,6 +49,7 @@ def show_docker():
 
 @socketio.event
 def get_container_db():
+    print(f'Refreshing the docker database')
     emit('container_db', {"db": tools.get_docker_containers()})
 
 
