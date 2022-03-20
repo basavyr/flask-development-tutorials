@@ -137,15 +137,23 @@ def create_container_db():
 
 
 def add_containers_to_db(db_conn, containers):
+    # create a list of tuples with all the information required for the db
+    tuple_items = [(idx, containers[idx - 1][0], containers[idx - 1][1],
+                    containers[idx - 1][2], containers[idx - 1][3]) for idx in range(len(containers))]
+
     cursor = db_conn.cursor()
-    idx = 1
-    for container in containers:
-        current_tuple = (
-            idx, container[0], container[1], container[2], container[3])
-        cursor.execute('INSERT INTO CONTAINERS VALUES (?,?,?,?,?)',
-                       current_tuple)
-        idx = idx + 1
+    cursor.executemany(
+        'INSERT INTO CONTAINERS VALUES (?,?,?,?,?)', tuple_items)
     db_conn.commit()
+
+    # idx = 1
+    # for container in containers:
+    #     current_tuple = (
+    #         idx, container[0], container[1], container[2], container[3])
+    #     cursor.execute('INSERT INTO CONTAINERS VALUES (?,?,?,?,?)',
+    #                    current_tuple)
+    #     idx = idx + 1
+    # db_conn.commit()
 
 
 def main():
