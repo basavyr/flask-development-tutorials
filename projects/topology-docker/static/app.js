@@ -53,8 +53,12 @@ $("document").ready(() => {
     // change the html for the topology div
     var updated_html = '<div class="flex-box">';
     for (var i = 0; i < container_db.length; i++) {
-      // console.log(container_db[i]);
-      docker_div = '<div class="container-active">';
+      var status = container_db[i][3];
+      if (status == 1) {
+        docker_div = '<div class="container-active">';
+      } else {
+        docker_div = '<div class="container-inactive">';
+      }
       docker_div += "<p>" + container_db[i] + "</p>";
       docker_div += "</div>";
       updated_html += docker_div;
