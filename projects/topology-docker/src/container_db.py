@@ -10,9 +10,12 @@ UTF8 = 'utf-8'
 
 
 def manipulate_raw_string(raw_string):
-    raw_string = [line.split()[0:2]
-                  for line in str(raw_string).strip().split('\n')]
-    return raw_string[1:]
+    processed_raw_string = []
+    for line in str(raw_string).strip().split('\n')[1:]:
+        c_line = line.split()
+        docker_container = [c_line[0], c_line[1], c_line[-1]]
+        processed_raw_string.append(docker_container)
+    return processed_raw_string
 
 
 def get_active_containers():
@@ -58,7 +61,7 @@ def get_active_containers():
 def get_docker_containers():
     """
     - Retreive all the docker containers that are installed on the current machine
-    - The function returns a tuple list containing the ID, the name, and the status of the container
+    - The function returns a tuple list containing the container ID, the image name, and the status of the container
     """
     docker_ps = ['docker', 'ps']
     docker_ps_a = ['docker', 'ps', '-a']
@@ -93,10 +96,10 @@ def get_docker_containers():
             for idx in range(len(all_containers)):
                 if all_containers[idx] in active_containers:
                     tuple_item = [all_containers[idx]
-                                  [0], all_containers[idx][1], 1]
+                                  [0], all_containers[idx][1], all_containers[idx][2], 1]
                 else:
                     tuple_item = [all_containers[idx]
-                                  [0], all_containers[idx][1], 0]
+                                  [0], all_containers[idx][1], all_containers[idx][2], 0]
                 containers.append(tuple_item)
             return containers
 
@@ -120,10 +123,11 @@ def create_container_db():
         cursor = DB_CONN.cursor()
         cursor.execute('DROP TABLE IF EXISTS CONTAINERS')
         cursor.execute('''CREATE TABLE IF NOT EXISTS CONTAINERS
-                                (id integer primary_key,
-                                container_id text,
-                                container_name text,
-                                container_status text)''')
+                                (c_id integer primary_key,
+                                ID text,
+                                Image text,
+                                Name text,
+                                Status integer)''')
 
         DB_CONN.commit()
 
@@ -134,9 +138,10 @@ def add_containers_to_db(db_conn, containers):
     cursor = db_conn.cursor()
     idx = 1
     for container in containers:
-        print(f'will add this container to the db: {container}')
-        current_tuple = (idx, container[0], container[1], container[2])
-        cursor.execute('INSERT INTO CONTAINERS VALUES (?,?,?,?)',
+        # print(f'will add this container to the db: {container}')
+        current_tuple = (
+            idx, container[0], container[1], container[2], container[3])
+        cursor.execute('INSERT INTO CONTAINERS VALUES (?,?,?,?,?)',
                        current_tuple)
         idx = idx + 1
     db_conn.commit()
