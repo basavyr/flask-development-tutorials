@@ -89,7 +89,17 @@ def get_docker_containers():
             # continue with processing the containers list
             decoded_string = stdout_ps_a.decode(UTF8)
             all_containers = manipulate_raw_string(decoded_string)
-            print(all_containers)
+            containers = []
+            for idx in range(len(all_containers)):
+                if all_containers[idx] in active_containers:
+                    tuple_item = [all_containers[idx]
+                                  [0], all_containers[idx][1], 1]
+                else:
+                    tuple_item = [all_containers[idx]
+                                  [0], all_containers[idx][1], 0]
+                containers.append(tuple_item)
+            print(containers)
+            return containers
 
 
 def retrieve_container_status(active_containers, all_containers):
