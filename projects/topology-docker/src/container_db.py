@@ -26,7 +26,6 @@ def get_active_containers():
     try:
         assert stderr == b'', 'Error while running the command'
     except AssertionError as issue:
-        # return stderr.decode(UTF8)
         return []
     else:
         return manipulate_raw_string(stdout.decode(UTF8))
@@ -81,8 +80,10 @@ def get_docker_containers():
         # first decode the command result from binary to standard utf8
         decoded_string = stdout_ps.decode(UTF8)
         # manipulate the raw string to a list
+
         # store the active containers in a list
         active_containers = manipulate_raw_string(decoded_string)
+
         # execute the command for getting all the docker containers within the local system
         stdout_ps_a, stderr_ps_a = proc_docker_ps_a.communicate()
 
@@ -119,17 +120,18 @@ def create_container_db():
     DB_FILE = 'containers.docker.db'
 
     DB_CONN = db.connect(DB_FILE)
-    with closing(DB_CONN):
-        cursor = DB_CONN.cursor()
-        cursor.execute('DROP TABLE IF EXISTS CONTAINERS')
-        cursor.execute('''CREATE TABLE IF NOT EXISTS CONTAINERS
-                                (c_id integer primary_key,
-                                ID text,
-                                Image text,
-                                Name text,
-                                Status integer)''')
 
-        DB_CONN.commit()
+    cursor = DB_CONN.cursor()
+    cursor.execute('DROP TABLE IF EXISTS CONTAINERS')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS CONTAINERS
+                            (c_id integer primary_key,
+                            ID text,
+                            Image text,
+                            Name text,
+                            Status integer)''')
+
+    DB_CONN.commit()
+    DB_CONN.close()
 
     return db.connect(DB_FILE)
 
@@ -138,7 +140,6 @@ def add_containers_to_db(db_conn, containers):
     cursor = db_conn.cursor()
     idx = 1
     for container in containers:
-        # print(f'will add this container to the db: {container}')
         current_tuple = (
             idx, container[0], container[1], container[2], container[3])
         cursor.execute('INSERT INTO CONTAINERS VALUES (?,?,?,?,?)',
