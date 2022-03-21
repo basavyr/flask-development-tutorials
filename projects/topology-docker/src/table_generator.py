@@ -25,8 +25,8 @@ def generate_rows(table_data, n_rows, n_cols):
                 item += f'<td style="color:green;">{table_data[row][col]}</td>\n'
             else:
                 item += f'<td style="color:red;">{table_data[row][col]}</td>\n'
-        item += f'<td><button type="button" class="action-start-container">START</button></td>'
-        item += f'<td><button type="button" class="action-stop-container" >STOP</button></td>'
+        item += f'<td><button type="button" class="btn btn-success action-start-container">START</button></td>'
+        item += f'<td><button type="button" class="btn btn-danger action-stop-container" >STOP</button></td>'
         item += '</tr>\n'
         res_string += item
 

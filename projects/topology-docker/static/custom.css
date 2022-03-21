@@ -39,7 +39,7 @@
 .docker-tabular {
   border: 2px solid grey;
   padding: 5px;
-  font-size: large;
+  /* font-size: large; */
   font-weight: bold;
   width: auto;
   /* color: aqua; */
