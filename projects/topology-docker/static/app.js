@@ -44,7 +44,7 @@ $("document").ready(() => {
   });
 
   sio.on("receive_container_db", (data) => {
-    console.log("Received a new container db");
+    // console.log("Received a new container db");
     // retrieve the pre-defined html table template from the server
     var tabular_html = data["table"];
     $("#tabs").html(tabular_html);
@@ -86,19 +86,15 @@ $("document").ready(() => {
     $(".docker-tabular").on("click", ".action-start-container", function () {
       var current_container = $(this).closest("tr");
       var container_id = current_container.find("td:eq(1)").text();
-      // console.log(container_id);
 
       sio.emit("docker_action", { req: "START", container_id: container_id });
-      // console.log("User requested container: START");
     });
 
     $(".docker-tabular").on("click", ".action-stop-container", function () {
       var current_container = $(this).closest("tr");
       var container_id = current_container.find("td:eq(1)").text();
-      // console.log(container_id);
 
       sio.emit("docker_action", { req: "STOP", container_id: container_id });
-      // console.log("User requested container: STOP");
     });
   });
 });
