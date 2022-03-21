@@ -10,7 +10,7 @@ from threading import Lock
 
 import src.container_db as tools
 import src.table_generator as table
-
+import src.execute_commands as exe
 
 # define the port and host that the app will run on
 PORT = 5051
@@ -61,9 +61,10 @@ def request_container_db():
 
 @socketio.event
 def docker_action(msg):
-    print('User requested a docker command...')
-    print(msg['req'])
-    print(msg['container_id'])
+    if msg['req'] == 'START':
+        exe.execute_docker_command('start', msg['container_id'])
+    elif msg['req'] == 'STOP':
+        exe.execute_docker_command('stop', msg['container_id'])
 
     containers = tools.get_docker_containers()
     n_rows = len(containers)
