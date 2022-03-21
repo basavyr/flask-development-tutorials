@@ -1,5 +1,3 @@
-# import container_db as tools
-
 
 def generate_header(headers):
     res_string = f'<tr>\n'
@@ -16,9 +14,9 @@ def generate_rows(table_data, n_rows, n_cols):
         item = '<tr>\n'
         for col in range(n_cols):
             if(int(table_data[row][3]) == 1):
-                item += f'<td style="color:lightgreen;">{table_data[row][col]}</td>\n'
+                item += f'<td style="color:green;">{table_data[row][col]}</td>\n'
             else:
-                item += f'<td style="color:lightcoral;">{table_data[row][col]}</td>\n'
+                item += f'<td style="color:red;">{table_data[row][col]}</td>\n'
         item += '</tr>\n'
         res_string += item
 
@@ -32,4 +30,5 @@ def table(headers, table_data, n_rows, n_cols):
     T += H
     T += R
     T += '\n</table>\n'
+
     return T
