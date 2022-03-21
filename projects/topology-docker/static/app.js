@@ -83,19 +83,21 @@ $("document").ready(() => {
     // source https://stackoverflow.com/questions/376081/how-to-get-a-table-cell-value-using-jquery
     // source https://stackoverflow.com/questions/19832621/how-to-get-the-value-of-tr-of-a-table-using-jquery-on-click
     $(".docker-tabular").on("click", ".action-start-container", function () {
-      console.log("User requested container:START");
       var current_container = $(this).closest("tr");
       var container_id = current_container.find("td:eq(1)").text();
       console.log(container_id);
-      // var container_id_order = current_container.find("td:eq(0)").text();
+
+      sio.emit("docker_action", { req: "START", container_id: container_id });
+      console.log("User requested container: START");
     });
+
     $(".docker-tabular").on("click", ".action-stop-container", function () {
-      console.log("User requested container:STOP");
       var current_container = $(this).closest("tr");
-      // var current_container = $(this).closest("tr").find("td:eq(0)").text();
-      // var container_id_order = current_container.find(".nr").text();
-      // var container_id_order = current_container.find("td:eq(0)").text();
-      console.log(current_container);
+      var container_id = current_container.find("td:eq(1)").text();
+      console.log(container_id);
+
+      sio.emit("docker_action", { req: "STOP", container_id: container_id });
+      console.log("User requested container: STOP");
     });
   });
 });

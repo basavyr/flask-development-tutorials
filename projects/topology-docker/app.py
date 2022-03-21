@@ -59,6 +59,11 @@ def request_container_db():
     })
 
 
+@socketio.event
+def docker_action(msg):
+    print('User requested a docker command...')
+
+
 def main():
     socketio.run(app, port=PORT, host=HOST)
 
