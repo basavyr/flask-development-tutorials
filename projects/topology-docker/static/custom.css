@@ -39,15 +39,23 @@
 .docker-tabular {
   border: 2px solid grey;
   padding: 5px;
+  font-size: large;
+  font-weight: bold;
   /* color: aqua; */
 }
 
 .docker-tabular th {
   border: 2px solid grey;
   text-align: center;
+  padding: 5px;
 }
 
 .docker-tabular td {
   /* border: 2px solid grey; */
   text-align: center;
+  padding: 5px;
+}
+
+.view-divs {
+  padding: 20px;
 }
