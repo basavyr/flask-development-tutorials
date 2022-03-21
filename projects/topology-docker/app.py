@@ -1,4 +1,3 @@
-# general imports
 from crypt import methods
 from flask_socketio import SocketIO
 from flask_socketio import emit
@@ -18,10 +17,6 @@ PORT = 5051
 HOST = '127.0.0.1'
 
 
-# Set this variable to "threading", "eventlet" or "gevent" to test the
-# different async modes, or leave it set to None for the application to choose
-# the best option based on installed packages.
-# source of the doc => https://github.com/miguelgrinberg/Flask-SocketIO/blob/main/example/app.py
 async_mode = None
 
 thread = None
