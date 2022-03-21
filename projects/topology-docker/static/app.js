@@ -6,12 +6,12 @@ $("document").ready(() => {
   var retrieve_db_on_document_ready = true;
   if (retrieve_db_on_document_ready) {
     // console.log("Will retrieve db on document ready");
-    sio.emit("get_container_db");
+    sio.emit("request_container_db");
   } else console.log("No db retrieval required");
 
   $("#tabular-view").click(() => {
     console.log("User requested tabular view");
-    sio.emit("get_container_db");
+    sio.emit("request_container_db");
 
     // if the topology view is selected, hide it when tabular view is selected
     if ($("#topology").is(":visible")) {
@@ -28,7 +28,7 @@ $("document").ready(() => {
 
   $("#topology-view").click(() => {
     console.log("User requested topology view");
-    sio.emit("get_container_db");
+    sio.emit("request_container_db");
 
     // if the tabular view is selected, hide it when topology view is selected
     if ($("#tabs").is(":visible")) {
@@ -43,8 +43,9 @@ $("document").ready(() => {
     }
   });
 
-  sio.on("container_db", (data) => {
+  sio.on("receive_container_db", (data) => {
     var container_db = data["db"];
+    var container_table = data["table"];
 
     //change the container_db to a string
     var container_db_string = JSON.stringify(container_db);
