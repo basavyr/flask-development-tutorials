@@ -1,6 +1,8 @@
 
 def generate_header(headers):
     res_string = f'<tr>\n'
+    id_string = f'<th>#id</th>\n'
+    res_string += id_string
     for header in headers:
         res_string += f'<th>{header}</th>\n'
     res_string += f'</tr>\n'
@@ -12,6 +14,7 @@ def generate_rows(table_data, n_rows, n_cols):
     res_string = ''
     for row in range(n_rows):
         item = '<tr>\n'
+        item += f'<td>{row+1}</td>'
         for col in range(n_cols):
             if(int(table_data[row][3]) == 1):
                 item += f'<td style="color:green;">{table_data[row][col]}</td>\n'
