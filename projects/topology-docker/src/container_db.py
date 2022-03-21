@@ -7,6 +7,7 @@ from sys import stderr
 
 
 UTF8 = 'utf-8'
+DB_FILE = 'containers.docker.db'
 
 
 def manipulate_raw_string(raw_string):
@@ -29,32 +30,6 @@ def get_active_containers():
         return []
     else:
         return manipulate_raw_string(stdout.decode(UTF8))
-
-
-# def get_all_containers():
-#     # retreive the list of active containers
-#     active_containers = get_active_containers()
-#     # command for getting all the docker containers
-#     docker_cmd = ['docker', 'ps', '-a']
-#     # execute command
-#     process = subprocess.Popen(docker_cmd, stdout=PIPE, stderr=PIPE)
-#     # get the result of the command
-#     stdout, stderr = process.communicate()
-
-#     try:
-#         assert stderr == b'', 'Error while running the command'
-#     except AssertionError as issue:
-#         return []
-#     else:
-#         all_containers = manipulate_raw_string(stdout.decode(UTF8))
-#         container_status = retrieve_container_status(
-#             active_containers, all_containers)
-#         # store each container and its status within a separate object
-#         res = []
-#         for idx in range(len(all_containers)):
-#             res.append([all_containers[idx][0], all_containers[idx]
-#                        [1], container_status[idx]])
-#         return res
 
 
 def get_docker_containers():
@@ -105,64 +80,45 @@ def get_docker_containers():
             return containers
 
 
-# def retrieve_container_status(active_containers, all_containers):
-#     container_status = []
-#     for container in all_containers:
-#         if container in active_containers:
-#             container_status.append(1)
-#         else:
-#             container_status.append(0)
-
-#     return container_status
-
-
 def create_container_db():
-    DB_FILE = 'containers.docker.db'
-
     DB_CONN = db.connect(DB_FILE)
 
-    cursor = DB_CONN.cursor()
-    cursor.execute('DROP TABLE IF EXISTS CONTAINERS')
-    cursor.execute('''CREATE TABLE IF NOT EXISTS CONTAINERS
-                            (c_id integer primary_key,
-                            ID text,
-                            Image text,
-                            Name text,
-                            Status integer)''')
+    with closing(DB_CONN):
+        cursor = DB_CONN.cursor()
+        cursor.execute('DROP TABLE IF EXISTS CONTAINERS')
+        cursor.execute('''CREATE TABLE IF NOT EXISTS CONTAINERS
+                                (c_id integer primary_key,
+                                ID text,
+                                Image text,
+                                Name text,
+                                Status integer)''')
 
-    DB_CONN.commit()
-    DB_CONN.close()
-
-    return db.connect(DB_FILE)
+        DB_CONN.commit()
 
 
-def add_containers_to_db(db_conn, containers):
+def add_containers_to_db(db_connection, containers):
     # create a list of tuples with all the information required for the db
     tuple_items = [(idx, containers[idx - 1][0], containers[idx - 1][1],
                     containers[idx - 1][2], containers[idx - 1][3]) for idx in range(len(containers))]
 
-    cursor = db_conn.cursor()
+    cursor = db_connection.cursor()
     cursor.executemany(
         'INSERT INTO CONTAINERS VALUES (?,?,?,?,?)', tuple_items)
-    db_conn.commit()
+    db_connection.commit()
 
-    # idx = 1
-    # for container in containers:
-    #     current_tuple = (
-    #         idx, container[0], container[1], container[2], container[3])
-    #     cursor.execute('INSERT INTO CONTAINERS VALUES (?,?,?,?,?)',
-    #                    current_tuple)
-    #     idx = idx + 1
-    # db_conn.commit()
+
+def get_container_db():
+    # execute the docker command on the local system and get the complete list of docker containers
+    docker_containers = get_docker_containers()
+
+    container_db = create_container_db()
+    db_connection = db.connect(DB_FILE)
+    with closing(db_connection):
+        add_containers_to_db(db_connection, docker_containers)
 
 
 def main():
-    containers = get_docker_containers()
-
-    # create the db object
-    db_conn = create_container_db()
-    # add the containers to the actual database
-    add_containers_to_db(db_conn, containers)
+    get_container_db()
 
 
 if __name__ == '__main__':
