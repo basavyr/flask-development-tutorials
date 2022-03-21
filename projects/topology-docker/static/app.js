@@ -67,20 +67,16 @@ $("document").ready(() => {
     // change the html for the topology div
     $("#topology").html(tabular_html);
 
-    // $(".docker-tabular tr").on("click", "td", function () {
-    //   console.log("click");
-    // });
-
-    //access the action-start-container class and add a click event listener
-    // $(".action-start-container").click(() => {
-    //   console.log("User clicked START container");
-    // });
-
-    //access the action-stopÎ-container class and add a click event listener
+    //access the action-stop-container class and add a click event listener
     $(".action-stop-container").click(() => {
       console.log("User clicked STOP container");
     });
 
+    // get the table row when the start button of a particular container is clicked
+    // source https://codepedia.info/jquery-get-table-cell-td-value-div
+    // source https://stackoverflow.com/questions/14460421/get-the-contents-of-a-table-row-with-a-button-click
+    // source https://stackoverflow.com/questions/376081/how-to-get-a-table-cell-value-using-jquery
+    // source https://stackoverflow.com/questions/19832621/how-to-get-the-value-of-tr-of-a-table-using-jquery-on-click
     $(".docker-tabular").on("click", ".action-start-container", function () {
       console.log("User clicked START container");
       var current_container = $(this).closest("tr");
