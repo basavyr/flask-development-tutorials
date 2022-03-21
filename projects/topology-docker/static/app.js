@@ -44,26 +44,26 @@ $("document").ready(() => {
   });
 
   sio.on("receive_container_db", (data) => {
-    var container_db = data["db"];
-    //change the container_db to a string
+    // retrieve the pre-defined html table template from the server
+    var tabular_html = data["table"];
+    $("#tabs").html(tabular_html);
 
-    var container_table = data["table"];
-    $("#tabs").html(container_table);
-
-    // change the html for the topology div
-    var updated_html = '<div class="flex-box">';
-    for (var i = 0; i < container_db.length; i++) {
-      var status = container_db[i][3];
+    // retrieve the container database and draw the topology
+    var container_topology = data["db"];
+    var tabular_html = '<div class="flex-box">';
+    for (var i = 0; i < container_topology.length; i++) {
+      var status = container_topology[i][3];
       if (status == 1) {
-        docker_div = '<div class="container-active">';
+        container_div = '<div class="container-active">';
       } else {
-        docker_div = '<div class="container-inactive">';
+        container_div = '<div class="container-inactive">';
       }
-      docker_div += "<p>" + container_db[i] + "</p>";
-      docker_div += "</div>";
-      updated_html += docker_div;
+      container_div += "<p>" + container_topology[i] + "</p>";
+      container_div += "</div>";
+      tabular_html += container_div;
     }
-    updated_html += "</div>";
-    $("#topology").html(updated_html);
+    tabular_html += "</div>";
+    // change the html for the topology div
+    $("#topology").html(tabular_html);
   });
 });
