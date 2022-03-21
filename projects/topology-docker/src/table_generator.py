@@ -1,5 +1,4 @@
-from email import header
-from re import T
+import container_db as tools
 
 
 def generate_header(headers):
@@ -37,8 +36,11 @@ def table(headers, table_data, n_rows, n_cols):
 
 
 def main():
-    T = table(['header1', 'header2', 'header3'], [
-              ['1', '2', '3'], ['1', '2', '3'], ['1', '2', '3']], 3, 3)
+    containers = tools.get_docker_containers()
+    n_rows = len(containers)
+    n_cols = len(containers[0])
+    T = table(['header1', 'header2', 'header3', 'header4'],
+              containers, n_rows, n_cols)
     print(T)
 
 
