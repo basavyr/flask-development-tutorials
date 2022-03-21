@@ -10,6 +10,8 @@ from threading import Lock
 
 
 import src.container_db as tools
+import src.table_generator as table
+
 
 # define the port and host that the app will run on
 PORT = 5051
@@ -50,9 +52,15 @@ def show_docker():
 @socketio.event
 def request_container_db():
     print(f'Refreshing the docker database')
+
+    containers = tools.get_docker_containers()
+    n_rows = len(containers)
+    n_cols = len(containers[0])
+    T = table.table(['header1', 'header2', 'header3', 'header4'],
+                    containers, n_rows, n_cols)
     emit('receive_container_db', {
-        "db": tools.get_docker_containers(),
-        "table": 1,
+        "db": containers,
+        "table": T,
     })
 
 

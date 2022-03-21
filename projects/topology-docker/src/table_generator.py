@@ -1,4 +1,4 @@
-import container_db as tools
+# import container_db as tools
 
 
 def generate_header(headers):
@@ -15,8 +15,8 @@ def generate_rows(table_data, n_rows, n_cols):
     for row in range(n_rows):
         item = '<tr>\n'
         for col in range(n_cols):
-            # item += f'<td>{table_data[row][col]}</td>\n'
-            item += f'<td></td>\n'
+            item += f'<td>{table_data[row][col]}</td>\n'
+            # item += f'<td></td>\n'
         item += '</tr>\n'
         res_string += item
 
@@ -24,8 +24,6 @@ def generate_rows(table_data, n_rows, n_cols):
 
 
 def table(headers, table_data, n_rows, n_cols):
-    # style = "<style> table, th, td { border:1px solid black; } </style>\n"
-    # T = style + '<table style="" class="table-style" id ="">\n'
     T = '<table class="docker-tabular" id ="">\n'
     H = generate_header(headers)
     R = generate_rows(table_data, n_rows, n_cols)
@@ -33,16 +31,3 @@ def table(headers, table_data, n_rows, n_cols):
     T += R
     T += '\n</table>\n'
     return T
-
-
-def main():
-    containers = tools.get_docker_containers()
-    n_rows = len(containers)
-    n_cols = len(containers[0])
-    T = table(['header1', 'header2', 'header3', 'header4'],
-              containers, n_rows, n_cols)
-    print(T)
-
-
-if __name__ == '__main__':
-    main()

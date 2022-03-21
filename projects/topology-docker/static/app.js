@@ -45,11 +45,11 @@ $("document").ready(() => {
 
   sio.on("receive_container_db", (data) => {
     var container_db = data["db"];
-    var container_table = data["table"];
-
     //change the container_db to a string
     var container_db_string = JSON.stringify(container_db);
-    // console.log("Received the container db:\n" + container_db);
+
+    var container_table = data["table"];
+    $("#tabs").html(container_table);
 
     // change the html for the topology div
     var updated_html = '<div class="flex-box">';
