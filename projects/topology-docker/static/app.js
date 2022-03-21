@@ -66,28 +66,27 @@ $("document").ready(() => {
     // change the html for the topology div
     $("#topology").html(tabular_html);
 
+    // $(".docker-tabular tr").on("click", "td", function () {
+    //   console.log("click");
+    // });
+
     //access the action-start-container class and add a click event listener
-    $(".action-start-container").click(() => {
-      //access the table values
-      $("#docker-table tr").each(() => {
-        // var customerId = $(this).find("td:first").val();
-        var customerId = $(this).find("td").eq(0).html();
-        console.log(customerId);
-      });
-      console.log("User clicked START container");
-    });
+    // $(".action-start-container").click(() => {
+    //   console.log("User clicked START container");
+    // });
 
     //access the action-stopÎ-container class and add a click event listener
     $(".action-stop-container").click(() => {
       console.log("User clicked STOP container");
     });
 
-    // $("#action-start-container").on("click", () => {
-    //   console.log("User clicked START container");
-    // });
-
-    // $("#action-stop-container").on("click", () => {
-    //   console.log("User clicked STOP container");
-    // });
+    $(".docker-tabular").on("click", ".action-start-container", function () {
+      console.log("User clicked START container");
+      var current_container = $(this).closest("tr");
+      // var current_container = $(this).closest("tr").find("td:eq(0)").text();
+      // var container_id_order = current_container.find(".nr").text();
+      // var container_id_order = current_container.find("td:eq(0)").text();
+      console.log(current_container);
+    });
   });
 });

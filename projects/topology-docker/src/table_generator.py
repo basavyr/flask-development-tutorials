@@ -19,13 +19,13 @@ def generate_rows(table_data, n_rows, n_cols):
     res_string = ''
     for row in range(n_rows):
         item = '<tr>\n'
-        item += f'<td>{row+1}</td>'
+        item += f'<td class="nr">{row+1}</td>'
         for col in range(n_cols):
             if(int(table_data[row][3]) == 1):
                 item += f'<td style="color:green;">{table_data[row][col]}</td>\n'
             else:
                 item += f'<td style="color:red;">{table_data[row][col]}</td>\n'
-        item += f'<td><button type="button" class="action-start-container" >START</button></td>'
+        item += f'<td><button type="button" class="action-start-container">START</button></td>'
         item += f'<td><button type="button" class="action-stop-container" >STOP</button></td>'
         item += '</tr>\n'
         res_string += item
@@ -34,7 +34,7 @@ def generate_rows(table_data, n_rows, n_cols):
 
 
 def table(headers, table_data, n_rows, n_cols):
-    T = '<table class="docker-tabular" id="docker-table">\n'
+    T = '<table class="docker-tabular">\n'
     H = generate_header(headers)
     R = generate_rows(table_data, n_rows, n_cols)
     T += H
