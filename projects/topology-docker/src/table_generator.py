@@ -19,7 +19,7 @@ def generate_rows(table_data, n_rows, n_cols):
     res_string = ''
     for row in range(n_rows):
         item = '<tr>\n'
-        item += f'<td class="nr">{row+1}</td>'
+        item += f'<td>{row+1}</td>'
         for col in range(n_cols):
             if(int(table_data[row][3]) == 1):
                 item += f'<td style="color:green;">{table_data[row][col]}</td>\n'

@@ -38,7 +38,6 @@
 
 .docker-tabular {
   border: 2px solid grey;
-  padding: 5px;
   font-weight: bold;
   width: auto;
   text-align: center;
@@ -51,12 +50,13 @@
 
 .docker-tabular td {
   border: 2px solid grey;
+  padding: 5px;
 }
 
 .view-divs {
-  padding: 20px;
+  padding: 10px;
 }
 
 .view-buttons {
-  padding: 20px;
+  padding: 10px;
 }

@@ -9,7 +9,7 @@
   local machine.
 </p>
 
-<form action="/">
+<form action="/" style="padding: 10px">
   <input type="submit" value="Back to Index" class="btn btn-primary" />
 </form>
 
@@ -17,16 +17,16 @@
 
 <p>Select a type of view for the docker containers.</p>
 
-<div id="view-buttons">
+<div class="view-buttons">
   <button id="tabular-view" class="btn btn-primary">Tabular View</button>
   <button id="topology-view" class="btn btn-primary">Topology View</button>
 </div>
 
-<div id="view-divs" class="view-divs">
+<div class="view-divs">
   <!-- add the tabular view  -->
-  <div id="tabs" style="display: none"></div>
+  <div id="tabs" style="display: block"></div>
   <!-- add the topology view -->
-  <div id="topology" style="display: block"></div>
+  <div id="topology" style="display: none"></div>
 </div>
 
 {% endblock %}
