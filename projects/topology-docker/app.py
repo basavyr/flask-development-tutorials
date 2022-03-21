@@ -51,7 +51,7 @@ def request_container_db():
     containers = tools.get_docker_containers()
     n_rows = len(containers)
     n_cols = len(containers[0])
-    T = table.table(['header1', 'header2', 'header3', 'header4'],
+    T = table.table(['Container ID', 'Image', 'Container Name', 'Container Status'],
                     containers, n_rows, n_cols)
     emit('receive_container_db', {
         "db": containers,

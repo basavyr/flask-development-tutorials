@@ -15,8 +15,10 @@ def generate_rows(table_data, n_rows, n_cols):
     for row in range(n_rows):
         item = '<tr>\n'
         for col in range(n_cols):
-            item += f'<td>{table_data[row][col]}</td>\n'
-            # item += f'<td></td>\n'
+            if(int(table_data[row][3]) == 1):
+                item += f'<td style="color:lightgreen;">{table_data[row][col]}</td>\n'
+            else:
+                item += f'<td style="color:lightcoral;">{table_data[row][col]}</td>\n'
         item += '</tr>\n'
         res_string += item
 
