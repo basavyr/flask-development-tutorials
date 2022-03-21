@@ -69,7 +69,12 @@ $("document").ready(() => {
 
     //access the action-stop-container class and add a click event listener
     $(".action-stop-container").click(() => {
-      console.log("User clicked STOP container");
+      // console.log("User clicked STOP container");
+    });
+
+    //access the action-start-container class and add a click event listener
+    $(".action-start-container").click(() => {
+      // console.log("User clicked START container");
     });
 
     // get the table row when the start button of a particular container is clicked
@@ -78,7 +83,14 @@ $("document").ready(() => {
     // source https://stackoverflow.com/questions/376081/how-to-get-a-table-cell-value-using-jquery
     // source https://stackoverflow.com/questions/19832621/how-to-get-the-value-of-tr-of-a-table-using-jquery-on-click
     $(".docker-tabular").on("click", ".action-start-container", function () {
-      console.log("User clicked START container");
+      console.log("User requested container:START");
+      var current_container = $(this).closest("tr");
+      var container_id = current_container.find("td:eq(1)").text();
+      console.log(container_id);
+      // var container_id_order = current_container.find("td:eq(0)").text();
+    });
+    $(".docker-tabular").on("click", ".action-stop-container", function () {
+      console.log("User requested container:STOP");
       var current_container = $(this).closest("tr");
       // var current_container = $(this).closest("tr").find("td:eq(0)").text();
       // var container_id_order = current_container.find(".nr").text();
