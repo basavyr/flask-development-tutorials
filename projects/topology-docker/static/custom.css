@@ -39,6 +39,7 @@
 .docker-tabular {
   border: 2px solid grey;
   padding: 5px;
+  /* color: aqua; */
 }
 
 .docker-tabular th {
