@@ -46,7 +46,6 @@ $("document").ready(() => {
   sio.on("receive_container_db", (data) => {
     var container_db = data["db"];
     //change the container_db to a string
-    var container_db_string = JSON.stringify(container_db);
 
     var container_table = data["table"];
     $("#tabs").html(container_table);

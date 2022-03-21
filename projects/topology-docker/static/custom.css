@@ -35,3 +35,18 @@
   background-color: #e5e5e5;
   font-weight: bold;
 }
+
+.docker-tabular {
+  border: 2px solid grey;
+  padding: 5px;
+}
+
+.docker-tabular th {
+  border: 2px solid grey;
+  text-align: center;
+}
+
+.docker-tabular td {
+  /* border: 2px solid grey; */
+  text-align: center;
+}
