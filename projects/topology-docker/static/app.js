@@ -65,5 +65,29 @@ $("document").ready(() => {
     tabular_html += "</div>";
     // change the html for the topology div
     $("#topology").html(tabular_html);
+
+    //access the action-start-container class and add a click event listener
+    $(".action-start-container").click(() => {
+      //access the table values
+      $("#docker-table tr").each(() => {
+        // var customerId = $(this).find("td:first").val();
+        var customerId = $(this).find("td").eq(0).html();
+        console.log(customerId);
+      });
+      console.log("User clicked START container");
+    });
+
+    //access the action-stopÎ-container class and add a click event listener
+    $(".action-stop-container").click(() => {
+      console.log("User clicked STOP container");
+    });
+
+    // $("#action-start-container").on("click", () => {
+    //   console.log("User clicked START container");
+    // });
+
+    // $("#action-stop-container").on("click", () => {
+    //   console.log("User clicked STOP container");
+    // });
   });
 });
