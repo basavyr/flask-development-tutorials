@@ -111,6 +111,13 @@ $("document").ready(() => {
     });
   });
 
+  sio.on("response_container_details", function (msg) {
+    console.log(msg.status);
+    var cont = $(".topology").find(".container-active p");
+    console.log(cont);
+    cont.append("<p>" + msg.status + "</p>");
+  });
+
   $(".topology").on("click", ".container-inactive", function () {
     // console.log("User clicked on inactive container");
     box_text = $(this).find("p").text();
