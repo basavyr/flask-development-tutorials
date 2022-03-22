@@ -133,11 +133,25 @@ def get_container_db():
     # retrieve the content from the database once it has been updated
     db_conn = db.connect(DB_FILE)
     raw_data = db_conn.execute('SELECT * FROM CONTAINERS').fetchall()
-    print(raw_data)
+    if (len(raw_data) == 0):
+        return []
+    # the final container list to be returned as result
+    container_list = []
+    for data in raw_data:
+        container = [d for d in data]
+        container_list.append(container)
+    return container_list
 
 
 def main():
-    get_container_db()
+    C = get_container_db()
+    C = []
+    try:
+        assert C != [], 'Issue while retreiving the containers'
+    except AssertionError as issue:
+        print(issue)
+    else:
+        print(f'All good -> {C}')
 
 
 if __name__ == '__main__':
