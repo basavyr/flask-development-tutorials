@@ -112,9 +112,12 @@ $("document").ready(() => {
   });
 
   sio.on("response_container_details", function (msg) {
-    console.log(msg.status);
-    var cont = $(".topology").find(".container-active p");
-    console.log(cont);
+    c_id = msg.id;
+    // select only the container box that corresponds to the clicked one
+    var cont = $(".topology").find(
+      ".container-active p:contains('#" + c_id + "')"
+    );
+    // console.log(cont);
     cont.append("<p>" + msg.status + "</p>");
   });
 
