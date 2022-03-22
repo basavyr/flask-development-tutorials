@@ -66,11 +66,16 @@ def docker_action(msg):
     elif msg['req'] == 'STOP':
         exe.execute_docker_command('stop', msg['container_id'])
 
+    # add blocking operation in order to emit a changed state of the container within the database
+    time.sleep(1)
+
     containers = tools.get_docker_containers()
+
     n_rows = len(containers)
     n_cols = len(containers[0])
     T = table.table(['Container ID', 'Image', 'Container Name', 'Container Status'],
                     containers, n_rows, n_cols)
+
     emit('receive_container_db', {
         "db": containers,
         "table": T,
@@ -81,7 +86,7 @@ def docker_action(msg):
 def request_container_details(msg):
     container = str(msg['container_id'])
     print(f'Will process container #{container}')
-    emit('response_container_details', {"status": 'CLICK'})
+    emit('response_container_details', {"status": 'CLICK', "id": container})
 
 
 def main():
