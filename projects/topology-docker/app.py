@@ -53,8 +53,17 @@ def request_container_db():
     print(f'Refreshing the docker database')
 
     containers = tools.get_docker_containers()
-    n_rows = len(containers)
-    n_cols = len(containers[0])
+    try:
+        n_rows = len(containers)
+        n_cols = len(containers[0])
+    except TypeError as issue:
+        emit('receive_container_db', {
+            "db": [],
+            "table": '-',
+        })
+        return
+    else:
+        pass
     T = table.table(['Container ID', 'Image', 'Container Name', 'Container Status'],
                     containers, n_rows, n_cols)
     emit('receive_container_db', {
