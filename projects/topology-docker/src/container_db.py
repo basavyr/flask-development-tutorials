@@ -41,10 +41,24 @@ def get_docker_containers():
     docker_ps = ['docker', 'ps']
     docker_ps_a = ['docker', 'ps', '-a']
 
-    # execute process for retreiving only the active/started containers from the system
-    proc_docker_ps = subprocess.Popen(docker_ps, stdout=PIPE, stderr=PIPE)
-    # execute process for retreiving ALL the containers from the system
-    proc_docker_ps_a = subprocess.Popen(docker_ps_a, stdout=PIPE, stderr=PIPE)
+    try:
+        # execute process for retreiving only the active/started containers from the system
+        proc_docker_ps = subprocess.Popen(docker_ps, stdout=PIPE, stderr=PIPE)
+    except Exception:
+        print('Cannot run docker ps command')
+        return -1
+    else:
+        pass
+
+    try:
+        # execute process for retreiving ALL the containers from the system
+        proc_docker_ps_a = subprocess.Popen(
+            docker_ps_a, stdout=PIPE, stderr=PIPE)
+    except Exception:
+        print('Cannot run docker ps -a command')
+        return -1
+    else:
+        pass
 
     stdout_ps, stderr_ps = proc_docker_ps.communicate()
     try:
@@ -116,12 +130,12 @@ def get_container_db():
     # the function returns the containers as a list object
     docker_containers = get_docker_containers()
     if(docker_containers == -1):
-        print('cannot retrieve a list of containers...')
+        print('Container list has an invalid format -> [] = -1')
         return []
 
     # add the docker containers in a database
     # 1 -> create the database file
-    container_db = create_container_db()
+    create_container_db()
     # 2-> make a connection to the (pre-existing) database
     db_connection = db.connect(DB_FILE)
     with closing(db_connection):
