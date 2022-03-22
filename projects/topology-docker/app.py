@@ -81,6 +81,7 @@ def docker_action(msg):
 def request_container_details(msg):
     container = str(msg['container_id'])
     print(f'Will process container #{container}')
+    emit('response_container_details', {"status": 'CLICK'})
 
 
 def main():
