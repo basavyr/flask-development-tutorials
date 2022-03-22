@@ -1,4 +1,5 @@
 from curses import raw
+from shelve import DbfilenameShelf
 import subprocess
 from subprocess import PIPE
 import sqlite3 as db
@@ -50,6 +51,9 @@ def get_docker_containers():
         assert stderr_ps == b'', 'Error while running the command'
     except AssertionError as issue:
         # if error occurs, stop the process
+        # add a print function for debugging
+        print(issue)
+        print(stderr_ps.decode('utf-8'))
         return -1
     else:
         # first decode the command result from binary to standard utf8
@@ -113,8 +117,7 @@ def get_container_db():
     docker_containers = get_docker_containers()
     if(docker_containers == -1):
         print('cannot retrieve a list of containers...')
-        return
-    print(docker_containers)
+        return []
 
     # add the docker containers in a database
     # 1 -> create the database file
@@ -123,9 +126,14 @@ def get_container_db():
     db_connection = db.connect(DB_FILE)
     with closing(db_connection):
         # use the container list obtained above as a data source for the opened database
-        print('adding container list to the database...')
+        # print('adding container list to the database...')
         add_containers_to_db(db_connection, docker_containers)
-        print('finished updating the database...')
+        # print('finished updating the database...')
+
+    # retrieve the content from the database once it has been updated
+    db_conn = db.connect(DB_FILE)
+    raw_data = db_conn.execute('SELECT * FROM CONTAINERS').fetchall()
+    print(raw_data)
 
 
 def main():
