@@ -77,6 +77,12 @@ def docker_action(msg):
     })
 
 
+@socketio.event
+def request_container_details(msg):
+    container = str(msg['container_id'])
+    print(f'Will process container #{container}')
+
+
 def main():
     socketio.run(app, port=PORT, host=HOST)
 
