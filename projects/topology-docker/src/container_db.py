@@ -41,21 +41,21 @@ def get_docker_containers():
     docker_ps = ['docker', 'ps']
     docker_ps_a = ['docker', 'ps', '-a']
 
+    # execute process for retreiving only the active/started containers from the system
     try:
-        # execute process for retreiving only the active/started containers from the system
         proc_docker_ps = subprocess.Popen(docker_ps, stdout=PIPE, stderr=PIPE)
     except Exception:
-        print('Cannot run docker ps command')
+        # print('Cannot run docker ps command')
         return -1
     else:
         pass
 
+    # execute process for retreiving ALL the containers from the system
     try:
-        # execute process for retreiving ALL the containers from the system
         proc_docker_ps_a = subprocess.Popen(
             docker_ps_a, stdout=PIPE, stderr=PIPE)
     except Exception:
-        print('Cannot run docker ps -a command')
+        # print('Cannot run docker ps -a command')
         return -1
     else:
         pass
@@ -66,8 +66,8 @@ def get_docker_containers():
     except AssertionError as issue:
         # if error occurs, stop the process
         # add a print function for debugging
-        print(issue)
-        print(stderr_ps.decode('utf-8'))
+        # print(issue)
+        # print(stderr_ps.decode('utf-8'))
         return -1
     else:
         # first decode the command result from binary to standard utf8
@@ -130,7 +130,7 @@ def get_container_db():
     # the function returns the containers as a list object
     docker_containers = get_docker_containers()
     if(docker_containers == -1):
-        print('Container list has an invalid format -> [] = -1')
+        # print('Container list has an invalid format -> [] = -1')
         return []
 
     # add the docker containers in a database
@@ -155,6 +155,7 @@ def get_container_db():
         container = [d for d in data[1:]]
         print(container)
         container_list.append(container)
+
     return container_list
 
 
