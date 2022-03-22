@@ -138,14 +138,14 @@ def get_container_db():
     # the final container list to be returned as result
     container_list = []
     for data in raw_data:
-        container = [d for d in data]
+        container = [d for d in data[1:]]
+        print(container)
         container_list.append(container)
     return container_list
 
 
 def main():
     C = get_container_db()
-    C = []
     try:
         assert C != [], 'Issue while retreiving the containers'
     except AssertionError as issue:
