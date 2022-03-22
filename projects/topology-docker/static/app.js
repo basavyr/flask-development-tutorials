@@ -101,9 +101,20 @@ $("document").ready(() => {
   });
 
   $(".topology").on("click", ".container-active", function () {
-    console.log("User clicked on active container");
-    container_id = $(this).find("p").text();
-    console.log(container_id.substring(container_id.indexOf("#") + 1));
-    sio.emit("request_container_details");
+    // console.log("User clicked on active container");
+    box_text = $(this).find("p").text();
+    container_id = box_text.substring(box_text.indexOf("#") + 1);
+    // console.log(container_id);
+    sio.emit("request_container_details", {
+      container_id: container_id,
+      req: "STOP",
+    });
+  });
+
+  $(".topology").on("click", ".container-inactive", function () {
+    // console.log("User clicked on inactive container");
+    box_text = $(this).find("p").text();
+    container_id = box_text.substring(box_text.indexOf("#") + 1);
+    // sio.emit("request_container_details");
   });
 });
