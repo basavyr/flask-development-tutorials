@@ -109,12 +109,23 @@ def add_containers_to_db(db_connection, containers):
 
 def get_container_db():
     # execute the docker command on the local system and get the complete list of docker containers
+    # the function returns the containers as a list object
     docker_containers = get_docker_containers()
+    if(docker_containers == -1):
+        print('cannot retrieve a list of containers...')
+        return
+    print(docker_containers)
 
+    # add the docker containers in a database
+    # 1 -> create the database file
     container_db = create_container_db()
+    # 2-> make a connection to the (pre-existing) database
     db_connection = db.connect(DB_FILE)
     with closing(db_connection):
+        # use the container list obtained above as a data source for the opened database
+        print('adding container list to the database...')
         add_containers_to_db(db_connection, docker_containers)
+        print('finished updating the database...')
 
 
 def main():
