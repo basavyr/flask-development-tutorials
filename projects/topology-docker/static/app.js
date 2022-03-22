@@ -61,6 +61,8 @@ $("document").ready(() => {
       }
       container_div +=
         "<p> <strong>Container #" + container_topology[i][0] + "</strong></p>";
+      container_div +=
+        "<p> <strong>Container #" + container_topology[i][0] + "</strong></p>";
       container_div += "</div>";
       tabular_html += container_div;
     }
@@ -96,5 +98,11 @@ $("document").ready(() => {
 
       sio.emit("docker_action", { req: "STOP", container_id: container_id });
     });
+  });
+
+  $(".topology").on("click", ".container-active", function () {
+    console.log("User clicked on active container");
+    value = $(this).find("p").text();
+    console.log(value);
   });
 });
