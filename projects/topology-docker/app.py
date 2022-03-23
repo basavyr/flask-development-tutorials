@@ -39,13 +39,11 @@ def show_index():
 
 @app.route('/docker', methods=['GET', 'POST'])
 def show_docker():
-    docker_containers_0 = tools.get_docker_containers()
-    docker_containers_1 = tools.get_container_db()
-    print(docker_containers_0)
-    print(docker_containers_1)
-    return render_template('view.html')
-    # return render_template('view.html',
-    #                        docker_containers=docker_containers)
+    # get the docker containers via the list -> db -> list  workflow
+    docker_containers = tools.get_container_db()
+    print(docker_containers)
+    return render_template('view.html',
+                           docker_containers=docker_containers)
 
 
 @socketio.event
