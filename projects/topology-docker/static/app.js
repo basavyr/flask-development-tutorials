@@ -6,7 +6,7 @@ $("document").ready(() => {
   var retrieve_db_on_document_ready = false;
   if (retrieve_db_on_document_ready) {
     sio.emit("request_container_db");
-  } else console.log("No db retrieval required");
+  } else console.log("No db retrieval required on document load");
 
   var request_db_on_click = true;
 
@@ -114,36 +114,45 @@ $("document").ready(() => {
     sio.emit("request_container_details", {
       container_id: container_id,
       req: "STOP",
+      status: "active",
     });
   });
 
   $(".topology").on("click", ".container-inactive", function () {
     // console.log("User clicked on inactive container");
-    box_text = $(this).find("p").text();
+    box_text = $(this).find("p:first").text();
+    // console.log(box_text);
     container_id = box_text.substring(box_text.indexOf("#") + 1);
     // console.log(container_id);
     sio.emit("request_container_details", {
       container_id: container_id,
       req: "START",
+      status: "inactive",
     });
   });
 
+  //generate an html render on the response from container request sio event
+  //active container case
   sio.on("response_container_details", function (msg) {
     //get the container id from the message
     c_id = msg.id;
-    // select only the container box that corresponds to the c_id
-    var cont = $(".topology").find(
-      ".container-active p:contains('#" + c_id + "')"
-    );
-    console.log(cont);
-    cont.append("<p>" + msg.status + "</p>");
-  });
-
-  $(".topology").on("click", ".container-inactive", function () {
-    // console.log("User clicked on inactive container");
-    box_text = $(this).find("p").text();
-    container_id = box_text.substring(box_text.indexOf("#") + 1);
-    // sio.emit("request_container_details");
+    // get the status of the container (given the type of box the user clicked on)
+    c_status = msg.status;
+    console.log(c_status);
+    if (c_status == 1) {
+      // select only the active container box that corresponds to the c_id
+      var active_box = $(".topology").find(
+        ".container-active p:contains('#" + c_id + "')"
+      );
+      console.log(active_box);
+    } else {
+      // select only the inactive container box that corresponds to the c_id
+      var inactive_box = $(".topology").find(
+        ".container-inactive p:contains('#" + c_id + "')"
+      );
+      console.log(inactive_box);
+    }
+    // cont.append("<p>" + msg.status + "</p>");
   });
 
   sio.on("docker_db_fail", function (msg) {
