@@ -4,6 +4,8 @@ from pickle import EMPTY_LIST
 import subprocess
 from subprocess import PIPE
 from sys import stderr
+import json
+
 
 EMPTY_LIST = []
 
@@ -41,7 +43,20 @@ def execute_docker_inspect(docker_id):
         stdout, stderr = process.communicate(timeout=15)
     except subprocess.TimeoutExpired:
         process.kill()
-        return EMPTY_LIST
+        return -1
     else:
-        with open(f'docker.{docker_id}.inspect.dat', 'w+') as writer:
+        docker_file = f'docker.{docker_id}.inspect.dat'
+        with open(docker_file, 'w+') as writer:
             writer.write(stdout.decode('utf-8'))
+
+    return docker_file
+
+
+def process_string(docker_file):
+    with open(docker_file, 'r+') as reader:
+        y = json.loads(reader.read().strip())
+        container_IP = print(y[0]['NetworkSettings']['IPAddress'])
+        container_Gateway = print(y[0]['NetworkSettings']['Gateway'])
+        container_MacAddress = print(y[0]['NetworkSettings']['MacAddress'])
+
+    return [container_IP, container_Gateway, container_MacAddress]
