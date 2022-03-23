@@ -45,7 +45,6 @@ def show_docker():
 @socketio.event
 def request_container_db():
     # print(f'Refreshing the docker database')
-
     # get the docker containers via the list -> db -> list  workflow
     docker_containers = get_container_db()
     if docker_containers == EMPTY_LIST:
@@ -62,7 +61,6 @@ def request_container_db():
             return
         else:
             pass
-
         T = table.table(['Container ID', 'Image', 'Container Name', 'Container Status'],
                         docker_containers, n_rows, n_cols)
         emit('receive_container_db', {
