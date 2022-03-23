@@ -2,13 +2,13 @@ from crypt import methods
 from flask_socketio import SocketIO
 from flask_socketio import emit
 from flask import Flask, render_template
-from random import random
 import time
 from threading import Thread, Event
 from threading import Lock
 
 
 from src.container_db import get_container_db
+from src.container_db import EMPTY_LIST
 import src.table_generator as table
 import src.execute_commands as exe
 
@@ -39,17 +39,18 @@ def show_index():
 
 @app.route('/docker', methods=['GET', 'POST'])
 def show_docker():
-    # get the docker containers via the list -> db -> list  workflow
-    docker_containers = get_container_db()
-    return render_template('view.html',
-                           docker_containers=docker_containers)
+    return render_template('view.html')
 
 
 @socketio.event
 def request_container_db():
     print(f'Refreshing the docker database')
 
+    # get the docker containers via the list -> db -> list  workflow
     docker_containers = get_container_db()
+    if docker_containers == EMPTY_LIST:
+        emit('docker_db_fail', {
+             'msg': 'Issue when retreiving the database with docker containers'})
 
     try:
         n_rows = len(docker_containers)

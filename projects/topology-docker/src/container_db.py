@@ -162,9 +162,9 @@ def get_container_db():
     # the function returns the containers as a list object
     docker_containers = get_docker_containers()
     if(docker_containers == EMPTY_LIST):
-        print('<<< In `get_container_db()` >>>')
+        # print('<<< In `get_container_db()` >>>')
         # print('<<< In `get_container_db()` >>>\nContainer list has an invalid format -> []')
-        print('Issues occurred while executing docker commands on the system')
+        # print('Issues occurred while executing docker commands on the system')
         # print(docker_containers)
         return EMPTY_LIST
 
