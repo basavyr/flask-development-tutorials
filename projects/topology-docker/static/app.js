@@ -164,13 +164,16 @@ $("document").ready(() => {
     // get the status of the container (given the type of box the user clicked on)
     c_status = msg.status;
 
+    //get the container info
+    c_info = msg.info;
+
     if (c_status == 1) {
       active_box = selected_box.find("div.container-details");
-      active_box.text("Container is active");
+      active_box.text("1" + c_info);
       // console.log(active_box);
     } else {
       inactive_box = selected_box.find("div.container-details");
-      inactive_box.text("Container is inactive");
+      inactive_box.text("0" + c_info);
       // console.log(inactive_box);
     }
   });
