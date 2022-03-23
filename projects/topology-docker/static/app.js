@@ -9,10 +9,14 @@ $("document").ready(() => {
     sio.emit("request_container_db");
   } else console.log("No db retrieval required");
 
+  var request_db_on_click = false;
+
   // create event listener (using socketIO) when client requests a tabular view of the database
   $("#tabular-view").click(() => {
     console.log("User requested tabular view");
-    // sio.emit("request_container_db");
+    if (request_db_on_click) {
+      sio.emit("request_container_db");
+    } else console.log("No db retrieval required");
 
     // if the topology view is selected, hide it when tabular view is selected
     if ($("#topology").is(":visible")) {
@@ -27,9 +31,12 @@ $("document").ready(() => {
     }
   });
 
+  // create event listener (using socketIO) when client requests a topological view of the database
   $("#topology-view").click(() => {
     console.log("User requested topology view");
-    sio.emit("request_container_db");
+    if (request_db_on_click) {
+      sio.emit("request_container_db");
+    } else console.log("No db retrieval required");
 
     // if the tabular view is selected, hide it when topology view is selected
     if ($("#tabs").is(":visible")) {
