@@ -72,18 +72,19 @@ def get_docker_containers():
         pass
 
     try:
-        assert stderr_ps == b'', 'Error while running the command'
+        assert stderr_ps == b'', 'Error while running docker ps'
     except AssertionError as issue:
         # if error occurs, stop the process
         # add a print function for debugging
-        print(stderr_ps.decode('utf-8'))
+        print(issue)
+        print(stderr_ps_a.decode(UTF8))
         return EMPTY_LIST
     else:
         # first decode the command result from binary to standard utf8
         decoded_string = stdout_ps.decode(UTF8)
 
-        # 1-> manipulate the raw string to a list
-        # 2->store the active containers in a list
+        # 1 -> manipulate the raw string to a list
+        # 2 -> store the active containers in a list
         active_containers = manipulate_raw_string(decoded_string)
 
         # execute the command for getting ALL the docker containers within the local system
@@ -95,7 +96,13 @@ def get_docker_containers():
         else:
             pass
 
-        if stderr_ps_a != b'':
+        try:
+            assert stderr_ps_a == b'', 'Issue while running docker ps -a'
+        except AssertionError as issue:
+            # if error occurs, stop the process
+            # add a print function for debugging
+            print(issue)
+            print(stderr_ps_a.decode(UTF8))
             return EMPTY_LIST
         else:
             # continue with processing the containers list
@@ -144,9 +151,10 @@ def get_container_db():
     # execute the docker command on the local system and get the complete list of docker containers
     # the function returns the containers as a list object
     docker_containers = get_docker_containers()
-    if(docker_containers == -1):
-        # print('Container list has an invalid format -> [] = -1')
-        return []
+    if(docker_containers == EMPTY_LIST):
+        print('Container list has an invalid format -> []')
+        print(docker_containers)
+        return EMPTY_LIST
 
     # add the docker containers in a database
     # 1 -> create the database file
@@ -155,16 +163,18 @@ def get_container_db():
     db_connection = db.connect(DB_FILE)
     with closing(db_connection):
         # use the container list obtained above as a data source for the opened database
-        # print('adding container list to the database...')
+        print('adding container list to the database...')
+        print(docker_containers)
         add_containers_to_db(db_connection, docker_containers)
-        # print('finished updating the database...')
+        print('finished updating the database...')
 
     # retrieve the content from the database once it has been updated
     db_conn = db.connect(DB_FILE)
     raw_data = db_conn.execute('SELECT * FROM CONTAINERS').fetchall()
     if (len(raw_data) == 0):
         return []
-    # the final container list to be returned as result
+
+    # the final container list which will be returned as result
     container_list = []
     for data in raw_data:
         container = [d for d in data[1:]]
@@ -180,8 +190,9 @@ def main():
         assert C != [], 'Issue while retreiving the containers'
     except AssertionError as issue:
         print(issue)
+        print(f'C-> {C}')
     else:
-        print(f'All good -> {C}')
+        print(f'All good\nC -> {C}')
 
 
 if __name__ == '__main__':
