@@ -85,8 +85,8 @@ def get_docker_containers():
     except AssertionError as issue:
         # if error occurs, stop the process
         # add a print function for debugging
-        print(issue)
-        print(stderr_ps_a.decode(UTF8))
+        # print(issue)
+        # print(stderr_ps.decode(UTF8))
         return EMPTY_LIST
     else:
         # first decode the command result from binary to standard utf8
@@ -110,8 +110,8 @@ def get_docker_containers():
         except AssertionError as issue:
             # if error occurs, stop the process
             # add a print function for debugging
-            print(issue)
-            print(stderr_ps_a.decode(UTF8))
+            # print(issue)
+            # print(stderr_ps_a.decode(UTF8))
             return EMPTY_LIST
         else:
             # continue with processing the containers list
@@ -161,7 +161,9 @@ def get_container_db():
     # the function returns the containers as a list object
     docker_containers = get_docker_containers()
     if(docker_containers == EMPTY_LIST):
-        print('<<< In `get_container_db()` >>>\nContainer list has an invalid format -> []')
+        print('<<< In `get_container_db()` >>>')
+        # print('<<< In `get_container_db()` >>>\nContainer list has an invalid format -> []')
+        print('Issues occurred while executing docker commands on the system')
         # print(docker_containers)
         return EMPTY_LIST
 
@@ -180,12 +182,14 @@ def get_container_db():
     # retrieve the content from the database once it has been updated
     db_conn = db.connect(DB_FILE)
     raw_data = db_conn.execute('SELECT * FROM CONTAINERS').fetchall()
+    # if the fetched data is an empty list, then stop the execution of the procedure
     if (len(raw_data) == 0):
-        return []
+        return EMPTY_LIST
 
     # the final container list which will be returned as result
     container_list = []
     for data in raw_data:
+        # ignore the first column from the database
         container = [d for d in data[1:]]
         print(container)
         container_list.append(container)
@@ -195,13 +199,7 @@ def get_container_db():
 
 def main():
     C = get_container_db()
-    try:
-        assert C != [], 'Issue while retreiving the containers'
-    except AssertionError as issue:
-        print(issue)
-        print(f'C-> {C}')
-    else:
-        print(f'All good\nC -> {C}')
+    print(C)
 
 
 if __name__ == '__main__':
