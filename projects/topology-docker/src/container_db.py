@@ -27,12 +27,21 @@ def manipulate_raw_string(raw_string):
 def get_active_containers():
     docker_cmd = ['docker', 'ps']
     process = subprocess.Popen(docker_cmd, stdout=PIPE, stderr=PIPE)
-    stdout, stderr = process.communicate()
+
+    try:
+        stdout, stderr = process.communicate(timeout=15)
+    except subprocess.TimeoutExpired:
+        process.kill()
+        return EMPTY_LIST
 
     try:
         assert stderr == b'', 'Error while running the command'
     except AssertionError as issue:
-        return []
+        # if error occurs, stop the process
+        # add a print function for debugging
+        print(issue)
+        print(stderr.decode(UTF8))
+        return EMPTY_LIST
     else:
         return manipulate_raw_string(stdout.decode(UTF8))
 
@@ -152,8 +161,8 @@ def get_container_db():
     # the function returns the containers as a list object
     docker_containers = get_docker_containers()
     if(docker_containers == EMPTY_LIST):
-        print('Container list has an invalid format -> []')
-        print(docker_containers)
+        print('<<< In `get_container_db()` >>>\nContainer list has an invalid format -> []')
+        # print(docker_containers)
         return EMPTY_LIST
 
     # add the docker containers in a database
