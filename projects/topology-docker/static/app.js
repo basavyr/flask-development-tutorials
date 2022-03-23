@@ -69,6 +69,7 @@ $("document").ready(() => {
       container_div +=
         "<p> <strong>Container #" + container_topology[i][0] + "</strong></p>";
       container_div += '<p class="p-name">' + container_topology[i][2] + "</p>";
+      container_div += '<div class="container-details"></div>';
       container_div += "</div>";
       tabular_html += container_div;
     }
@@ -140,17 +141,18 @@ $("document").ready(() => {
     var selected_box = $(".topology")
       .find("p:contains('#" + c_id + "')")
       .parent();
-    console.log(selected_box);
 
     // get the status of the container (given the type of box the user clicked on)
     c_status = msg.status;
 
     if (c_status == 1) {
-      active_box = selected_box.find("p:last").text();
-      console.log(active_box);
+      active_box = selected_box.find("div.container-details");
+      active_box.text("Container is active");
+      // console.log(active_box);
     } else {
-      inactive_box = selected_box.find("p:last").text();
-      console.log(inactive_box);
+      inactive_box = selected_box.find("div.container-details");
+      inactive_box.text("Container is inactive");
+      // console.log(inactive_box);
     }
   });
 
