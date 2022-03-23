@@ -21,8 +21,8 @@ def execute_docker_command(command, docker_id):
     stdout, stderr = process.communicate()
     # print('after communicate()')
 
-    if (stdout.decode('utf-8').strip() == str(docker_id)):
-        print('Docker container state was successfully changed')
+    # if (stdout.decode('utf-8').strip() == str(docker_id)):
+    #     print('Docker container state was successfully changed')
 
     try:
         assert stderr == b'', 'Issue while executing the command'
@@ -61,11 +61,11 @@ def process_string(raw_string):
     container_MacAddress = JSON_OBJECT[0]['NetworkSettings']['MacAddress']
 
     if container_IP == '':
-        container_IP = '-'
+        container_IP = 'n/a'
     if container_Gateway == '':
-        container_Gateway = '-'
+        container_Gateway = 'n/a'
     if container_MacAddress == '':
-        container_MacAddress = '-'
+        container_MacAddress = 'n/a'
 
     # print([container_IP, container_Gateway, container_MacAddress])
     return [container_IP, container_Gateway, container_MacAddress]

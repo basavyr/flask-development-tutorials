@@ -67,8 +67,11 @@ $("document").ready(() => {
         container_div = '<div class="container-inactive">';
       }
       container_div +=
-        "<p> <strong>Container #" + container_topology[i][0] + "</strong></p>";
-      container_div += '<p class="p-name">' + container_topology[i][2] + "</p>";
+        '<p style="float: left;"><strong>#' +
+        container_topology[i][0] +
+        "</strong></p>";
+      container_div +=
+        '<p class="p-name">&nbsp|&nbsp' + container_topology[i][2] + "</p>";
       container_div +=
         '<div class="container-details" style="display: none"></div>';
       container_div += "</div>";
