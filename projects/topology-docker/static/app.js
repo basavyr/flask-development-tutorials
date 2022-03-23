@@ -5,7 +5,6 @@ $("document").ready(() => {
 
   var retrieve_db_on_document_ready = false;
   if (retrieve_db_on_document_ready) {
-    // console.log("Will retrieve db on document ready");
     sio.emit("request_container_db");
   } else console.log("No db retrieval required");
 
@@ -138,5 +137,7 @@ $("document").ready(() => {
 
   sio.on("docker_db_fail", function (msg) {
     console.log(msg.msg);
+    $("#tabs").html("<p><strong>Table</strong>: No containers found</p>");
+    $("#topology").html("<p><strong>Topology</strong>: No containers found</p>");
   });
 });
