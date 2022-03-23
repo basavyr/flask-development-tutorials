@@ -9,9 +9,13 @@ from sys import stderr
 
 UTF8 = 'utf-8'
 DB_FILE = 'containers.docker.db'
+EMPTY_LIST = []
 
 
 def manipulate_raw_string(raw_string):
+    """
+    - obtain a list of containers from the initial raw string provided by subprocess
+    """
     processed_raw_string = []
     for line in str(raw_string).strip().split('\n')[1:]:
         c_line = line.split()
@@ -36,7 +40,8 @@ def get_active_containers():
 def get_docker_containers():
     """
     - Retreive all the docker containers that are installed on the current machine
-    - The function returns a tuple list containing the container ID, the image name, and the status of the container
+    - The function returns a tuple list containing the container ID, the image name, the container name, and the status of the container
+    - Returns an empty list if any errors occur during the command execution
     """
     docker_ps = ['docker', 'ps']
     docker_ps_a = ['docker', 'ps', '-a']
@@ -45,8 +50,7 @@ def get_docker_containers():
     try:
         proc_docker_ps = subprocess.Popen(docker_ps, stdout=PIPE, stderr=PIPE)
     except Exception:
-        # print('Cannot run docker ps command')
-        return -1
+        return EMPTY_LIST
     else:
         pass
 
@@ -55,33 +59,44 @@ def get_docker_containers():
         proc_docker_ps_a = subprocess.Popen(
             docker_ps_a, stdout=PIPE, stderr=PIPE)
     except Exception:
-        # print('Cannot run docker ps -a command')
-        return -1
+        return EMPTY_LIST
     else:
         pass
 
-    stdout_ps, stderr_ps = proc_docker_ps.communicate()
+    try:
+        stdout_ps, stderr_ps = proc_docker_ps.communicate(timeout=15)
+    except subprocess.TimeoutExpired:
+        proc_docker_ps.kill()
+        return EMPTY_LIST
+    else:
+        pass
+
     try:
         assert stderr_ps == b'', 'Error while running the command'
     except AssertionError as issue:
         # if error occurs, stop the process
         # add a print function for debugging
-        # print(issue)
-        # print(stderr_ps.decode('utf-8'))
-        return -1
+        print(stderr_ps.decode('utf-8'))
+        return EMPTY_LIST
     else:
         # first decode the command result from binary to standard utf8
         decoded_string = stdout_ps.decode(UTF8)
-        # manipulate the raw string to a list
 
-        # store the active containers in a list
+        # 1-> manipulate the raw string to a list
+        # 2->store the active containers in a list
         active_containers = manipulate_raw_string(decoded_string)
 
-        # execute the command for getting all the docker containers within the local system
-        stdout_ps_a, stderr_ps_a = proc_docker_ps_a.communicate()
+        # execute the command for getting ALL the docker containers within the local system
+        try:
+            stdout_ps_a, stderr_ps_a = proc_docker_ps_a.communicate(timeout=15)
+        except subprocess.TimeoutExpired:
+            proc_docker_ps_a.kill()
+            return EMPTY_LIST
+        else:
+            pass
 
         if stderr_ps_a != b'':
-            return -1
+            return EMPTY_LIST
         else:
             # continue with processing the containers list
             decoded_string = stdout_ps_a.decode(UTF8)
