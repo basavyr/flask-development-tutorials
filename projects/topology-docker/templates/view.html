@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %} Docker {% endblock%} {%block body%}
+
+<script src="static/app.js"></script>
+
+<h1>Docker containers</h1>
+
+<p>
+  A complete view with the containers that run under the docker daemon, on the
+  local machine.
+</p>
+
+<form action="/" style="padding: 10px">
+  <input type="submit" value="Back to Index" class="btn btn-primary" />
+</form>
+
+<h2>Container views</h2>
+
+<p>Select a type of view for the docker containers.</p>
+
+<div class="view-buttons">
+  <button id="tabular-view" class="btn btn-primary">Tabular View</button>
+  <button id="topology-view" class="btn btn-primary">Topology View</button>
+</div>
+
+<div class="view-divs">
+  <!-- add the tabular view  -->
+  <div id="tabs" style="display: none"></div>
+  <!-- add the topology view -->
+  <div id="topology" style="display: block" class="topology"></div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block title %} Index {% endblock%} {%block body%}
+
+<h1>Index</h1>
+
+<p>App that shows a list of docker containers running on the local machine.</p>
+
+<form action="/docker" style="padding: 10px">
+  <input
+    id="docker_view"
+    type="submit"
+    value="Docker service"
+    class="btn btn-primary"
+  />
+</form>
+
+{%endblock %}
