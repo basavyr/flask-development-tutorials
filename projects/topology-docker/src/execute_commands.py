@@ -45,18 +45,20 @@ def execute_docker_inspect(docker_id):
         process.kill()
         return -1
     else:
-        docker_file = f'docker.{docker_id}.inspect.dat'
-        with open(docker_file, 'w+') as writer:
-            writer.write(stdout.decode('utf-8'))
+        # docker_file = f'docker.{docker_id}.inspect.dat'
+        # with open(docker_file, 'w+') as writer:
+        #     writer.write(stdout.decode('utf-8'))
+        container_inspect = stdout.decode('utf-8')
 
-    return docker_file
+    # return docker_file
+    return container_inspect
 
 
-def process_string(docker_file):
-    with open(docker_file, 'r+') as reader:
-        y = json.loads(reader.read().strip())
-        container_IP = print(y[0]['NetworkSettings']['IPAddress'])
-        container_Gateway = print(y[0]['NetworkSettings']['Gateway'])
-        container_MacAddress = print(y[0]['NetworkSettings']['MacAddress'])
+def process_string(raw_string):
+    JSON_OBJECT = json.loads(raw_string.strip())
+    container_IP = JSON_OBJECT[0]['NetworkSettings']['IPAddress']
+    container_Gateway = JSON_OBJECT[0]['NetworkSettings']['Gateway']
+    container_MacAddress = JSON_OBJECT[0]['NetworkSettings']['MacAddress']
 
+    print([container_IP, container_Gateway, container_MacAddress])
     return [container_IP, container_Gateway, container_MacAddress]
