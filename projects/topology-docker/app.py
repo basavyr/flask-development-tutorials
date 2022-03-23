@@ -8,7 +8,7 @@ from threading import Thread, Event
 from threading import Lock
 
 
-import src.container_db as tools
+from src.container_db import get_container_db
 import src.table_generator as table
 import src.execute_commands as exe
 
@@ -40,7 +40,7 @@ def show_index():
 @app.route('/docker', methods=['GET', 'POST'])
 def show_docker():
     # get the docker containers via the list -> db -> list  workflow
-    docker_containers = tools.get_container_db()
+    docker_containers = get_container_db()
     print(docker_containers)
     return render_template('view.html',
                            docker_containers=docker_containers)
@@ -50,22 +50,22 @@ def show_docker():
 def request_container_db():
     print(f'Refreshing the docker database')
 
-    containers = tools.get_docker_containers()
+    docker_containers = get_container_db()
+    print(docker_containers)
     try:
-        n_rows = len(containers)
-        n_cols = len(containers[0])
+        n_rows = len(docker_containers)
+        n_cols = len(docker_containers[0])
     except TypeError as issue:
-        emit('receive_container_db', {
-            "db": [],
-            "table": '-',
-        })
+        print('In <<< request_container_db() >>>')
+        print('sio event error')
+        print(issue)
         return
     else:
         pass
     T = table.table(['Container ID', 'Image', 'Container Name', 'Container Status'],
-                    containers, n_rows, n_cols)
+                    docker_containers, n_rows, n_cols)
     emit('receive_container_db', {
-        "db": containers,
+        "db": docker_containers,
         "table": T,
     })
 
