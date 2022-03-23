@@ -68,7 +68,7 @@ $("document").ready(() => {
       }
       container_div +=
         "<p> <strong>Container #" + container_topology[i][0] + "</strong></p>";
-      container_div += "<p>" + container_topology[i][2] + "</p>";
+      container_div += '<p class="p-name">' + container_topology[i][2] + "</p>";
       container_div += "</div>";
       tabular_html += container_div;
     }
@@ -138,21 +138,24 @@ $("document").ready(() => {
     c_id = msg.id;
     // get the status of the container (given the type of box the user clicked on)
     c_status = msg.status;
-    console.log(c_status);
     if (c_status == 1) {
       // select only the active container box that corresponds to the c_id
       var active_box = $(".topology").find(
         ".container-active p:contains('#" + c_id + "')"
       );
       console.log(active_box);
+      active_box.append("<p>" + 0 + "</p>");
     } else {
       // select only the inactive container box that corresponds to the c_id
-      var inactive_box = $(".topology").find(
-        ".container-inactive p:contains('#" + c_id + "')"
-      );
-      console.log(inactive_box);
+      // var inactive_box = $(".topology").find(
+      //   ".container-inactive p:contains('#" + c_id + "')"
+      // );
+      var selected_inactive_box = $(".topology")
+        .find("p:contains('#" + c_id + "')")
+        .parent();
+      console.log(selected_inactive_box);
+      selected_inactive_box.add('<p>' + 1 + '</p>');
     }
-    // cont.append("<p>" + msg.status + "</p>");
   });
 
   sio.on("docker_db_fail", function (msg) {
