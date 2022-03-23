@@ -15,3 +15,4 @@ projects/.DS_Store
 projects/openstack-topology/src/.DS_Store
 *.log
 
+projects/topology-docker/docker.ed57fdcf5773.inspect.dat

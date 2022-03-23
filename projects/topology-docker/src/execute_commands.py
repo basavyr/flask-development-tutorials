@@ -1,7 +1,11 @@
 from asyncio.subprocess import STDOUT
+from concurrent.futures import process
+from pickle import EMPTY_LIST
 import subprocess
 from subprocess import PIPE
 from sys import stderr
+
+EMPTY_LIST = []
 
 
 def execute_docker_command(command, docker_id):
@@ -26,3 +30,18 @@ def execute_docker_command(command, docker_id):
         return -1
     else:
         return stdout.decode('utf-8')
+
+
+def execute_docker_inspect(docker_id):
+    command = ['docker', 'inspect', f'{docker_id}']
+
+    process = subprocess.Popen(command, stdout=PIPE, stderr=PIPE)
+
+    try:
+        stdout, stderr = process.communicate(timeout=15)
+    except subprocess.TimeoutExpired:
+        process.kill()
+        return EMPTY_LIST
+    else:
+        with open(f'docker.{docker_id}.inspect.dat', 'w+') as writer:
+            writer.write(stdout.decode('utf-8'))
