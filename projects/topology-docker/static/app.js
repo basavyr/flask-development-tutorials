@@ -169,11 +169,31 @@ $("document").ready(() => {
 
     if (c_status == 1) {
       active_box = selected_box.find("div.container-details");
-      active_box.text(c_info);
+      active_box.html(
+        "<p><strong>IP:</strong> " +
+          c_info[0] +
+          "</p>" +
+          "<p><strong>Gateway:</strong> " +
+          c_info[1] +
+          "</p>" +
+          "<p><strong>MAC:</strong> " +
+          c_info[2] +
+          "</p>"
+      );
       // console.log(active_box);
     } else {
       inactive_box = selected_box.find("div.container-details");
-      inactive_box.text(c_info);
+      inactive_box.html(
+        "<p><strong>IP:</strong> " +
+          c_info[0] +
+          "</p>" +
+          "<p><strong>Gateway:</strong> " +
+          c_info[1] +
+          "</p>" +
+          "<p><strong>MAC:</strong> " +
+          c_info[2] +
+          "</p>"
+      );
       // console.log(inactive_box);
     }
   });
