@@ -48,6 +48,7 @@ def get_active_containers():
 
 def get_docker_containers():
     """
+    - <<< THIS FUNCTION MUST BE CALLED ONLY WITHIN THE CURRENT MODULE >>>
     - Retreive all the docker containers that are installed on the current machine
     - The function returns a tuple list containing the container ID, the image name, the container name, and the status of the container
     - Returns an empty list if any errors occur during the command execution
