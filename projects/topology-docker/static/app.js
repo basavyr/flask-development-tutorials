@@ -118,6 +118,17 @@ $("document").ready(() => {
     });
   });
 
+  $(".topology").on("click", ".container-inactive", function () {
+    // console.log("User clicked on inactive container");
+    box_text = $(this).find("p").text();
+    container_id = box_text.substring(box_text.indexOf("#") + 1);
+    // console.log(container_id);
+    sio.emit("request_container_details", {
+      container_id: container_id,
+      req: "START",
+    });
+  });
+
   sio.on("response_container_details", function (msg) {
     //get the container id from the message
     c_id = msg.id;
@@ -125,7 +136,7 @@ $("document").ready(() => {
     var cont = $(".topology").find(
       ".container-active p:contains('#" + c_id + "')"
     );
-    // console.log(cont);
+    console.log(cont);
     cont.append("<p>" + msg.status + "</p>");
   });
 
@@ -140,7 +151,7 @@ $("document").ready(() => {
     console.log(msg.msg);
     $("#tabs").html("<p><strong>Table</strong>: No containers found</p>");
     $("#topology").html(
-      '<div class="container-active"><p><strong>Topology</strong>: No containers found</p></div>'
+      '<div class="container-inactive"><p><strong>Topology</strong>: No containers found</p></div>'
     );
   });
 });

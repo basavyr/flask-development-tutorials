@@ -58,15 +58,15 @@ def request_container_db():
             print('In <<< request_container_db() >>>')
             print('sio event error')
             print(issue)
-            return
+            emit('docker_db_fail', {
+                'msg': 'Issue when retreiving the database with docker containers'})
         else:
-            pass
-        T = table.table(['Container ID', 'Image', 'Container Name', 'Container Status'],
-                        docker_containers, n_rows, n_cols)
-        emit('receive_container_db', {
-            "db": docker_containers,
-            "table": T,
-        })
+            T = table.table(['Container ID', 'Image', 'Container Name', 'Container Status'],
+                            docker_containers, n_rows, n_cols)
+            emit('receive_container_db', {
+                "db": docker_containers,
+                "table": T,
+            })
 
 
 @socketio.event
