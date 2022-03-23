@@ -9,9 +9,10 @@ $("document").ready(() => {
     sio.emit("request_container_db");
   } else console.log("No db retrieval required");
 
+  // create event listener (using socketIO) when client requests a tabular view of the database
   $("#tabular-view").click(() => {
     console.log("User requested tabular view");
-    sio.emit("request_container_db");
+    // sio.emit("request_container_db");
 
     // if the topology view is selected, hide it when tabular view is selected
     if ($("#topology").is(":visible")) {
