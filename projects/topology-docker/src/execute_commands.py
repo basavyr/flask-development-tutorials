@@ -60,5 +60,5 @@ def process_string(raw_string):
     container_Gateway = JSON_OBJECT[0]['NetworkSettings']['Gateway']
     container_MacAddress = JSON_OBJECT[0]['NetworkSettings']['MacAddress']
 
-    print([container_IP, container_Gateway, container_MacAddress])
+    # print([container_IP, container_Gateway, container_MacAddress])
     return [container_IP, container_Gateway, container_MacAddress]

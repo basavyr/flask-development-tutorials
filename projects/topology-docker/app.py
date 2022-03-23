@@ -97,17 +97,22 @@ def docker_action(msg):
 def request_container_details(msg):
     container = str(msg['container_id'])
     status = str(msg['status'])
+
     # print(f'Will process container #{container}')
     # print(f'Status of the container: {status}')
+
     container_inspect = exe.execute_docker_inspect(container)
     if(container_inspect != -1):
-        exe.process_string(container_inspect)
+        container_info = exe.process_string(container_inspect)
+    else:
+        container_info = ['-', '-', '-']
+
     if(status == 'active'):
         emit('response_container_details', {
-             "status": 1, "id": container})
+             "status": 1, "id": container, "info": container_info, })
     else:
         emit('response_container_details', {
-             "status": 0, "id": container})
+             "status": 0, "id": container, "info": container_info, })
 
 
 def main():
