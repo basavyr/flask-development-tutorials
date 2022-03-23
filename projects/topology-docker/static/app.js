@@ -3,7 +3,7 @@ $("document").ready(() => {
 
   sio = io();
 
-  var retrieve_db_on_document_ready = false;
+  var retrieve_db_on_document_ready = true;
   if (retrieve_db_on_document_ready) {
     sio.emit("request_container_db");
   } else console.log("No db retrieval required on document load");
@@ -108,7 +108,7 @@ $("document").ready(() => {
 
   $(".topology").on("click", ".container-active", function () {
     // console.log("User clicked on active container");
-    box_text = $(this).find("p").text();
+    box_text = $(this).find("p:first").text();
     container_id = box_text.substring(box_text.indexOf("#") + 1);
     // console.log(container_id);
     sio.emit("request_container_details", {
@@ -135,26 +135,22 @@ $("document").ready(() => {
   //active container case
   sio.on("response_container_details", function (msg) {
     //get the container id from the message
+    // select only the inactive container box that corresponds to the c_id
     c_id = msg.id;
+    var selected_box = $(".topology")
+      .find("p:contains('#" + c_id + "')")
+      .parent();
+    console.log(selected_box);
+
     // get the status of the container (given the type of box the user clicked on)
     c_status = msg.status;
+
     if (c_status == 1) {
-      // select only the active container box that corresponds to the c_id
-      var active_box = $(".topology").find(
-        ".container-active p:contains('#" + c_id + "')"
-      );
+      active_box = selected_box.find("p:last").text();
       console.log(active_box);
-      active_box.append("<p>" + 0 + "</p>");
     } else {
-      // select only the inactive container box that corresponds to the c_id
-      // var inactive_box = $(".topology").find(
-      //   ".container-inactive p:contains('#" + c_id + "')"
-      // );
-      var selected_inactive_box = $(".topology")
-        .find("p:contains('#" + c_id + "')")
-        .parent();
-      console.log(selected_inactive_box);
-      selected_inactive_box.add('<p>' + 1 + '</p>');
+      inactive_box = selected_box.find("p:last").text();
+      console.log(inactive_box);
     }
   });
 
