@@ -148,8 +148,10 @@ def create_container_db():
 
 def add_containers_to_db(db_connection, containers):
     # create a list of tuples with all the information required for the db
-    tuple_items = [(idx, containers[idx - 1][0], containers[idx - 1][1],
-                    containers[idx - 1][2], containers[idx - 1][3]) for idx in range(len(containers))]
+    tuple_items = [(idx, containers[idx][0], containers[idx][1],
+                    containers[idx][2], containers[idx][3]) for idx in range(len(containers))]
+
+    print(tuple_items)
 
     cursor = db_connection.cursor()
     cursor.executemany(
@@ -175,10 +177,10 @@ def get_container_db():
     db_connection = db.connect(DB_FILE)
     with closing(db_connection):
         # use the container list obtained above as a data source for the opened database
-        print('adding container list to the database...')
-        print(docker_containers)
+        # print('adding container list to the database...')
+        print(f'LIST: {docker_containers}')
         add_containers_to_db(db_connection, docker_containers)
-        print('finished updating the database...')
+        # print('finished updating the database...')
 
     # retrieve the content from the database once it has been updated
     db_conn = db.connect(DB_FILE)
@@ -192,7 +194,7 @@ def get_container_db():
     for data in raw_data:
         # ignore the first column from the database
         container = [d for d in data[1:]]
-        print(container)
+        # print(container)
         container_list.append(container)
 
     return container_list
