@@ -169,11 +169,11 @@ $("document").ready(() => {
 
     if (c_status == 1) {
       active_box = selected_box.find("div.container-details");
-      active_box.text("1" + c_info);
+      active_box.text(c_info);
       // console.log(active_box);
     } else {
       inactive_box = selected_box.find("div.container-details");
-      inactive_box.text("0" + c_info);
+      inactive_box.text(c_info);
       // console.log(inactive_box);
     }
   });
