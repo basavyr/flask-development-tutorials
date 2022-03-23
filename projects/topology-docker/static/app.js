@@ -68,8 +68,7 @@ $("document").ready(() => {
       }
       container_div +=
         "<p> <strong>Container #" + container_topology[i][0] + "</strong></p>";
-      // container_div +=
-      //   "<p> <strong>Container #" + container_topology[i][0] + "</strong></p>";
+      container_div += "<p>" + container_topology[i][2] + "</p>";
       container_div += "</div>";
       tabular_html += container_div;
     }
