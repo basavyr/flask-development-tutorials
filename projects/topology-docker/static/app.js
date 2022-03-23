@@ -3,7 +3,7 @@ $("document").ready(() => {
 
   sio = io();
 
-  var retrieve_db_on_document_ready = true;
+  var retrieve_db_on_document_ready = false;
   if (retrieve_db_on_document_ready) {
     // console.log("Will retrieve db on document ready");
     sio.emit("request_container_db");
