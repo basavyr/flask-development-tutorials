@@ -96,8 +96,15 @@ def docker_action(msg):
 @socketio.event
 def request_container_details(msg):
     container = str(msg['container_id'])
+    status = str(msg['status'])
     print(f'Will process container #{container}')
-    emit('response_container_details', {"status": 'CLICK', "id": container})
+    print(f'Status of the container: {status}')
+    if(status == 'active'):
+        emit('response_container_details', {
+             "status": 1, "id": container})
+    else:
+        emit('response_container_details', {
+             "status": 0, "id": container})
 
 
 def main():

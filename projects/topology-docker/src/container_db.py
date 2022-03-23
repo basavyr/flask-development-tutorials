@@ -151,8 +151,6 @@ def add_containers_to_db(db_connection, containers):
     tuple_items = [(idx, containers[idx][0], containers[idx][1],
                     containers[idx][2], containers[idx][3]) for idx in range(len(containers))]
 
-    print(tuple_items)
-
     cursor = db_connection.cursor()
     cursor.executemany(
         'INSERT INTO CONTAINERS VALUES (?,?,?,?,?)', tuple_items)
@@ -178,7 +176,7 @@ def get_container_db():
     with closing(db_connection):
         # use the container list obtained above as a data source for the opened database
         # print('adding container list to the database...')
-        print(f'LIST: {docker_containers}')
+        # print(f'LIST: {docker_containers}')
         add_containers_to_db(db_connection, docker_containers)
         # print('finished updating the database...')
 
