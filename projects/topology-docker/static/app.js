@@ -119,8 +119,9 @@ $("document").ready(() => {
   });
 
   sio.on("response_container_details", function (msg) {
+    //get the container id from the message
     c_id = msg.id;
-    // select only the container box that corresponds to the clicked one
+    // select only the container box that corresponds to the c_id
     var cont = $(".topology").find(
       ".container-active p:contains('#" + c_id + "')"
     );
@@ -138,6 +139,8 @@ $("document").ready(() => {
   sio.on("docker_db_fail", function (msg) {
     console.log(msg.msg);
     $("#tabs").html("<p><strong>Table</strong>: No containers found</p>");
-    $("#topology").html("<p><strong>Topology</strong>: No containers found</p>");
+    $("#topology").html(
+      '<div class="container-active"><p><strong>Topology</strong>: No containers found</p></div>'
+    );
   });
 });
