@@ -69,7 +69,8 @@ $("document").ready(() => {
       container_div +=
         "<p> <strong>Container #" + container_topology[i][0] + "</strong></p>";
       container_div += '<p class="p-name">' + container_topology[i][2] + "</p>";
-      container_div += '<div class="container-details"></div>';
+      container_div +=
+        '<div class="container-details" style="display: none"></div>';
       container_div += "</div>";
       tabular_html += container_div;
     }
@@ -112,6 +113,15 @@ $("document").ready(() => {
     box_text = $(this).find("p:first").text();
     container_id = box_text.substring(box_text.indexOf("#") + 1);
     // console.log(container_id);
+
+    //hide the container-details div if it is visible
+    if ($(this).find(".container-details").is(":hidden")) {
+      $(this).find(".container-details").show();
+    } else {
+      $(this).find(".container-details").hide();
+    }
+
+    // create a sio event for requesting docker details
     sio.emit("request_container_details", {
       container_id: container_id,
       req: "STOP",
@@ -125,6 +135,15 @@ $("document").ready(() => {
     // console.log(box_text);
     container_id = box_text.substring(box_text.indexOf("#") + 1);
     // console.log(container_id);
+
+    //hide the container-details div if it is visible
+    if ($(this).find(".container-details").is(":hidden")) {
+      $(this).find(".container-details").show();
+    } else {
+      $(this).find(".container-details").hide();
+    }
+
+    // create a sio event for requesting docker details
     sio.emit("request_container_details", {
       container_id: container_id,
       req: "START",
