@@ -9,7 +9,7 @@ $("document").ready(() => {
     sio.emit("request_container_db");
   } else console.log("No db retrieval required");
 
-  var request_db_on_click = false;
+  var request_db_on_click = true;
 
   // create event listener (using socketIO) when client requests a tabular view of the database
   $("#tabular-view").click(() => {
@@ -134,5 +134,9 @@ $("document").ready(() => {
     box_text = $(this).find("p").text();
     container_id = box_text.substring(box_text.indexOf("#") + 1);
     // sio.emit("request_container_details");
+  });
+
+  sio.on("docker_db_fail", function (msg) {
+    console.log(msg.msg);
   });
 });

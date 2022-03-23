@@ -44,31 +44,31 @@ def show_docker():
 
 @socketio.event
 def request_container_db():
-    print(f'Refreshing the docker database')
+    # print(f'Refreshing the docker database')
 
     # get the docker containers via the list -> db -> list  workflow
     docker_containers = get_container_db()
     if docker_containers == EMPTY_LIST:
         emit('docker_db_fail', {
              'msg': 'Issue when retreiving the database with docker containers'})
-
-    try:
-        n_rows = len(docker_containers)
-        n_cols = len(docker_containers[0])
-    except TypeError as issue:
-        print('In <<< request_container_db() >>>')
-        print('sio event error')
-        print(issue)
-        return
     else:
-        pass
+        try:
+            n_rows = len(docker_containers)
+            n_cols = len(docker_containers[0])
+        except TypeError as issue:
+            print('In <<< request_container_db() >>>')
+            print('sio event error')
+            print(issue)
+            return
+        else:
+            pass
 
-    T = table.table(['Container ID', 'Image', 'Container Name', 'Container Status'],
-                    docker_containers, n_rows, n_cols)
-    emit('receive_container_db', {
-        "db": docker_containers,
-        "table": T,
-    })
+        T = table.table(['Container ID', 'Image', 'Container Name', 'Container Status'],
+                        docker_containers, n_rows, n_cols)
+        emit('receive_container_db', {
+            "db": docker_containers,
+            "table": T,
+        })
 
 
 @socketio.event
