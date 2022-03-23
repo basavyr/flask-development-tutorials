@@ -41,7 +41,6 @@ def show_index():
 def show_docker():
     # get the docker containers via the list -> db -> list  workflow
     docker_containers = get_container_db()
-    print(docker_containers)
     return render_template('view.html',
                            docker_containers=docker_containers)
 
@@ -51,7 +50,7 @@ def request_container_db():
     print(f'Refreshing the docker database')
 
     docker_containers = get_container_db()
-    print(docker_containers)
+
     try:
         n_rows = len(docker_containers)
         n_cols = len(docker_containers[0])
@@ -62,6 +61,7 @@ def request_container_db():
         return
     else:
         pass
+
     T = table.table(['Container ID', 'Image', 'Container Name', 'Container Status'],
                     docker_containers, n_rows, n_cols)
     emit('receive_container_db', {
@@ -80,15 +80,16 @@ def docker_action(msg):
     # add blocking operation in order to emit a changed state of the container within the database
     time.sleep(1)
 
-    containers = tools.get_docker_containers()
+    docker_containers = get_container_db()
 
-    n_rows = len(containers)
-    n_cols = len(containers[0])
+    n_rows = len(docker_containers)
+    n_cols = len(docker_containers[0])
+
     T = table.table(['Container ID', 'Image', 'Container Name', 'Container Status'],
-                    containers, n_rows, n_cols)
+                    docker_containers, n_rows, n_cols)
 
     emit('receive_container_db', {
-        "db": containers,
+        "db": docker_containers,
         "table": T,
     })
 
