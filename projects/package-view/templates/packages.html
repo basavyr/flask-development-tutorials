@@ -5,4 +5,14 @@
 
 <a href="{{url_for('show_index')}}"><button>Index</button></a>
 
+<p>The list of packages are shown below</p>
+
+<div class="package-list">
+  <ol>
+    {% for package in package_list %}
+    <li><strong>{{package}}</strong></li>
+    {% endfor %}
+  </ol>
+</div>
+
 {% endblock %}

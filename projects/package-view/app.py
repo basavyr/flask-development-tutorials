@@ -40,7 +40,8 @@ def show_index():
 
 @app.route('/packages', methods=['GET', 'POST'])
 def show_packages():
-    return render_template('packages.html')
+    package_list = ['pcgk1', 'pcgk2', 'pcgk3']
+    return render_template('packages.html', package_list=package_list)
 
 
 def main():
