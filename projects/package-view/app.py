@@ -9,6 +9,8 @@ from threading import Thread, Event
 from threading import Lock
 
 
+import src.packages as pack
+
 # define the port and host that the app will run on
 PORT = 5051
 HOST = '127.0.0.1'
@@ -40,8 +42,8 @@ def show_index():
 
 @app.route('/packages', methods=['GET', 'POST'])
 def show_packages():
-    package_list = ['pcgk1', 'pcgk2', 'pcgk3']
-    return render_template('packages.html', package_list=package_list)
+    return render_template('packages.html',
+                           package_list=pack.get_yum_packages())
 
 
 def main():
