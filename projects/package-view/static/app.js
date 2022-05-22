@@ -52,6 +52,11 @@ $("document").ready(() => {
     }
 
     if (make_table === true) {
+      $("#vm-name-title").css("display", "block");
+      $("#vm-name-title").text(e.target.text);
+      $("#vm-name-title").css("font-weight", "bold");
+      $("#vm-name-title").css("font-family", "console");
+
       //after user selects an item from the dropdown list, generate a table with two columns and 5 rows
       //make the table visible
       $("#vm-table").css("display", "block");
@@ -97,6 +102,16 @@ $("document").ready(() => {
 
     if (make_table === true) {
       //after user selects an item from the dropdown list, generate a table with two columns and 5 rows
+
+      //make the "container-name-title" div visible
+      $("#container-name-title").css("display", "block");
+      //set the "container-name-title" div to the selected container name
+      $("#container-name-title").text(e.target.text);
+      //set the font weight of the "container-name-title" div to bold
+      $("#container-name-title").css("font-weight", "bold");
+      //set the font of the "container-name-title" div to console
+      $("#container-name-title").css("font-family", "console");
+
       //make the table visible
       $("#container-table").css("display", "block");
 
