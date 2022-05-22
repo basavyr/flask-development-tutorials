@@ -32,5 +32,20 @@ $("document").ready(() => {
 
     //remove the element from the container-drp-list
     $("#container-drp-list").empty();
+    //print every container into the dropdown list
+    data.containers.forEach((element) => {
+      //add each array item into the "container-drp-list" dropdown list
+      $("#container-drp-list").append(
+        '<a class="dropdown-item" href="#">' + element + "</a>"
+      );
+    });
+  });
+
+  //console log when user selects an item from container-drp-list
+  $("#container-drp-list").on("click", "a", (e) => {
+    console.log("Container selected: " + e.target.text);
+    sio.emit("container_selected", {
+      container: e.target.text,
+    });
   });
 });
