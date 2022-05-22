@@ -12,10 +12,6 @@ from threading import Lock
 
 import src.packages as pack
 
-# define the port and host that the app will run on
-PORT = 5003
-HOST = '127.0.0.1'
-
 
 # Set this variable to "threading", "eventlet" or "gevent" to test the
 # different async modes, or leave it set to None for the application to choose
@@ -68,12 +64,13 @@ def show_system_statistics():
 ###################################
 
 
-# @socketio.event
-# def message(msg):
-#     print(f'There was a connection')
+@socketio.event
+def on_message(payload):
+    print(f'There was a connection' + str(payload['data']))
+
 
 def main():
-    socketio.run(app, port=PORT, host=HOST)
+    socketio.run(app, port='5003', host='127.0.0.1')
 
 
 if __name__ == '__main__':
