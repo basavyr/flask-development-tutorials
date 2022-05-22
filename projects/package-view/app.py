@@ -74,6 +74,13 @@ def on_connect(payload):
     print(payload['msg'])
 
 
+@socketio.event
+def refresh_instances():
+    print('User requested VM and Container list')
+    active_instances = [f'vm-{idx}' for idx in range(1, 6)]
+    emit('instances', {'active_instances': active_instances})
+
+
 def main():
     socketio.run(app, port=PORT, host=HOST, debug=True)
 
