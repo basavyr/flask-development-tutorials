@@ -38,6 +38,8 @@ def store_docker_containers(db_file):
     cursor.execute('''CREATE TABLE IF NOT EXISTS Containers
                    (ContainerName TEXT, ContainerID Text)''')
 
+    cursor.execute('''DELETE FROM Containers''')
+
     # add the containers into the db
     for container in containers:
         cursor.execute('''INSERT INTO Containers VALUES (?,?)''', container)
