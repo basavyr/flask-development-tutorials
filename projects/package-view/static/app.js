@@ -18,8 +18,11 @@ $("document").ready(() => {
     sio.emit("refresh_instances");
   });
 
-  //save the active_instances list from the server as an array
-  sio.on("active_instances", (data) => {
-    console.log(data);
+  //save the instances list from the server as an array
+  sio.on("instances", (data) => {
+    //print every element from the array
+    data.active_instances.forEach((element) => {
+      console.log(element);
+    });
   });
 });
