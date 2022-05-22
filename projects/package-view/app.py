@@ -77,8 +77,9 @@ def on_connect(payload):
 @socketio.event
 def refresh_instances():
     print('User requested VM and Container list')
-    active_instances = [f'vm-{idx}' for idx in range(1, 6)]
-    emit('instances', {'active_instances': active_instances})
+    active_vms = [f'vm-{idx}' for idx in range(1, 6)]
+    active_containers = [f'container-{idx}' for idx in range(1, 8)]
+    emit('instances', {'vms': active_vms, 'containers': active_containers})
 
 
 def main():
