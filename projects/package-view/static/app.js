@@ -53,33 +53,39 @@ $("document").ready(() => {
   $("#vm-drp-list").on("click", "a", (e) => {
     // console.log("VM selected: " + e.target.text);
 
-    //after user selects an item from the dropdown list, generate a table with two columns and 5 rows
-    //make the table visible
-    $("#vm-table").css("display", "block");
-
-    // make the vm-table empty but do not remove the table header
-    // https://stackoverflow.com/questions/370013/jquery-delete-all-table-rows-except-first
-    // https://stackoverflow.com/a/8053924/8295213
-    $("#vm-table > tbody").empty();
-    $("#vm-table").append("<tbody>");
-    $("#vm-table").append('<tr class="table-success">');
-
-    //generate a random number between 1 and 8
-    let num_of_columns = Math.floor(Math.random() * (8 - 3 + 1)) + 3;
-    for (let i = 0; i < num_of_columns; i++) {
-      $("#vm-table").append(
-        "<tr><td>" +
-          "package-" +
-          i +
-          "</td><td>" +
-          "version-" +
-          i +
-          "</td></tr>"
-      );
+    if (e.target.text === "empty...") {
+      make_table = false;
     }
-    $("#vm-table").append("</tr>");
-    $("#vm-table").append("</tbody>");
 
+    if (make_table === true) {
+      //after user selects an item from the dropdown list, generate a table with two columns and 5 rows
+      //make the table visible
+      $("#vm-table").css("display", "block");
+
+      // make the vm-table empty but do not remove the table header
+      // https://stackoverflow.com/questions/370013/jquery-delete-all-table-rows-except-first
+      // https://stackoverflow.com/a/8053924/8295213
+      $("#vm-table > tbody").empty();
+
+      $("#vm-table").append("<tbody>");
+      $("#vm-table").append('<tr class="table-success">');
+
+      //generate a random number between 1 and 8
+      let num_of_columns = Math.floor(Math.random() * (8 - 3 + 1)) + 3;
+      for (let i = 0; i < num_of_columns; i++) {
+        $("#vm-table").append(
+          "<tr><td>" +
+            "package-" +
+            i +
+            "</td><td>" +
+            "version-" +
+            i +
+            "</td></tr>"
+        );
+      }
+      $("#vm-table").append("</tr>");
+      $("#vm-table").append("</tbody>");
+    }
     sio.emit("vm_selected", {
       vm: e.target.text,
     });
