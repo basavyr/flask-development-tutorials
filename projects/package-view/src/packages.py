@@ -1,6 +1,8 @@
 import subprocess
 from subprocess import PIPE
 from subprocess import STDOUT
+from pathlib import Path
+
 
 # return ann empty list of errors occurred during the execution of the command
 EMPTY_LIST = ['No packages found']
@@ -42,7 +44,10 @@ def get_brew_packages():
 
         # extract each package by splitting after whitespaces
         packages = [pack.split() for pack in raw_packages]
-        print(packages[0])
-
-
-get_brew_packages()
+        pack_file = Path('brew.packages.dat')
+        pack_file.touch(exist_ok=True)
+        with open('brew.packages.dat', 'r+') as writer:
+            for pack in packages:
+                pack_name, version = pack
+                writer.write(f'{pack_name} {version}\n')
+        return len(packages)
