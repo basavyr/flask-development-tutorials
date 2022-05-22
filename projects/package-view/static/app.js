@@ -24,10 +24,10 @@ $("document").ready(() => {
     $("#vm-drp-list").empty();
     //print every element from the array
     data.active_instances.forEach((element) => {
-      console.log(element);
+      //   console.log(element);
       //add each array item into the "vm-drp-list" dropdown list
       $("#vm-drp-list").append(
-        '<a class="dropdown-item" href="#">${element}</a>'
+        '<a class="dropdown-item" href="#">' + element + "</a>"
       );
     });
   });
