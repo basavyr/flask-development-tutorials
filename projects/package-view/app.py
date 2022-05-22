@@ -13,7 +13,7 @@ from threading import Lock
 import src.packages as pack
 
 # define the port and host that the app will run on
-PORT = 5051
+PORT = 5003
 HOST = '127.0.0.1'
 
 
@@ -56,6 +56,21 @@ def show_topology():
     return render_template('topology.html',
                            user_id=LOCAL_USER)
 
+
+@app.route('/stats', methods=['GET', 'POST'])
+def show_system_statistics():
+    return render_template('system_statistics.html',
+                           user_id=LOCAL_USER)
+
+
+###################################
+# define any socketIO event
+###################################
+
+
+# @socketio.event
+# def message(msg):
+#     print(f'There was a connection')
 
 def main():
     socketio.run(app, port=PORT, host=HOST)

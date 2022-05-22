@@ -1,3 +1,9 @@
-console.log("App launched successfully");
+$("document").ready(() => {
+  console.log("App started successfully");
 
-// add a table below the dropdown box
+  sio = io();
+
+  sio.on("connect", () => {
+    console.log("Connected to server");
+  });
+});
