@@ -2,11 +2,31 @@
 %}
 
 <div class="container">
-  <p>The package management tool for any available:</p>
+  <p style="font-style: italic;">The package management tool for active cloud service instances.</p>
+  <p>Hello, <b>{{user_id}}</b>.</p>
   <ul>
     <li>Virtual Machine (VM)</li>
     <li>Container Application</li>
   </ul>
-  running on your current infrastructure available at Cloudifin
+  <p>
+
+  <div class="dropdown">
+    <button
+      class="btn btn-secondary dropdown-toggle"
+      type="button"
+      id="dropdownMenuButton"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      Dropdown button
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+  </div>
 </div>
+
 {% endblock %}

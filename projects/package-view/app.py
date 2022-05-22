@@ -36,15 +36,25 @@ app.config['DEBUG'] = True
 socketio = SocketIO(app, async_mode=async_mode)
 
 
+LOCAL_USER = 'User-2022-69'
+
+
 @app.route("/", methods=['GET', 'POST'])
 def show_index():
-    return render_template('index.html')
+    return render_template('index.html',
+                           user_id=LOCAL_USER)
 
 
 @app.route('/packages', methods=['GET', 'POST'])
 def show_packages():
     return render_template('packages.html',
-                           package_list=7)
+                           user_id=LOCAL_USER)
+
+
+@app.route('/topology', methods=['GET', 'POST'])
+def show_topology():
+    return render_template('topology.html',
+                           user_id=LOCAL_USER)
 
 
 def main():
