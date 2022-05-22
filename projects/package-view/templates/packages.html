@@ -2,15 +2,21 @@
 %}
 
 <div class="container">
-  <p style="font-style: italic;">The package management tool for active cloud service instances.</p>
+  <p style="font-style: italic">
+    Package management tool for your active cloud service instances.
+  </p>
   <p>Hello, <b>{{user_id}}</b>.</p>
-  <ul>
+  <!-- <ul>
     <li>Virtual Machine (VM)</li>
     <li>Container Application</li>
   </ul>
+  <p> -->
+  <h4>Virtual Machines ⌨️</h4>
   <p>
-
-  <div class="dropdown">
+    Choose from the list of <b>Virtual Machines</b> to see its installed
+    packages.
+  </p>
+  <div class="dropdown box">
     <button
       class="btn btn-secondary dropdown-toggle"
       type="button"
@@ -19,7 +25,29 @@
       aria-haspopup="true"
       aria-expanded="false"
     >
-      Dropdown button
+      VM List
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+  </div>
+  <h4>Container Apps 📦</h4>
+  <p>
+
+    Choose from the list of <b>Containers</b> to see its installed packages.
+  </p>
+  <div class="dropdown box">
+    <button
+      class="btn btn-secondary dropdown-toggle"
+      type="button"
+      id="dropdownMenuButton"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      Container List
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" href="#">Action</a>
