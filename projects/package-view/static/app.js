@@ -41,18 +41,12 @@ $("document").ready(() => {
     });
   });
 
-  //console log when user selects an item from container-drp-list
-  $("#container-drp-list").on("click", "a", (e) => {
-    console.log("Container selected: " + e.target.text);
-    sio.emit("container_selected", {
-      container: e.target.text,
-    });
-  });
-
   //actions when the user selects an item from vm-drp-list
   $("#vm-drp-list").on("click", "a", (e) => {
-    // console.log("VM selected: " + e.target.text);
+    console.log("VM selected: " + e.target.text);
 
+    make_table = true;
+    //do not create a table if there is no vm list
     if (e.target.text === "empty...") {
       make_table = false;
     }
@@ -88,6 +82,50 @@ $("document").ready(() => {
     }
     sio.emit("vm_selected", {
       vm: e.target.text,
+    });
+  });
+
+  //actions when the user selects an item from container-drp-list
+  $("#container-drp-list").on("click", "a", (e) => {
+    console.log("Container selected: " + e.target.text);
+
+    make_table = true;
+    //do not create a table if there is no vm list
+    if (e.target.text === "empty...") {
+      make_table = false;
+    }
+
+    if (make_table === true) {
+      //after user selects an item from the dropdown list, generate a table with two columns and 5 rows
+      //make the table visible
+      $("#container-table").css("display", "block");
+
+      // make the vm-table empty but do not remove the table header
+      // https://stackoverflow.com/questions/370013/jquery-delete-all-table-rows-except-first
+      // https://stackoverflow.com/a/8053924/8295213
+      $("#container-table > tbody").empty();
+
+      $("#container-table").append("<tbody>");
+      $("#container-table").append('<tr class="table-success">');
+
+      //generate a random number between 1 and 3
+      let num_of_columns = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+      for (let i = 0; i < num_of_columns; i++) {
+        $("#container-table").append(
+          "<tr><td>" +
+            "package-" +
+            i +
+            "</td><td>" +
+            "version-" +
+            i +
+            "</td></tr>"
+        );
+      }
+      $("#container-table").append("</tr>");
+      $("#container-table").append("</tbody>");
+    }
+    sio.emit("container_selected", {
+      container: e.target.text,
     });
   });
 });
