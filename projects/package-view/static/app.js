@@ -49,16 +49,24 @@ $("document").ready(() => {
     });
   });
 
-  //console log when user selects an item from vm-drp-list
+  //actions when the user selects an item from vm-drp-list
   $("#vm-drp-list").on("click", "a", (e) => {
-    console.log("VM selected: " + e.target.text);
+    // console.log("VM selected: " + e.target.text);
+
     //after user selects an item from the dropdown list, generate a table with two columns and 5 rows
     //make the table visible
     $("#vm-table").css("display", "block");
-    //make the vm-table empty but do not remove the table header
-    $("#vm-table > tbody").empty();
 
-    for (let i = 0; i < 5; i++) {
+    // make the vm-table empty but do not remove the table header
+    // https://stackoverflow.com/questions/370013/jquery-delete-all-table-rows-except-first
+    // https://stackoverflow.com/a/8053924/8295213
+    $("#vm-table > tbody").empty();
+    $("#vm-table").append("<tbody>");
+    $("#vm-table").append('<tr class="table-success">');
+
+    //generate a random number between 1 and 8
+    let num_of_columns = Math.floor(Math.random() * (8 - 3 + 1)) + 3;
+    for (let i = 0; i < num_of_columns; i++) {
       $("#vm-table").append(
         "<tr><td>" +
           "package-" +
@@ -69,6 +77,9 @@ $("document").ready(() => {
           "</td></tr>"
       );
     }
+    $("#vm-table").append("</tr>");
+    $("#vm-table").append("</tbody>");
+
     sio.emit("vm_selected", {
       vm: e.target.text,
     });
