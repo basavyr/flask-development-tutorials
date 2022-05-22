@@ -1,5 +1,6 @@
 # general imports
 from crypt import methods
+from distutils.log import debug
 from flask_socketio import SocketIO
 from flask_socketio import emit
 from flask import Flask, render_template
@@ -43,7 +44,7 @@ def show_index():
 @app.route('/packages', methods=['GET', 'POST'])
 def show_packages():
     return render_template('packages.html',
-                           package_list=pack.get_yum_packages())
+                           package_list=7)
 
 
 def main():

@@ -1,18 +1,11 @@
 {% extends "base.html" %} {% block title %} Packages{% endblock %} {% block body
 %}
 
-<h1>Packages</h1>
-
-<a href="{{url_for('show_index')}}"><button>Index</button></a>
 
 <p>The list of packages are shown below</p>
 
 <div class="package-list">
-  <ol>
-    {% for package in package_list %}
-    <li><strong>{{package}}</strong></li>
-    {% endfor %}
-  </ol>
+    There are <b>{{package_list}}</b> packages installed on the current system.
 </div>
 
 {% endblock %}

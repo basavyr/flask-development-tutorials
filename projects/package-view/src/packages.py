@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 # return ann empty list of errors occurred during the execution of the command
-EMPTY_LIST = ['No packages found']
+EMPTY_LIST = []
 
 
 def get_yum_packages():
@@ -37,7 +37,7 @@ def get_brew_packages():
         stdout, stderr = proc.communicate(timeout=5)
     except subprocess.TimeoutExpired:
         proc.kill()
-        return EMPTY_LIST
+        return len(EMPTY_LIST)
     else:
         # extract the packages as raw strings that are split only for new lines
         raw_packages = str(stdout.decode('utf-8')).strip().split('\n')
