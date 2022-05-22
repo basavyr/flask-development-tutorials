@@ -14,7 +14,7 @@ import src.packages as pack
 
 
 # define the port and host that the app will run on
-PORT = 5051
+PORT = 6969
 HOST = '127.0.0.1'
 
 
@@ -75,7 +75,7 @@ def on_connect(payload):
 
 
 def main():
-    socketio.run(app, port='5003', host='127.0.0.1')
+    socketio.run(app, port=PORT, host=HOST, debug=True)
 
 
 if __name__ == '__main__':
