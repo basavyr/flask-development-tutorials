@@ -48,4 +48,29 @@ $("document").ready(() => {
       container: e.target.text,
     });
   });
+
+  //console log when user selects an item from vm-drp-list
+  $("#vm-drp-list").on("click", "a", (e) => {
+    console.log("VM selected: " + e.target.text);
+    //after user selects an item from the dropdown list, generate a table with two columns and 5 rows
+    //make the table visible
+    $("#vm-table").css("display", "block");
+    //make the vm-table empty but do not remove the table header
+    $("#vm-table > tbody").empty();
+
+    for (let i = 0; i < 5; i++) {
+      $("#vm-table").append(
+        "<tr><td>" +
+          "package-" +
+          i +
+          "</td><td>" +
+          "version-" +
+          i +
+          "</td></tr>"
+      );
+    }
+    sio.emit("vm_selected", {
+      vm: e.target.text,
+    });
+  });
 });
