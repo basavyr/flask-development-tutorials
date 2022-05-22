@@ -82,6 +82,10 @@ def refresh_instances():
     emit('instances', {'vms': active_vms, 'containers': active_containers})
 
 
+###################################
+# main function
+###################################
+
 def main():
     socketio.run(app, port=PORT, host=HOST, debug=True)
 

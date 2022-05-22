@@ -15,6 +15,21 @@ $("document").ready(() => {
   // console log when user clicks on "instance-refresher" button
   $("#instance-refresher").click(() => {
     console.log("Refreshing instances");
+
+    //when user clicks on "instance-refresher" button, clear the "container-table" table
+    $("#vm-table > tbody").empty();
+    //hide the table
+    $("#vm-table").hide();
+    //hide the "container-name-title" div
+    $("#vm-name-title").hide();
+
+    //when user clicks on "instance-refresher" button, clear the "container-table" table
+    $("#container-table > tbody").empty();
+    //hide the table
+    $("#container-table").hide();
+    //hide the "container-name-title" div
+    $("#container-name-title").hide();
+
     sio.emit("refresh_instances");
   });
 
