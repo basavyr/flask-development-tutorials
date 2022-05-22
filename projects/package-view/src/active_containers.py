@@ -4,9 +4,6 @@ import subprocess
 from subprocess import PIPE, STDOUT
 
 
-DB_FILE = "../db/docker.containers.db"
-
-
 def execute_docker_ps():
     cmd = ['docker', 'ps', '-a']
     proc = subprocess.Popen(cmd, stdout=PIPE, stderr=PIPE)
@@ -49,10 +46,10 @@ def store_docker_containers(db_file):
     connection.close()
 
 
-def get_containers():
-    container_db = store_docker_containers(DB_FILE)
+def get_containers(db_file):
+    container_db = store_docker_containers(db_file)
 
-    connection = db.connect(DB_FILE)
+    connection = db.connect(db_file)
 
     cursor = connection.cursor()
 

@@ -9,8 +9,11 @@ import time
 from threading import Thread, Event
 from threading import Lock
 
-
+import src.active_containers as containers_db
 import src.packages as pack
+
+
+DB_FILE = "db/docker.containers.db"
 
 
 # define the port and host that the app will run on
@@ -78,7 +81,7 @@ def on_connect(payload):
 def refresh_instances():
     print('User requested VM and Container list')
     active_vms = [f'vm-{idx}' for idx in range(1, 6)]
-    active_containers = [f'container-{idx}' for idx in range(1, 8)]
+    active_containers = containers_db.get_containers(DB_FILE)
     emit('instances', {'vms': active_vms, 'containers': active_containers})
 
 
