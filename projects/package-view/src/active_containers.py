@@ -1,9 +1,13 @@
-import sqlite3
+from multiprocessing import connection
+import sqlite3 as db
 import subprocess
 from subprocess import PIPE, STDOUT
 
 
-def get_all_containers():
+DB_FILE = "../db/docker.containers.db"
+
+
+def execute_docker_ps():
     cmd = ['docker', 'ps', '-a']
     proc = subprocess.Popen(cmd, stdout=PIPE, stderr=PIPE)
 
@@ -21,3 +25,37 @@ def get_all_containers():
             container_name = out_t[1]
             containers.append((container_name, container_id))
         return containers
+
+
+def store_docker_containers(db_file):
+    """Execute a docker command to get all the containers and store them to a pre-defined database"""
+
+    containers = execute_docker_ps()
+
+    connection = db.connect(db_file)
+
+    # open the cursor
+    cursor = connection.cursor()
+
+    # first create the table
+    cursor.execute('''CREATE TABLE IF NOT EXISTS Containers
+                   (ContainerName TEXT, ContainerID Text)''')
+
+    # add the containers into the db
+    for container in containers:
+        cursor.execute('''INSERT INTO Containers VALUES (?,?)''', container)
+
+    connection.commit()
+    connection.close()
+
+
+def get_containers():
+    container_db = store_docker_containers(DB_FILE)
+
+    connection = db.connect(DB_FILE)
+
+    cursor = connection.cursor()
+
+    containers = cursor.execute('''SELECT * FROM Containers''').fetchall()
+
+    return containers
