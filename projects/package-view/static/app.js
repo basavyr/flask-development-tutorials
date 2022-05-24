@@ -43,7 +43,7 @@ $("document").ready(() => {
 
     //save the first element of the tuples from data
     for (let i = 0; i < data.vms.length; i++) {
-      id_list[data.vms[i][1]] = data.vms[i][0];
+      id_list[data.vms[i][1]] = i + 1;
     }
 
     //print every element from the array
@@ -186,8 +186,5 @@ $("document").ready(() => {
       $("#container-table").append("</tr>");
       $("#container-table").append("</tbody>");
     }
-    sio.emit("container_selected", {
-      container: e.target.text,
-    });
   });
 });
