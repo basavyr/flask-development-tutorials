@@ -103,6 +103,9 @@ create table cloudifinNetwork (
   Name text,
   Subnets text
 );
+######################
+######################
+######################
 drop table if exists cloudifinServer;
 create table cloudifinServer (
   ID text,
@@ -112,6 +115,9 @@ create table cloudifinServer (
   Image text,
   Flavor text
 );
+######################
+######################
+######################
 drop table if exists OCCHosts;
 create table OCCHosts (
   ID_cloud text,

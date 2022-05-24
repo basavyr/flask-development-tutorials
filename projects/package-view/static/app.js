@@ -78,9 +78,13 @@ $("document").ready(() => {
         vm_packages = data["vm_packages"];
 
         $("#vm-name-title").css("display", "block");
-        $("#vm-name-title").text(" 🔽  " + e.target.text + " 🔽 ");
+        $("#vm-name-title").text(e.target.text);
         $("#vm-name-title").css("font-weight", "bold");
         $("#vm-name-title").css("font-family", "console");
+        // $("#vm-id-title").css("display", "block");
+        $("#vm-id-title").text(selected_id);
+        $("#vm-id-title").css("font-weight", "bold");
+        $("#vm-id-title").css("font-family", "console");
 
         //after user selects an item from the dropdown list, generate a table with two columns and 5 rows
         //make the table visible
@@ -217,9 +221,20 @@ $("document").ready(() => {
 
   //check when the user clicks on the "check-update-button" button from the vm-table
   $("#vm-table").on("click", "#check-update-button", (e) => {
+    //select the first element of the selected row
+    let vm_name = e.target.parentNode.parentNode.children[0].textContent;
+    //print the text of the selected vm
+    console.log("Will check updates for " + vm_name);
+
+    //get the current selected vm from the vm-drp-list
+    // let vm_selected = $("#vm-drp-list").find(":selected").text();
+    // console.log("Will check updates for " + vm_selected);
+
+    //get the current "vm-name-title"
+    let vm_name_title = $("#vm-name-title").text();
+    let vm_id_title = $("#vm-id-title").text();
     console.log(
-      "Will check update for " +
-        e.target.parentNode.parentNode.children[0].textContent
+      "Will check updates for " + vm_name_title + "with the ID: " + vm_id_title
     );
   });
 });
