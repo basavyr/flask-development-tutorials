@@ -5,6 +5,7 @@ from subprocess import PIPE
 from subprocess import STDOUT
 from pathlib import Path
 import sqlite3
+import random
 
 # return ann empty list of errors occurred during the execution of the command
 EMPTY_LIST = []
@@ -62,6 +63,10 @@ def write_packages_on_db(userID, vm_id):
 
         # keep the db always clean
         cursor.execute('''DELETE FROM Packages''')
+
+        # only select a random number of data points to make the db
+        number_of_items = random.randint(3, 7)
+        packages = packages[0:number_of_items]
 
         for pack in packages:
             db_item = (pack[0], pack[1])

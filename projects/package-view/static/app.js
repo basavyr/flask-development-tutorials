@@ -52,6 +52,8 @@ $("document").ready(() => {
     //assume the table should be created
     make_table = true;
 
+    $("#vm-table > tbody").empty();
+    vm_packages = [];
     //do not create a table if there is no vm list
     if (e.target.text === "empty...") {
       make_table = false;
@@ -70,6 +72,8 @@ $("document").ready(() => {
 
       //wait for the server to send the vm packages
       sio.on("vm_packages", (data) => {
+        $("#vm-table > tbody").empty();
+        vm_packages = [];
         // tuple list which contains the package name and the package version
         vm_packages = data["vm_packages"];
 
@@ -87,16 +91,16 @@ $("document").ready(() => {
         // https://stackoverflow.com/a/8053924/8295213
         $("#vm-table > tbody").empty();
 
-        $("#vm-table").append("<tbody>");
-        $("#vm-table").append('<tr class="table-success">');
+        // $("#vm-table").append("<tbody>");
 
         //add each tuple item from vm_packages to the table
-        vm_packages.forEach((element) => {
+        //console log every item from vm_packages
+        for (let i = 0; i < vm_packages.length; i++) {
           $("#vm-table > tbody").append(
             '<tr class="table-primary"><td>' +
-              element[0] +
+              vm_packages[i][0] +
               "</td><td>" +
-              element[1] +
+              vm_packages[i][1] +
               "</td>" +
               "<td>" +
               "N/A" +
@@ -113,9 +117,8 @@ $("document").ready(() => {
               "</button></td>" +
               "</tr>"
           );
-        });
+        }
 
-        $("#vm-table").append("</tr>");
         $("#vm-table").append("</tbody>");
       });
 
