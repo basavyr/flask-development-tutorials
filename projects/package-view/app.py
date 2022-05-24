@@ -42,31 +42,31 @@ app.config['DEBUG'] = True
 socketio = SocketIO(app, async_mode=async_mode)
 
 
-LOCAL_USER = 'User-2022-69'
+USER_ID = 'user69'
 
 
 @app.route("/", methods=['GET', 'POST'])
 def show_index():
     return render_template('index.html',
-                           user_id=LOCAL_USER)
+                           user_id=USER_ID)
 
 
 @app.route('/packages', methods=['GET', 'POST'])
 def show_packages():
     return render_template('packages.html',
-                           user_id=LOCAL_USER)
+                           user_id=USER_ID)
 
 
 @app.route('/topology', methods=['GET', 'POST'])
 def show_topology():
     return render_template('topology.html',
-                           user_id=LOCAL_USER)
+                           user_id=USER_ID)
 
 
 @app.route('/stats', methods=['GET', 'POST'])
 def show_system_statistics():
     return render_template('system_statistics.html',
-                           user_id=LOCAL_USER)
+                           user_id=USER_ID)
 
 
 ###################################
@@ -83,7 +83,6 @@ def on_connect(payload):
 def refresh_instances():
     print('User requested VM and Container list')
     active_vms = [(vm[0], vm[1]) for vm in vm_db.get_user_vms(VM_DB)]
-    # active_containers = containers_db.get_containers(DB_FILE)
     emit('instances', {'vms': active_vms})
 
 
@@ -92,6 +91,9 @@ def vm_selected(data):
     vm_id = data['vm_id']
     vm_name = data['vm_name']
     print(vm_id, vm_name)
+    vm_containers = containers_db.get_vm_containers(USER_ID, vm_id)
+    # print(vm_containers)
+    emit('available_vm_containers', {'vm_containers': vm_containers})
 
 ###################################
 # main function

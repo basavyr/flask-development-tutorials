@@ -58,3 +58,17 @@ def get_containers(db_file):
     containers = cursor.execute('''SELECT * FROM Containers''').fetchall()
 
     return containers
+
+
+def get_vm_containers(user_id, vm_id):
+    server_db_path = 'db/'
+    db_file = f'{server_db_path}{user_id}.{vm_id}.containers.db'
+    container_db = store_docker_containers(db_file)
+
+    connection = db.connect(db_file)
+
+    cursor = connection.cursor()
+
+    containers = cursor.execute('''SELECT * FROM Containers''').fetchall()
+
+    return containers

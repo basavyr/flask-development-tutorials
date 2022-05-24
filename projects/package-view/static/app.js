@@ -33,14 +33,22 @@ $("document").ready(() => {
     sio.emit("refresh_instances");
   });
 
+  // save the ids that correspond to every vm for later usage
+  let id_list = [];
+
   //save the instances list from the server as an array
   sio.on("instances", (data) => {
     //remove the element from the vm-drp-list
     $("#vm-drp-list").empty();
+
+    //save the first element of the tuples from data
+    for (let i = 0; i < data.vms.length; i++) {
+      id_list[data.vms[i][1]] = data.vms[i][0];
+    }
+
     //print every element from the array
     data.vms.forEach((element) => {
-      vm_id = element[0];
-      vm_name = element[1];
+      let vm_name = element[1];
       //add each array item into the "vm-drp-list" dropdown list
       $("#vm-drp-list").append(
         '<a class="dropdown-item" href="#">' + vm_name + "</a>"
@@ -65,8 +73,8 @@ $("document").ready(() => {
 
   //actions when the user selects an item from vm-drp-list
   $("#vm-drp-list").on("click", "a", (e) => {
-    console.log("VM selected: " + e.target.text);
-
+    selected_vm = e.target.text;
+    selected_id = id_list[e.target.text];
     make_table = true;
     //do not create a table if there is no vm list
     if (e.target.text === "empty...") {
@@ -126,8 +134,8 @@ $("document").ready(() => {
     }
 
     sio.emit("vm_selected", {
-      vm_id: vm_id,
-      vm_name: vm_name,
+      vm_id: selected_id,
+      vm_name: selected_vm,
     });
   });
 
