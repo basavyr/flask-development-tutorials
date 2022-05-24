@@ -45,20 +45,20 @@ $("document").ready(() => {
       );
     });
 
-    //remove the element from the container-drp-list
-    $("#container-drp-list").empty();
-    //print every container into the dropdown list
-    data.containers.forEach((element) => {
-      //extract the container name and container id
-      let containerName = element[0];
-      let containerId = element[1];
-    //   console.log(containerName);
-    //   console.log(containerId);
-      //add each array item into the "container-drp-list" dropdown list
-      $("#container-drp-list").append(
-        '<a class="dropdown-item" href="#">' + containerName + "</a>"
-      );
-    });
+    // //remove the element from the container-drp-list
+    // $("#container-drp-list").empty();
+    // //print every container into the dropdown list
+    // data.containers.forEach((element) => {
+    //   //extract the container name and container id
+    //   let containerName = element[0];
+    //   let containerId = element[1];
+    // //   console.log(containerName);
+    // //   console.log(containerId);
+    //   //add each array item into the "container-drp-list" dropdown list
+    //   $("#container-drp-list").append(
+    //     '<a class="dropdown-item" href="#">' + containerName + "</a>"
+    //   );
+    // });
   });
 
   //actions when the user selects an item from vm-drp-list

@@ -4,7 +4,7 @@ from distutils.log import debug
 from flask_socketio import SocketIO
 from flask_socketio import emit
 from flask import Flask, render_template
-from random import random
+import random
 import time
 from threading import Thread, Event
 from threading import Lock
@@ -80,9 +80,10 @@ def on_connect(payload):
 @socketio.event
 def refresh_instances():
     print('User requested VM and Container list')
-    active_vms = [f'vm-{idx}' for idx in range(1, 6)]
-    active_containers = containers_db.get_containers(DB_FILE)
-    emit('instances', {'vms': active_vms, 'containers': active_containers})
+    number_of_vm = random.randint(3, 10)
+    active_vms = [f'vm-{idx}' for idx in range(number_of_vm)]
+    # active_containers = containers_db.get_containers(DB_FILE)
+    emit('instances', {'vms': active_vms})
 
 
 ###################################
