@@ -6,6 +6,7 @@ from subprocess import STDOUT
 from pathlib import Path
 import sqlite3
 import random
+from paho import mqtt
 
 # return ann empty list of errors occurred during the execution of the command
 EMPTY_LIST = []
