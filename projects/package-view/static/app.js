@@ -33,20 +33,11 @@ $("document").ready(() => {
     sio.emit("refresh_instances");
   });
 
-  // save the ids that correspond to every vm for later usage
-  let id_list = [];
-
   //save the instances list from the server as an array
   sio.on("instances", (data) => {
     //remove the element from the vm-drp-list
     $("#vm-drp-list").empty();
 
-    //save the first element of the tuples from data
-    for (let i = 0; i < data.vms.length; i++) {
-      id_list[data.vms[i][1]] = i + 1;
-    }
-
-    //print every element from the array
     data.vms.forEach((element) => {
       let vm_name = element[1];
       //add each array item into the "vm-drp-list" dropdown list
@@ -74,8 +65,14 @@ $("document").ready(() => {
   //actions when the user selects an item from vm-drp-list
   $("#vm-drp-list").on("click", "a", (e) => {
     selected_vm = e.target.text;
-    selected_id = id_list[e.target.text];
+
+    //check the position of the selected item in the vm-drp-list
+    let selected_vm_index = $("#vm-drp-list a").index(e.target) + 1;
+    selected_id = selected_vm_index;
+
+    //assume the table should be created
     make_table = true;
+
     //do not create a table if there is no vm list
     if (e.target.text === "empty...") {
       make_table = false;
