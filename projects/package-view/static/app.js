@@ -49,17 +49,6 @@ $("document").ready(() => {
 
   //actions when the user selects an item from vm-drp-list
   $("#vm-drp-list").on("click", "a", (e) => {
-    selected_vm = e.target.text;
-
-    //check the position of the selected item in the vm-drp-list
-    let selected_vm_index = $("#vm-drp-list a").index(e.target) + 1;
-    selected_id = selected_vm_index;
-
-    sio.emit("vm_selected", {
-      vm_id: selected_id,
-      vm_name: selected_vm,
-    });
-
     //assume the table should be created
     make_table = true;
 
@@ -69,6 +58,17 @@ $("document").ready(() => {
     }
 
     if (make_table === true) {
+      selected_vm = e.target.text;
+
+      //check the position of the selected item in the vm-drp-list
+      let selected_vm_index = $("#vm-drp-list a").index(e.target) + 1;
+      selected_id = selected_vm_index;
+
+      sio.emit("vm_selected", {
+        vm_id: selected_id,
+        vm_name: selected_vm,
+      });
+
       $("#vm-name-title").css("display", "block");
       $("#vm-name-title").text(" 🔽  " + e.target.text + " 🔽 ");
       $("#vm-name-title").css("font-weight", "bold");

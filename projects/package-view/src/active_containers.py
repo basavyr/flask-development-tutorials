@@ -62,7 +62,7 @@ def get_containers(db_file):
 
 def get_vm_containers(user_id, vm_id):
     server_db_path = 'db/'
-    db_file = f'{server_db_path}{user_id}.{vm_id}.containers.db'
+    db_file = f'{server_db_path}{user_id}.VM-{vm_id}.containers.db'
     container_db = store_docker_containers(db_file)
 
     connection = db.connect(db_file)
