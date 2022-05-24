@@ -99,6 +99,14 @@ def vm_selected(data):
     vm_containers = containers_db.get_vm_containers(USER_ID, vm_id)
     emit('available_vm_containers', {'vm_containers': vm_containers})
 
+
+@socketio.event
+def check_update(data):
+    vm_id = data['vm_id']
+    package_name = data['package']
+    print(f'will update {package_name} on VM: {vm_id}')
+
+
 ###################################
 # main function
 ###################################

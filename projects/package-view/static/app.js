@@ -222,13 +222,7 @@ $("document").ready(() => {
   //check when the user clicks on the "check-update-button" button from the vm-table
   $("#vm-table").on("click", "#check-update-button", (e) => {
     //select the first element of the selected row
-    let vm_name = e.target.parentNode.parentNode.children[0].textContent;
-    //print the text of the selected vm
-    console.log("Will check updates for " + vm_name);
-
-    //get the current selected vm from the vm-drp-list
-    // let vm_selected = $("#vm-drp-list").find(":selected").text();
-    // console.log("Will check updates for " + vm_selected);
+    let package_name = e.target.parentNode.parentNode.children[0].textContent;
 
     //get the current "vm-name-title"
     let vm_name_title = $("#vm-name-title").text();
@@ -236,5 +230,6 @@ $("document").ready(() => {
     console.log(
       "Will check updates for " + vm_name_title + "with the ID: " + vm_id_title
     );
+    sio.emit("check_update", { vm_id: vm_id_title, package: package_name });
   });
 });
