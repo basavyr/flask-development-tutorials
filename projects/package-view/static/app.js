@@ -107,7 +107,7 @@ $("document").ready(() => {
               "</td>" +
               "<td>" +
               //make a button called CHECK
-              '<button type="button" class="btn btn-primary btn-sm" id="check-button">' +
+              '<button type="button" class="btn btn-primary btn-sm" id="check-update-button">' +
               "CHECK" +
               "</button>" +
               "</td>" +
@@ -206,5 +206,20 @@ $("document").ready(() => {
       // $("#container-table").append("</tr>");
       // $("#container-table").append("</tbody>");
     }
+  });
+
+  //check when the user clicks on the "update-button" button from the vm-table
+  $("#vm-table").on("click", "#update-button", (e) => {
+    console.log(
+      "Will update " + e.target.parentNode.parentNode.children[0].textContent
+    );
+  });
+
+  //check when the user clicks on the "check-update-button" button from the vm-table
+  $("#vm-table").on("click", "#check-update-button", (e) => {
+    console.log(
+      "Will check update for " +
+        e.target.parentNode.parentNode.children[0].textContent
+    );
   });
 });
