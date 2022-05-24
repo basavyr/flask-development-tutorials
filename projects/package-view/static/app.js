@@ -212,24 +212,31 @@ $("document").ready(() => {
     }
   });
 
-  //check when the user clicks on the "update-button" button from the vm-table
-  $("#vm-table").on("click", "#update-button", (e) => {
-    console.log(
-      "Will update " + e.target.parentNode.parentNode.children[0].textContent
-    );
-  });
-
   //check when the user clicks on the "check-update-button" button from the vm-table
   $("#vm-table").on("click", "#check-update-button", (e) => {
     //select the first element of the selected row
     let package_name = e.target.parentNode.parentNode.children[0].textContent;
 
     //get the current "vm-name-title"
-    let vm_name_title = $("#vm-name-title").text();
-    let vm_id_title = $("#vm-id-title").text();
+    let vm_name = $("#vm-name-title").text();
+    let vm_id = $("#vm-id-title").text();
     console.log(
-      "Will check updates for " + vm_name_title + "with the ID: " + vm_id_title
+      "Will check updates for " + package_name + "on the VM with ID: " + vm_id
     );
-    sio.emit("check_update", { vm_id: vm_id_title, package: package_name });
+    sio.emit("check_update", { vm_id: vm_id, package: package_name });
+  });
+
+  //check when the user clicks on the "update-button" button from the vm-table
+  $("#vm-table").on("click", "#update-button", (e) => {
+    //select the first element of the selected row
+    let package_name = e.target.parentNode.parentNode.children[0].textContent;
+
+    //get the current "vm-name-title"
+    let vm_name = $("#vm-name-title").text();
+    let vm_id = $("#vm-id-title").text();
+    console.log(
+      "Will update " + package_name + " for the VM with ID: " + vm_id
+    );
+    sio.emit("update", { vm_id: vm_id, package: package_name });
   });
 });

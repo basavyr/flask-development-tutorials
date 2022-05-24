@@ -104,6 +104,13 @@ def vm_selected(data):
 def check_update(data):
     vm_id = data['vm_id']
     package_name = data['package']
+    print(f'will check update for {package_name} on VM: {vm_id}')
+
+
+@socketio.event
+def update(data):
+    vm_id = data['vm_id']
+    package_name = data['package']
     print(f'will update {package_name} on VM: {vm_id}')
 
 
