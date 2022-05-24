@@ -87,3 +87,13 @@ def get_vm_packages(userID, vm_id):
     packages = cursor.execute('''SELECT * FROM Packages''').fetchall()
 
     return packages
+
+
+def execute_check_update(userID, vm_id, package_name):
+    print(f'From: {userID}')
+    print(f'will check update for {package_name} on VM: {vm_id}')
+
+
+def execute_update(userID, vm_id, package_name):
+    print(f'From: {userID}')
+    print(f'will update {package_name} on VM: {vm_id}')
