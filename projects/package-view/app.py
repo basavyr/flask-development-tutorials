@@ -82,8 +82,7 @@ def on_connect(payload):
 @socketio.event
 def refresh_instances():
     print('User requested VM and Container list')
-    number_of_vm = random.randint(3, 10)
-    active_vms = [f'vm-{idx}' for idx in range(number_of_vm)]
+    active_vms = [vm[1] for vm in vm_db.get_user_vms(VM_DB)]
     # active_containers = containers_db.get_containers(DB_FILE)
     emit('instances', {'vms': active_vms})
 

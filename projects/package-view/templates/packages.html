@@ -43,7 +43,13 @@
       VM List
     </button>
     <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> -->
-    <div class="dropdown-menu" id="vm-drp-list">
+    <!-- make a dropdown list with fixed height and scrollable -->
+    <!-- source: https://www.aspsnippets.com/questions/186447/Display-DropDownList-with-fixed-height-and-AutoScroll-enabled-using-C-in-ASPNet-MVC/ -->
+    <div
+      class="dropdown-menu"
+      id="vm-drp-list"
+      style="max-height: 160px; overflow: auto"
+    >
       <a class="dropdown-item" href="#">empty...</a>
     </div>
   </div>
@@ -67,7 +73,7 @@
   <div id="vm-container-box" style="display: none">
     <h4>Container Apps 📦</h4>
     <p id="vm-name-for-containers">
-      The containerized services that run on the VM: 
+      The containerized services that run on the VM:
     </p>
     <p>
       Choose from the list of <b>Containers</b> to see all the installed
