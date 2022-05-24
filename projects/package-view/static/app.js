@@ -104,7 +104,16 @@ $("document").ready(() => {
       }
       $("#vm-table").append("</tr>");
       $("#vm-table").append("</tbody>");
+      //when user selects an item from vm-drp-list, show the "vm-container-box" div
+      $("#vm-container-box").css("display", "block");
+
+      //get the text from the "vm-name-for-containers" paragraph
+      let vm_name = $("#vm-name-for-containers").text();
+      let new_paragraph = vm_name + " " + e.target.text + ".";
+      //set the value for the "vm-name-for-containers" paragraph to new_paragraph
+      $("#vm-name-for-containers").text(new_paragraph);
     }
+
     sio.emit("vm_selected", {
       vm: e.target.text,
     });

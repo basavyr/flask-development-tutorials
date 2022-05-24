@@ -10,10 +10,12 @@ from threading import Thread, Event
 from threading import Lock
 
 import src.active_containers as containers_db
+import src.active_vms as vm_db
 import src.packages as pack
 
 
-DB_FILE = "db/docker.containers.db"
+CONTAINER_DB = "db/userID.VM.containers.db"
+VM_DB = "db/userID.openstackVM.db"
 
 
 # define the port and host that the app will run on
