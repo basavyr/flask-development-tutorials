@@ -58,7 +58,11 @@
   <!-- add a hidden table called "vm-table" to the page -->
   <div id="vm-name-title" style="display: none"></div>
   <div id="vm-name-title" style="display: none"></div>
-  <table class="table table-hover" id="vm-table" style="display: none">
+  <table
+    class="table table-hover"
+    id="vm-table"
+    style="display: none; overflow: auto; max-height: 400px"
+  >
     <thead>
       <tr>
         <th scope="col">Package Name</th>

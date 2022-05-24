@@ -90,17 +90,31 @@ $("document").ready(() => {
         $("#vm-table").append("<tbody>");
         $("#vm-table").append('<tr class="table-success">');
 
-        for (let i = 0; i < 4; i++) {
-          $("#vm-table").append(
-            "<tr><td>" +
-              "package-" +
-              i +
+        //add each tuple item from vm_packages to the table
+        vm_packages.forEach((element) => {
+          $("#vm-table > tbody").append(
+            '<tr class="table-primary"><td>' +
+              element[0] +
               "</td><td>" +
-              "version-" +
-              i +
-              "</td></tr>"
+              element[1] +
+              "</td>" +
+              "<td>" +
+              "N/A" +
+              "</td>" +
+              "<td>" +
+              //make a button called CHECK
+              '<button type="button" class="btn btn-primary btn-sm" id="check-button">' +
+              "CHECK" +
+              "</button>" +
+              "</td>" +
+              //make a button called UPDATE
+              '<td><button type="button" class="btn btn-danger btn-sm" id="update-button">' +
+              "UPDATE" +
+              "</button></td>" +
+              "</tr>"
           );
-        }
+        });
+
         $("#vm-table").append("</tr>");
         $("#vm-table").append("</tbody>");
       });
