@@ -14,8 +14,8 @@ import src.active_vms as vm_db
 import src.packages as pack
 
 
+VM_DB = "db/userID.openstack.VM.db"
 CONTAINER_DB = "db/userID.VM.containers.db"
-VM_DB = "db/userID.openstackVM.db"
 
 
 # define the port and host that the app will run on
