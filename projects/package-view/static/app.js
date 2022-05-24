@@ -59,7 +59,6 @@ $("document").ready(() => {
 
     if (make_table === true) {
       selected_vm = e.target.text;
-
       //check the position of the selected item in the vm-drp-list
       let selected_vm_index = $("#vm-drp-list a").index(e.target) + 1;
       selected_id = selected_vm_index;
@@ -69,36 +68,42 @@ $("document").ready(() => {
         vm_name: selected_vm,
       });
 
-      $("#vm-name-title").css("display", "block");
-      $("#vm-name-title").text(" 🔽  " + e.target.text + " 🔽 ");
-      $("#vm-name-title").css("font-weight", "bold");
-      $("#vm-name-title").css("font-family", "console");
+      //wait for the server to send the vm packages
+      sio.on("vm_packages", (data) => {
+        // tuple list which contains the package name and the package version
+        vm_packages = data["vm_packages"];
 
-      //after user selects an item from the dropdown list, generate a table with two columns and 5 rows
-      //make the table visible
-      $("#vm-table").css("display", "block");
+        $("#vm-name-title").css("display", "block");
+        $("#vm-name-title").text(" 🔽  " + e.target.text + " 🔽 ");
+        $("#vm-name-title").css("font-weight", "bold");
+        $("#vm-name-title").css("font-family", "console");
 
-      // make the vm-table empty but do not remove the table header
-      // https://stackoverflow.com/questions/370013/jquery-delete-all-table-rows-except-first
-      // https://stackoverflow.com/a/8053924/8295213
-      $("#vm-table > tbody").empty();
+        //after user selects an item from the dropdown list, generate a table with two columns and 5 rows
+        //make the table visible
+        $("#vm-table").css("display", "block");
 
-      $("#vm-table").append("<tbody>");
-      $("#vm-table").append('<tr class="table-success">');
+        // make the vm-table empty but do not remove the table header
+        // https://stackoverflow.com/questions/370013/jquery-delete-all-table-rows-except-first
+        // https://stackoverflow.com/a/8053924/8295213
+        $("#vm-table > tbody").empty();
 
-      for (let i = 0; i < 4; i++) {
-        $("#vm-table").append(
-          "<tr><td>" +
-            "package-" +
-            i +
-            "</td><td>" +
-            "version-" +
-            i +
-            "</td></tr>"
-        );
-      }
-      $("#vm-table").append("</tr>");
-      $("#vm-table").append("</tbody>");
+        $("#vm-table").append("<tbody>");
+        $("#vm-table").append('<tr class="table-success">');
+
+        for (let i = 0; i < 4; i++) {
+          $("#vm-table").append(
+            "<tr><td>" +
+              "package-" +
+              i +
+              "</td><td>" +
+              "version-" +
+              i +
+              "</td></tr>"
+          );
+        }
+        $("#vm-table").append("</tr>");
+        $("#vm-table").append("</tbody>");
+      });
 
       //when user selects an item from vm-drp-list, show the "vm-container-box" div
       $("#vm-container-box").css("display", "block");

@@ -90,9 +90,10 @@ def refresh_instances():
 def vm_selected(data):
     vm_id = data['vm_id']
     vm_name = data['vm_name']
-    print(vm_id, vm_name)
+
     # run the shell command for getting the packages that are installed on the current vm
-    pack.write_packages_on_db(USER_ID, vm_id)
+    vm_packages = pack.get_vm_packages(USER_ID, vm_id)
+    emit('vm_packages', {'vm_packages': vm_packages})
 
     # get the active containers and put them into the dropdown list
     vm_containers = containers_db.get_vm_containers(USER_ID, vm_id)
