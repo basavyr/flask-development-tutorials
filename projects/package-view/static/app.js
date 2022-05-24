@@ -70,6 +70,11 @@ $("document").ready(() => {
     let selected_vm_index = $("#vm-drp-list a").index(e.target) + 1;
     selected_id = selected_vm_index;
 
+    sio.emit("vm_selected", {
+      vm_id: selected_id,
+      vm_name: selected_vm,
+    });
+
     //assume the table should be created
     make_table = true;
 
@@ -129,10 +134,19 @@ $("document").ready(() => {
       // $("#vm-name-for-containers").css("font-family", "console");
       // $("#vm-name-for-containers").css("font-weight", "bold");
     }
+  });
 
-    sio.emit("vm_selected", {
-      vm_id: selected_id,
-      vm_name: selected_vm,
+  sio.on("available_vm_containers", (data) => {
+    //remove the first element from the container-drp-list
+    $("#container-drp-list").empty();
+
+    //append the data to the container-drp-list dropdown list
+    data["vm_containers"].forEach((element) => {
+      let containerName = element[0];
+      let containerId = element[1];
+      $("#container-drp-list").append(
+        '<a class="dropdown-item" href="#">' + containerName + "</a>"
+      );
     });
   });
 
@@ -161,27 +175,28 @@ $("document").ready(() => {
       //make the table visible
       $("#container-table").css("display", "block");
 
-      // make the vm-table empty but do not remove the table header
-      // https://stackoverflow.com/questions/370013/jquery-delete-all-table-rows-except-first
-      // https://stackoverflow.com/a/8053924/8295213
-      $("#container-table > tbody").empty();
+      // //add the data into the container-table
+      // // make the vm-table empty but do not remove the table header
+      // // https://stackoverflow.com/questions/370013/jquery-delete-all-table-rows-except-first
+      // // https://stackoverflow.com/a/8053924/8295213
+      // $("#container-table > tbody").empty();
 
-      $("#container-table").append("<tbody>");
-      $("#container-table").append('<tr class="table-success">');
+      // $("#container-table").append("<tbody>");
+      // $("#container-table").append('<tr class="table-success">');
 
-      for (let i = 0; i < 3; i++) {
-        $("#container-table").append(
-          "<tr><td>" +
-            "package-" +
-            i +
-            "</td><td>" +
-            "version-" +
-            i +
-            "</td></tr>"
-        );
-      }
-      $("#container-table").append("</tr>");
-      $("#container-table").append("</tbody>");
+      // for (let i = 0; i < 3; i++) {
+      //   $("#container-table").append(
+      //     "<tr><td>" +
+      //       "package-" +
+      //       i +
+      //       "</td><td>" +
+      //       "version-" +
+      //       i +
+      //       "</td></tr>"
+      //   );
+      // }
+      // $("#container-table").append("</tr>");
+      // $("#container-table").append("</tbody>");
     }
   });
 });
