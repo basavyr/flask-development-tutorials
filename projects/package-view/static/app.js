@@ -39,9 +39,11 @@ $("document").ready(() => {
     $("#vm-drp-list").empty();
     //print every element from the array
     data.vms.forEach((element) => {
+      vm_id = element[0];
+      vm_name = element[1];
       //add each array item into the "vm-drp-list" dropdown list
       $("#vm-drp-list").append(
-        '<a class="dropdown-item" href="#">' + element + "</a>"
+        '<a class="dropdown-item" href="#">' + vm_name + "</a>"
       );
     });
 
@@ -107,10 +109,15 @@ $("document").ready(() => {
       $("#vm-container-box").css("display", "block");
 
       //get the text from the "vm-name-for-containers" paragraph
-      let paragraph = "The containerized services that run on the VM:";
+      let paragraph = "The containerized services that run on the VM ";
       let vm_name = $("#vm-name-for-containers").text();
       let new_paragraph =
-        "<p>" + paragraph + " <b>" + e.target.text + "</b>." + "<p>";
+        "<p>" +
+        paragraph +
+        " <b style='font-family: console;'>" +
+        e.target.text +
+        "</b>." +
+        "<p>";
 
       //set the value for the "vm-name-for-containers" to the new paragraph
       $("#vm-name-for-containers").html(new_paragraph);
@@ -119,7 +126,8 @@ $("document").ready(() => {
     }
 
     sio.emit("vm_selected", {
-      vm: e.target.text,
+      vm_id: vm_id,
+      vm_name: vm_name,
     });
   });
 
