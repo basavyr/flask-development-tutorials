@@ -73,7 +73,7 @@ $("document").ready(() => {
 
     if (make_table === true) {
       $("#vm-name-title").css("display", "block");
-      $("#vm-name-title").text(e.target.text);
+      $("#vm-name-title").text(" 🔽  " + e.target.text + " 🔽 ");
       $("#vm-name-title").css("font-weight", "bold");
       $("#vm-name-title").css("font-family", "console");
 
@@ -89,9 +89,7 @@ $("document").ready(() => {
       $("#vm-table").append("<tbody>");
       $("#vm-table").append('<tr class="table-success">');
 
-      //generate a random number between 1 and 8
-      let num_of_columns = Math.floor(Math.random() * (8 - 3 + 1)) + 3;
-      for (let i = 0; i < num_of_columns; i++) {
+      for (let i = 0; i < 4; i++) {
         $("#vm-table").append(
           "<tr><td>" +
             "package-" +
@@ -104,14 +102,20 @@ $("document").ready(() => {
       }
       $("#vm-table").append("</tr>");
       $("#vm-table").append("</tbody>");
+
       //when user selects an item from vm-drp-list, show the "vm-container-box" div
       $("#vm-container-box").css("display", "block");
 
       //get the text from the "vm-name-for-containers" paragraph
+      let paragraph = "The containerized services that run on the VM:";
       let vm_name = $("#vm-name-for-containers").text();
-      let new_paragraph = vm_name + " " + e.target.text + ".";
-      //set the value for the "vm-name-for-containers" paragraph to new_paragraph
-      $("#vm-name-for-containers").text(new_paragraph);
+      let new_paragraph =
+        "<p>" + paragraph + " <b>" + e.target.text + "</b>." + "<p>";
+
+      //set the value for the "vm-name-for-containers" to the new paragraph
+      $("#vm-name-for-containers").html(new_paragraph);
+      // $("#vm-name-for-containers").css("font-family", "console");
+      // $("#vm-name-for-containers").css("font-weight", "bold");
     }
 
     sio.emit("vm_selected", {
@@ -152,9 +156,7 @@ $("document").ready(() => {
       $("#container-table").append("<tbody>");
       $("#container-table").append('<tr class="table-success">');
 
-      //generate a random number between 1 and 3
-      let num_of_columns = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
-      for (let i = 0; i < num_of_columns; i++) {
+      for (let i = 0; i < 3; i++) {
         $("#container-table").append(
           "<tr><td>" +
             "package-" +
