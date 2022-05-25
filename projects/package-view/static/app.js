@@ -107,7 +107,7 @@ $("document").ready(() => {
               vm_packages[i][1] +
               "</td>" +
               "<td>" +
-              "N/A" +
+              vm_packages[i][2] +
               "</td>" +
               "<td>" +
               //make a button called CHECK
