@@ -278,8 +278,8 @@ $("document").ready(() => {
   //get the value of the "vm-list-stats" element when user clicks
   $("#vm-list-stats").on("click", (e) => {
     //check the position of the selected item in the vm-list-stats
-    let selected_vm_index = $("#vm-list-stats a").index(e.target) + 1;
-    selected_id = selected_vm_index;
+    let selected_index = $("#vm-list-stats a").index(e.target) + 1;
+    let selected_vm_id = vm_id_list[selected_index - 1];
 
     show_stats = true;
 
@@ -288,8 +288,11 @@ $("document").ready(() => {
     }
 
     if (show_stats === true) {
+      sio.emit("get_vm_stats", { vm_id: selected_vm_id });
       html_element =
-        "<h4><< VM: <code>" + vm_name_list[selected_id - 1] + "</code>>></h4>";
+        "<h4><<VM: <code>" +
+        vm_name_list[selected_index - 1] +
+        "</code>>></h4>";
 
       //set the html for "box-vm-name" to html_element
       $("#box-vm-name").html(html_element);
@@ -297,9 +300,9 @@ $("document").ready(() => {
       //show the unified-vm-stats div
       $("#unified-vm-stats").css("display", "block");
       // change the html for the div "vm_id_stats" to the selected vm id
-      $("#vm_id_stats").html(vm_id_list[selected_id - 1]);
+      $("#vm_id_stats").html(vm_id_list[selected_index - 1]);
       // change the html for the div "vm_name_stats" to the selected vm name
-      $("#vm_name_stats").html(vm_name_list[selected_id - 1]);
+      $("#vm_name_stats").html(vm_name_list[selected_index - 1]);
     }
   });
 });

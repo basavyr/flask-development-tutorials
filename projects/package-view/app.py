@@ -14,7 +14,7 @@ import src.active_containers as containers_db
 import src.active_vms as vm_db
 import src.packages as pack
 import src.graphs as graf
-
+import src.stats as stats
 
 VM_DB = "db/userID.openstack.VM.db"
 CONTAINER_DB = "db/userID.VM.containers.db"
@@ -139,6 +139,12 @@ def update(data):
     package_name = data['package']
     pack.execute_update(USER_ID, vm_id, package_name)
 
+
+@socketio.event
+def get_vm_stats(data):
+    vm_id = data['vm_id']
+    print(f'Will get stats for the VM with ID: {vm_id}')
+    stats.publish_command(USER_ID, vm_id)
 
 ###################################
 # main function
