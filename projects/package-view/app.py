@@ -16,7 +16,7 @@ import src.packages as pack
 import src.graphs as graf
 import src.stats as stats
 
-VM_DB = "db/userID.openstack.VM.db"
+VM_DB = "db/userID.openstack.VM.list.db"
 CONTAINER_DB = "db/userID.VM.containers.db"
 
 

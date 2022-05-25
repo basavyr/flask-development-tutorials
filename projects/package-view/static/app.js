@@ -35,6 +35,8 @@ $("document").ready(() => {
 
   //save the instances list from the server as an array
   sio.on("instances", (data) => {
+    console.log(data);
+
     //remove the element from the vm-drp-list
     $("#vm-drp-list").empty();
 
