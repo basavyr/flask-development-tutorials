@@ -41,10 +41,7 @@ block body %}
   <!-- create a div where the vm id will be kept -->
   <div id="vm_id_stats" style="display: none"></div>
   {% if node_name %}
-  <div class="container">
-    <h4 style="padding-left: 20px; padding-top: 0px">
-      << node: <code>{{node_name}}</code> >>
-    </h4>
+  <div class="container" id="box-vm-name">
   </div>
   {% endif %}
   <div class="flex-container">

@@ -288,6 +288,12 @@ $("document").ready(() => {
     }
 
     if (show_stats === true) {
+      html_element =
+        "<h4><< VM: <code>" + vm_name_list[selected_id - 1] + "</code>>></h4>";
+
+      //set the html for "box-vm-name" to html_element
+      $("#box-vm-name").html(html_element);
+
       //show the unified-vm-stats div
       $("#unified-vm-stats").css("display", "block");
       // change the html for the div "vm_id_stats" to the selected vm id
