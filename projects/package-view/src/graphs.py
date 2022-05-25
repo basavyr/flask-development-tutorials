@@ -136,7 +136,7 @@ def shower(pct, data):
 
 
 def swap_pie_chart():
-    raw_dict_data = local_data.get_swap_info()
+    raw_dict_data = get_swap_info()
 
     percent = raw_dict_data['percent']
 
@@ -192,7 +192,7 @@ def swap_pie_chart():
 
 
 def virtual_memory_pie_char():
-    raw_dict_data = local_data.get_virtual_memory_info()
+    raw_dict_data = get_virtual_memory_info()
 
     percent = raw_dict_data['percent']
 
@@ -248,7 +248,7 @@ def virtual_memory_pie_char():
 
 
 def disk_pie_chart():
-    raw_dict_data = local_data.get_disk_info()
+    raw_dict_data = get_disk_info()
 
     percent = raw_dict_data['percent']
 
@@ -304,7 +304,7 @@ def disk_pie_chart():
 
 
 def cpu_info_chart():
-    cpu_usages, _ = local_data.get_cpu_info()
+    cpu_usages, _ = get_cpu_info()
 
     bar_labels = [f'last\n{idx} minute(s)' for idx in [1, 5, 15]]
 
