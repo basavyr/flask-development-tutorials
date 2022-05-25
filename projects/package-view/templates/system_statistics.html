@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% block title %} System Statistics {% endblock %} {%
 block body %}
+<script src="static/app.js"></script>
 
 <div class="container">
   <h2>System statistics</h2>
@@ -25,13 +26,15 @@ block body %}
     <!-- source: https://www.aspsnippets.com/questions/186447/Display-DropDownList-with-fixed-height-and-AutoScroll-enabled-using-C-in-ASPNet-MVC/ -->
     <div
       class="dropdown-menu"
-      id="vm-drp-list"
+      id="vm-list-stats"
       style="max-height: 160px; overflow: auto"
     >
       <a class="dropdown-item" href="#">empty...</a>
     </div>
   </div>
 </div>
+
+<!-- prevent the entire statistics view to be displayed on page loading -->
 <div id="unidifed-vm-stats" style="display: none">
   {% if node_name %}
   <h2 style="padding-left: 20px; padding-top: 0px">

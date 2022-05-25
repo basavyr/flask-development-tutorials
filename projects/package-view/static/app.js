@@ -239,4 +239,17 @@ $("document").ready(() => {
     );
     sio.emit("update", { vm_id: vm_id, package: package_name });
   });
+
+  //************************************************************************** */
+  //************************************************************************** */
+  //************************************************************************** */
+  //************************************************************************** */
+  //************************************************************************** */
+  // The system statistics app module
+
+  // console log when user clicks on the System Statistics button in the navbar
+  $("#system-statistics").click(() => {
+    console.log("System Statistics button clicked");
+    sio.emit("refresh_instances");
+  });
 });

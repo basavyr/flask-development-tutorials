@@ -92,7 +92,8 @@ def show_system_statistics():
 
 @socketio.event
 def on_connect(payload):
-    print(payload['msg'])
+    pass
+    # print(payload['msg'])
 
 
 @socketio.event
