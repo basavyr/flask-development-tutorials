@@ -258,4 +258,18 @@ $("document").ready(() => {
     // console log the data
     console.log(data);
   });
+
+  //get the value of the "vm-list-stats" element when user clicks
+  $("#vm-list-stats").on("click", (e) => {
+    show_stats = true;
+
+    if (e.target.text === "empty...") {
+      show_stats = false;
+    }
+
+    if (show_stats === true) {
+      //show the unified-vm-stats div
+      $("#unified-vm-stats").css("display", "block");
+    }
+  });
 });
