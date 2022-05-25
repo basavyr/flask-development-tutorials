@@ -96,11 +96,20 @@ def on_connect(payload):
     # print(payload['msg'])
 
 
+# the vms that will be returned when 'package-management' module is selected
 @socketio.event
 def refresh_instances():
     print('User requested VM list')
     active_vms = [(vm[0], vm[1]) for vm in vm_db.get_user_vms(VM_DB)]
     emit('instances', {'vms': active_vms})
+
+
+# the vms that will be returned when 'system-statistics' module is selected
+@socketio.event
+def refresh_instances_stats():
+    print('User requested VM list')
+    active_vms = [(vm[0], vm[1]) for vm in vm_db.get_user_vms(VM_DB)]
+    emit('instances_stats', {'vms': active_vms})
 
 
 @socketio.event

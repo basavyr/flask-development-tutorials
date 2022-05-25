@@ -248,8 +248,14 @@ $("document").ready(() => {
   // The system statistics app module
 
   // console log when user clicks on the System Statistics button in the navbar
-  $("#system-statistics").click(() => {
+  $("#system-statistics").ready(() => {
     console.log("System Statistics button clicked");
-    sio.emit("refresh_instances");
+    sio.emit("refresh_instances_stats");
+  });
+
+  //save the instances list from the server as an array
+  sio.on("instances_stats", (data) => {
+    // console log the data
+    console.log(data);
   });
 });
