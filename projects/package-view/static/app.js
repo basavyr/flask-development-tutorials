@@ -256,7 +256,22 @@ $("document").ready(() => {
   //save the instances list from the server as an array
   sio.on("instances_stats", (data) => {
     // console log the data
-    console.log(data);
+    vms = data["vms"];
+    vm_id_list = [];
+    vm_name_list = [];
+    vms.forEach((element) => {
+      vm_id_list.push(element[0]);
+      vm_name_list.push(element[1]);
+    });
+    console.log(vm_id_list);
+    //clean the "vm-list-stats" dropdown list first
+    $("#vm-list-stats").empty();
+    // add every item from vm_name_list to the "vm-list-stats" dropdown list
+    vm_name_list.forEach((element) => {
+      $("#vm-list-stats").append(
+        '<a class="dropdown-item" href="#">' + element + "</a>"
+      );
+    });
   });
 
   //get the value of the "vm-list-stats" element when user clicks
