@@ -36,6 +36,10 @@ block body %}
 
 <!-- prevent the entire statistics view to be displayed on page loading -->
 <div id="unified-vm-stats" style="display: none">
+  <!-- create a div where the vm name will be kept -->
+  <div id="vm_name_stats" style="display: none"></div>
+  <!-- create a div where the vm id will be kept -->
+  <div id="vm_id_stats" style="display: none"></div>
   {% if node_name %}
   <div class="container">
     <h4 style="padding-left: 20px; padding-top: 0px">

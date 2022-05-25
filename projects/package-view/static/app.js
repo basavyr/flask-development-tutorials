@@ -253,17 +253,18 @@ $("document").ready(() => {
     sio.emit("refresh_instances_stats");
   });
 
+  let vm_id_list = [];
+  let vm_name_list = [];
+
   //save the instances list from the server as an array
   sio.on("instances_stats", (data) => {
     // console log the data
     vms = data["vms"];
-    vm_id_list = [];
-    vm_name_list = [];
+
     vms.forEach((element) => {
       vm_id_list.push(element[0]);
       vm_name_list.push(element[1]);
     });
-    console.log(vm_id_list);
     //clean the "vm-list-stats" dropdown list first
     $("#vm-list-stats").empty();
     // add every item from vm_name_list to the "vm-list-stats" dropdown list
@@ -276,6 +277,10 @@ $("document").ready(() => {
 
   //get the value of the "vm-list-stats" element when user clicks
   $("#vm-list-stats").on("click", (e) => {
+    //check the position of the selected item in the vm-list-stats
+    let selected_vm_index = $("#vm-list-stats a").index(e.target) + 1;
+    selected_id = selected_vm_index;
+
     show_stats = true;
 
     if (e.target.text === "empty...") {
@@ -285,6 +290,10 @@ $("document").ready(() => {
     if (show_stats === true) {
       //show the unified-vm-stats div
       $("#unified-vm-stats").css("display", "block");
+      // change the html for the div "vm_id_stats" to the selected vm id
+      $("#vm_id_stats").html(vm_id_list[selected_id - 1]);
+      // change the html for the div "vm_name_stats" to the selected vm name
+      $("#vm_name_stats").html(vm_name_list[selected_id - 1]);
     }
   });
 });
