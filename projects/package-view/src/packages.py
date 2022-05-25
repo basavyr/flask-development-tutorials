@@ -6,10 +6,36 @@ from subprocess import STDOUT
 from pathlib import Path
 import sqlite3
 import random
-from paho import mqtt
 
 
-import mqtt_publisher as openstack_publisher
+import time
+import paho.mqtt.client as mqtt
+
+# define the server parameters
+OPENSTACK_BROKER = "127.0.0.1"
+OPENSTACK_PORT = 1883
+OPENSTACK_TOPIC = "/openstack/cloudifin/servers/"
+
+
+def on_connect(client, userdata, flags, rc):
+    if rc == 0:
+        print("Connected to MQTT Broker!")
+    else:
+        print("Failed to connect, return code %d\n", rc)
+
+
+def publish_command(user_id, vm_id, command):
+    client = mqtt.Client(str(user_id))
+    client.on_connect = on_connect
+
+    # start the connection in order to publish messages on the proper topic
+    client.connect(OPENSTACK_BROKER, OPENSTACK_PORT)
+    client.loop_start()
+    vm_topic = f'{OPENSTACK_TOPIC}{vm_id}'
+    print(f'Will publish on the topic: {vm_topic}')
+    client.publish(vm_topic, command)
+    client.loop_stop()
+
 
 # return ann empty list of errors occurred during the execution of the command
 EMPTY_LIST = []
@@ -98,7 +124,7 @@ def execute_check_update(userID, vm_id, package_name):
     print(f'will check update for {package_name} on VM: {vm_id}')
     # shell command to be executed on the selected VM
     command = f'yum check-update | grep {package_name}'
-    openstack_publisher.publish_command(userID, vm_id, command)
+    publish_command(userID, vm_id, command)
 
 
 def execute_update(userID, vm_id, package_name):
@@ -106,4 +132,4 @@ def execute_update(userID, vm_id, package_name):
     print(f'will update {package_name} on VM: {vm_id}')
     # shell command to be executed on the selected VM
     command = f'yum update {package_name}'
-    openstack_publisher.publish_command(userID, vm_id, command)
+    publish_command(userID, vm_id, command)
