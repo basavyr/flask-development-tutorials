@@ -290,9 +290,9 @@ $("document").ready(() => {
     if (show_stats === true) {
       sio.emit("get_vm_stats", { vm_id: selected_vm_id });
       html_element =
-        "<h4><<VM: <code>" +
+        "<h4><p>VM: <code>" +
         vm_name_list[selected_index - 1] +
-        "</code>>></h4>";
+        "</code></p></h4>";
 
       //set the html for "box-vm-name" to html_element
       $("#box-vm-name").html(html_element);
