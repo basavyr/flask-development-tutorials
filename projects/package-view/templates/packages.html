@@ -1,21 +1,16 @@
-{% extends "base.html" %} {% block title %} Cloudifin{% endblock %} {% block body
-%}
+{% extends "base.html" %} {% block title %} Cloudifin{% endblock %} {% block
+body %}
 <script src="static/app.js"></script>
 
 <div class="container">
+  <h2>Package management</h2>
   <p style="font-style: italic">
     Package management tool for any active cloud compute instances.
   </p>
-  <p>Hello, <b>{{user_id}}</b>.</p>
-  <p>Please refresh the instances to get the available resources.</p>
-  <!-- <ul>
-    <li>Virtual Machine (VM)</li>
-    <li>Container Application</li>
-  </ul>
-  <p> -->
-
+  <p>User: <b>{{user_id}}</b>.</p>
+  <!-- <div class="padder"> -->
   <!-- add a button to the top of the page to retrieve active instances -->
-  <div class="padder">
+  <div style="padding-bottom: 10px">
     <button
       type="button"
       class="btn btn-primary"
@@ -25,6 +20,9 @@
     >
       Refresh Instances
     </button>
+    <p style="display: inline; padding-left: 5px">
+      Please refresh the instances to get the available resources.
+    </p>
   </div>
 
   <h4>Virtual Machines ⌨️</h4>
@@ -58,7 +56,7 @@
   <!-- add a hidden table called "vm-table" to the page -->
   <div id="vm-name-title" style="display: none"></div>
   <div id="vm-id-title" style="display: none"></div>
-  
+
   <table
     class="table table-hover"
     id="vm-table"

@@ -1,8 +1,37 @@
 {% extends "base.html" %} {% block title %} System Statistics {% endblock %} {%
 block body %}
 
-<h2 style="padding-left: 20px; padding-top: 20px">System statistics</h2>
+<div class="container">
+  <h2>System statistics</h2>
 
+  <p>Hello, <b>{{user_id}}</b>.</p>
+  <p>
+    Choose from the list of <b>Virtual Machines</b> to see its current
+    statistics.
+  </p>
+  <div class="dropdown box">
+    <button
+      class="btn btn-secondary dropdown-toggle"
+      type="button"
+      id="dropdownMenuButton"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      VM List
+    </button>
+    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> -->
+    <!-- make a dropdown list with fixed height and scrollable -->
+    <!-- source: https://www.aspsnippets.com/questions/186447/Display-DropDownList-with-fixed-height-and-AutoScroll-enabled-using-C-in-ASPNet-MVC/ -->
+    <div
+      class="dropdown-menu"
+      id="vm-drp-list"
+      style="max-height: 160px; overflow: auto"
+    >
+      <a class="dropdown-item" href="#">empty...</a>
+    </div>
+  </div>
+</div>
 <div id="unidifed-vm-stats" style="display: none">
   {% if node_name %}
   <h2 style="padding-left: 20px; padding-top: 0px">

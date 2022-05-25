@@ -1,4 +1,5 @@
 # general imports
+from collections import UserDict
 from crypt import methods
 from distutils.log import debug
 from flask_socketio import SocketIO
@@ -80,6 +81,7 @@ def show_system_statistics():
                            time_stamp=graf.get_timestamp(),
                            arch=graf.get_platform_arch(),
                            cpu_info=graf.get_cpu_info(),
+                           user_id=USER_ID,
                            )
 
 
