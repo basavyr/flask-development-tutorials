@@ -377,7 +377,7 @@ def cpu_info_chart():
     # fig.tight_layout()
     ax.set_title('Average CPU usage')
     ax.set_ylabel('%')
-    # ax.set_ylim([0, 100])
+    ax.set_ylim([0, 100])
 
     # adjust the sizing and padding of the figure
     fig.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.90)
