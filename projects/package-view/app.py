@@ -12,6 +12,7 @@ from threading import Lock
 import src.active_containers as containers_db
 import src.active_vms as vm_db
 import src.packages as pack
+import src.graphs as graf
 
 
 VM_DB = "db/userID.openstack.VM.db"
@@ -74,11 +75,11 @@ def show_system_statistics():
                            swap_pie_chart=graf.swap_pie_chart(),
                            virtual_memory_pie_chart=graf.virtual_memory_pie_char(),
                            cpu_chart=graf.cpu_info_chart(),
-                           node_name=graf.local_data.get_node_name(),
-                           sys_info=graf.local_data.get_sys_info(),
-                           time_stamp=graf.local_data.get_timestamp(),
-                           arch=graf.local_data.get_platform_arch(),
-                           cpu_info=graf.local_data.get_cpu_info(),
+                           node_name=graf.get_node_name(),
+                           sys_info=graf.get_sys_info(),
+                           time_stamp=graf.get_timestamp(),
+                           arch=graf.get_platform_arch(),
+                           cpu_info=graf.get_cpu_info(),
                            )
 
 
