@@ -65,8 +65,21 @@ def show_topology():
 
 @app.route('/stats', methods=['GET', 'POST'])
 def show_system_statistics():
-    return render_template('system_statistics.html',
-                           user_id=USER_ID)
+    graph_template = 'system_statistics.html'
+    graph_data = graf.give_graph_data()
+
+    return render_template(graph_template,
+                           graph_data=graph_data,
+                           disk_pie_chart=graf.disk_pie_chart(),
+                           swap_pie_chart=graf.swap_pie_chart(),
+                           virtual_memory_pie_chart=graf.virtual_memory_pie_char(),
+                           cpu_chart=graf.cpu_info_chart(),
+                           node_name=graf.local_data.get_node_name(),
+                           sys_info=graf.local_data.get_sys_info(),
+                           time_stamp=graf.local_data.get_timestamp(),
+                           arch=graf.local_data.get_platform_arch(),
+                           cpu_info=graf.local_data.get_cpu_info(),
+                           )
 
 
 ###################################
@@ -112,7 +125,6 @@ def update(data):
     vm_id = data['vm_id']
     package_name = data['package']
     pack.execute_update(USER_ID, vm_id, package_name)
-    
 
 
 ###################################
