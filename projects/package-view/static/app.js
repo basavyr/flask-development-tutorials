@@ -3,6 +3,9 @@ $("document").ready(() => {
 
   sio = io();
 
+  let vm_id_list = [];
+  let vm_name_list = [];
+
   sio.on("connect", () => {
     console.log("Connected to server");
 
@@ -35,17 +38,22 @@ $("document").ready(() => {
 
   //save the instances list from the server as an array
   sio.on("instances", (data) => {
-    console.log(data);
-
     //remove the element from the vm-drp-list
     $("#vm-drp-list").empty();
 
     data.vms.forEach((element) => {
       let vm_name = element[1];
+      let vm_id = element[0];
+
       //add each array item into the "vm-drp-list" dropdown list
       $("#vm-drp-list").append(
         '<a class="dropdown-item" href="#">' + vm_name + "</a>"
       );
+
+      // add the id to the vm_id_list array
+      vm_id_list.push(vm_id);
+      // add the name to the vm_name_list array
+      vm_name_list.push(vm_name);
     });
   });
 
@@ -54,8 +62,9 @@ $("document").ready(() => {
     //assume the table should be created
     make_table = true;
 
+    //clear the vm-table first
     $("#vm-table > tbody").empty();
-    vm_packages = [];
+
     //do not create a table if there is no vm list
     if (e.target.text === "empty...") {
       make_table = false;
@@ -65,26 +74,30 @@ $("document").ready(() => {
       selected_vm = e.target.text;
       //check the position of the selected item in the vm-drp-list
       let selected_vm_index = $("#vm-drp-list a").index(e.target) + 1;
-      selected_id = selected_vm_index;
 
       sio.emit("vm_selected", {
-        vm_id: selected_id,
-        vm_name: selected_vm,
+        vm_id: vm_id_list[selected_vm_index - 1],
+        vm_name: vm_name_list[selected_vm_index - 1],
       });
 
-      //wait for the server to send the vm packages
+      //wait for the server to send the packages on the VM that was previously selected
       sio.on("vm_packages", (data) => {
-        $("#vm-table > tbody").empty();
-        vm_packages = [];
         // tuple list which contains the package name and the package version
         vm_packages = data["vm_packages"];
 
+        $("#vm-table > tbody").empty();
         $("#vm-name-title").css("display", "block");
-        $("#vm-name-title").text(e.target.text);
+        // $("#vm-name-title").html(
+        //   "<code>VM: " + vm_name_list[selected_vm_index - 1] + "</code>"
+        // );
+        $("#vm-name-title").html(vm_name_list[selected_vm_index - 1]);
         $("#vm-name-title").css("font-weight", "bold");
         $("#vm-name-title").css("font-family", "console");
-        // $("#vm-id-title").css("display", "block");
-        $("#vm-id-title").text(selected_id);
+        $("#vm-id-title").css("display", "block");
+        $("#vm-id-title").html(vm_id_list[selected_vm_index - 1]);
+        // $("#vm-id-title").html(
+        //   "<code>VM ID: " + vm_id_list[selected_vm_index - 1] + "</code>"
+        // );
         $("#vm-id-title").css("font-weight", "bold");
         $("#vm-id-title").css("font-family", "console");
 
@@ -241,6 +254,4 @@ $("document").ready(() => {
     );
     sio.emit("update", { vm_id: vm_id, package: package_name });
   });
-
-  
 });
