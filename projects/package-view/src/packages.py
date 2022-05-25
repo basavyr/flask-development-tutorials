@@ -8,6 +8,9 @@ import sqlite3
 import random
 from paho import mqtt
 
+
+import mqtt_publisher as openstack_publisher
+
 # return ann empty list of errors occurred during the execution of the command
 EMPTY_LIST = []
 
@@ -93,8 +96,14 @@ def get_vm_packages(userID, vm_id):
 def execute_check_update(userID, vm_id, package_name):
     print(f'From: {userID}')
     print(f'will check update for {package_name} on VM: {vm_id}')
+    # shell command to be executed on the selected VM
+    command = f'yum check-update | grep {package_name}'
+    openstack_publisher.publish_command(userID, vm_id, command)
 
 
 def execute_update(userID, vm_id, package_name):
     print(f'From: {userID}')
     print(f'will update {package_name} on VM: {vm_id}')
+    # shell command to be executed on the selected VM
+    command = f'yum update {package_name}'
+    openstack_publisher.publish_command(userID, vm_id, command)
