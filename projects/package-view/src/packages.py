@@ -63,7 +63,7 @@ def publish_command(user_id, vm_id, command):
     # start the connection in order to publish messages on the proper topic
     client.connect(OPENSTACK_BROKER, OPENSTACK_PORT)
     client.loop_start()
-    vm_topic = f'{OPENSTACK_TOPIC}{vm_id}'
+    vm_topic = f'{OPENSTACK_TOPIC}{user_id}/{vm_id}'
     print(f'Will publish on the topic: {vm_topic}')
     client.publish(vm_topic, command)
     client.loop_stop()
