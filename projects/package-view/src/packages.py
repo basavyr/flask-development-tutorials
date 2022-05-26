@@ -189,11 +189,3 @@ def execute_update(userID, vm_id, package_name):
     # shell command to be executed on the selected VM
     command = f'yum update {package_name}'
     publish_command(userID, vm_id, command)
-
-
-def main():
-    write_test_packages_on_db()
-
-
-if __name__ == '__main__':
-    main()

@@ -1,3 +1,4 @@
+import numpy as np
 from encodings import utf_8
 
 import psutil
@@ -13,6 +14,9 @@ from datetime import datetime
 from matplotlib.figure import Figure
 import matplotlib
 matplotlib.rcParams['font.size'] = 15
+
+
+np.seterr(divide='ignore', invalid='ignore')
 
 
 ################# move local data from separate module into here for app execution #######################
@@ -235,7 +239,7 @@ def virtual_memory_pie_char():
               loc='upper right',
               bbox_to_anchor=(0.2, 0.95),
               )
-    fig.tight_layout()
+    # fig.tight_layout()
 
     # Save it to a temporary buffer
     buffer = BytesIO()
@@ -292,7 +296,7 @@ def disk_pie_chart():
               bbox_to_anchor=(0.8, 0.7),
               )
 
-    fig.tight_layout()
+    # fig.tight_layout()
     # Save it to a temporary buffer
     buffer = BytesIO()
     fig.savefig(buffer, format="png")

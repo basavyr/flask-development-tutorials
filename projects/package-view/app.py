@@ -1,20 +1,20 @@
 # general imports
-from collections import UserDict
-from crypt import methods
-from distutils.log import debug
+from asyncio.subprocess import DEVNULL
 from flask_socketio import SocketIO
 from flask_socketio import emit
 from flask import Flask, render_template
-import random
-import time
-from threading import Thread, Event
 from threading import Lock
+import subprocess
+import glob
+import os
 
+# local imports
 import src.active_containers as containers_db
 import src.active_vms as vm_db
 import src.packages as pack
 import src.graphs as graf
 import src.stats as stats
+
 
 VM_DB = "db/userID.openstack.VM.list.db"
 CONTAINER_DB = "db/userID.VM.containers.db"
@@ -93,13 +93,17 @@ def show_system_statistics():
 @socketio.event
 def on_connect(payload):
     pass
-    # print(payload['msg'])
 
 
 # the vms that will be returned when 'package-management' module is selected
 @socketio.event
 def refresh_instances():
     print('User requested VM list')
+
+    # clean the db dir
+    for db_file in glob.glob('db/user69.*'):
+        os.remove(db_file)
+
     active_vms = [(vm[0], vm[1]) for vm in vm_db.get_user_vms(VM_DB)]
     emit('instances', {'vms': active_vms})
 
@@ -108,6 +112,11 @@ def refresh_instances():
 @socketio.event
 def refresh_instances_stats():
     print('User requested VM list')
+
+    # clean the db dir
+    for db_file in glob.glob('db/user69.*'):
+        os.remove(db_file)
+
     active_vms = [(vm[0], vm[1]) for vm in vm_db.get_user_vms(VM_DB)]
     emit('instances_stats', {'vms': active_vms})
 
