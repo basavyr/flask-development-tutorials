@@ -179,7 +179,7 @@ def swap_pie_chart():
               bbox_to_anchor=(0.20, 0.95),
               loc='upper right',
               )
-    fig.tight_layout()
+    # fig.tight_layout()
 
     # Save it to a temporary buffer
     buffer = BytesIO()

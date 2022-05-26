@@ -63,13 +63,19 @@ $("document").ready(() => {
 
     if (show_stats === true) {
       sio.emit("get_vm_stats", { vm_id: selected_vm_id });
-      html_element =
+      html_element_name =
         "<h4><p>VM: <code>" +
         vm_name_list[selected_index - 1] +
         "</code></p></h4>";
+      html_element_id =
+        "<h4><p>VM ID: <code>" +
+        vm_id_list[selected_index - 1] +
+        "</code></p></h4>";
 
       //set the html for "box-vm-name" to html_element
-      $("#box-vm-name").html(html_element);
+      $("#box-vm-name").html(html_element_name);
+      //set the html for "box-vm-id" to html_element
+      $("#box-vm-id").html(html_element_id);
 
       //show the unified-vm-stats div
       $("#unified-vm-stats").css("display", "block");
