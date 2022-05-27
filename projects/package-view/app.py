@@ -18,6 +18,7 @@ import src.stats as stats
 
 VM_DB = "db/userID.openstack.VM.list.db"
 CONTAINER_DB = "db/userID.VM.containers.db"
+CLOUD_CONTAINER_DB = "db/ccdb.db"
 
 
 # define the port and host that the app will run on
@@ -104,7 +105,8 @@ def refresh_instances():
     for db_file in glob.glob('db/user69.*'):
         os.remove(db_file)
 
-    active_vms = [(vm[0], vm[1]) for vm in vm_db.get_user_vms(VM_DB)]
+    active_vms = [(vm[0], vm[1])
+                  for vm in vm_db.get_user_vms(CLOUD_CONTAINER_DB)]
     emit('instances', {'vms': active_vms})
 
 
@@ -117,7 +119,8 @@ def refresh_instances_stats():
     for db_file in glob.glob('db/user69.*'):
         os.remove(db_file)
 
-    active_vms = [(vm[0], vm[1]) for vm in vm_db.get_user_vms(VM_DB)]
+    active_vms = [(vm[0], vm[1])
+                  for vm in vm_db.get_user_vms(CLOUD_CONTAINER_DB)]
     emit('instances_stats', {'vms': active_vms})
 
 
