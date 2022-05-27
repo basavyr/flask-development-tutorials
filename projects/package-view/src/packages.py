@@ -14,7 +14,8 @@ import paho.mqtt.client as mqtt
 # define the server parameters
 OPENSTACK_BROKER = "127.0.0.1"
 OPENSTACK_PORT = 1883
-OPENSTACK_TOPIC = "/openstack/cloudifin/servers/"
+REQ_OPENSTACK_TOPIC = "cloud/req/cloudifin/servers/"
+RES_OPENSTACK_TOPIC = "cloud/res/cloudifin/servers/"
 
 
 raw_packages = """
@@ -63,7 +64,9 @@ def publish_command(user_id, vm_id, command):
     # start the connection in order to publish messages on the proper topic
     client.connect(OPENSTACK_BROKER, OPENSTACK_PORT)
     client.loop_start()
-    vm_topic = f'{OPENSTACK_TOPIC}{user_id}/{vm_id}'
+    # define the request topic
+    # request topic sends a message to the VM in order to execute shell command
+    vm_topic = f'{REQ_OPENSTACK_TOPIC}/{vm_id}'
     print(f'Will publish on the topic: {vm_topic}')
     client.publish(vm_topic, command)
     client.loop_stop()
