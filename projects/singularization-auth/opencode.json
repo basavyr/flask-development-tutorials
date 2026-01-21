@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "litellm": {
+      "name": "LiteLLM",
+      "npm": "@ai-sdk/openai-compatible",
+      "models": {
+        "vertex_ai/claude-sonnet-4-5": {},
+        "vertex_ai/claude-opus-4-5": {}
+      },
+      "options": {
+        "baseURL": "https://management.llmproxy.ai.orange",
+        "apiKey": "sk-sLBS7OVZtj-UXrF9BfB8iw"
+      }
+    }
+  }
+}

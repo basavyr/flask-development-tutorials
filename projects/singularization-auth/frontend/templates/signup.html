@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up - SPS Auth Workflow{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Create Account</h2>
+        <p class="auth-subtitle">Join SPS Auth Workflow</p>
+
+        <form method="POST" action="{{ url_for('auth.signup') }}" class="auth-form">
+            <div class="form-group">
+                <label for="full_name">Full Name</label>
+                <input type="text" id="full_name" name="full_name" required 
+                       placeholder="John Doe" autocomplete="name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required 
+                       placeholder="you@example.com" autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required 
+                       placeholder="john.doe" autocomplete="username">
+                <small class="form-hint">Recommended format: firstname.lastname</small>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required 
+                       placeholder="Create a strong password" autocomplete="new-password"
+                       minlength="12" maxlength="32">
+                <div class="password-strength">
+                    <div class="password-strength-bar" id="password-strength-bar"></div>
+                </div>
+                <small class="form-hint" id="password-hint">
+                    12-32 characters, include uppercase, digit, and special character
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" required 
+                       placeholder="Confirm your password" autocomplete="new-password">
+                <small class="form-hint" id="confirm-hint"></small>
+            </div>
+
+            <div class="singularization-toggle">
+                <label class="toggle-label">
+                    <input type="checkbox" id="singularization-toggle" class="toggle-input">
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-text">Use Singularization</span>
+                </label>
+            </div>
+
+            <div id="singularization-notice" class="singularization-notice hidden">
+                <p>The Singularization feature is coming soon. This functionality will be implemented in a future release.</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Account</button>
+        </form>
+
+        <p class="auth-footer">
+            Already have an account? <a href="{{ url_for('auth.login') }}">Sign in</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initPasswordStrengthMeter();
+        initPasswordConfirmation();
+        initSingularizationToggle('signup');
+    });
+</script>
+{% endblock %}
