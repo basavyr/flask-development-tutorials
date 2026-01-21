@@ -24,3 +24,4 @@ projects/singularization-auth/venv
 projects/singularization-auth/.env
 projects/singularization-auth/.env.example
 projects/singularization-auth/.python-version
+projects/singularization-auth/opencode.json
