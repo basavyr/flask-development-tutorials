@@ -58,23 +58,52 @@ def verify_password(password: str, stored_hash: str, salt: str) -> bool:
     return computed_hash == stored_hash
 
 
-def validate_password(password: str) -> tuple[bool, str]:
+def generate_singularization_nonce(length: int = 32) -> str:
+    """
+    Generate a cryptographically secure nonce for singularization.
+    
+    Args:
+        length: Number of random bytes (default 32 -> 64 hex chars).
+    
+    Returns:
+        A 64-character hex-encoded random string.
+    """
+    return secrets.token_hex(length)
+
+
+def validate_password(password: str, singularization: bool = False) -> tuple[bool, str]:
     """
     Validate a password against security requirements.
     
-    Requirements:
+    When singularization is enabled, requirements are relaxed because 
+    a large nonce will be concatenated with the password before hashing,
+    making even short passwords extremely strong.
+    
+    Standard requirements:
         - Length between 12 and 32 characters
         - At least one uppercase letter
         - At least one digit
         - At least one special character
     
+    Singularization requirements:
+        - Length between 3 and 32 characters
+        - No complexity requirements (nonce provides the entropy)
+    
     Args:
         password: The password to validate.
+        singularization: Whether singularization mode is active.
     
     Returns:
         A tuple of (is_valid, error_message).
         If valid, error_message is an empty string.
     """
+    if singularization:
+        if len(password) < 3:
+            return False, "Password must be at least 3 characters long"
+        if len(password) > 32:
+            return False, "Password must not exceed 32 characters"
+        return True, ""
+    
     if len(password) < 12:
         return False, "Password must be at least 12 characters long"
     

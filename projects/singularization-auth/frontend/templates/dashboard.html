@@ -28,6 +28,16 @@
                 <span class="info-label">Member Since</span>
                 <span class="info-value">{{ user.created_at[:10] if user.created_at else 'N/A' }}</span>
             </div>
+            <div class="info-item">
+                <span class="info-label">Singularization</span>
+                <span class="info-value">
+                    {% if user.singularization_enabled %}
+                        <span class="badge badge-active">Active</span>
+                    {% else %}
+                        <span class="badge badge-inactive">Off</span>
+                    {% endif %}
+                </span>
+            </div>
         </div>
 
         <div class="dashboard-actions">

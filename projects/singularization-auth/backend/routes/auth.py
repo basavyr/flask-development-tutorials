@@ -29,18 +29,25 @@ def login():
     if request.method == "POST":
         email = request.form.get("email", "").strip()
         password = request.form.get("password", "")
+        singularization = request.form.get("singularization", "off") == "on"
         
         if not email or not password:
             flash("Please enter both email and password", "error")
             return render_template("login.html")
         
-        user = User.authenticate(email, password)
+        try:
+            user = User.authenticate(email, password, singularization=singularization)
+        except ValueError as e:
+            # Singularization mismatch -- specific error from the model
+            flash(str(e), "error")
+            log_debug(f"Login singularization mismatch for: {email}")
+            return render_template("login.html")
         
         if user:
             session["user_id"] = user.id
             session["username"] = user.username
             session["full_name"] = user.full_name
-            log_info(f"User logged in: {user.username}")
+            log_info(f"User logged in: {user.username} (singularization: {singularization})")
             return redirect(url_for("account.dashboard"))
         else:
             flash("Invalid email or password", "error")
@@ -61,6 +68,7 @@ def signup():
         username = request.form.get("username", "").strip().lower()
         password = request.form.get("password", "")
         confirm_password = request.form.get("confirm_password", "")
+        singularization = request.form.get("singularization", "off") == "on"
         
         # Validate required fields
         if not all([full_name, email, username, password, confirm_password]):
@@ -72,22 +80,23 @@ def signup():
             flash("Passwords do not match", "error")
             return render_template("signup.html")
         
-        # Validate password requirements
-        is_valid, error_msg = validate_password(password)
+        # Validate password requirements (relaxed when singularization is on)
+        is_valid, error_msg = validate_password(password, singularization=singularization)
         if not is_valid:
             flash(error_msg, "error")
             return render_template("signup.html")
         
         # Attempt to create user
         try:
-            user = User.create(full_name, email, username, password)
+            user = User.create(full_name, email, username, password, 
+                               singularization=singularization)
             
             # Auto-login after registration
             session["user_id"] = user.id
             session["username"] = user.username
             session["full_name"] = user.full_name
             
-            log_info(f"New user registered and logged in: {username}")
+            log_info(f"New user registered and logged in: {username} (singularization: {singularization})")
             flash(f"Welcome, {full_name}! Your account has been created.", "success")
             return redirect(url_for("account.dashboard"))
             
@@ -116,5 +125,7 @@ def singularization_log():
     """Log when singularization toggle is activated."""
     data = request.get_json() or {}
     page = data.get("page", "unknown")
-    log_info(f"Singularization mode activated on {page}")
-    return jsonify({"status": "logged", "message": "Singularization activation logged"})
+    enabled = data.get("enabled", True)
+    state = "activated" if enabled else "deactivated"
+    log_info(f"Singularization mode {state} on {page}")
+    return jsonify({"status": "logged", "message": f"Singularization {state} logged"})

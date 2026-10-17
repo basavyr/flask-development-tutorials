@@ -606,3 +606,23 @@ footer p {
         flex-direction: column;
     }
 }
+
+/* ============ Badges ============ */
+.badge {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.badge-active {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.badge-inactive {
+    background-color: #f3f4f6;
+    color: #6b7280;
+}

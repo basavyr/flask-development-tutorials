@@ -7,7 +7,7 @@ Provides CRUD operations for user management.
 import uuid
 from datetime import datetime
 from backend.database import get_db_connection
-from backend.utils.password import hash_password, verify_password
+from backend.utils.password import hash_password, verify_password, generate_singularization_nonce
 from backend.utils.logger import log_info, log_error, log_debug
 
 
@@ -18,6 +18,8 @@ class User:
                  full_name: str | None = None, email: str | None = None, 
                  username: str | None = None, password_hash: str | None = None,
                  password_salt: str | None = None, hashing_algorithm: str = "md5",
+                 singularization_enabled: bool = False, 
+                 singularization_nonce: str | None = None,
                  created_at: str | None = None, updated_at: str | None = None):
         self.id = id
         self.uuid = user_uuid
@@ -27,11 +29,14 @@ class User:
         self.password_hash = password_hash
         self.password_salt = password_salt
         self.hashing_algorithm = hashing_algorithm
+        self.singularization_enabled = singularization_enabled
+        self.singularization_nonce = singularization_nonce
         self.created_at = created_at
         self.updated_at = updated_at
     
     @staticmethod
-    def create(full_name: str, email: str, username: str, password: str) -> "User":
+    def create(full_name: str, email: str, username: str, password: str,
+               singularization: bool = False) -> "User":
         """
         Create a new user in the database.
         
@@ -40,6 +45,9 @@ class User:
             email: The user's email address.
             username: The user's chosen username.
             password: The plaintext password (will be hashed).
+            singularization: Whether to enable singularization mode.
+                             If True, a nonce is generated and concatenated
+                             with the password before hashing.
         
         Returns:
             The created User object.
@@ -61,21 +69,32 @@ class User:
             if cursor.fetchone():
                 raise ValueError("Username already taken")
             
-            # Generate UUID and hash password
+            # Generate UUID
             user_uuid = str(uuid.uuid4())
-            password_hash, password_salt = hash_password(password)
+            
+            # Handle singularization: generate nonce and strengthen password
+            nonce = None
+            effective_password = password
+            if singularization:
+                nonce = generate_singularization_nonce()
+                effective_password = password + nonce
+                log_info(f"Singularization enabled for new user: {username} (nonce generated: {len(nonce)} hex chars)")
+            
+            # Hash the (possibly strengthened) password
+            password_hash, password_salt = hash_password(effective_password)
             
             cursor.execute("""
                 INSERT INTO users (uuid, full_name, email, username, password_hash, 
-                                   password_salt, hashing_algorithm)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                                   password_salt, hashing_algorithm,
+                                   singularization_enabled, singularization_nonce)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (user_uuid, full_name, email, username, password_hash, 
-                  password_salt, "md5"))
+                  password_salt, "md5", 1 if singularization else 0, nonce))
             
             conn.commit()
             user_id = cursor.lastrowid
             
-            log_info(f"New user created: {username} (ID: {user_id})")
+            log_info(f"New user created: {username} (ID: {user_id}, singularization: {singularization})")
             
             return User.get_by_id(user_id)
             
@@ -132,16 +151,21 @@ class User:
             conn.close()
     
     @staticmethod
-    def authenticate(email: str, password: str) -> "User | None":
+    def authenticate(email: str, password: str, singularization: bool = False) -> "User | None":
         """
         Authenticate a user with email and password.
         
         Args:
             email: The user's email address.
             password: The plaintext password to verify.
+            singularization: Whether the login form had singularization toggled ON.
         
         Returns:
             The User object if authentication succeeds, None otherwise.
+        
+        Raises:
+            ValueError: If the account requires singularization but the toggle was OFF,
+                        providing a specific message to the caller.
         """
         user = User.get_by_email(email)
         
@@ -149,8 +173,22 @@ class User:
             log_debug(f"Authentication failed: no user with email {email}")
             return None
         
-        if verify_password(password, user.password_hash, user.password_salt):
-            log_info(f"User authenticated: {user.username}")
+        # Enforce singularization requirement
+        if user.singularization_enabled and not singularization:
+            log_debug(f"Authentication blocked: account {email} requires singularization but toggle was OFF")
+            raise ValueError("This account was created with Singularization. Please enable the toggle to sign in.")
+        
+        if not user.singularization_enabled and singularization:
+            log_debug(f"Authentication failed: account {email} does not use singularization but toggle was ON")
+            raise ValueError("This account was not created with Singularization. Please disable the toggle to sign in.")
+        
+        # Reconstruct the effective password
+        effective_password = password
+        if user.singularization_enabled and singularization and user.singularization_nonce:
+            effective_password = password + user.singularization_nonce
+        
+        if verify_password(effective_password, user.password_hash, user.password_salt):
+            log_info(f"User authenticated: {user.username} (singularization: {singularization})")
             return user
         
         log_debug(f"Authentication failed: invalid password for {email}")
@@ -220,6 +258,8 @@ class User:
             password_hash=row["password_hash"],
             password_salt=row["password_salt"],
             hashing_algorithm=row["hashing_algorithm"],
+            singularization_enabled=bool(row["singularization_enabled"]),
+            singularization_nonce=row["singularization_nonce"],
             created_at=row["created_at"],
             updated_at=row["updated_at"]
         )
@@ -232,6 +272,7 @@ class User:
             "full_name": self.full_name,
             "email": self.email,
             "username": self.username,
+            "singularization_enabled": self.singularization_enabled,
             "created_at": self.created_at,
             "updated_at": self.updated_at
         }

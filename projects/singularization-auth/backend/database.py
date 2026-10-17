@@ -22,10 +22,36 @@ USERS_TABLE_SCHEMA = """
         password_hash TEXT NOT NULL,
         password_salt TEXT NOT NULL,
         hashing_algorithm TEXT DEFAULT 'md5',
+        singularization_enabled INTEGER DEFAULT 0,
+        singularization_nonce TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
 """
+
+
+def _migrate_schema(conn: sqlite3.Connection) -> None:
+    """
+    Apply incremental migrations to an existing database.
+    
+    Adds columns that may not exist in older versions of the schema.
+    Uses a safe approach: checks column existence before ALTER TABLE.
+    """
+    cursor = conn.cursor()
+    cursor.execute("PRAGMA table_info(users)")
+    existing_columns = {row[1] for row in cursor.fetchall()}
+    
+    migrations = [
+        ("singularization_enabled", "ALTER TABLE users ADD COLUMN singularization_enabled INTEGER DEFAULT 0"),
+        ("singularization_nonce", "ALTER TABLE users ADD COLUMN singularization_nonce TEXT"),
+    ]
+    
+    for col_name, sql in migrations:
+        if col_name not in existing_columns:
+            cursor.execute(sql)
+            log_info(f"Migration: added column '{col_name}' to users table")
+    
+    conn.commit()
 
 
 def _ensure_schema(conn: sqlite3.Connection) -> None:
@@ -49,6 +75,9 @@ def _ensure_schema(conn: sqlite3.Connection) -> None:
         cursor.execute(USERS_TABLE_SCHEMA)
         conn.commit()
         log_info("Database schema recreated successfully")
+    else:
+        # Table exists - apply any pending migrations
+        _migrate_schema(conn)
 
 
 def get_db_connection() -> sqlite3.Connection:
